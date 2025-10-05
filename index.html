@@ -230,12 +230,21 @@
 <h3 id="部署新博客"><a href="#部署新博客" class="headerlink" title="部署新博客"></a>部署新博客</h3><p>编写完成后，再次生成和部署</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo -g</span><br><span class="line">hexo -d</span><br></pre></td></tr></table></figure>
 
-<p>再访问博客地址</p>
+<p>再访问博客地址。嗯能看到新博客了，但是问题还挺多的，首先就是图片无法显示</p>
+<p><img src="/how-to-build-your-own-blog.assets/image-20251004220909988.png" alt="image-20251004220909988"></p>
+<p>查资料发现，<code>_config.yml</code>中有一项设置<code>post_asset_folder</code></p>
+<p>安装 Hexo 资源文件夹插件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<p><img src="/how-to-build-your-own-blog.assets/image-20251005143257347.png" alt="image-20251005143257347"></p>
+<p>然后把<code>_config.yml</code>中的<code>post_asset_folder</code>设置为true</p>
+<p><img src="/how-to-build-your-own-blog.assets/image-20251005143329312.png" alt="image-20251005143329312"></p>
+<p>清理并重新生成部署</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/04/how-to-build-your-own-blog/" data-id="cuidoQRut-YyImupnULNjsaxN" data-title="how-to-build-your-own-blog" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/10/04/how-to-build-your-own-blog/" data-id="cuiddwgmVD_67MPh_xZ1hVkWd" data-title="how-to-build-your-own-blog" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -288,7 +297,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/10/04/hello-world/" data-id="cuidNSfKMVokLwTqZoSlWtg7-" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/2025/10/04/hello-world/" data-id="cuidekzwfhuKfiF_xcdt-jnVo" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
