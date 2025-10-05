@@ -93,9 +93,7 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="使用github-io搭建个人博客"><a href="#使用github-io搭建个人博客" class="headerlink" title="使用github.io搭建个人博客"></a>使用github.io搭建个人博客</h1><p>[TOC]</p>
-<hr>
-<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>搭建过程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392994381">https://zhuanlan.zhihu.com/p/392994381</a></p>
+        <h1 id="使用github-io搭建个人博客"><a href="#使用github-io搭建个人博客" class="headerlink" title="使用github.io搭建个人博客"></a>使用github.io搭建个人博客</h1><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>搭建过程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392994381">https://zhuanlan.zhihu.com/p/392994381</a></p>
 <h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>本机环境：windows11</p>
 <p>md编辑器：Typora</p>
 <h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>下载链接：<a href="https://link.zhihu.com/?target=https://git-scm.com/">git-scm.com&#x2F;</a></p>
@@ -129,27 +127,27 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮件地址&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>有三次问题，一是保存key的路径，二是密码三是确认密码。全部回车表示默认…发现默认不了，保存路径有问题，是linux格式的，改成<code>C:\Users\Anthon\.ssh\id_rsa</code>（当然是错过一次才发现的），而且没有<code>.ssh</code>目录的话要先新建一个，不然会报错目录不存在</p>
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004145733689.png" alt="image-20251004145733689"></p>
+<p><img src="/.io//image-20251004145733689.png" alt="image-20251004145733689"></p>
 <p>然后进.ssh文件夹，复制id_rsa.pub（公钥）文件里的全部内容</p>
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004145752965.png" alt="image-20251004145752965"></p>
+<p><img src="/.io//image-20251004145752965.png" alt="image-20251004145752965"></p>
 <p>接着打开github主页，点击个人设置，点击左侧的SSH and GPG keys，点击New SSH key，Key里输入刚刚复制的内容，标题起一个，设置完成后点击Add SSH key</p>
 <p>（很好，刚刚我发现我一直在cmd里运行命令，但是参考都是在gitbash里（晕）。算了反正都过来了，现在开始也不迟，在文件夹右键，选择open gitbash here，后面就在这执行命令）</p>
 <p>然后测试：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
 
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004151147330.png" alt="image-20251004151147330"></p>
+<p><img src="/.io//image-20251004151147330.png" alt="image-20251004151147330"></p>
 <p>使用-v参数开启详细模式排错</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
 
 <p>这里ssh客户端识别了RSA密钥。嗯但是其实没有看出别的什么，ds推测是因为OpenSSH 8.8及更高版本默认禁用ssh-rsa签名算法，所以换个Ed25519就可以了</p>
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004163242324.png" alt="image-20251004163242324"></p>
+<p><img src="/.io//image-20251004163242324.png" alt="image-20251004163242324"></p>
 <p>新生成一个Ed25519密钥</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>记得改位置</p>
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004162228287.png" alt="image-20251004162228287"></p>
+<p><img src="/.io//image-20251004162228287.png" alt="image-20251004162228287"></p>
 <p>然后去GitHub删掉旧密钥，添加上.pub的内容。再试，成功</p>
-<p><img src="/.io//Default\Desktop\blog\博客\image-20251004162201726.png" alt="image-20251004162201726"></p>
+<p><img src="/.io//image-20251004162201726.png" alt="image-20251004162201726"></p>
 <p>配置账号密码</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;liyunchen&quot;</span> <span class="comment">#你的github用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxx@163.com&quot;</span> <span class="comment">#填写你的github注册邮箱</span></span><br></pre></td></tr></table></figure>
 
@@ -237,18 +235,25 @@
 <p>查资料发现跟<code>_config.yml</code>的设置有关，就来都来了，更新一下基础设置。打开<code>_config.yml</code>，设置Site和URL。url换成自己博客地址。其他的看着设置就行</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Mintind&#x27;s</span> <span class="string">Blog</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Mintind</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://mintind.github.io</span></span><br></pre></td></tr></table></figure>
 
-<p>安装 Hexo 资源文件夹插件</p>
+<p>参考：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7273435095922114560">https://juejin.cn/post/7273435095922114560</a></p>
+<p>安装 Hexo 资源文件夹插件。这个插件会在使用hexo n命令生成新博客时自动建一个<strong>与文章同名的文件夹</strong>来存放资源</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
 
 <p><img src="/.io//image-20251005143257347.png" alt="image-20251005143257347"></p>
 <p>然后把<code>_config.yml</code>中的<code>post_asset_folder</code>设置为true</p>
 <p><img src="/.io//image-20251005143329312.png" alt="image-20251005143329312"></p>
+<p>因为这个插件使用的文件夹是与文章同名，那么Typora的图像保存路径也要改一下了，改成<code>./${filename}</code></p>
+<p><img src="/.io//image-20251005145808156-17596475950381.png" alt="image-20251005145808156"></p>
+<p>记一下：如果图片采用网络地址，在文章开头的front-matter下添加一行（目前还没用上）</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;referrer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;no-referrer&quot;</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
 <p>清理并重新生成部署</p>
+<h4 id="关于图片和md文件迁移"><a href="#关于图片和md文件迁移" class="headerlink" title="关于图片和md文件迁移"></a>关于图片和md文件迁移</h4><p>如果之前图片存错路径了，可以新建一个md文件，全部复制粘贴过来，会自动生成新的图片文件夹（已经做好几次了T^T）</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mintind.github.io/2025/10/04/how-to-build-your-own-blog/" data-id="cuid6U_1i3CPdtUBVzW9BrIUL" data-title="how-to-build-your-own-blog" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://mintind.github.io/2025/10/04/how-to-build-your-own-blog/" data-id="cuidTTHT5gejPufqby8ipZIUO" data-title="how-to-build-your-own-blog" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -301,7 +306,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://mintind.github.io/2025/10/04/hello-world/" data-id="cuidGhwiC11B8nX1LlAgkXqQA" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://mintind.github.io/2025/10/04/hello-world/" data-id="cuid6HEdgVpmJsYO7WyLD3Xn8" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
