@@ -1,5 +1,7 @@
-https://mintind.github.io/2025/10/05/how-to-decorate-your-blog/
 https://mintind.github.io/2025/10/04/how-to-build-your-own-blog/
+https://mintind.github.io/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
+https://mintind.github.io/2025/10/05/how-to-decorate-your-blog/
 https://mintind.github.io/2025/10/04/hello-world/
 https://mintind.github.io/
 https://mintind.github.io/tags/notes/
+https://mintind.github.io/tags/courses/

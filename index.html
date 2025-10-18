@@ -165,13 +165,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">2</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -197,6 +197,9 @@
               <a href="https://sarpless.github.io/" title="https:&#x2F;&#x2F;sarpless.github.io&#x2F;" rel="noopener" target="_blank">Sarp</a>
             </li>
             <li class="links-of-blogroll-item">
+              <a href="https://www.cnblogs.com/wanwanjiuhao7744" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wanwanjiuhao7744" rel="noopener" target="_blank">玩玩就好</a>
+            </li>
+            <li class="links-of-blogroll-item">
               <a href="http://jmpcliff.top/" title="http:&#x2F;&#x2F;jmpcliff.top&#x2F;" rel="noopener" target="_blank">Jmp.Cliff</a>
             </li>
         </ul>
@@ -208,6 +211,128 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/" class="post-title-link" itemprop="url">MAC-Address-Spoofing-with-Cisco-Packet-Tracer</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-10-18 14:48:13 / 修改时间：14:49:40" itemprop="dateCreated datePublished" datetime="2025-10-18T14:48:13+08:00">2025-10-18</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="Cisco-Packet-Tracer-MAC欺骗实验"><a href="#Cisco-Packet-Tracer-MAC欺骗实验" class="headerlink" title="Cisco Packet Tracer-MAC欺骗实验"></a>Cisco Packet Tracer-MAC欺骗实验</h1><p>参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/419898743">https://zhuanlan.zhihu.com/p/419898743</a></p>
+<h2 id="平台"><a href="#平台" class="headerlink" title="平台"></a>平台</h2><p>Cisco Packet Tracer 6.2.0.0052 for Windows Student Version (no tutorials)</p>
+<h2 id="环境和测试"><a href="#环境和测试" class="headerlink" title="环境和测试"></a>环境和测试</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>以太网结构如图：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018092825456.png" alt="image-20251018092825456"></p>
+<p>交换机：2950-24</p>
+<p>终端：PC-PT</p>
+<p>启动Packet Tracer,在逻辑工作区根据如图2.9所示的网络结构放置和连接设备,终端与交换机之间用直通线互连，交换机与交换机之间用Copper Cross -Over(交叉线)互连。</p>
+<blockquote>
+<p>直通线：一般连接不同的设备<br>交叉线：一般用于相同设备的连接</p>
+</blockquote>
+<p>搭建完成并且连通后：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018094223010.png" alt="image-20251018094223010"></p>
+<p>这里记一下各终端的mac地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PC0:</span><br><span class="line">00D0.BCED.0D3D</span><br><span class="line">PC1:</span><br><span class="line">0006.2ABD.ECEC</span><br><span class="line">PC2:</span><br><span class="line">0001.6309.2E05</span><br></pre></td></tr></table></figure>
+
+<h3 id="IP及掩码配置"><a href="#IP及掩码配置" class="headerlink" title="IP及掩码配置"></a>IP及掩码配置</h3><p>点config，选择接口，写ip，掩码会自动补全</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018094556984.png" alt="image-20251018094556984"></p>
+<p>PC0配置为192.1.1.1，PC1配置为192.1.1.2，PC2配置为192.1.1.3，子网掩码都是255.255.255.0</p>
+<h3 id="ping测试"><a href="#ping测试" class="headerlink" title="ping测试"></a>ping测试</h3><p>完成各终端两两之间的icmp报文传输，就是各ping一下其他终端</p>
+<p>打开desktop，点command prompt，执行ping命令</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018103308892.png" alt="image-20251018103308892"></p>
+<p>似乎是会自动阻塞，要在右边的模拟面板点下一步（captrue&#x2F;forward）（后来发现好像是不小心点到模拟了）</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018103412950.png" alt="image-20251018103412950"></p>
+<p>全部两两ping完之后查看各交换机的转发表</p>
+<p>点cli</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Switch&gt;<span class="built_in">enable</span>  		//进入超级管理员模式</span><br><span class="line">Switch#show mac address-table 	// 查看交换机记录mac地址表</span><br></pre></td></tr></table></figure>
+
+<p>switch0：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018104723851.png" alt="image-20251018104723851"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">          Mac Address Table</span><br><span class="line">-------------------------------------------</span><br><span class="line"></span><br><span class="line">Vlan    Mac Address       Type        Ports</span><br><span class="line">----    -----------       --------    -----</span><br><span class="line"></span><br><span class="line">   1    0001.6309.2e05    DYNAMIC     Fa0/3</span><br><span class="line">   1    0006.2abd.ecec    DYNAMIC     Fa0/2</span><br><span class="line">   1    000b.bec3.e901    DYNAMIC     Fa0/3</span><br><span class="line">   1    00d0.bced.0d3d    DYNAMIC     Fa0/1</span><br></pre></td></tr></table></figure>
+
+<p>可以看到PC2在三号口，PC1在二号口，PC0在一号口，和结构是对应的</p>
+<p>switch1：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018114025947.png" alt="image-20251018114025947"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">          Mac Address Table</span><br><span class="line">-------------------------------------------</span><br><span class="line"></span><br><span class="line">Vlan    Mac Address       Type        Ports</span><br><span class="line">----    -----------       --------    -----</span><br><span class="line"></span><br><span class="line">   1    0001.6309.2e05    DYNAMIC     Fa0/2</span><br><span class="line">   1    0006.2abd.ecec    DYNAMIC     Fa0/1</span><br><span class="line">   1    0060.2f6e.bc03    DYNAMIC     Fa0/1</span><br><span class="line">   1    00d0.5893.dd02    DYNAMIC     Fa0/2</span><br><span class="line">   1    00d0.bced.0d3d    DYNAMIC     Fa0/1</span><br></pre></td></tr></table></figure>
+
+<p>switch2：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018114113383.png" alt="image-20251018114113383"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">          Mac Address Table</span><br><span class="line">-------------------------------------------</span><br><span class="line"></span><br><span class="line">Vlan    Mac Address       Type        Ports</span><br><span class="line">----    -----------       --------    -----</span><br><span class="line"></span><br><span class="line">   1    0001.6309.2e05    DYNAMIC     Fa0/1</span><br><span class="line">   1    0006.2abd.ecec    DYNAMIC     Fa0/2</span><br><span class="line">   1    000b.bec3.e902    DYNAMIC     Fa0/2</span><br><span class="line">   1    00d0.bced.0d3d    DYNAMIC     Fa0/2</span><br></pre></td></tr></table></figure>
+
+<h3 id="模拟操作"><a href="#模拟操作" class="headerlink" title="模拟操作"></a>模拟操作</h3><p>打开模拟操作，ping一次，可以看到一步步的报文传输过程</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018141345705.png" alt="image-20251018141345705"></p>
+<h2 id="MAC欺骗实践"><a href="#MAC欺骗实践" class="headerlink" title="MAC欺骗实践"></a>MAC欺骗实践</h2><h3 id="MAC欺骗更新转发表"><a href="#MAC欺骗更新转发表" class="headerlink" title="MAC欺骗更新转发表"></a>MAC欺骗更新转发表</h3><p>把PC2的MAC地址改成PC0的MAC地址。前面记了PC0的MAC地址是00D0.BCED.0D3D</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018141627069.png" alt="image-20251018141627069"></p>
+<p>然后从PC2pingPC1，完成传输后查看更新的交换机转发表。可以看到PC0的MAC地址已经被记在了PC2的位置。所有交换机中的转发项将通往PC2的交换路径作为通往MAC地址为00D0.BCED.0D3D的终端的交换路径。</p>
+<p>switch0：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018142008124.png" alt="image-20251018142008124"></p>
+<p>switch1：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018142405066.png" alt="image-20251018142405066"></p>
+<p>switch2：</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018142648008.png" alt="image-20251018142648008"></p>
+<h3 id="收到发给被害机的报文"><a href="#收到发给被害机的报文" class="headerlink" title="收到发给被害机的报文"></a>收到发给被害机的报文</h3><p>先切换到模拟。此时在PC1 ping PC0，可以看到报文到达了PC2。</p>
+<p><img src="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/image-20251018143743331-176077017035314.png" alt="image-20251018143743331"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -329,7 +454,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-10-05 15:23:28" itemprop="dateModified" datetime="2025-10-05T15:23:28+08:00">2025-10-05</time>
+      <time title="修改时间：2025-10-18 14:50:32" itemprop="dateModified" datetime="2025-10-18T14:50:32+08:00">2025-10-18</time>
     </span>
 
   
@@ -479,7 +604,7 @@
 <p>设置完了再插入图片时，就会看到博客所在目录变成了这样：</p>
 <p><img src="/2025/10/04/how-to-build-your-own-blog/image-20251004215041864.png" alt="image-20251004215041864"></p>
 <h3 id="部署新博客"><a href="#部署新博客" class="headerlink" title="部署新博客"></a>部署新博客</h3><p>编写完成后，再次生成和部署</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo -g</span><br><span class="line">hexo -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
 
 <p>再访问博客地址。嗯能看到新博客了，但是问题还挺多的，首先就是图片无法显示</p>
 <p><img src="/2025/10/04/how-to-build-your-own-blog/image-20251004220909988.png" alt="image-20251004220909988"></p>
