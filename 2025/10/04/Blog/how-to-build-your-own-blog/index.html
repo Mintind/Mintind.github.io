@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/moew.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/moew.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-light","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="网页：github.io 框架：Hexo 一个记录，搭博客好累…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Hexo&amp;github.io搭建个人博客">
+<meta property="og:url" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="网页：github.io 框架：Hexo 一个记录，搭博客好累…">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004111515909.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004111559094.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005151658564.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114106190.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114255788.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114623424.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114712087.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211833110.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004145733689.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004145752965.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004151147330.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004163242324.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004162228287.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004162201726.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164434570.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164716816.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164834914.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211404531.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004165746361.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204327482.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204038757.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204636973.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204856555.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004205026425.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004210630668.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211854079.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212305562.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212603266.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212615690.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212632664.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004213543006.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004214254402.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004214828290.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004215041864.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004220909988.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005144135434.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005143257347.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005143329312.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005145808156-17596475950381.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005150845253.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005150909066.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005152036583.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005152201756.png">
+<meta property="article:published_time" content="2025-10-04T13:35:32.000Z">
+<meta property="article:modified_time" content="2025-11-14T06:16:56.665Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Blog">
+<meta property="article:tag" content="Hexo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004111515909.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/","path":"2025/10/04/Blog/how-to-build-your-own-blog/","title":"使用Hexo&github.io搭建个人博客"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用Hexo&github.io搭建个人博客 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">生活细碎，万物成诗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Git"><span class="nav-number">2.1.</span> <span class="nav-text">Git</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nodejs"><span class="nav-number">2.2.</span> <span class="nav-text">Nodejs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo"><span class="nav-number">2.3.</span> <span class="nav-text">Hexo</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AESSH"><span class="nav-number">3.</span> <span class="nav-text">配置SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.</span> <span class="nav-text">搭建博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E6%96%B0%E5%BB%BA%E5%8D%9A%E5%AE%A2"><span class="nav-number">4.1.</span> <span class="nav-text">本地新建博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHub"><span class="nav-number">4.2.</span> <span class="nav-text">部署到GitHub</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8D%9A%E5%AE%A2"><span class="nav-number">5.</span> <span class="nav-text">添加博客</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="nav-number">5.1.</span> <span class="nav-text">添加新博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E8%B7%AF%E5%BE%84%E9%97%AE%E9%A2%98"><span class="nav-number">5.2.</span> <span class="nav-text">图像路径问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E6%96%B0%E5%8D%9A%E5%AE%A2"><span class="nav-number">5.3.</span> <span class="nav-text">部署新博客</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E7%BD%AE-%E6%98%BE%E7%A4%BA%E5%9B%BE%E7%89%87"><span class="nav-number">5.4.</span> <span class="nav-text">基础设置&amp;显示图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%9B%BE%E7%89%87%E5%92%8Cmd%E6%96%87%E4%BB%B6%E8%BF%81%E7%A7%BB"><span class="nav-number">5.4.1.</span> <span class="nav-text">关于图片和md文件迁移</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mintind" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://sarpless.github.io/" title="https:&#x2F;&#x2F;sarpless.github.io&#x2F;" rel="noopener" target="_blank">Sarp</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.cnblogs.com/wanwanjiuhao7744" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wanwanjiuhao7744" rel="noopener" target="_blank">玩玩就好</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jmpcliff.top/" title="http:&#x2F;&#x2F;jmpcliff.top&#x2F;" rel="noopener" target="_blank">Jmp.Cliff</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用Hexo&amp;github.io搭建个人博客 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用Hexo&github.io搭建个人博客
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-04 21:35:32" itemprop="dateCreated datePublished" datetime="2025-10-04T21:35:32+08:00">2025-10-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-14 14:16:56" itemprop="dateModified" datetime="2025-11-14T14:16:56+08:00">2025-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>网页：github.io</p>
+<p>框架：Hexo</p>
+<p>一个记录，搭博客好累…</p>
+<span id="more"></span>
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>搭建过程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/392994381">https://zhuanlan.zhihu.com/p/392994381</a></p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>本机环境：windows11</p>
+<p>md编辑器：Typora</p>
+<h3 id="Git"><a href="#Git" class="headerlink" title="Git"></a>Git</h3><p>下载链接：<a href="https://link.zhihu.com/?target=https://git-scm.com/">git-scm.com&#x2F;</a></p>
+<p>之前装过，跳过</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004111515909.png" alt="image-20251004111515909"></p>
+<p>就是跳过了发现没开gitbash，直接在windows的cmd里执行命令了（）</p>
+<p>从后面回来的我：朋友们千万不要像我一样用cmd啊，gitbash和cmd是两个不一样的环境！一定要用gitbash！</p>
+<p>总结一下这俩（用到目前）的区别：gitbash用的是linux语法，快捷键是复制：shift+Insert，粘贴：ctrl+Insert</p>
+<h3 id="Nodejs"><a href="#Nodejs" class="headerlink" title="Nodejs"></a>Nodejs</h3><p>下载链接：<a href="https://link.zhihu.com/?target=https://nodejs.org/en/download/">nodejs.org&#x2F;en&#x2F;download&#x2F;</a></p>
+<p>装过，跳过</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004111559094.png" alt="image-20251004111559094"></p>
+<p>二编：经常警告说当前版本略低于 Hexo 8.0.0 所需的最低版本（要求 &gt;&#x3D;20.19.0），所以可能大概以后升级一下吧</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005151658564.png" alt="image-20251005151658564"></p>
+<h3 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h3><p>安装命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo -g</span><br></pre></td></tr></table></figure>
+
+<p>报了一大堆错，改成用管理员权限运行命令提示符就ok了</p>
+<p>但是一测试又有问题</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114106190.png" alt="image-20251004114106190"></p>
+<p>应该是环境变量问题。查找npm的全局安装路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm config get prefix</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114255788.png" alt="image-20251004114255788"></p>
+<p>然后把路径添加到系统变量。进环境变量，选择系统变量，编辑<code>Path</code>，新建路径，添加npm的路径，确定。然后<strong>关闭当前命令行</strong>，打开一个新的再测试，OK了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114623424.png" alt="image-20251004114623424"></p>
+<p>hexo依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save hexo-deployer-git</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004114712087.png" alt="image-20251004114712087"></p>
+<p>后面重跑：</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211833110.png" alt="image-20251004211833110"></p>
+<h2 id="配置SSH"><a href="#配置SSH" class="headerlink" title="配置SSH"></a>配置SSH</h2><p>生成一个RSA的SSH key。邮件地址是GitHub关联的邮件地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;邮件地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>有三次问题，一是保存key的路径，二是密码三是确认密码。全部回车表示默认…发现默认不了，保存路径有问题，是linux格式的，改成<code>C:\Users\Anthon\.ssh\id_rsa</code>（当然是错过一次才发现的），而且没有<code>.ssh</code>目录的话要先新建一个，不然会报错目录不存在</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004145733689.png" alt="image-20251004145733689"></p>
+<p>然后进.ssh文件夹，复制id_rsa.pub（公钥）文件里的全部内容</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004145752965.png" alt="image-20251004145752965"></p>
+<p>接着打开github主页，点击个人设置，点击左侧的SSH and GPG keys，点击New SSH key，Key里输入刚刚复制的内容，标题起一个，设置完成后点击Add SSH key</p>
+<p>（很好，刚刚我发现我一直在cmd里运行命令，但是参考都是在gitbash里（晕）。算了反正都过来了，现在开始也不迟，在文件夹右键，选择open gitbash here，后面就在这执行命令）</p>
+<p>然后测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004151147330.png" alt="image-20251004151147330"></p>
+<p>使用-v参数开启详细模式排错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vT git@github.com</span><br></pre></td></tr></table></figure>
+
+<p>这里ssh客户端识别了RSA密钥。嗯但是其实没有看出别的什么，ds推测是因为OpenSSH 8.8及更高版本默认禁用ssh-rsa签名算法，所以换个Ed25519就可以了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004163242324.png" alt="image-20251004163242324"></p>
+<p>新生成一个Ed25519密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t ed25519 -C <span class="string">&quot;your_email@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>记得改位置</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004162228287.png" alt="image-20251004162228287"></p>
+<p>然后去GitHub删掉旧密钥，添加上.pub的内容。再试，成功</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004162201726.png" alt="image-20251004162201726"></p>
+<p>配置账号密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;liyunchen&quot;</span> <span class="comment">#你的github用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;xxx@163.com&quot;</span> <span class="comment">#填写你的github注册邮箱</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h2><p>Hexo命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;postName&quot;</span> <span class="comment">#新建文章</span></span><br><span class="line">hexo new page <span class="string">&quot;pageName&quot;</span> <span class="comment">#新建页面</span></span><br><span class="line">hexo generate <span class="comment">#生成静态页面至public目录</span></span><br><span class="line">hexo server <span class="comment">#开启预览访问端口（默认端口4000，&#x27;ctrl + c&#x27;关闭server）</span></span><br><span class="line">hexo deploy <span class="comment">#部署到GitHub</span></span><br><span class="line">hexo <span class="built_in">help</span>  <span class="comment"># 查看帮助</span></span><br><span class="line">hexo version  <span class="comment">#查看Hexo的版本</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="本地新建博客"><a href="#本地新建博客" class="headerlink" title="本地新建博客"></a>本地新建博客</h3><p>gitbash进入博客的存放目录，初始化博客</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>好吧，得在空目录里执行，后面才能加东西进去</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164434570.png" alt="image-20251004164434570"></p>
+<p>然后再重试，成功</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164716816.png" alt="image-20251004164716816"></p>
+<p>博客目录出现了：</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004164834914.png" alt="image-20251004164834914"></p>
+<p>生成静态文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211404531.png" alt="image-20251004211404531"></p>
+<p>生成静态网页：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+
+<p>模块兼容问题。项目中使用的 <code>strip-ansi</code> 模块新版仅支持 ES 模块，而 Hexo 或其部分依赖仍在使用 CommonJS 的 <code>require()</code> 语法来加载它，两者不兼容</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004165746361.png" alt="image-20251004165746361"></p>
+<p>解决方案：锁定兼容版本。通过项目的 <code>package.json</code> 文件，强制将 <code>strip-ansi</code> 锁定到一个兼容 CommonJS 的旧版本。</p>
+<p>打开目录里的<code>package.json</code> 文件，先看看本来有没有resolution字段，没有，新建一个，加入以下内容，保存。这里的 <code>&quot;6.0.1&quot;</code> 是明确支持 CommonJS 的 <code>strip-ansi</code> 版本</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;overrides&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;strip-ansi&quot;</span><span class="punctuation">:</span> <span class="string">&quot;6.0.1&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>完成配置后，删除package-lock.json和node_module，重新安装依赖再试</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204327482.png" alt="image-20251004204327482"></p>
+<p>此时主包终于发现补兑，跑去在gitbash环境里重新运行了一些上面的命令（包括安装npm、hexo -v、安装hexo-deployer-git），一通乱搞OK了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204038757.png" alt="image-20251004204038757"></p>
+<p>访问url可以看到</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204636973.png" alt="image-20251004204636973"></p>
+<h3 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h3><p>新建一个仓库，仓库名必须是<code>用户名.github.io</code>。下面勾选README和public，点击create</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004204856555.png" alt="image-20251004204856555"></p>
+<p>查看分支，是main</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004205026425.png" alt="image-20251004205026425"></p>
+<p>编辑博客目录下的<code>_config.yml</code>。修改最后的deploy，branch看上面的分支是什么就填什么</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">https://github.com/Mintind/Mintind.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<p>至于repository这个链接，可以在仓库里点clone，选择https或者ssh，复制这个链接</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004210630668.png" alt="image-20251004210630668"></p>
+<p>完成之后保存。发布</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo -d</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004211854079.png" alt="image-20251004211854079"></p>
+<p>在浏览器访问<a href="https://mintind.github.io/">https://mintind.github.io/</a></p>
+<p>嗯发现是白的</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212305562.png" alt="image-20251004212305562"></p>
+<p>（此处经历了回去在gitbash里装hexo-deployer-git）</p>
+<p>变动了之后可以clean一下重新生成和部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &amp;&amp; hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>这回不一样了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212603266.png" alt="image-20251004212603266"></p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212615690.png" alt="image-20251004212615690"></p>
+<p>再访问，有了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004212632664.png" alt="image-20251004212632664"></p>
+<h2 id="添加博客"><a href="#添加博客" class="headerlink" title="添加博客"></a>添加博客</h2><h3 id="添加新博客"><a href="#添加新博客" class="headerlink" title="添加新博客"></a>添加新博客</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&#x27;chenge-first-blog&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004213543006.png" alt="image-20251004213543006"></p>
+<p>在<code>blog\source\_posts</code>目录下就可以看到这篇博客的md文件，可以进行编写（从其他地方粘过了也可以）</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004214254402.png" alt="image-20251004214254402"></p>
+<p>这里学到了一个技巧，可以在博客里加上一段</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--more--&gt;</span><br></pre></td></tr></table></figure>
+
+<p>这样在点击more才会查看文章全部内容</p>
+<h3 id="图像路径问题"><a href="#图像路径问题" class="headerlink" title="图像路径问题"></a>图像路径问题</h3><p>因为md文件只是借用本地图片，图像都需要有个保存路径，Typora默认的保存路径在default&#x2F;picture下，但是写博客的这些md文件所用的图片需要上传，要保存在博客目录下，所以<strong>建议把图像设置成保存为相对路径</strong>。</p>
+<p>打开一个md文件，点左上角文件-偏好设置，点击图像，插入图片时，选择<strong>复制图片到.&#x2F;${filename}.assets文件夹</strong>，个人感觉这样最方便也最好找</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004214828290.png" alt="image-20251004214828290"></p>
+<p>设置完了再插入图片时，就会看到博客所在目录变成了这样：</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004215041864.png" alt="image-20251004215041864"></p>
+<h3 id="部署新博客"><a href="#部署新博客" class="headerlink" title="部署新博客"></a>部署新博客</h3><p>编写完成后，再次生成和部署</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p>再访问博客地址。嗯能看到新博客了，但是问题还挺多的，首先就是图片无法显示</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251004220909988.png" alt="image-20251004220909988"></p>
+<h3 id="基础设置-显示图片"><a href="#基础设置-显示图片" class="headerlink" title="基础设置&amp;显示图片"></a>基础设置&amp;显示图片</h3><p>进仓库看这篇新博客的html文件，发现url有问题</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005144135434.png" alt="image-20251005144135434"></p>
+<p>查资料发现跟<code>_config.yml</code>的设置有关，就来都来了，更新一下基础设置。打开<code>_config.yml</code>，设置Site和URL。url换成自己博客地址。其他的看着设置就行</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">Mintind&#x27;s</span> <span class="string">Blog</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="attr">keywords:</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">Mintind</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">en</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment">## Set your site url here. For example, if you use GitHub Page, set url as &#x27;https://username.github.io/project&#x27;</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">https://mintind.github.io</span></span><br></pre></td></tr></table></figure>
+
+<p>参考：<a target="_blank" rel="noopener" href="https://juejin.cn/post/7273435095922114560">https://juejin.cn/post/7273435095922114560</a></p>
+<p>安装 Hexo 资源文件夹插件。这个插件会在使用hexo n命令生成新博客时自动建一个<strong>与文章同名的文件夹</strong>来存放资源</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005143257347.png" alt="image-20251005143257347"></p>
+<p>嗯后面说这个插件有问题还是装这个：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+
+<p>然后把<code>_config.yml</code>中的<code>post_asset_folder</code>设置为true</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005143329312.png" alt="image-20251005143329312"></p>
+<p>因为这个插件使用的文件夹是与文章同名，那么Typora的图像保存路径也要改一下了，改成<code>./${filename}</code></p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005145808156-17596475950381.png" alt="image-20251005145808156"></p>
+<p>记一下：如果图片采用网络地址，在文章开头的front-matter下添加一行（目前还没用上）</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">&quot;referrer&quot;</span> <span class="attr">content</span>=<span class="string">&quot;no-referrer&quot;</span>/&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>清理并重新生成部署</p>
+<p>这回生成和部署的时候能看到上传图片了：</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005150845253.png" alt="image-20251005150845253"></p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005150909066.png" alt="image-20251005150909066"></p>
+<p>再查看html文件，路径正确了</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005152036583.png" alt="image-20251005152036583"></p>
+<p>再查看博客网页，如果发现路径没刷新的话可能是用的缓存，可以打开开发者模式，禁用缓存再刷新一下。图片成功显示了。嗯就是图片名丑丑的但我实在暂时没有给图片命名的习惯</p>
+<p><img src="/2025/10/04/Blog/how-to-build-your-own-blog/image-20251005152201756.png" alt="image-20251005152201756"></p>
+<h4 id="关于图片和md文件迁移"><a href="#关于图片和md文件迁移" class="headerlink" title="关于图片和md文件迁移"></a>关于图片和md文件迁移</h4><p>如果之前图片存错路径了，可以新建一个md文件，全部复制粘贴过来，会自动生成新的图片文件夹（已经做好几次了T^T）</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Blog/" rel="tag"># Blog</a>
+              <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/04/hello-world/" rel="prev" title="Hello World">
+                  <i class="fa fa-angle-left"></i> Hello World
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/05/Blog/how-to-decorate-your-blog/" rel="next" title="NexT博客配置与美化">
+                  NexT博客配置与美化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

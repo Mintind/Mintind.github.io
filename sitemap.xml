@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://mintind.github.io/2025/11/25/RE_N1BOOK_BabyAlgorithm/</loc>
+    <loc>https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://mintind.github.io/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/</loc>
+    <loc>https://mintind.github.io/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/</loc>
+    <loc>https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://mintind.github.io/2025/11/07/IPSec_VPN/</loc>
+    <loc>https://mintind.github.io/2025/11/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://mintind.github.io/2025/10/05/how-to-decorate-your-blog/</loc>
+    <loc>https://mintind.github.io/2025/10/05/Blog/how-to-decorate-your-blog/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -47,7 +47,7 @@
   </url>
   
   <url>
-    <loc>https://mintind.github.io/2025/10/04/how-to-build-your-own-blog/</loc>
+    <loc>https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -124,6 +124,13 @@
   
   <url>
     <loc>https://mintind.github.io/tags/RC4/</loc>
+    <lastmod>2025-11-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/tags/UCAS/</loc>
     <lastmod>2025-11-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>

@@ -19,26 +19,39 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-light","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+    <meta name="description" content="网络协议安全实验二，使用VLAN防范MAC欺骗">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="https://mintind.github.io/2025/10/04/hello-world/index.html">
+<meta property="og:title" content="【网络协议安全】VLAN防MAC欺骗实验">
+<meta property="og:url" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/index.html">
 <meta property="og:site_name" content="Mintind&#39;s Blog">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="网络协议安全实验二，使用VLAN防范MAC欺骗">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-10-04T08:46:26.007Z">
-<meta property="article:modified_time" content="2025-10-04T08:46:26.007Z">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026205213271.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026205354558.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026212552731.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026212727454.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026213428640.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215459339.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215611972.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215818323.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026220302567.png">
+<meta property="article:published_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-14T08:04:15.412Z">
 <meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="思科模拟器">
+<meta property="article:tag" content="网络协议安全">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026205213271.png">
 
 
-<link rel="canonical" href="https://mintind.github.io/2025/10/04/hello-world/">
+<link rel="canonical" href="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/04/hello-world/","path":"2025/10/04/hello-world/","title":"Hello World"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/","path":"2025/10/26/UCAS/MAC_Spoofing_prevention/","title":"【网络协议安全】VLAN防MAC欺骗实验"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Hello World | Mintind's Blog</title>
+<title>【网络协议安全】VLAN防MAC欺骗实验 | Mintind's Blog</title>
   
 
 
@@ -157,7 +170,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch0%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">switch0接口配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC%E6%AC%BA%E9%AA%97"><span class="nav-number">3.1.</span> <span class="nav-text">MAC欺骗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVLAN2"><span class="nav-number">3.2.</span> <span class="nav-text">配置VLAN2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2MAC%E6%AC%BA%E9%AA%97"><span class="nav-number">3.3.</span> <span class="nav-text">防MAC欺骗</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -231,7 +244,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/04/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -244,12 +257,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Hello World | Mintind's Blog">
+      <meta itemprop="name" content="【网络协议安全】VLAN防MAC欺骗实验 | Mintind's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Hello World
+          【网络协议安全】VLAN防MAC欺骗实验
         </h1>
 
         <div class="post-meta-container">
@@ -260,7 +273,23 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2025-10-04 16:46:26" itemprop="dateCreated datePublished" datetime="2025-10-04T16:46:26+08:00">2025-10-04</time>
+      <time title="创建时间：2025-10-26 00:00:00" itemprop="dateCreated datePublished" datetime="2025-10-26T00:00:00+08:00">2025-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-14 16:04:15" itemprop="dateModified" datetime="2025-11-14T16:04:15+08:00">2025-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Network/" itemprop="url" rel="index"><span itemprop="name">Network</span></a>
+        </span>
     </span>
 
   
@@ -272,19 +301,32 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+    <div class="post-body" itemprop="articleBody"><p>网络协议安全实验二，使用VLAN防范MAC欺骗</p>
+<span id="more"></span>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><p>在没有划分VLAN前,交换机端口属于默认VLAN,即VLAN 1。一旦将终端A和终端B划分到VLAN 2,将终端C划分到VLAN 1,由于交换机中每一个VLAN有着独立的转发表,因此，在交换机S1 VLAN 2对应的转发表中生成终端A的MAC地址对应的转发项后，即使终端C将自己的MAC地址改为终端A的MAC地址,且广播一帧以终端A的MAC地址为源MAC地址、全1广播地址为目的MAC地址的MAC帧，该MAC帧只能影响交换机S1 VLAN 1对应的转发表,无法影响交换机S1 VLAN 2对应的转发表，从而使交换机S1不会将终端B发送给终端A的MAC帧错误地从端口3转发出去。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>以太网结构：</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026205213271.png" alt="image-20251026205213271"></p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026205354558.png" alt="image-20251026205354558"></p>
+<h3 id="switch0接口配置"><a href="#switch0接口配置" class="headerlink" title="switch0接口配置"></a>switch0接口配置</h3><p>先enable和config，选择terminal，然后创建vlan</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vlan 2</span><br><span class="line">name vlan2</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026212552731.png" alt="image-20251026212552731"></p>
+<p>将交换机的端口FastEthernet0&#x2F;1作为接入端口分配给VLAN2</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026212727454.png" alt="image-20251026212727454"></p>
+<p>interface Fasthernet0&#x2F;1是全局模式下使用的命令，该命令的作用是进入交换机端口Fasthernet0&#x2F;1的接口配置模式，交换机的24个端口的编号分别为FastEthernet&#x2F;1~FastEthernet0&#x2F;24。<br>switchport mode access是接口配置模式下使用的命令,该命令的作用是将特定交换机端口(这里是FastEthernet0&#x2F;1)指定为接人端口，接人端口是非标记端口，从该端口输入&#x2F;输出的MAC帧不携带VLAN ID。switchport access vlan 2是接口配置模式下使用的命令,该命令的作用是将指定交换机端口(这里是FastEthernet0&#x2F;1)作为接人端口分配给编号为2的VLAN(VLAN ID&#x3D;2的VLAN)。</p>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="MAC欺骗"><a href="#MAC欺骗" class="headerlink" title="MAC欺骗"></a>MAC欺骗</h3><p>PC0配置如下，MAC地址为00D0.BCED.0D3D</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026213428640.png" alt="image-20251026213428640"></p>
+<p>跟上次实验一样。完成PC0、PC1和PC2之间ICMP报文传输过程。然后将PC2的MAC地址改为PC0的MAC地址00D0.BCED.0D3D,完成PC2和PC1之间ICMP报文传输过程。</p>
+<h3 id="配置VLAN2"><a href="#配置VLAN2" class="headerlink" title="配置VLAN2"></a>配置VLAN2</h3><p>查看Switch0的MAC表。交换机转发表将通往PC2的交换路径作为通往MAC地址为00D0.BCED.0D3D的终端的交换路径。</p>
+<p>然后建立VLAN2。在switch0点config-VLAN database。VLAN number输入2，VLAN name输入vlan2，然后点击添加</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215459339.png" alt="image-20251026215459339"></p>
+<p>配置接入端口，把Fasthernet0&#x2F;1和Fasthernet0&#x2F;2都配置成VLAN2的接入端口。这两步也可以用上面的配置命令完成</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215611972.png" alt="image-20251026215611972"></p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026215818323.png" alt="image-20251026215818323"></p>
+<h3 id="防MAC欺骗"><a href="#防MAC欺骗" class="headerlink" title="防MAC欺骗"></a>防MAC欺骗</h3><p>然后再进行一次PC0和PC1之间的icmp报文传输。再进行PC2（还是用PC0的MAC地址）和PC1之间的icmp报文传输，失败，再查看switch0的MAC表：</p>
+<p><img src="/2025/10/26/UCAS/MAC_Spoofing_prevention/image-20251026220302567.png" alt="image-20251026220302567"></p>
+<p>可以看到VLAN2对应的MAC表里，PC0的MAC地址00D0.BCED.0D3D对应的是0&#x2F;1端口，也就是PC0实际对应的端口，而在VLAN1的MAC表里对应的是PC2的端口，这样就阻止了VLAN2中发往PC0的MAC帧发往PC2，而只会发给PC0</p>
 
     </div>
 
@@ -293,15 +335,23 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/" rel="tag"># 网络协议安全</a>
+              <a href="/tags/%E6%80%9D%E7%A7%91%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag"># 思科模拟器</a>
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
+                <a href="/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/" rel="prev" title="【网络协议安全】MAC欺骗实验">
+                  <i class="fa fa-angle-left"></i> 【网络协议安全】MAC欺骗实验
+                </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/10/04/Blog/how-to-build-your-own-blog/" rel="next" title="使用Hexo&amp;github.io搭建个人博客">
-                  使用Hexo&github.io搭建个人博客 <i class="fa fa-angle-right"></i>
+                <a href="/2025/11/07/UCAS/IPSec_VPN/" rel="next" title="【网络协议安全】IPSec+VPN实验">
+                  【网络协议安全】IPSec+VPN实验 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

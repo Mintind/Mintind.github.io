@@ -1,9 +1,9 @@
-https://mintind.github.io/2025/11/25/RE_N1BOOK_BabyAlgorithm/
-https://mintind.github.io/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
-https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/
-https://mintind.github.io/2025/11/07/IPSec_VPN/
-https://mintind.github.io/2025/10/05/how-to-decorate-your-blog/
-https://mintind.github.io/2025/10/04/how-to-build-your-own-blog/
+https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/
+https://mintind.github.io/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
+https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/
+https://mintind.github.io/2025/11/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/
+https://mintind.github.io/2025/10/05/Blog/how-to-decorate-your-blog/
+https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/
 https://mintind.github.io/2025/10/04/hello-world/
 https://mintind.github.io/
 https://mintind.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/
@@ -14,6 +14,7 @@ https://mintind.github.io/tags/NexT/
 https://mintind.github.io/tags/CTF/
 https://mintind.github.io/tags/RE/
 https://mintind.github.io/tags/RC4/
+https://mintind.github.io/tags/UCAS/
 https://mintind.github.io/categories/Network/
 https://mintind.github.io/categories/Notes/
 https://mintind.github.io/categories/RE/
