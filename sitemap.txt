@@ -1,3 +1,4 @@
+https://mintind.github.io/2025/11/25/RE_N1BOOK_BabyAlgorithm/
 https://mintind.github.io/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
 https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/
 https://mintind.github.io/2025/11/07/IPSec_VPN/
@@ -10,5 +11,9 @@ https://mintind.github.io/tags/%E6%80%9D%E7%A7%91%E6%A8%A1%E6%8B%9F%E5%99%A8/
 https://mintind.github.io/tags/Blog/
 https://mintind.github.io/tags/Hexo/
 https://mintind.github.io/tags/NexT/
+https://mintind.github.io/tags/CTF/
+https://mintind.github.io/tags/RE/
+https://mintind.github.io/tags/RC4/
 https://mintind.github.io/categories/Network/
 https://mintind.github.io/categories/Notes/
+https://mintind.github.io/categories/RE/
