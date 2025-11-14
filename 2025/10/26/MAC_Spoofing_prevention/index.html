@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/moew.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/moew.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-light","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="网络协议安全实验二，使用VLAN防范MAC欺骗">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【网络协议安全】VLAN防MAC欺骗实验">
+<meta property="og:url" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="网络协议安全实验二，使用VLAN防范MAC欺骗">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026205213271.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026205354558.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026212552731.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026212727454.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026213428640.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026215459339.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026215611972.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026215818323.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026220302567.png">
+<meta property="article:published_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-14T06:35:34.097Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="思科模拟器">
+<meta property="article:tag" content="网络协议安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/image-20251026205213271.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/","path":"2025/10/26/MAC_Spoofing_prevention/","title":"【网络协议安全】VLAN防MAC欺骗实验"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【网络协议安全】VLAN防MAC欺骗实验 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">生活细碎，万物成诗</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">2.1.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#switch0%E6%8E%A5%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="nav-number">2.2.</span> <span class="nav-text">switch0接口配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC%E6%AC%BA%E9%AA%97"><span class="nav-number">3.1.</span> <span class="nav-text">MAC欺骗</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEVLAN2"><span class="nav-number">3.2.</span> <span class="nav-text">配置VLAN2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2MAC%E6%AC%BA%E9%AA%97"><span class="nav-number">3.3.</span> <span class="nav-text">防MAC欺骗</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mintind" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://sarpless.github.io/" title="https:&#x2F;&#x2F;sarpless.github.io&#x2F;" rel="noopener" target="_blank">Sarp</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.cnblogs.com/wanwanjiuhao7744" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wanwanjiuhao7744" rel="noopener" target="_blank">玩玩就好</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jmpcliff.top/" title="http:&#x2F;&#x2F;jmpcliff.top&#x2F;" rel="noopener" target="_blank">Jmp.Cliff</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/26/MAC_Spoofing_prevention/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【网络协议安全】VLAN防MAC欺骗实验 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【网络协议安全】VLAN防MAC欺骗实验
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-26 00:00:00" itemprop="dateCreated datePublished" datetime="2025-10-26T00:00:00+08:00">2025-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2025-11-14 14:35:34" itemprop="dateModified" datetime="2025-11-14T14:35:34+08:00">2025-11-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Network/" itemprop="url" rel="index"><span itemprop="name">Network</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>网络协议安全实验二，使用VLAN防范MAC欺骗</p>
+<span id="more"></span>
+
+<h2 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h2><p>在没有划分VLAN前,交换机端口属于默认VLAN,即VLAN 1。一旦将终端A和终端B划分到VLAN 2,将终端C划分到VLAN 1,由于交换机中每一个VLAN有着独立的转发表,因此，在交换机S1 VLAN 2对应的转发表中生成终端A的MAC地址对应的转发项后，即使终端C将自己的MAC地址改为终端A的MAC地址,且广播一帧以终端A的MAC地址为源MAC地址、全1广播地址为目的MAC地址的MAC帧，该MAC帧只能影响交换机S1 VLAN 1对应的转发表,无法影响交换机S1 VLAN 2对应的转发表，从而使交换机S1不会将终端B发送给终端A的MAC帧错误地从端口3转发出去。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>以太网结构：</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026205213271.png" alt="image-20251026205213271"></p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026205354558.png" alt="image-20251026205354558"></p>
+<h3 id="switch0接口配置"><a href="#switch0接口配置" class="headerlink" title="switch0接口配置"></a>switch0接口配置</h3><p>先enable和config，选择terminal，然后创建vlan</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vlan 2</span><br><span class="line">name vlan2</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026212552731.png" alt="image-20251026212552731"></p>
+<p>将交换机的端口FastEthernet0&#x2F;1作为接入端口分配给VLAN2</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026212727454.png" alt="image-20251026212727454"></p>
+<p>interface Fasthernet0&#x2F;1是全局模式下使用的命令，该命令的作用是进入交换机端口Fasthernet0&#x2F;1的接口配置模式，交换机的24个端口的编号分别为FastEthernet&#x2F;1~FastEthernet0&#x2F;24。<br>switchport mode access是接口配置模式下使用的命令,该命令的作用是将特定交换机端口(这里是FastEthernet0&#x2F;1)指定为接人端口，接人端口是非标记端口，从该端口输入&#x2F;输出的MAC帧不携带VLAN ID。switchport access vlan 2是接口配置模式下使用的命令,该命令的作用是将指定交换机端口(这里是FastEthernet0&#x2F;1)作为接人端口分配给编号为2的VLAN(VLAN ID&#x3D;2的VLAN)。</p>
+<h2 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h2><h3 id="MAC欺骗"><a href="#MAC欺骗" class="headerlink" title="MAC欺骗"></a>MAC欺骗</h3><p>PC0配置如下，MAC地址为00D0.BCED.0D3D</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026213428640.png" alt="image-20251026213428640"></p>
+<p>跟上次实验一样。完成PC0、PC1和PC2之间ICMP报文传输过程。然后将PC2的MAC地址改为PC0的MAC地址00D0.BCED.0D3D,完成PC2和PC1之间ICMP报文传输过程。</p>
+<h3 id="配置VLAN2"><a href="#配置VLAN2" class="headerlink" title="配置VLAN2"></a>配置VLAN2</h3><p>查看Switch0的MAC表。交换机转发表将通往PC2的交换路径作为通往MAC地址为00D0.BCED.0D3D的终端的交换路径。</p>
+<p>然后建立VLAN2。在switch0点config-VLAN database。VLAN number输入2，VLAN name输入vlan2，然后点击添加</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026215459339.png" alt="image-20251026215459339"></p>
+<p>配置接入端口，把Fasthernet0&#x2F;1和Fasthernet0&#x2F;2都配置成VLAN2的接入端口。这两步也可以用上面的配置命令完成</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026215611972.png" alt="image-20251026215611972"></p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026215818323.png" alt="image-20251026215818323"></p>
+<h3 id="防MAC欺骗"><a href="#防MAC欺骗" class="headerlink" title="防MAC欺骗"></a>防MAC欺骗</h3><p>然后再进行一次PC0和PC1之间的icmp报文传输。再进行PC2（还是用PC0的MAC地址）和PC1之间的icmp报文传输，失败，再查看switch0的MAC表：</p>
+<p><img src="/2025/10/26/MAC_Spoofing_prevention/image-20251026220302567.png" alt="image-20251026220302567"></p>
+<p>可以看到VLAN2对应的MAC表里，PC0的MAC地址00D0.BCED.0D3D对应的是0&#x2F;1端口，也就是PC0实际对应的端口，而在VLAN1的MAC表里对应的是PC2的端口，这样就阻止了VLAN2中发往PC0的MAC帧发往PC2，而只会发给PC0</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/" rel="tag"># 网络协议安全</a>
+              <a href="/tags/%E6%80%9D%E7%A7%91%E6%A8%A1%E6%8B%9F%E5%99%A8/" rel="tag"># 思科模拟器</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/18/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/" rel="prev" title="【网络协议安全】MAC欺骗实验">
+                  <i class="fa fa-angle-left"></i> 【网络协议安全】MAC欺骗实验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/11/07/IPSec_VPN/" rel="next" title="【网络协议安全】IPSec+VPN实验">
+                  【网络协议安全】IPSec+VPN实验 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
