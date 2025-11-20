@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mintind.github.io/2025/11/04/CTF/Web/web_security_midterm/</loc>
+    <lastmod>2025-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://mintind.github.io/2025/11/11/Notes/zotero_basic/</loc>
+    <lastmod>2025-11-20</lastmod>
+  </url>
+  <url>
+    <loc>https://mintind.github.io/2025/10/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/</loc>
+    <lastmod>2025-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://mintind.github.io/2025/11/17/Notes/some_notes_I_always_forget/</loc>
+    <lastmod>2025-11-17</lastmod>
+  </url>
+  <url>
     <loc>https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/</loc>
     <lastmod>2025-11-14</lastmod>
   </url>
@@ -10,10 +26,6 @@
   </url>
   <url>
     <loc>https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/</loc>
-    <lastmod>2025-11-14</lastmod>
-  </url>
-  <url>
-    <loc>https://mintind.github.io/2025/11/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/</loc>
     <lastmod>2025-11-14</lastmod>
   </url>
   <url>

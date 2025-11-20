@@ -1,7 +1,10 @@
+https://mintind.github.io/2025/11/04/CTF/Web/web_security_midterm/
+https://mintind.github.io/2025/11/11/Notes/zotero_basic/
+https://mintind.github.io/2025/10/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/
+https://mintind.github.io/2025/11/17/Notes/some_notes_I_always_forget/
 https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/
 https://mintind.github.io/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
 https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/
-https://mintind.github.io/2025/11/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/
 https://mintind.github.io/2025/10/05/Blog/how-to-decorate-your-blog/
 https://mintind.github.io/2025/10/04/Blog/how-to-build-your-own-blog/
 https://mintind.github.io/2025/10/04/hello-world/
@@ -15,6 +18,11 @@ https://mintind.github.io/tags/%E6%80%9D%E7%A7%91%E6%A8%A1%E6%8B%9F%E5%99%A8/
 https://mintind.github.io/tags/CTF/
 https://mintind.github.io/tags/RE/
 https://mintind.github.io/tags/RC4/
+https://mintind.github.io/tags/Notes/
+https://mintind.github.io/tags/Virtual-Machine/
+https://mintind.github.io/tags/Web/
+https://mintind.github.io/tags/Zotero/
 https://mintind.github.io/categories/Notes/
 https://mintind.github.io/categories/Network/
 https://mintind.github.io/categories/RE/
+https://mintind.github.io/categories/Web/

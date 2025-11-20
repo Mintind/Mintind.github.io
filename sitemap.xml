@@ -2,6 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://mintind.github.io/2025/11/04/CTF/Web/web_security_midterm/</loc>
+    
+    <lastmod>2025-11-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/2025/11/11/Notes/zotero_basic/</loc>
+    
+    <lastmod>2025-11-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/2025/10/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/</loc>
+    
+    <lastmod>2025-11-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/2025/11/17/Notes/some_notes_I_always_forget/</loc>
+    
+    <lastmod>2025-11-17</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/</loc>
     
     <lastmod>2025-11-14</lastmod>
@@ -21,15 +57,6 @@
   
   <url>
     <loc>https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/</loc>
-    
-    <lastmod>2025-11-14</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://mintind.github.io/2025/11/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/</loc>
     
     <lastmod>2025-11-14</lastmod>
     
@@ -67,7 +94,7 @@
 
   <url>
     <loc>https://mintind.github.io/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -75,63 +102,91 @@
   
   <url>
     <loc>https://mintind.github.io/tags/Blog/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/Hexo/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/NexT/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/UCAS/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/%E6%80%9D%E7%A7%91%E6%A8%A1%E6%8B%9F%E5%99%A8/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/CTF/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/RE/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/tags/RC4/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/tags/Notes/</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/tags/Virtual-Machine/</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/tags/Web/</loc>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/tags/Zotero/</loc>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
@@ -140,21 +195,28 @@
   
   <url>
     <loc>https://mintind.github.io/categories/Notes/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/categories/Network/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://mintind.github.io/categories/RE/</loc>
-    <lastmod>2025-11-14</lastmod>
+    <lastmod>2025-11-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://mintind.github.io/categories/Web/</loc>
+    <lastmod>2025-11-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
