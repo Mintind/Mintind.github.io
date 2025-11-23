@@ -1,7 +1,9 @@
+https://mintind.github.io/2025/11/17/Notes/some_notes_I_always_forget/
+https://mintind.github.io/2025/11/21/Notes/little_notes/
+https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/
 https://mintind.github.io/2025/11/04/CTF/Web/web_security_midterm/
 https://mintind.github.io/2025/11/11/Notes/zotero_basic/
 https://mintind.github.io/2025/10/25/CTF/RE/RE_N1BOOK_BabyAlgorithm/
-https://mintind.github.io/2025/11/17/Notes/some_notes_I_always_forget/
 https://mintind.github.io/2025/11/07/UCAS/IPSec_VPN/
 https://mintind.github.io/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/
 https://mintind.github.io/2025/10/26/UCAS/MAC_Spoofing_prevention/

