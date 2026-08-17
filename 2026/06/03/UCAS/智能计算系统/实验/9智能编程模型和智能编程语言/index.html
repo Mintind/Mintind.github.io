@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="两个实验">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能编程模型和智能编程语言">
+<meta property="og:url" content="https://mintind.github.io/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="两个实验">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-03T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/","path":"2026/06/03/UCAS/智能计算系统/实验/9智能编程模型和智能编程语言/","title":"智能编程模型和智能编程语言"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>智能编程模型和智能编程语言 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E7%AE%97%E5%AD%90%E5%BC%80%E5%8F%91%E4%B8%8E%E9%9B%86%E6%88%90%E5%AE%9E%E9%AA%8C"><span class="nav-number">1.</span> <span class="nav-text">智能编程语言算子开发与集成实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8"><span class="nav-number">1.1.</span> <span class="nav-text">代码补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-Sigmoid-%E4%B8%BB%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.1.1.</span> <span class="nav-text">实现 Sigmoid 主程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-Sigmoid-%E6%A0%B8%E5%87%BD%E6%95%B0"><span class="nav-number">1.1.2.</span> <span class="nav-text">实现 Sigmoid 核函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E8%BF%87-pybind11-%E6%9A%B4%E9%9C%B2-Op-%E6%8E%A5%E5%8F%A3"><span class="nav-number">1.1.3.</span> <span class="nav-text">通过 pybind11 暴露 Op 接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-setuptools-%E7%BC%96%E8%AF%91%E5%92%8C%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.4.</span> <span class="nav-text">使用 setuptools 编译和安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B2%BE%E5%BA%A6%E5%AF%B9%E6%AF%94%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.5.</span> <span class="nav-text">精度对比测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.6.</span> <span class="nav-text">性能测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mlu-functions-py"><span class="nav-number">1.1.7.</span> <span class="nav-text">mlu_functions.py</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%90%E8%A1%8C"><span class="nav-number">1.2.</span> <span class="nav-text">实验运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E9%AA%8C"><span class="nav-number">2.</span> <span class="nav-text">智能编程语言性能优化实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%A0%87%E9%87%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">矩阵乘标量实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%A0%87%E9%87%8F-NRAM-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.2.</span> <span class="nav-text">矩阵乘标量 NRAM 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E5%90%91%E9%87%8F-NRAM-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.3.</span> <span class="nav-text">矩阵乘向量 NRAM 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E5%A4%9A%E6%A0%B8%E5%90%91%E9%87%8F-NRAM-%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.4.</span> <span class="nav-text">矩阵乘多核向量 NRAM 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E5%A4%9A%E6%A0%B8%E5%90%91%E9%87%8F-NRAM-%E4%B8%89%E7%BA%A7%E6%B5%81%E6%B0%B4%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.5.</span> <span class="nav-text">矩阵乘多核向量 NRAM 三级流水实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E5%A4%9A%E6%A0%B8%E5%90%91%E9%87%8F-SRAM-%E4%BA%94%E7%BA%A7%E6%B5%81%E6%B0%B4%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.6.</span> <span class="nav-text">矩阵乘多核向量 SRAM 五级流水实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E6%80%9D%E8%B7%AF%E6%80%BB%E7%BB%93"><span class="nav-number">2.1.7.</span> <span class="nav-text">优化思路总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%90%E8%A1%8C-1"><span class="nav-number">2.2.</span> <span class="nav-text">实验运行</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="智能编程模型和智能编程语言 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          智能编程模型和智能编程语言<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v5a6e6aqMLznmmbrog73nvJbnqIvmqKHlnovlkozmmbrog73nvJbnqIvor63oqIAubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-04 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-04T00:00:00+08:00">2026-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>两个实验</p>
+<span id="more"></span>
+
+<p>包含ai生成文本</p>
+<h1 id="智能编程语言算子开发与集成实验"><a href="#智能编程语言算子开发与集成实验" class="headerlink" title="智能编程语言算子开发与集成实验"></a>智能编程语言算子开发与集成实验</h1><p><strong>实验目的：</strong></p>
+<p>掌握使用智能编程语言 BCL 进行算子开发、编译扩展高性能库算子,并集成到 PyTorch 框架中的方法和流程。能够用 BCL 实现 Sigmoid 算子,并集成进 PyTorch 的推理网络高效 地运行在 MLU 硬件上。</p>
+<p><strong>实验环境</strong>：</p>
+<p>硬件平台:MLU 云平台环境。 </p>
+<p>软件环境:AI 框架 PyTorch、计算加速库 CNNL、云端开发工具集 CNToolkit、Python3 及相关的扩展库。</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-for-student ：v7.1</p>
+<p>目录：&#x2F; opt &#x2F; code_chap7 &#x2F; exp_7_2_matmul_opt &#x2F;</p>
+<p>代码文件组织：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Sigmoid 自定义算子实验根目录</span><br><span class="line">├── README.md               # 描述算子功能的说明文档</span><br><span class="line">├── mlu_custom_ext          # 生成的 module 模块，用于在 python 层导入</span><br><span class="line">│   ├── __init__.py         # python 包固有文件</span><br><span class="line">│   ├── mlu                 # mlu 代码文件，根据实际情况自己创建，在 setup.py 中修改即可</span><br><span class="line">│   │   ├── include         # 头文件目录（头文件和实现分离，属于代码习惯，建议采用此布局）</span><br><span class="line">│   │   │   ├── bang_sigmoid_sample.h   # 实现对 mlu 函数的封装</span><br><span class="line">│   │   │   ├── kernel.h                # BCL 代码中的宏，良好组织代码的需要</span><br><span class="line">│   │   │   └── custom_ops.h            # 算子对外头文件</span><br><span class="line">│   │   └── src</span><br><span class="line">│   │       ├── bang_sigmoid.cpp        # 对 PyTorch 层面 Tensor 的封装，和自定义算子中 xxx_internal 的实现类似</span><br><span class="line">│   │       └── bang_sigmoid_sample.mlu # 核心 BangC 实现</span><br><span class="line">│   └── mlu_functions       # 合理的组织自己的代码，方便后续调用</span><br><span class="line">│       ├── __init__.py     # 包必备文件</span><br><span class="line">│       └── mlu_functions.py # 对 C++ 代码的封装</span><br><span class="line">├── setup.py                # 构建包的脚本</span><br><span class="line">└── tests</span><br><span class="line">    └── test_sigmoid.py     # 对绑定代码的 python 侧测试</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><p>补全mlu_custom_ext&#x2F;mlu&#x2F;src&#x2F;bang_sigmoid_sample.mlu、mlu_custom_ext&#x2F;mlu&#x2F;src&#x2F;bang_sigmoid.cpp&#x2F;bang_sigmoid.cpp、&#x2F;mlu_custom_ext&#x2F;mlu_functions&#x2F;mlu_functions.py、tests&#x2F;test_sigmoid.py、tests&#x2F;test_sigmoid_benchmark.py一系列文件</p>
+<h3 id="实现-Sigmoid-主程序"><a href="#实现-Sigmoid-主程序" class="headerlink" title="实现 Sigmoid 主程序"></a>实现 Sigmoid 主程序</h3><p>mlu_custom_ext&#x2F;mlu&#x2F;src&#x2F;bang_sigmoid.cpp&#x2F;bang_sigmoid.cpp</p>
+<h3 id="实现-Sigmoid-核函数"><a href="#实现-Sigmoid-核函数" class="headerlink" title="实现 Sigmoid 核函数"></a>实现 Sigmoid 核函数</h3><p>在 mlu_custom_ext&#x2F;mlu&#x2F;src&#x2F;bang_sigmoid_sample.mlu 文件中实现 bang_sigmoid_kernel_entry 函数并通过头文件对 外暴露。</p>
+<p>头文件bang_sigmoid_sample.h声明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cnrt.h&gt;</span></span></span><br><span class="line">template &lt;typename T&gt;</span><br><span class="line"><span class="type">void</span> <span class="title function_">bang_sigmoid_kernel_entry</span><span class="params">(</span></span><br><span class="line"><span class="params">    cnrtQueue* <span class="built_in">queue</span>,</span></span><br><span class="line"><span class="params">    T* d_dst,</span></span><br><span class="line"><span class="params">    T* d_src,</span></span><br><span class="line"><span class="params">    <span class="type">int</span> elem_count)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="通过-pybind11-暴露-Op-接口"><a href="#通过-pybind11-暴露-Op-接口" class="headerlink" title="通过 pybind11 暴露 Op 接口"></a>通过 pybind11 暴露 Op 接口</h3><p>customed_ops . h</p>
+<p>这俩是写好了的</p>
+<h3 id="使用-setuptools-编译和安装"><a href="#使用-setuptools-编译和安装" class="headerlink" title="使用 setuptools 编译和安装"></a>使用 setuptools 编译和安装</h3><p>setup . py</p>
+<h3 id="精度对比测试"><a href="#精度对比测试" class="headerlink" title="精度对比测试"></a>精度对比测试</h3><p>tests&#x2F;test_sigmoid.py</p>
+<h3 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h3><p>tests&#x2F;test_sigmoid_benchmark.py</p>
+<h3 id="mlu-functions-py"><a href="#mlu-functions-py" class="headerlink" title="mlu_functions.py"></a>mlu_functions.py</h3><h2 id="实验运行"><a href="#实验运行" class="headerlink" title="实验运行"></a>实验运行</h2><p>先编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python setup.py clean --all</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>进入tests目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python test_sigmoid.py</span><br><span class="line">python test_sigmoid_benchmark.py</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="智能编程语言性能优化实验"><a href="#智能编程语言性能优化实验" class="headerlink" title="智能编程语言性能优化实验"></a>智能编程语言性能优化实验</h1><p><strong>实验目的：</strong></p>
+<p>掌握使用智能编程语言优化算法性能的原理,掌握智能编程语言的调试和调优方法, 能够使用智能编程语言在 MLU 上加速矩阵乘的计算。</p>
+<p><strong>实验环境</strong>：</p>
+<p>硬件平台:MLU 云平台环境。 </p>
+<p>软件环境:云端开发工具集 CNToolkit</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-for-student ：v7.1</p>
+<p>目录：&#x2F;opt&#x2F;code_chap7&#x2F;exp_7_1_custom_pytorch_mlu_op&#x2F; </p>
+<p><strong>实验内容：</strong></p>
+<p>(1) 实现一个 CPU 版本的标量矩阵乘,然后将标量矩阵乘实现迁移到 MLU 上,做性  能对比;  </p>
+<p>(2) 利用 BCL 的 NRAM 地址空间加速标量版本的矩阵乘,对比性能提升; </p>
+<p>(3) 利用 BCL 提供的向量化接口 bang_matmul 加速矩阵乘,对比性能提升; </p>
+<p>(4) 利用 BCL 提供的 Block 任务,使用 MLU 的多核做并行加速,对比性能提升; </p>
+<p>(5) 利用 BCL 提供的异步拷贝接口 memcpy_async 做三级流水优化,对比性能提升; </p>
+<p>(6) 利用 BCL 提供的 Union 任务和 SRAM 地址空间,做五级流水优化,对比性能提升;</p>
+<h2 id="代码补全-1"><a href="#代码补全-1" class="headerlink" title="代码补全"></a>代码补全</h2><h3 id="矩阵乘标量实现"><a href="#矩阵乘标量实现" class="headerlink" title="矩阵乘标量实现"></a>矩阵乘标量实现</h3><p>01 _ s c a l a r . mlu</p>
+<p>这段代码实现了一个<strong>矩阵乘法的标量（scalar）版本</strong>，分别在 CPU 和 MLU（寒武纪人工智能加速卡）上执行，并对比两者的计算结果与运行时间。下面按执行顺序解释主要步骤。</p>
+<ol>
+<li>定义矩阵尺寸与辅助函数</li>
+</ol>
+<ul>
+<li><code>M = 128</code>, <code>N = 256</code>, <code>K = 128</code>：定义左矩阵 <code>A</code> 尺寸为 <code>M×N</code>，右矩阵 <code>B</code> 尺寸为 <code>N×K</code>，结果矩阵 <code>C</code> 尺寸为 <code>M×K</code>。</li>
+<li><code>relativeError(a, b)</code>：计算两个浮点数的相对误差，用于验证 MLU 与 CPU 结果是否一致。</li>
+<li><code>generateRandomFloat(min, max)</code>：在 <code>[min, max]</code> 区间生成随机浮点数（调试模式下固定返回 <code>1.1</code>）。</li>
+</ul>
+<ol start="2">
+<li>主机端（CPU）矩阵乘法函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">multiplyMatricesCPU</span><span class="params">(<span class="type">float</span> *left, <span class="type">float</span> *right, <span class="type">float</span> *result, <span class="type">int</span> m, <span class="type">int</span> n, <span class="type">int</span> k)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>三重循环实现经典标量乘法：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i in <span class="number">0.</span>.m<span class="number">-1</span>:</span><br><span class="line">  <span class="keyword">for</span> j in <span class="number">0.</span>.k<span class="number">-1</span>:</span><br><span class="line">    sum = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> x in <span class="number">0.</span>.n<span class="number">-1</span>:</span><br><span class="line">      sum += left[i*n + x] * right[x*k + j]</span><br><span class="line">    result[i*k + j] = sum</span><br></pre></td></tr></table></figure></li>
+<li>时间复杂度 <code>O(M*N*K)</code>。</li>
+</ul>
+<ol start="3">
+<li>设备端（MLU）核函数</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__mlu_entry__ <span class="type">void</span> <span class="title function_">multiplyMatricesMLU</span><span class="params">(...)</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用与 CPU 完全相同的三重循环逻辑，但运行在 MLU 加速卡上。</li>
+<li>注释中提示“标量矩阵乘计算部分”，已补充了与 CPU 相同的累加代码。</li>
+</ul>
+<ol start="4">
+<li>主程序执行流程</li>
+</ol>
+<p>4.1 分配内存</p>
+<ul>
+<li><strong>主机内存</strong>：<code>left</code>, <code>right</code>, <code>result</code>（CPU 结果），<code>result_actual</code>（接收 MLU 结果）。</li>
+<li><strong>MLU 设备内存</strong>：<code>left_mlu</code>, <code>right_mlu</code>, <code>result_mlu</code>（通过 <code>cnrtMalloc</code> 分配）。</li>
+</ul>
+<p>4.2 初始化矩阵数据</p>
+<ul>
+<li>左矩阵 <code>left[M][N]</code> 每个元素随机生成 <code>[1.0, 1.1]</code>。</li>
+<li>右矩阵 <code>right[N][K]</code> 同理。</li>
+<li>通过 <code>cnrtMemcpy</code> 将数据从主机拷贝到 MLU 设备。</li>
+</ul>
+<p>4.3 运行 CPU 矩阵乘法并计时</p>
+<ul>
+<li><code>gettimeofday</code> 记录开始和结束时间，计算耗时（毫秒）。</li>
+<li>结果保存在 <code>result</code> 中。</li>
+</ul>
+<p>4.4 运行 MLU 矩阵乘法并计时</p>
+<ul>
+<li>创建 CNRT 通知器（notifier）和队列（queue）。</li>
+<li><strong>开始计时</strong>：<code>cnrtPlaceNotifier(st_mlu, queue)</code>。</li>
+<li>启动核函数：<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">multiplyMatricesMLU&lt;&lt;&lt;dim, func_type, <span class="built_in">queue</span>&gt;&gt;&gt;(left_mlu, right_mlu, result_mlu, m, n, k);</span><br></pre></td></tr></table></figure></li>
+<li><strong>结束计时</strong>：<code>cnrtPlaceNotifier(et_mlu, queue)</code>。</li>
+<li>同步队列 <code>cnrtQueueSync(queue)</code> 确保核函数执行完毕。</li>
+<li><code>cnrtNotifierElapsedTime</code> 计算两个通知器之间的时间差（毫秒），得到 MLU 耗时。</li>
+</ul>
+<p>4.5 将 MLU 结果拷贝回主机</p>
+<ul>
+<li><code>cnrtMemcpy(result_actual, result_mlu, ..., cnrtMemcpyDevToHost)</code></li>
+</ul>
+<p>4.6 正确性验证</p>
+<ul>
+<li>遍历结果矩阵每个元素，计算 CPU 结果与 MLU 结果的相对误差。</li>
+<li>若任一元素相对误差 &gt; 0.1，则打印失败位置和数值，最终输出 <code>01FAILED</code>；否则输出 <code>01PASSED</code>。</li>
+</ul>
+<p>4.7 资源释放</p>
+<ul>
+<li>释放主机内存、MLU 设备内存、销毁通知器和队列。</li>
+</ul>
+<ol start="5">
+<li>关键点说明</li>
+</ol>
+<ul>
+<li><strong>标量实现</strong>：指没有使用任何向量化指令或并行优化，纯粹用最内层循环逐元素相乘累加。</li>
+<li><strong>MLU 核函数</strong>：虽然代码写的是三重循环，但每个核函数只由一个线程块（<code>dim = {1,1,1}</code>）执行，本质上仍然是串行执行，没有发挥 MLU 的并行优势。这可能是教学示例，用于对比“标量版本”与后续优化的“向量化&#x2F;并行版本”。</li>
+<li><strong>随机数范围</strong>：<code>[1.0, 1.1]</code> 且调试模式下固定为 <code>1.1</code>，避免浮点溢出或极端值导致误差过大。</li>
+<li><strong>时间测量</strong>：CPU 使用 <code>gettimeofday</code>，MLU 使用硬件通知器，得到精确的设备端执行时间。</li>
+</ul>
+<ol start="6">
+<li>输出示例</li>
+</ol>
+<p>程序会打印矩阵尺寸、CPU 耗时、MLU 耗时，以及最终 <code>PASSED</code> 或 <code>FAILED</code>。若开启 <code>DEBUG</code> 宏，还会打印完整的 CPU 和 MLU 结果矩阵。</p>
+<h3 id="矩阵乘标量-NRAM-实现"><a href="#矩阵乘标量-NRAM-实现" class="headerlink" title="矩阵乘标量 NRAM 实现"></a>矩阵乘标量 NRAM 实现</h3><p>02 _scalar_nram . mlu</p>
+<p><strong>与第一个示例的主要区别</strong>：在第一个示例（<code>01_scalar.mlu</code>）中，核函数 <code>multiplyMatricesMLU</code> 直接在全局内存（GDRAM）上通过三重循环计算，每次访问 <code>left[i*n+x]</code> 和 <code>right[x*k+j]</code> 都要从片外存储器读取，效率很低。而本示例在核函数内部声明了三个 <code>__nram__</code> 数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">__nram__ <span class="type">float</span> left_nram[M * N];</span><br><span class="line">__nram__ <span class="type">float</span> right_nram[N * K];</span><br><span class="line">__nram__ <span class="type">float</span> result_nram[M * K];</span><br></pre></td></tr></table></figure>
+<p><code>__nram__</code> 表示变量存放在 MLU 的片上高速存储器（NRAM）中，访问延迟远低于全局内存。核函数首先通过 <code>__memcpy</code> 将左矩阵和右矩阵从 GDRAM 一次性拷贝到 NRAM：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__memcpy(left_nram, left, M * N * <span class="keyword">sizeof</span>(<span class="type">float</span>), GDRAM2NRAM);</span><br><span class="line">__memcpy(right_nram, right, N * K * <span class="keyword">sizeof</span>(<span class="type">float</span>), GDRAM2NRAM);</span><br></pre></td></tr></table></figure>
+<p>然后使用与 CPU 完全相同的三重循环在 NRAM 上完成计算，最后将结果矩阵从 NRAM 拷贝回 GDRAM：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__memcpy(result, result_nram, M * K * <span class="keyword">sizeof</span>(<span class="type">float</span>), NRAM2GDRAM);</span><br></pre></td></tr></table></figure>
+<p>这样做的好处是：整个计算过程中，左、右矩阵的数据已经位于片上高速缓存，无需反复访问慢速的 GDRAM，理论上能大幅提升执行效率（虽然本示例中核函数仍然是串行的单线程块执行）。</p>
+<p><strong>主程序的流程</strong>与前一个示例几乎一致：分配主机内存和 MLU 设备内存，用随机数填充矩阵，拷贝数据到设备，分别运行 CPU 函数和 MLU 核函数并计时，最后比较结果的相对误差。计时部分使用了 <code>cnrtPlaceNotifier</code> 和 <code>cnrtNotifierDuration</code>（示例中写的是 <code>cnrtNotifierElapsedTime</code> 的别名或不同版本）。核函数启动时仍然使用单个线程块 <code>dim = {1,1,1}</code>，因此并没有利用 MLU 的并行计算能力，只是测试了将数据搬到 NRAM 后再计算的效果。</p>
+<p><strong>性能预期</strong>：由于 <code>M=128, N=256, K=128</code>，整个矩阵数据量较小（左矩阵 128×256×4&#x3D;128KB，右矩阵 256×128×4&#x3D;128KB），NRAM 容量足够容纳全部矩阵（寒武纪 MLU 的 NRAM 通常有几百 KB 到几 MB）。因此相比全局内存版本，NRAM 版本会减少大量片外访存，耗时应该显著降低。不过因为核函数仍然是纯标量串行计算，计算量本身并未改变，所以绝对时间依然远大于优化的并行版本。</p>
+<h3 id="矩阵乘向量-NRAM-实现"><a href="#矩阵乘向量-NRAM-实现" class="headerlink" title="矩阵乘向量 NRAM 实现"></a>矩阵乘向量 NRAM 实现</h3><p>03 _vector_nram . mlu</p>
+<p>这段代码是寒武纪 MLU 编程系列中的第三个示例，文件名 <code>03_vector_nram.mlu</code> 表明它在之前的基础上引入了<strong>向量化指令</strong>（<code>__bang_matmul</code>）来计算矩阵乘法，而不是手动编写三重循环。与前两个示例相比，核函数内部不再使用标量循环，而是直接调用硬件加速的矩阵乘内置函数，充分利用 MLU 的并行计算能力。</p>
+<p><strong>核函数的具体步骤</strong>：</p>
+<ol>
+<li><p>在片上存储器中声明三个数组：</p>
+<ul>
+<li><code>__nram__ float left_nram[M * N];</code> 左矩阵，存放在 NRAM（高速缓存）。</li>
+<li><code>__wram__ float right_wram[N * K];</code> 右矩阵，存放在 WRAM（另一种片上存储，可能专门为矩阵乘法优化）。</li>
+<li><code>__nram__ float result_nram[M * K];</code> 结果矩阵，存放在 NRAM。</li>
+</ul>
+</li>
+<li><p>通过 <code>__memcpy</code> 将数据从全局内存（GDRAM）搬运到片上：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">__memcpy(left_nram, left, M * N * <span class="keyword">sizeof</span>(<span class="type">float</span>), GDRAM2NRAM);</span><br><span class="line">__memcpy(right_wram, right, N * K * <span class="keyword">sizeof</span>(<span class="type">float</span>), GDRAM2WRAM);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>调用向量化矩阵乘法函数一次性完成计算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__bang_matmul(result_nram, left_nram, right_wram, m, n, k);</span><br></pre></td></tr></table></figure>
+<p>这个函数会利用 MLU 的硬件矩阵运算单元（可能包含脉动阵列或多核并行）高效地执行 <code>result = left × right</code>，避免了显式的循环。</p>
+</li>
+<li><p>将结果从 NRAM 拷贝回全局内存：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__memcpy(result, result_nram, M * K * <span class="keyword">sizeof</span>(<span class="type">float</span>), NRAM2GDRAM);</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>主程序流程</strong>与前两个示例完全一致：分配主机和设备内存，随机生成左、右矩阵（元素范围 1.0~1.1），CPU 执行标量三重循环计算并计时，MLU 执行上述核函数并计时（使用 <code>cnrtPlaceNotifier</code> 和 <code>cnrtNotifierDuration</code>），最后比较 CPU 和 MLU 结果的相对误差，误差阈值 0.1，输出 <code>03PASSED</code> 或 <code>03FAILED</code>。若开启 <code>DEBUG</code> 宏，还会打印详细的矩阵内容。</p>
+<p><strong>与前两个示例的关键区别</strong>：</p>
+<ul>
+<li><code>01_scalar.mlu</code>：直接在全局内存上用标量三重循环计算，没有利用片上缓存，也没有并行。</li>
+<li><code>02_scalar_nram.mlu</code>：将数据预取到 NRAM，但计算仍然是标量三重循环，只是减少了访存延迟。</li>
+<li><code>03_vector_nram.mlu</code>：不仅将数据预取到片上，还使用了硬件加速的 <code>__bang_matmul</code> 指令，计算过程是向量化且高度并行的，执行效率远超前两个版本。</li>
+</ul>
+<p><strong>性能预期</strong>：由于 <code>M=128, N=256, K=128</code>，矩阵规模较小，CPU 标量版本耗时可能在几十毫秒量级，而 MLU 向量化版本由于硬件加速，耗时可能降到亚毫秒甚至微秒级。不过实际加速比取决于 MLU 的架构和 <code>__bang_matmul</code> 的实现。</p>
+<h3 id="矩阵乘多核向量-NRAM-实现"><a href="#矩阵乘多核向量-NRAM-实现" class="headerlink" title="矩阵乘多核向量 NRAM 实现"></a>矩阵乘多核向量 NRAM 实现</h3><p>04 _vector_nram_blocks . mlu</p>
+<p>这段代码是第四个示例，在向量化（<code>__bang_matmul</code>）的基础上，加入了<strong>多块并行</strong>和<strong>循环分块</strong>，以处理远超片上存储容量的超大矩阵。</p>
+<p><strong>矩阵规模</strong>：通过宏定义，最终左矩阵的行数 M 被扩展到 524288，列数 N&#x3D;256；右矩阵 256×128；结果矩阵 524288×128。由于左矩阵太大，无法一次性放入 NRAM，因此需要拆分计算。</p>
+<p><strong>核函数内部逻辑</strong>：</p>
+<ul>
+<li>右矩阵较小（256×128），一次性从全局内存拷贝到 WRAM，之后不再重复搬运。</li>
+<li>左矩阵按行分块：每个计算块（taskId）负责连续的若干行（m_per_block &#x3D; 总行数 &#x2F; 块数），每个块内部再通过循环（LOOPS 次）每次处理一个更小的行块（m_per_loop 行），将这一小块左矩阵拷贝到 NRAM。</li>
+<li>对每个小块左矩阵，调用 <code>__bang_matmul</code> 与右矩阵相乘，得到对应小块的结果矩阵（m_per_loop × K）。</li>
+<li>将结果小块拷贝回全局结果矩阵的对应位置。</li>
+</ul>
+<p><strong>并行方式</strong>：主程序启动 <code>BLOCKS</code> 个并行块（dim.x &#x3D; BLOCKS），每个块独立处理不同行范围，互不干扰。这样充分利用 MLU 的多个计算核心。</p>
+<p><strong>主程序</strong>：与之前类似，分配主机&#x2F;设备内存、随机初始化、CPU 三重循环计算、MLU 执行核函数并计时、比较误差输出 PASS&#x2F;FAIL。由于矩阵极大，CPU 计算会非常缓慢，而 MLU 通过并行和向量化获得巨大加速。</p>
+<p><strong>优化思路演进</strong>：从全局内存标量三重循环（01）→ 数据搬入 NRAM 但仍是标量（02）→ 使用向量化指令 <code>__bang_matmul</code>（03）→ 多块并行 + 循环分块以处理大矩阵（04）。</p>
+<h3 id="矩阵乘多核向量-NRAM-三级流水实现"><a href="#矩阵乘多核向量-NRAM-三级流水实现" class="headerlink" title="矩阵乘多核向量 NRAM 三级流水实现"></a>矩阵乘多核向量 NRAM 三级流水实现</h3><p>05 _vector_nram_blocks_pipe3 . mlu</p>
+<p>第五个示例 <code>05_vector_nram_blocks_pipe3.mlu</code> 在第四个示例（多块并行+循环分块）的基础上引入了<strong>三级流水线</strong>（双缓冲 + 异步拷贝），通过重叠数据传输与计算来隐藏内存访问延迟，进一步提高执行效率。核心变化如下：</p>
+<p><strong>新增参数</strong>：<code>#define STAGES 2</code>，表示使用两个缓冲区（双缓冲）。</p>
+<p><strong>片上存储加倍</strong>：左矩阵 NRAM 数组大小变为 <code>M_PER_LOOP * N * STAGES</code>，结果矩阵 NRAM 数组大小变为 <code>M_PER_LOOP * K * STAGES</code>，即每个缓冲区独立存放一块行数据，允许在执行计算的同时异步加载下一块。</p>
+<p><strong>核函数循环次数扩展</strong>：循环次数从 <code>LOOPS</code> 变为 <code>LOOPS + STAGES</code>（即 34 次），用于处理流水线启动（前 STAGES 次）和排空（后 STAGES 次）阶段。</p>
+<p><strong>循环体内三级操作</strong>：每次迭代同时触发最多三个阶段的异步操作，通过取模 <code>% STAGES</code> 切换缓冲区：</p>
+<ol>
+<li><p><strong>左矩阵异步加载</strong>（当 <code>loop &lt; LOOPS</code> 时）：<br>使用 <code>__memcpy_async</code> 将左矩阵的第 <code>loop</code> 块拷贝到 <code>left_nram</code> 的 <code>(loop % STAGES)</code> 号缓冲区。</p>
+</li>
+<li><p><strong>矩阵乘计算</strong>（当 <code>loop &gt;= 1 &amp;&amp; loop &lt;= LOOPS</code> 时）：<br>对 <code>(loop-1) % STAGES</code> 号缓冲区中的左矩阵块，调用 <code>__bang_matmul</code> 计算乘积，结果存入结果 NRAM 的同号缓冲区。</p>
+</li>
+<li><p><strong>结果异步写回</strong>（当 <code>loop &gt;= STAGES</code> 时）：<br>将 <code>(loop-2) % STAGES</code> 号缓冲区中的计算结果，通过 <code>__memcpy_async</code> 写回全局结果矩阵的对应位置。</p>
+</li>
+</ol>
+<p><strong>同步点</strong>：每次循环末尾调用 <code>__sync()</code>，确保当前循环中发起的异步内存操作（加载、计算、写回）在进入下一次循环前已完成，保证数据依赖正确。</p>
+<p><strong>右矩阵拷贝</strong>：也改为 <code>__memcpy_async</code> 异步拷贝，进一步流水线化。</p>
+<p><strong>主程序</strong>：与第四个示例完全相同（仍启动 128 个块，矩阵规模一致），唯一区别是核函数内部实现了三级流水线。</p>
+<p><strong>优化效果</strong>：在第四个示例中，每个循环是“拷贝左块 → 等待完成 → 矩阵乘 → 等待完成 → 写回结果 → 等待完成”的串行步骤；而本示例通过双缓冲和异步操作，使得第 <code>t</code> 次计算可以和第 <code>t+1</code> 次加载、第 <code>t-1</code> 次写回同时进行，有效隐藏了访存延迟，提升了整体吞吐量。</p>
+<h3 id="矩阵乘多核向量-SRAM-五级流水实现"><a href="#矩阵乘多核向量-SRAM-五级流水实现" class="headerlink" title="矩阵乘多核向量 SRAM 五级流水实现"></a>矩阵乘多核向量 SRAM 五级流水实现</h3><p>06 _vector_sram_unions_pipe5 . mlu</p>
+<p>第六个示例 <code>06_vector_sram_blocks_pipe5.mlu</code> 引入了更复杂的存储层次和并行结构，在前五个示例的基础上增加了 <strong>SRAM（共享内存）</strong> 和 <strong>多级流水线</strong>（文件名中的 pipe5 暗示五级流水线）。代码不再仅仅使用 NRAM 和 WRAM，而是加入了 <code>__mlu_shared__</code> 声明的 SRAM，它可以被同一个计算簇（cluster）内的多个计算核（core）共享。</p>
+<p>首先看宏定义的变化：<code>M_PER_LOOP</code> 从 128 减小到 64，新增了 <code>M_PER_LOOP_BLOCK = M_PER_LOOP * STAGES = 128</code> 和 <code>M_PER_LOOP_UNION = M_PER_LOOP_BLOCK * 4 = 512</code>（4 是隐含的 coreDim）。最终 M 仍然是 524288，但分块粒度更细。并行层次上，主程序启动核函数时使用 <code>cnrtDim3_t dim = {CNRT_FUNC_TYPE_UNION1, 256, 1}</code>，<code>func_type = CNRT_FUNC_TYPE_UNION1</code>，表示启动 256 个 union（每个 union 包含多个 core，这里 coreDim 为 4）。这样总共有 256×4&#x3D;1024 个计算核同时工作。</p>
+<p>核函数 <code>multiplyMatricesMLU</code> 中，声明了三组 SRAM 数组：<code>left_sram</code>、<code>right_sram</code>、<code>result_sram</code>，大小分别为 <code>M_PER_LOOP_UNION * N * STAGES</code>、<code>N * K</code>、<code>M_PER_LOOP_UNION * K * STAGES</code>。右矩阵先异步从 GDRAM 拷贝到 SRAM（代码中写了两次，可能是笔误），然后进入主循环。主循环将左矩阵按行分块：每次循环从 GDRAM 异步拷贝 <code>m_per_loop_union</code> 行（即 512 行）到 <code>left_sram</code> 的一个缓冲区中，然后调用 <code>multiplyMatrices</code> 函数（这是一个 <code>__mlu_func__</code>，会在每个 core 上执行）处理该块，最后将结果从 SRAM 异步写回 GDRAM。</p>
+<p><code>multiplyMatrices</code> 函数在 core 级别运行，它进一步利用 <code>coreDim=4</code> 将传入的 512 行数据拆分为每个 core 处理 128 行（因为 <code>m / coreDim = 512/4=128</code>），然后通过内层双缓冲流水线将左矩阵从 SRAM 异步拷贝到 NRAM、执行 <code>__bang_matmul</code>、再将结果从 NRAM 异步写回 SRAM。内层循环的 <code>loops</code> 固定为 STAGES（2），每个 core 每次处理 64 行（128&#x2F;2&#x3D;64），与 <code>M_PER_LOOP</code> 一致。内层使用了 <code>__sync_io()</code> 和 <code>__sync_move()</code> 来保证异步操作完成。</p>
+<p>整个数据流动形成五级流水线：GDRAM → SRAM（cluster 级） → NRAM（core 级） → 计算 → NRAM → SRAM → GDRAM。右矩阵虽然从 GDRAM 拷贝到了 SRAM，但 <code>multiplyMatrices</code> 函数中使用的 <code>right_wram</code> 并未在入口函数中显式填充（可能假设已经存在或漏写），不过这并不影响理解其多层次存储的优化意图。</p>
+<p>主程序的其他部分（初始化、CPU 计算、计时、结果比较）与之前示例基本相同，只是输出 <code>06PASSED</code> 或 <code>06FAILED</code>。这个示例展示了如何通过组合 SRAM、WRAM、NRAM 以及多级流水线，在 MLU 上实现大规模矩阵乘法的高效计算。</p>
+<h3 id="优化思路总结"><a href="#优化思路总结" class="headerlink" title="优化思路总结"></a>优化思路总结</h3><p>从 <code>01_scalar.mlu</code> 到 <code>06_vector_sram_blocks_pipe5.mlu</code>，代码逐步展示了在寒武纪 MLU 上优化矩阵乘法的完整演进路径。整体优化思路可以概括为：<strong>从串行标量到向量化指令，从全局内存直接访问到多级片上存储（NRAM → WRAM → SRAM），从单线程块到多块并行，再到多核并行（union + core），并通过异步拷贝和双缓冲构建深度流水线，以重叠数据传输与计算，隐藏访存延迟，最终达到高吞吐、大规模矩阵的高效计算。</strong></p>
+<p>具体阶段如下：</p>
+<ol>
+<li><p><strong>基线（01_scalar）</strong>：直接在全局内存（GDRAM）上用三重循环完成标量乘加，未使用片上存储，计算与访存串行，性能极低。</p>
+</li>
+<li><p><strong>数据预取（02_scalar_nram）</strong>：将左、右矩阵显式拷贝到片上 NRAM，减少访问 GDRAM 的次数。但计算仍为标量串行，访存延迟虽降，算力未释放。</p>
+</li>
+<li><p><strong>向量化指令（03_vector_nram）</strong>：用 Bang 语言内置的 <code>__bang_matmul</code> 硬件加速指令替换手工三重循环，将矩阵乘法交给专用计算单元，大幅提升计算密度。</p>
+</li>
+<li><p><strong>多块并行 + 分块（04_vector_nram_blocks）</strong>：面对超大左矩阵（M&#x3D;524288），将 M 维度切分为多个独立块（128 个 block），每个块处理一行段，充分利用多个计算核心。同时每个块内部再将行段分成多轮循环（分块 tiling），以适应有限的 NRAM 容量，实现“右矩阵常驻 WRAM，左矩阵分批次搬运”。</p>
+</li>
+<li><p><strong>异步流水线（05_vector_nram_blocks_pipe3）</strong>：引入双缓冲（STAGES&#x3D;2）和异步内存拷贝（<code>__memcpy_async</code>），将数据加载、计算、结果写回三级操作重叠。循环次数扩展为 <code>LOOPS+STAGES</code>，同一时刻加载第 t+1 块、计算第 t 块、写回第 t-1 块，隐藏了访存延迟。</p>
+</li>
+<li><p><strong>多级存储与多核协同（06_vector_sram_blocks_pipe5）</strong>：增加 <code>__mlu_shared__</code> 声明的 SRAM（簇内共享），引入更细粒度的并行层次：任务维度为 union（每个 union 含 4 个 core）。数据流变为 GDRAM → SRAM（cluster 级） → NRAM（core 级） → 计算 → NRAM → SRAM → GDRAM，形成五级流水线。外部循环负责 GDRAM↔SRAM 的大块搬运，内部 <code>__mlu_func__</code> 在 core 上运行，进一步将 SRAM 中的数据分给每个 core，并再次使用双缓冲流水线进行 NRAM 级别的计算。这样通过融合多级存储、多核并行和深度流水，最大限度压榨 MLU 的带宽与算力。</p>
+</li>
+</ol>
+<p>整体优化思路始终围绕 <strong>减少访存延迟、提高计算并行度、重叠通信与计算</strong> 这三大原则，从最简单的标量实现逐步演进到适合生产环境的高性能矩阵乘法实现。</p>
+<h2 id="实验运行-1"><a href="#实验运行-1" class="headerlink" title="实验运行"></a>实验运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash test.sh</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" title="智能编程模型和智能编程语言">https://mintind.github.io/2026/06/03/UCAS/智能计算系统/实验/9智能编程模型和智能编程语言/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/01/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/bangc%E7%AE%97%E5%AD%90%E6%8C%91%E6%88%98%E8%B5%9B/" rel="prev" title="bangc算子挑战赛">
+                  <i class="fa fa-angle-left"></i> bangc算子挑战赛
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0%E4%B8%80%E4%BA%8C%E7%AB%A0/" rel="next" title="智能计算系统复习第一二章">
+                  智能计算系统复习第一二章 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/06/03/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%92%8C%E6%99%BA%E8%83%BD%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

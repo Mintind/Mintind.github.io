@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="不是我说你，你就不能创建虚拟机的时候就给个60G吗小气鬼">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VMWare虚拟机磁盘扩容踩坑记录">
+<meta property="og:url" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="不是我说你，你就不能创建虚拟机的时候就给个60G吗小气鬼">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260320150321591.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260320150650379.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260206232909466.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260207221732076.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260207222522301.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260207222935093.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/76c3fa4e6a2c489d859837c79a5cd2a1.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/9c6129fc440a41ccb902abba0236ca69.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/50ff637acb624ee4b7c568f13074b4a5.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/126a7f37ff7749ac9f7190c2b93eaae0.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/316b858ce18e40598d887fdc737e2944.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/e24bbcffc3874756938686104ab11581.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/d8145b6055614aad9693fb7aa53e1259.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/1c93ec1a562b4909b30bb29aa4efb7e4.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/0bb720d34830463fbb5ce9f355325cf2.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/8ff7634de3c745389b3c434fa0a3e908.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/3926d16cb51348df967bb040ea8afbce.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/092d99680b694745b388097a33c71d76.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/ec5ae4bedc254bbe808b970fd593530d.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/91ddbebf4e4d48588ea94ac2ea8ca279.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/f8f3cdc105c24b0faeb2a187bbae0099.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/45034c81952644b99cf552040d3adbac.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/5362c0aa7f974ee29e3a87515f4eafa4.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/4f44c977b2a445c0b06ba103201458d8.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/7e20c29247cc41228ff5cc5b807acca1.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/5886b175316042bc89a586fca0d93cb2.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/f9038720d126417cbef83dae1bad74a4.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/70916c169d2f44248b7942e1dfb2301c.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/4fb6b736b2c9472383d0bab1f15ade80.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/30025e87a69740409abb4b0b9dfa477d.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/d1b0bb91346540c09dbb0754cc858694.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/8449e0b1cb97428ebfc322f28f97f0c8.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/5066c34d78734d00ae0bfa64a88817c5.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/7fbbe595861947859a92e4a7b7f45424.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/eed73ffead5c4ba19f493be38a077a15.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/bbb8079783f142358b8cadb245592de3.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/b6eacf15e859415295db7a8d0ead8d3e.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/acf92d20fbe947f99a0f60b8c2d33b4a.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/2778bb5994b7476e968a85cb1ce9e29e.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/02a393954a6b483ba748e57bde31892e.png">
+<meta property="og:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/06cb047584fc4545a92fbc8e8952ce4f.png">
+<meta property="article:published_time" content="2026-02-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-02-05T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="VMWare">
+<meta property="article:tag" content="磁盘扩容">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/02/05/Notes/vmware_dh/image-20260320150321591.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/02/05/Notes/vmware_dh/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/02/05/Notes/vmware_dh/","path":"2026/02/05/Notes/vmware_dh/","title":"VMWare虚拟机磁盘扩容踩坑记录"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VMWare虚拟机磁盘扩容踩坑记录 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">步骤总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">相关知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%89%A9%E5%AE%B9%E7%BB%8F%E5%8E%86"><span class="nav-number">3.</span> <span class="nav-text">扩容经历</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E6%AC%A1%EF%BC%88Ubuntu-Server%EF%BC%89"><span class="nav-number">3.1.</span> <span class="nav-text">第六次（Ubuntu Server）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E6%AC%A1%EF%BC%88Ubuntu-Server%EF%BC%89"><span class="nav-number">3.2.</span> <span class="nav-text">第五次（Ubuntu Server）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AC%A1"><span class="nav-number">3.3.</span> <span class="nav-text">第四次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AC%A1"><span class="nav-number">3.4.</span> <span class="nav-text">第三次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AC%A1"><span class="nav-number">3.5.</span> <span class="nav-text">第二次</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AC%A1%EF%BC%88Ubuntu%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">第一次（Ubuntu）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%81%E7%9B%98%E6%89%A9%E5%B1%95"><span class="nav-number">3.6.1.</span> <span class="nav-text">磁盘扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E5%8C%BA"><span class="nav-number">3.6.2.</span> <span class="nav-text">分区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E5%A4%8D%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.6.3.</span> <span class="nav-text">修复文件系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Live-ISO"><span class="nav-number">3.6.4.</span> <span class="nav-text">Live ISO</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%90%8E%E7%BB%AD"><span class="nav-number">4.</span> <span class="nav-text">后续</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/02/05/Notes/vmware_dh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VMWare虚拟机磁盘扩容踩坑记录 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VMWare虚拟机磁盘扩容踩坑记录<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvTm90ZXMvdm13YXJlX2RoLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-02-06 00:00:00" itemprop="dateCreated datePublished" datetime="2026-02-06T00:00:00+08:00">2026-02-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.7k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>不是我说你，你就不能创建虚拟机的时候就给个60G吗小气鬼</p>
+<span id="more"></span>
+
+<p>一共两次，第一次踩的坑比较多，如果碰到问题可以看看<br>顺利的话可以直接看第二次！<br>更新了第三次<br>第四次，没扩容但是磁盘满了</p>
+<p>第五次，扩展虚拟分区</p>
+<h1 id="步骤总结"><a href="#步骤总结" class="headerlink" title="步骤总结"></a>步骤总结</h1><p><strong>（该sudo的一定要sudo啊）</strong></p>
+<p>在VMWare进行虚拟机磁盘扩容</p>
+<p>进入命令行：Ctrl + Alt + F2<br>查看分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+<p>使用parted分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> parted /dev/sda</span><br><span class="line">(parted) <span class="built_in">print</span></span><br><span class="line">(parted) resizepart 3   <span class="comment"># 输入要调整的分区号（例如3）</span></span><br><span class="line">End? [旧结束位置]       <span class="comment"># 输入磁盘最大可用值（例如100%或具体数值，如100GB对应21474836480s）</span></span><br><span class="line">(parted) quit</span><br></pre></td></tr></table></figure>
+<p>刷新、扩展文件系统、修复文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> partprobe /dev/sda	</span><br><span class="line"><span class="built_in">sudo</span> resize2fs /dev/sda3	</span><br><span class="line"><span class="built_in">sudo</span> fsck -f /dev/sda3		</span><br></pre></td></tr></table></figure>
+<p>逻辑卷的场景：</p>
+<p>扩展逻辑卷，文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pvresize /dev/sda3									<span class="comment"># 刷新 LVM 对分区的感知 (PV Resize)</span></span><br><span class="line"><span class="built_in">sudo</span> lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv		<span class="comment"># 扩展逻辑卷</span></span><br><span class="line"><span class="built_in">sudo</span> resize2fs /dev/ubuntu-vg/ubuntu-lv					<span class="comment"># 扩展文件系统</span></span><br><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<h1 id="相关知识"><a href="#相关知识" class="headerlink" title="相关知识"></a>相关知识</h1><table>
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+<th>类比</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>PV</strong> (Physical Volume)</td>
+<td>物理磁盘&#x2F;分区</td>
+<td>硬盘</td>
+</tr>
+<tr>
+<td><strong>VG</strong> (Volume Group)</td>
+<td>PV 组成的资源池</td>
+<td>硬盘阵列</td>
+</tr>
+<tr>
+<td><strong>LV</strong> (Logical Volume)</td>
+<td>从 VG 划出的虚拟分区</td>
+<td>C盘&#x2F;D盘</td>
+</tr>
+<tr>
+<td><strong>PE</strong> (Physical Extent)</td>
+<td>最小分配单元，默认 4MB</td>
+<td>簇&#x2F;块</td>
+</tr>
+</tbody></table>
+<h1 id="扩容经历"><a href="#扩容经历" class="headerlink" title="扩容经历"></a>扩容经历</h1><h2 id="第六次（Ubuntu-Server）"><a href="#第六次（Ubuntu-Server）" class="headerlink" title="第六次（Ubuntu Server）"></a>第六次（Ubuntu Server）</h2><p>还是VMWare扩容，parted</p>
+<p>查看实际分区表</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsblk /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>可以看到sda3扩展了，但是逻辑卷还没变</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260320150321591.png" alt="image-20260320150321591"></p>
+<p>然后刷新 LVM 对分区的感知 (PV Resize)，扩展逻辑卷，扩展文件系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pvresize /dev/sda3</span><br><span class="line"><span class="built_in">sudo</span> lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"><span class="built_in">sudo</span> resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p>每个命令，如果空间有更新的话都会有提示的</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260320150650379.png" alt="image-20260320150650379"></p>
+<h2 id="第五次（Ubuntu-Server）"><a href="#第五次（Ubuntu-Server）" class="headerlink" title="第五次（Ubuntu Server）"></a>第五次（Ubuntu Server）</h2><p>Ubuntu Server的分区有些不一样。应该扩展根分区&#x2F;dev&#x2F;mapper&#x2F;ubuntu–vg-ubuntu–lv（这名字咋这么奇怪）</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260206232909466.png" alt="image-20260206232909466"></p>
+<p>一看磁盘是有40G的，但是看这个分区一共大概就20G吧</p>
+<p>查看空间情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+
+<p>sda3分区是正常的，问题是LVM 只用了其中一部分</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260207221732076.png" alt="image-20260207221732076"></p>
+<p>查看实际使用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pvdisplay /dev/sda3</span><br><span class="line"><span class="built_in">sudo</span> vgdisplay ubuntu-vg</span><br><span class="line"><span class="built_in">sudo</span> lvdisplay /dev/mapper/ubuntu--vg-ubuntu--lv</span><br></pre></td></tr></table></figure>
+
+<p>有19G空闲的，逻辑卷LV只用了19G</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260207222522301.png" alt="image-20260207222522301"></p>
+<p>扩容。扩展逻辑卷，扩展文件系统。然后查看分区情况</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"><span class="built_in">sudo</span> resize2fs /dev/ubuntu-vg/ubuntu-lv</span><br><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/02/05/Notes/vmware_dh/image-20260207222935093.png" alt="image-20260207222935093"></p>
+<h2 id="第四次"><a href="#第四次" class="headerlink" title="第四次"></a>第四次</h2><p>没扩容但是磁盘满了（应该是），也是这个现象</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/76c3fa4e6a2c489d859837c79a5cd2a1.png" alt="在这里插入图片描述"><br>按Ctrl + Alt + F2进入命令行。查看容量，&#x2F;dev&#x2F;sda3分区满了（爆了<br><img src="/2026/02/05/Notes/vmware_dh/9c6129fc440a41ccb902abba0236ca69.png" alt="在这里插入图片描述"><br>扩容。关机，编辑虚拟机设置。坏了，得删快照<br><img src="/2026/02/05/Notes/vmware_dh/50ff637acb624ee4b7c568f13074b4a5.png" alt="在这里插入图片描述"><br>使用parted分区<br><img src="/2026/02/05/Notes/vmware_dh/126a7f37ff7749ac9f7190c2b93eaae0.png" alt="在这里插入图片描述"><br>这里因为resize2fs忘记sudo了卡了一下<br><img src="/2026/02/05/Notes/vmware_dh/316b858ce18e40598d887fdc737e2944.png" alt="在这里插入图片描述"></p>
+<h2 id="第三次"><a href="#第三次" class="headerlink" title="第三次"></a>第三次</h2><p>扩展到30G，也是黑屏打印&#x2F;dev&#x2F;sda<br>不过知道了个新办法。按Ctrl + Alt + F2进入命令行，登录用户可以执行命令。有个问题就是汉字显示不出来，会有乱码，总之差不多看得懂就行啦<br>接下来就是正常流程<br>parted<br>print<br>resizepart<br><img src="/2026/02/05/Notes/vmware_dh/e24bbcffc3874756938686104ab11581.png" alt="在这里插入图片描述"><br>更新分区<br>partprobe<br>resize2fs<br>然后验证，df -h，lsblk</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/d8145b6055614aad9693fb7aa53e1259.png" alt="在这里插入图片描述"></p>
+<h2 id="第二次"><a href="#第二次" class="headerlink" title="第二次"></a>第二次</h2><p>这次在VMware扩展完磁盘可以正常开机诶，好神奇<br>那就直接用parted改分区大小吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> parted /dev/sda</span><br></pre></td></tr></table></figure>
+
+
+<p>执行print</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>          <span class="comment"># 查看当前分区表，确认分区号和结束位置</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/1c93ec1a562b4909b30bb29aa4efb7e4.png" alt="在这里插入图片描述"><br>调整分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(parted) resizepart 3   <span class="comment"># 输入要调整的分区号（例如3）</span></span><br><span class="line">End? [旧结束位置]       <span class="comment"># 输入磁盘最大可用值（例如100%或具体数值，如100GB对应21474836480s）</span></span><br><span class="line">(parted) quit</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/0bb720d34830463fbb5ce9f355325cf2.png" alt="在这里插入图片描述"><br>退出 parted 后，强制刷新分区表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> partprobe /dev/sda</span><br></pre></td></tr></table></figure>
+<p>扩展文件系统（ext4的情况）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> resize2fs /dev/sda3</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/8ff7634de3c745389b3c434fa0a3e908.png" alt="在这里插入图片描述"></p>
+<p>验证扩展结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h           <span class="comment"># 查看根分区容量是否扩展</span></span><br><span class="line">lsblk           <span class="comment"># 确认分区大小已更新</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/3926d16cb51348df967bb040ea8afbce.png" alt="在这里插入图片描述"><img src="/2026/02/05/Notes/vmware_dh/092d99680b694745b388097a33c71d76.png" alt="在这里插入图片描述"></p>
+<h2 id="第一次（Ubuntu）"><a href="#第一次（Ubuntu）" class="headerlink" title="第一次（Ubuntu）"></a>第一次（Ubuntu）</h2><p>一次虚拟机扩容踩坑记录，搞完是25.3.10了<br>方法很脚踩香蕉皮，不太建议参考</p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ0Mjk3NTc5L2FydGljbGUvZGV0YWlscy8xMDczMTgwOTY=">VMware虚拟机解决空间不足，增加磁盘空间(磁盘扩容)<i class="fa fa-external-link-alt"></i></span><br>开头是参考这个，后面出问题了就问ds去了（大半篇都是一边踩坑一边问ds）<br>感觉也可以结合这个看<span class="exturl" data-url="aHR0cHM6Ly9wb3N0LnNtemRtLmNvbS9wL2E1ZzBlejA3Lw==">VMware扩展硬盘后无法正常开机的解决方法<i class="fa fa-external-link-alt"></i></span>，就不要像我一样到处踩了</p>
+<h3 id="磁盘扩展"><a href="#磁盘扩展" class="headerlink" title="磁盘扩展"></a>磁盘扩展</h3><p>关闭虚拟机，点击<code>编辑虚拟机设置-硬盘-扩展</code><br><img src="/2026/02/05/Notes/vmware_dh/ec5ae4bedc254bbe808b970fd593530d.png" alt="在这里插入图片描述"><img src="/2026/02/05/Notes/vmware_dh/91ddbebf4e4d48588ea94ac2ea8ca279.png" alt="在这里插入图片描述"></p>
+<h3 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h3><p>启动虚拟机，发现一直停在这个页面<br>查了下应该是现在系统要正确分区才能启动了<br><img src="/2026/02/05/Notes/vmware_dh/f8f3cdc105c24b0faeb2a187bbae0099.png" alt="在这里插入图片描述">强制重启并进入恢复模式<br>重新启动虚拟机，在启动时按住 Shift 键进入GRUB菜单（<strong>这里注意要先<code>Ctrl + G</code>定向输入到虚拟机再按shift，鼠标点好像没用</strong>）<br>选择 Advanced options for Ubuntu → 选择带有 (recovery mode) 的内核。<br><img src="/2026/02/05/Notes/vmware_dh/45034c81952644b99cf552040d3adbac.png" alt="在这里插入图片描述"></p>
+<p>选择 root（进入root shell）。<br><img src="/2026/02/05/Notes/vmware_dh/5362c0aa7f974ee29e3a87515f4eafa4.png" alt="在这里插入图片描述"><br>执行以下命令挂载根分区为可读写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o remount,rw /</span><br></pre></td></tr></table></figure>
+<p>查看扩展后的磁盘容量是否被识别：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+<p>磁盘总量是25GB，但是因为没分区，分区容量还是20GB的<br><img src="/2026/02/05/Notes/vmware_dh/4f44c977b2a445c0b06ba103201458d8.png" alt="在这里插入图片描述"></p>
+<p>使用 growpart 工具扩展分区（分区为 &#x2F;dev&#x2F;sda3）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt install cloud-guest-utils</span><br><span class="line">growpart /dev/sda 3</span><br></pre></td></tr></table></figure>
+<p>没有足够空间！<br><img src="/2026/02/05/Notes/vmware_dh/7e20c29247cc41228ff5cc5b807acca1.png" alt="在这里插入图片描述">尝试清理APT缓存和临时文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理APT下载的软件包缓存</span></span><br><span class="line">apt clean</span><br><span class="line"></span><br><span class="line"><span class="comment"># 删除不再需要的旧版本软件包</span></span><br><span class="line">apt autoremove</span><br><span class="line"></span><br><span class="line"><span class="comment"># 可选：清理旧的日志文件（谨慎操作）</span></span><br><span class="line"><span class="comment"># 这个我没搞</span></span><br><span class="line"><span class="built_in">rm</span> -rf /var/log/*.gz</span><br></pre></td></tr></table></figure>
+<p>清完尝试安装growpart，还是空间不足，于是尝试用parted手动分区<br>执行以下命令查看分区情况：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsblk</span><br><span class="line">fdisk -l /dev/sda</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/5886b175316042bc89a586fca0d93cb2.png" alt="在这里插入图片描述">记录需要扩展的分区（这里是&#x2F;dev&#x2F;sda3），确认 VMware 扩展后的磁盘总大小（是25GB啦）<br>运行parted</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parted /dev/sda</span><br></pre></td></tr></table></figure>
+<p>执行print</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>          <span class="comment"># 查看当前分区表，确认分区号和结束位置</span></span><br></pre></td></tr></table></figure>
+<p>这里也能看到sda3是ext4文件系统<br><img src="/2026/02/05/Notes/vmware_dh/f9038720d126417cbef83dae1bad74a4.png" alt="在这里插入图片描述">调整分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(parted) resizepart 3   <span class="comment"># 输入要调整的分区号（例如3）</span></span><br><span class="line">End? [旧结束位置]       <span class="comment"># 输入磁盘最大可用值（例如100%或具体数值，如100GB对应21474836480s）</span></span><br><span class="line">(parted) quit</span><br></pre></td></tr></table></figure>
+<p>end我输入了25GB，最安全的方法应该是输入<code>100%</code></p>
+<p><img src="/2026/02/05/Notes/vmware_dh/70916c169d2f44248b7942e1dfb2301c.png" alt="在这里插入图片描述"><br>退出 parted 后，强制刷新分区表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">partprobe /dev/sda</span><br></pre></td></tr></table></figure>
+<p>扩展文件系统（ext4的情况）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">resize2fs /dev/sda3</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/4fb6b736b2c9472383d0bab1f15ade80.png" alt="在这里插入图片描述"></p>
+<p>验证扩展结果</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h /         <span class="comment"># 查看根分区容量是否扩展</span></span><br><span class="line">lsblk           <span class="comment"># 确认分区大小已更新</span></span><br></pre></td></tr></table></figure>
+<p>看到sda3已经扩展了<br><img src="/2026/02/05/Notes/vmware_dh/30025e87a69740409abb4b0b9dfa477d.png" alt="在这里插入图片描述"></p>
+<h3 id="修复文件系统"><a href="#修复文件系统" class="headerlink" title="修复文件系统"></a>修复文件系统</h3><p>运行文件系统检查，防止潜在错误：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsck -f /dev/sda3</span><br></pre></td></tr></table></figure>
+<p>提示sda3正挂载着（之前看到根目录<code>/</code>就是挂载到sda3下的），fsck无法安全地进行检查，所以退出了</p>
+<p><img src="/2026/02/05/Notes/vmware_dh/d1b0bb91346540c09dbb0754cc858694.png" alt="在这里插入图片描述"><br>需要先卸载分区<br>重启虚拟机，在启动时按住 Shift 键进入 GRUB 菜单，选择 Advanced options for Ubuntu → 选择带有 (recovery mode) 的内核，选择 root</p>
+<p>以只读模式重新挂载根分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mount -o remount,ro /</span><br></pre></td></tr></table></figure>
+<p>卸载sda3分区</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/sda3</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/8449e0b1cb97428ebfc322f28f97f0c8.png" alt="在这里插入图片描述"><br>提示target is busy，说明仍然有进程在占用分区（这是当然的吧！）<br>尝试延迟卸载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount -l /dev/sda3  <span class="comment"># -l 表示“lazy unmount”，解除挂载后让进程逐渐退出</span></span><br></pre></td></tr></table></figure>
+<p>报了一大堆错捏，大意是说这些东西找不到，应该是因为一些关键目录标记成了未挂载，需要重新挂载<br><img src="/2026/02/05/Notes/vmware_dh/5066c34d78734d00ae0bfa64a88817c5.png" alt="在这里插入图片描述"><br>这样也没法fsck，很麻烦啊很麻烦<br><img src="/2026/02/05/Notes/vmware_dh/7fbbe595861947859a92e4a7b7f45424.png" alt="在这里插入图片描述"></p>
+<h3 id="Live-ISO"><a href="#Live-ISO" class="headerlink" title="Live ISO"></a>Live ISO</h3><p>后面问ds回答又滚回去了，所以总结了一下问他，于是他终于拿出了终极解决方案——Live ISO</p>
+<p>关机<br>编辑虚拟机设置 → CD&#x2F;DVD 驱动器 → 选择 Ubuntu 安装镜像（如 ubuntu-22.04.3-desktop-amd64.iso），勾选 Connect at power on。<br>不知道为什么我这有两个…？随便选了一个<br><img src="/2026/02/05/Notes/vmware_dh/eed73ffead5c4ba19f493be38a077a15.png" alt="在这里插入图片描述"><br>启动时快按Esc进入启动菜单，选择 CD&#x2F;DVD Drive 启动，在 Live 启动界面选择 Try Ubuntu（无需安装系统）<br>（此处重启了三四次（怒<br><img src="/2026/02/05/Notes/vmware_dh/bbb8079783f142358b8cadb245592de3.png" alt="在这里插入图片描述"><br>选择try！<img src="/2026/02/05/Notes/vmware_dh/b6eacf15e859415295db7a8d0ead8d3e.png" alt="在这里插入图片描述"><br>打开终端，获取用户权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> -i  <span class="comment"># 切换至 root 用户</span></span><br></pre></td></tr></table></figure>
+<p>确认根分区设备名（根据容量和挂载点判断）…没有根目录是什么情况啊！但是应该没问题<br><img src="/2026/02/05/Notes/vmware_dh/acf92d20fbe947f99a0f60b8c2d33b4a.png" alt="在这里插入图片描述">果然是没挂载，如果挂载了的话用umount卸载</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">umount /dev/sda3  <span class="comment"># 如果系统自动挂载了分区，先卸载</span></span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/2778bb5994b7476e968a85cb1ce9e29e.png" alt="在这里插入图片描述">执行文件系统检查与修复</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fsck -y /dev/sda3</span><br></pre></td></tr></table></figure>
+<p>看起来应该是sda3没问题（太好了我去兜这么大一圈子早知道就不fsck了）<br><img src="/2026/02/05/Notes/vmware_dh/02a393954a6b483ba748e57bde31892e.png" alt="在这里插入图片描述">卸载Live ISO并重启，先关机，然后取消CD&#x2F;DVD的启动时连接<br>这里我之前都是勾选的，但是查了下平时还是不要勾选为好，防止平时使用时不小心从CD&#x2F;DVD驱动器启动了，这个选项通常用于安装操作系统、运行启动盘工具或进行系统恢复等操作。所以取消勾选！<br>然后正常启动虚拟机，已经能正常显示桌面了，再检查一下分区容量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">df</span> -h</span><br></pre></td></tr></table></figure>
+<p><img src="/2026/02/05/Notes/vmware_dh/06cb047584fc4545a92fbc8e8952ce4f.png" alt="在这里插入图片描述">查看启动日志</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl -b -p 3  <span class="comment"># 检查本次启动的错误信息</span></span><br></pre></td></tr></table></figure>
+<p>嗯也看不太懂</p>
+<h1 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h1><p>要关注磁盘空间状况啊！<br>定期清理系统</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt autoremove &amp;&amp; <span class="built_in">sudo</span> apt clean  <span class="comment"># 删除无用软件包和缓存</span></span><br></pre></td></tr></table></figure>
+<p>监控磁盘空间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">watch <span class="built_in">df</span> -h /  <span class="comment"># 实时查看根分区使用情况</span></span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/02/05/Notes/vmware_dh/" title="VMWare虚拟机磁盘扩容踩坑记录">https://mintind.github.io/2026/02/05/Notes/vmware_dh/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/VMWare/" rel="tag"># VMWare</a>
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/%E7%A3%81%E7%9B%98%E6%89%A9%E5%AE%B9/" rel="tag"># 磁盘扩容</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/25/UCAS/network_a&d_base_review/" rel="prev" title="网络攻防基础期末复习">
+                  <i class="fa fa-angle-left"></i> 网络攻防基础期末复习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/02/08/CTF/Reverse/IDA_notes/" rel="next" title="一点IDA笔记">
+                  一点IDA笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/02/05/Notes/vmware_dh/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/02/05/Notes/vmware_dh/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

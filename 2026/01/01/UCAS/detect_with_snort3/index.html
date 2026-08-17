@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="全部覚えて、全部忘れて">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测">
+<meta property="og:url" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="全部覚えて、全部忘れて">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260102232016073.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260102232204214.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260102231522410.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260102231619533.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103101322450.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103102502956.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103102710799.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103112620346.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103112949798.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103113548768.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103114023522.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103114139133.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103114802867.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103114923119.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103144208979.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103150555823.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103151308845.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103163605882.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260103165430945.png">
+<meta property="article:published_time" content="2026-01-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-01T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Network">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="网络协议安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/image-20260102232016073.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/","path":"2026/01/01/UCAS/detect_with_snort3/","title":"【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A2%AB%E6%84%9F%E6%9F%93%E4%B8%BB%E6%9C%BA%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">被感染主机的信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%92%8C%E5%88%86%E6%9E%90%E6%81%B6%E6%84%8F%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">提取和分析恶意文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99snort%E8%A7%84%E5%88%99%E8%BF%9B%E8%A1%8C%E6%A3%80%E6%B5%8B"><span class="nav-number">4.</span> <span class="nav-text">编写snort规则进行检测</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85snort3%EF%BC%88Ubuntu-22-04%EF%BC%89"><span class="nav-number">4.1.</span> <span class="nav-text">安装snort3（Ubuntu 22.04）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99snort%E8%A7%84%E5%88%99"><span class="nav-number">4.2.</span> <span class="nav-text">编写snort规则</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy9kZXRlY3Rfd2l0aF9zbm9ydDMubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-02 00:00:00" itemprop="dateCreated datePublished" datetime="2026-01-02T00:00:00+08:00">2026-01-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>全部覚えて、全部忘れて</p>
+<span id="more"></span>
+
+<p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDM1NzA3MS9hcnRpY2xlL2RldGFpbHMvMTM1MDAwODI1">https://blog.csdn.net/weixin_44357071/article/details/135000825<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9zZWMucnVuL3Bvc3RzL25ldHByb3RvLW1hbHRyYWZmaWMtYW5hbHlzaXMv">https://sec.run/posts/netproto-maltraffic-analysis/<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>简介  </p>
+<p>malware.pcap中提供了恶意活动的流量。在这个场景中，一台Windows主机被恶意文件感染。 </p>
+<p>实验要求 ：</p>
+<p>被感染主机的IP地址和MAC地址是？ </p>
+<p>从pcap中提取恶意文件，获取该文件的SHA256。 </p>
+<p>编写一条Snort规则，使Snort能从pcap中检测到恶意文件正在被下载。 </p>
+<p>撰写实验报告时须提供被感染主机的信息，SHA256，编写的Snort规则，和进行分析的过程及截图。</p>
+<p>选做：</p>
+<p>分析该恶意文件，包括但不限于：这个恶意文件是什么类型的恶意文件，有什么恶意行为，etc. </p>
+<p>所需工具  </p>
+<p>Wireshark  Snort  <span class="exturl" data-url="aHR0cDovL3d3dy53aXJlc2hhcmsub3JnLw==">www.wireshark.org<i class="fa fa-external-link-alt"></i></span> <span class="exturl" data-url="aHR0cDovL3d3dy5zbm9ydC5vcmcv">www.snort.org<i class="fa fa-external-link-alt"></i></span> 需要用到的背景知识  利用Wireshark从pcap中导出文件。</p>
+<p>A Tutorial：</p>
+<p> Snort的基本使用。 Exporting Objects from a Pcap <span class="exturl" data-url="aHR0cHM6Ly93d3cuc25vcnQub3JnLyNnZXQtc3RhcnRlZA==">https://www.snort.org/#get-started<i class="fa fa-external-link-alt"></i></span> 编写Snort规则。官方文档： Writing Snort Rules </p>
+<p>提示  </p>
+<p>关注malware.pcap中的HTTP流量。 在Wireshark追踪HTTP流。 Wireshark中文件-导出对象-HTTP可以提取HTTP流中的文件。 VirusTotal或微步在线云沙箱也许有帮助。 如果在Windows运行Snort，注意修改配置文件中文件路径的表示方式 可以考虑通过匹配传输恶意文件的数据包中的某个字段来实现Snort规则，在匹配部分字符时需用 十六进制表示 一个最简单的snort rule示例，该rule关注从外部主机到本机的tcp-http流量，匹配”example”字 段，并输出“This is an example”警报： alert tcp $EXTERNAL_NET $HTTP_PORTS -&gt; $HOME_NET any (msg:”This is an example”;  content:”example”;sid:1983330;) </p>
+<p>备注  </p>
+<p>如果在Windows实机进行分析，需要暂时关闭安全软件，请勿运行从pcap提取的恶意文件。 Snort规则只需能在提供的pcap中检出正在下载malware即可，可采取任意思路编写规则</p>
+<h2 id="被感染主机的信息"><a href="#被感染主机的信息" class="headerlink" title="被感染主机的信息"></a>被感染主机的信息</h2><p><strong>被感染主机的IP地址和MAC地址是？</strong> </p>
+<p>用Wireshark打开恶意流量pcap，基本上看得出被感染主机IP是<code>10.8.19.101</code></p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260102232016073.png" alt="image-20260102232016073"></p>
+<p>点开一个能看到MAC地址是<code>Source: HewlettPacka_1c:47:ae (00:08:02:1c:47:ae)</code></p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260102232204214.png" alt="image-20260102232204214"></p>
+<h2 id="提取和分析恶意文件"><a href="#提取和分析恶意文件" class="headerlink" title="提取和分析恶意文件"></a>提取和分析恶意文件</h2><p><strong>从pcap中提取恶意文件，获取该文件的SHA256。</strong> </p>
+<p>过滤出所有的http请求，在过滤框输入http.request</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260102231522410.png" alt="image-20260102231522410"></p>
+<p>导出对象-HTTP，选择那个pdf文件</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260102231619533.png" alt="image-20260102231619533"></p>
+<p>被杀软拦了。暂时关闭杀毒软件导出，然后丢进虚拟机，使用file查看文件以及计算sha256</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">shasum -a 256 ooiwy.pdf</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103101322450.png" alt="image-20260103101322450"></p>
+<p>SHA256值：<code>f25a780095730701efac67e9d5b84bc289afea56d96d8aff8a44af69ae606404</code>。该文件是PE32可执行文件</p>
+<p>提交到微步云沙箱进行分析（哦直接交这不就好了，SHA也算出来了）属于Trickster家族的木马</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103102502956.png" alt="image-20260103102502956"></p>
+<p>恶意行为有暴力枚举进程、信息搜集、改内存权限、结束其他进程等</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103102710799.png" alt="image-20260103102710799"></p>
+<h2 id="编写snort规则进行检测"><a href="#编写snort规则进行检测" class="headerlink" title="编写snort规则进行检测"></a>编写snort规则进行检测</h2><p><strong>编写一条Snort规则，使Snort能从pcap中检测到恶意文件正在被下载。</strong> </p>
+<h3 id="安装snort3（Ubuntu-22-04）"><a href="#安装snort3（Ubuntu-22-04）" class="headerlink" title="安装snort3（Ubuntu 22.04）"></a>安装snort3（Ubuntu 22.04）</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vamlrZWZhbi9hcnRpY2xlcy8xODIyMDMyOA==">https://www.cnblogs.com/jikefan/articles/18220328<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzcyODkyNjQwL2FydGljbGUvZGV0YWlscy8xNDY0MDUxNjc=">https://blog.csdn.net/m0_72892640/article/details/146405167<i class="fa fa-external-link-alt"></i></span></p>
+<p>更新</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get update &amp;&amp; <span class="built_in">sudo</span> apt-get upgrade -y</span><br></pre></td></tr></table></figure>
+
+<p>依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install build-essential libpcap-dev libpcre3-dev libnet1-dev zlib1g-dev luajit hwloc libdnet-dev libdumbnet-dev bison flex liblzma-dev openssl libssl-dev pkg-config libhwloc-dev cmake cpputest libsqlite3-dev uuid-dev libcmocka-dev libnetfilter-queue-dev libmnl-dev autotools-dev libluajit-5.1-dev libunwind-dev -y</span><br></pre></td></tr></table></figure>
+
+<p>Snort DAQ（数据采集库）。新建一个snort目录来存放（记得开梯子我服了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/snort3/libdaq.git</span><br></pre></td></tr></table></figure>
+
+<p>Snort</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/snort3/snort3.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103112620346.png" alt="image-20260103112620346"></p>
+<p>编译安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> snort3/          //进入snort3目录</span><br><span class="line">./configure_cmake.sh --prefix=/usr/local --enable-tcmalloc //配置snort3</span><br><span class="line"><span class="built_in">cd</span> build/          //进入build目录</span><br><span class="line">make           //编译</span><br><span class="line">make install         //安装</span><br></pre></td></tr></table></figure>
+
+<p>.&#x2F;configure的时候报错</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103112949798.png" alt="image-20260103112949798"></p>
+<p>说是libdap的问题。去翻了libdap的README</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103113548768.png" alt="image-20260103113548768"></p>
+<p>那就先安装libdap吧。进libdap目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./bootstrap</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103114023522.png" alt="image-20260103114023522"></p>
+<p>缺权限，改成sudo。OK了。回去搞snort</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103114139133.png" alt="image-20260103114139133"></p>
+<p>额啊啊啊依赖写少了。<img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103114802867.png" alt="image-20260103114802867"></p>
+<p>啊这个就是参考博客里的TCMalloc。行吧装吧，缺一个装一个就是了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install libpcre2-dev libgoogle-perftools-dev</span><br></pre></td></tr></table></figure>
+
+<p>成功</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103114923119.png" alt="image-20260103114923119"></p>
+<p>继续</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> build/          //进入build目录</span><br><span class="line">make           //编译</span><br><span class="line"><span class="built_in">sudo</span> make install         //安装</span><br></pre></td></tr></table></figure>
+
+<p>完成。更新共享库</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig </span><br></pre></td></tr></table></figure>
+
+<p>查看snort版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -V </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103144208979.png" alt="image-20260103144208979"></p>
+<h3 id="编写snort规则"><a href="#编写snort规则" class="headerlink" title="编写snort规则"></a>编写snort规则</h3><p>官方文档：<span class="exturl" data-url="aHR0cDovL21hbnVhbC1zbm9ydC1vcmcuczMtd2Vic2l0ZS11cy1lYXN0LTEuYW1hem9uYXdzLmNvbS9ub2RlMjcuaHRtbA==">3. Writing Snort Rules<i class="fa fa-external-link-alt"></i></span></p>
+<p>snort3使用：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIudm9sY2VuZ2luZS5jb20vYXJ0aWNsZXMvNzUzOTQ4MzU0MTQ5NjI4MzE2Mg==">https://developer.volcengine.com/articles/7539483541496283162<i class="fa fa-external-link-alt"></i></span></p>
+<p>就是对那条下载pdf文件的流量进行报警就行了</p>
+<p>snort3的规则定义和snort2不太一样，在这个目录下（大概）。可以把这个自定义规则路径写进&#x2F;usr&#x2F;local&#x2F;etc&#x2F;snort&#x2F;snort.lua配置文件中，在ips部分定义规则集的路径，再include &#x3D; ‘自定义规则集的路径’</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103150555823.png" alt="image-20260103150555823"></p>
+<p>在这里新建一个规则ooi.rules</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">alert tcp any any -&gt; any any (</span><br><span class="line">    msg:&quot;malware detected in PDF flow&quot;;</span><br><span class="line">    http_header;</span><br><span class="line">    content:&quot;Content-Type: application/pdf&quot;;</span><br><span class="line">    file_data;</span><br><span class="line">    content:&quot;|4D 5A|&quot;;</span><br><span class="line">    sid:1000001;</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p><code>tcp any any -&gt; any any</code>监控网络中任何方向的 TCP 流量，在http_header中查找content:”Content-Type: application&#x2F;pdf”（也就是传输pdf），然后到file_data（就是在http正文里）查找<code>|4D 5A|</code>，对应MZ，<code>MZ</code> 是 Windows 可执行文件 (EXE, DLL) 的文件头标志。所以会检测到伪装成下载pdf实则在下载可执行文件的流量</p>
+<p>临时追加，检查规则是否正确</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c snort.lua -R ooi.rules</span><br></pre></td></tr></table></figure>
+
+<p>看多了觉得这个半边猪脸萌萌的。。。</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103151308845.png" alt="image-20260103151308845"></p>
+<p>没问题，在snort.lua里加上这个规则的路径</p>
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103163605882.png" alt="image-20260103163605882"></p>
+<p>检测pcap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">snort -c snort.lua -r /path/to/file.pcap -A alert_fast -l /path/to/log</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/01/UCAS/detect_with_snort3/image-20260103165430945.png" alt="image-20260103165430945"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/" title="【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测">https://mintind.github.io/2026/01/01/UCAS/detect_with_snort3/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Network/" rel="tag"># Network</a>
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/" rel="tag"># 网络协议安全</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/24/SetupEnv/CodeQL/" rel="prev" title="CodeQL">
+                  <i class="fa fa-angle-left"></i> CodeQL
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/05/SetupEnv/python_conda/" rel="next" title="Python-conda*Git">
+                  Python-conda*Git <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/01/01/UCAS/detect_with_snort3/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/01/01/UCAS/detect_with_snort3/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

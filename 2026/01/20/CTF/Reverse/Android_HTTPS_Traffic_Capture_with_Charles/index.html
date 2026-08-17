@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android手机使用charles抓https请求">
+<meta property="og:url" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121222113232.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121222155403.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224308135.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224728885.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224747942.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225141360.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225224397.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225643886.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225852706.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121230859402.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121231728328.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121233353495.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121233646304.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121235703214.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122160433492.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121235757784.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122145837585.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122223855849.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122225122301.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122225309860.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122231554014.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122231833337.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122234127679.png">
+<meta property="article:published_time" content="2026-01-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-20T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121222113232.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/","path":"2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/","title":"Android手机使用charles抓https请求"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android手机使用charles抓https请求 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Charles%E5%AE%89%E8%A3%85%E5%92%8C%E7%A0%B4%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">Charles安装和破解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%93%E5%8C%85"><span class="nav-number">2.</span> <span class="nav-text">抓包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%90%86"><span class="nav-number">2.1.</span> <span class="nav-text">代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%AE%89%E8%A3%85%E8%AF%81%E4%B9%A6"><span class="nav-number">2.2.</span> <span class="nav-text">手机安装证书</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E4%B8%8D%E4%BF%A1%E4%BB%BB%E7%94%A8%E6%88%B7%E6%B7%BB%E5%8A%A0%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="nav-number">3.</span> <span class="nav-text">系统不信任用户添加的证书</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E5%8A%A8%E6%8E%A8%E5%88%B0%E4%BF%A1%E4%BB%BB%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="nav-number">3.1.</span> <span class="nav-text">手动推到信任的证书</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Xposed-JustTrustMe"><span class="nav-number">3.2.</span> <span class="nav-text">Xposed+JustTrustMe</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JustTrustMe"><span class="nav-number">3.2.1.</span> <span class="nav-text">JustTrustMe</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xposed"><span class="nav-number">3.2.2.</span> <span class="nav-text">xposed</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E8%A3%85%E4%B8%80%E4%B8%AAAndroid5-1"><span class="nav-number">3.2.3.</span> <span class="nav-text">新装一个Android5.1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magisk-LSPosed"><span class="nav-number">3.3.</span> <span class="nav-text">Magisk+LSPosed</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Magisk%E5%AE%89%E8%A3%85"><span class="nav-number">3.4.</span> <span class="nav-text">Magisk安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%8F%96boot-img"><span class="nav-number">3.4.1.</span> <span class="nav-text">提取boot.img</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%BC%E8%87%B4%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%E8%B5%B0%E4%BB%A3%E7%90%86%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">导致其他应用走代理的问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android手机使用charles抓https请求 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android手机使用charles抓https请求<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2UvQW5kcm9pZF9IVFRQU19UcmFmZmljX0NhcHR1cmVfd2l0aF9DaGFybGVzLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-01-21T00:00:00+08:00">2026-01-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>983</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h2 id="Charles安装和破解"><a href="#Charles安装和破解" class="headerlink" title="Charles安装和破解"></a>Charles安装和破解</h2><p>参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vdXBzdHVkeS9wLzE4NzM1Njk4">https://www.cnblogs.com/upstudy/p/18735698<i class="fa fa-external-link-alt"></i></span></p>
+<p>下载：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hhcmxlc3Byb3h5LmNvbS9sYXRlc3QtcmVsZWFzZS9kb3dubG9hZC5kbw==">https://www.charlesproxy.com/latest-release/download.do<i class="fa fa-external-link-alt"></i></span></p>
+<p>选appx格式。msi的不知为啥我点安装没反应</p>
+<p>Charles破解：<span class="exturl" data-url="aHR0cHM6Ly93d3cuenp6bW9kZS5jb20vbXl0b29scy9jaGFybGVzLw==">https://www.zzzmode.com/mytools/charles/<i class="fa fa-external-link-alt"></i></span></p>
+<p>用户名自己想一个，点生成。打开Charles，help-enter license，输入用户名和license key，激活</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121222113232.png" alt="image-20260121222113232"></p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121222155403.png" alt="image-20260121222155403"></p>
+<h2 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h2><p>参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYmFvMC9hcnRpY2xlcy8xNjc2OTg2My5odG1s">https://www.cnblogs.com/bao0/articles/16769863.html<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="代理"><a href="#代理" class="headerlink" title="代理"></a>代理</h3><p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224308135.png" alt="image-20260121224308135"></p>
+<h3 id="手机安装证书"><a href="#手机安装证书" class="headerlink" title="手机安装证书"></a>手机安装证书</h3><p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224728885.png" alt="image-20260121224728885"></p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121224747942.png" alt="image-20260121224747942"></p>
+<p>编辑网络-代理-手动</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225141360.png" alt="image-20260121225141360"></p>
+<p>弹窗</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225224397.png" alt="image-20260121225224397"></p>
+<p>然后浏览器访问<span class="exturl" data-url="aHR0cDovL3NzbC5jaGFybGVz5LiL6L296K+B5LmmLw==">http://ssl.charles下载证书<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225643886.png" alt="image-20260121225643886"></p>
+<p>打开设置搜索certificate，安装，选中证书文件</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121225852706.png" alt="image-20260121225852706"></p>
+<p>https</p>
+<p>Proxy &gt; SSL Proxying Settings &gt; SSL Proxying, 启用 Enable SSL Proxying，添加include规则，全填<code>*</code></p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121230859402.png" alt="image-20260121230859402"></p>
+<p>登录的时候报错证书错误</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121231728328.png" alt="image-20260121231728328"></p>
+<h2 id="系统不信任用户添加的证书"><a href="#系统不信任用户添加的证书" class="headerlink" title="系统不信任用户添加的证书"></a>系统不信任用户添加的证书</h2><p>这个问题可能是因为，系统不信任用户添加的证书</p>
+<p>来源：<span class="exturl" data-url="aHR0cHM6Ly9kZXZlbG9wZXIuYWxpeXVuLmNvbS9hcnRpY2xlLzkxNzA1Mg==">https://developer.aliyun.com/article/917052<i class="fa fa-external-link-alt"></i></span></p>
+<p>Android 7.0 之后默认不信任用户添加到系统的 CA 证书：</p>
+<blockquote>
+<p>To provide a more consistent and more secure experience across the Android ecosystem, beginning with Android Nougat, compatible devices trust only the standardized system CAs maintained in AOSP.（<span class="exturl" data-url="aHR0cHM6Ly9saW5rcy5qaWFuc2h1LmNvbS9nbz90bz1odHRwczovL2FuZHJvaWQtZGV2ZWxvcGVycy5nb29nbGVibG9nLmNvbS8yMDE2LzA3L2NoYW5nZXMtdG8tdHJ1c3RlZC1jZXJ0aWZpY2F0ZS5odG1s">源自 Android Developers Blog<i class="fa fa-external-link-alt"></i></span>）</p>
+</blockquote>
+<p>换句话说，就是对基于 SDK24 及以上的 APP 来说，即使你在手机上安装了抓包工具的证书也无法抓取 HTTPS 请求。</p>
+<h3 id="手动推到信任的证书"><a href="#手动推到信任的证书" class="headerlink" title="手动推到信任的证书"></a>手动推到信任的证书</h3><p>保存证书到电脑，计算哈希</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 <span class="literal">-inform</span> PEM <span class="literal">-subject_hash_old</span> <span class="operator">-in</span> charles.pem</span><br></pre></td></tr></table></figure>
+
+<p>保存第一行那8位</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121233353495.png" alt="image-20260121233353495"></p>
+<p>重命名为<code>8b60ce84.0</code></p>
+<p>adb root</p>
+<p>挂载根分区为可读写。被禁止了，哎哟</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121233646304.png" alt="image-20260121233646304"></p>
+<p>还是记一下后面大概的步骤吧：</p>
+<p>推送证书</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb push 7bba63c6.0 /system/etc/security/cacerts/</span><br></pre></td></tr></table></figure>
+
+<p>改权限 &amp; 上下文</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell &quot;chmod 644 /system/etc/security/cacerts/7bba63c6.0&quot;</span><br><span class="line">adb shell &quot;chcon u:object_r:system_file:s0 /system/etc/security/cacerts/7bba63c6.0&quot;</span><br></pre></td></tr></table></figure>
+
+<p>重新挂载只读</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell &quot;mount -o remount,ro /system&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Xposed-JustTrustMe"><a href="#Xposed-JustTrustMe" class="headerlink" title="Xposed+JustTrustMe"></a>Xposed+JustTrustMe</h3><p>这个方案试了不适配高版本</p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjI2NDM1LTEuaHRt">https://bbs.kanxue.com/thread-226435-1.htm<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="JustTrustMe"><a href="#JustTrustMe" class="headerlink" title="JustTrustMe"></a>JustTrustMe</h4><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL0Z1emlvbjI0L0p1c3RUcnVzdE1l">https://github.com/Fuzion24/JustTrustMe<i class="fa fa-external-link-alt"></i></span></p>
+<p>release页面下载apk</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install ./JustTrustMe.apk</span><br></pre></td></tr></table></figure>
+
+<p>要求SDK22</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121235703214.png" alt="image-20260121235703214"></p>
+<h4 id="xposed"><a href="#xposed" class="headerlink" title="xposed"></a>xposed</h4><p>下载：<span class="exturl" data-url="aHR0cHM6Ly94cG9zZWQuY2Mv">https://xposed.cc/<i class="fa fa-external-link-alt"></i></span></p>
+<p>在Android11上也不适配</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122160433492.png" alt="image-20260122160433492"></p>
+<h4 id="新装一个Android5-1"><a href="#新装一个Android5-1" class="headerlink" title="新装一个Android5.1"></a>新装一个Android5.1</h4><p>直接新建找不到这么老的版本。右上角设置，SDK Manager → SDK Platforms 。勾选</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260121235757784.png" alt="image-20260121235757784"></p>
+<p>还是没有，发现是得展开并且选择系统镜像才行</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122145837585.png" alt="image-20260122145837585"></p>
+<h3 id="Magisk-LSPosed"><a href="#Magisk-LSPosed" class="headerlink" title="Magisk+LSPosed"></a>Magisk+LSPosed</h3><h3 id="Magisk安装"><a href="#Magisk安装" class="headerlink" title="Magisk安装"></a>Magisk安装</h3><p>网址：<span class="exturl" data-url="aHR0cHM6Ly9tYWdpc2tjbi5jb20v">https://magiskcn.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmxhbnNlcGVhY2guY24vYXJjaGl2ZXMvODky">https://blog.lansepeach.cn/archives/892<i class="fa fa-external-link-alt"></i></span></p>
+<p>查看内核版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell uname -r</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122223855849.png" alt="image-20260122223855849"></p>
+<p>（如果是真机需要<strong>解锁 Bootloader</strong>，搜对应品牌解锁教程）</p>
+<p>打开长这样。点install</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122225122301.png" alt="image-20260122225122301"></p>
+<p>这里需要选择boot.img文件来patch</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122225309860.png" alt="image-20260122225309860"></p>
+<h4 id="提取boot-img"><a href="#提取boot-img" class="headerlink" title="提取boot.img"></a>提取boot.img</h4><p><span class="exturl" data-url="aHR0cHM6Ly9tYWdpc2tjbi5jb20vcGF5bG9hZC1kdW1wZXItZ28tYm9vdC5odG1s">https://magiskcn.com/payload-dumper-go-boot.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>本来是想按这个来的，发现找不到对应的ROM…我真的什么都看不懂饶了我吧</p>
+<p>试试手动提取。</p>
+<p>怎么找对应的文件？如果直接有boot.img最好，可能在<code>/system/etc/</code>目录，不用提取。如果没有，看看在不在<code>/dev/block/by-name/boot</code>。也没有，说明可能使用了 “super” 分区方案（Android 10+ 的动态分区），需要合并啥的</p>
+<blockquote>
+<p>以上是边问ai边做边总结的，不保证对</p>
+</blockquote>
+<p>这里是有<code>/dev/block/by-name/</code>但是其下没有boot</p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122231554014.png" alt="image-20260122231554014"></p>
+<p>dump这个vda。ai说vda 最前端 1-65536 扇区就是 kernel + ramdisk（传统 boot 区域）。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">su</span><br><span class="line">dd <span class="keyword">if</span>=/dev/block/vda of=/sdcard/vda.img bs=<span class="number">1</span>M</span><br><span class="line"><span class="keyword">exit</span></span><br><span class="line">adb pull /sdcard/vda.img</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122231833337.png" alt="image-20260122231833337"></p>
+<p><img src="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/image-20260122234127679.png" alt="image-20260122234127679"></p>
+<p>引用：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vdmlpdi9wLzE1Njc0ODY0Lmh0bWw=">https://www.cnblogs.com/viiv/p/15674864.html<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<p>Android 产品中，内核格式是Linux标准的zImage，根文件系统采用ramdisk格式。这两者在Android下是直接合并在一起取名为boot.img,会放在一个独立分区当中。这个分区格式是Android自行制定的格式。<br> Android开发时，最标准的做法是重新编译于内核和根文件系统，然后调用Android给的命令行文件mkbootimg来打包。<br> 常用的就是打包和解包工具：unpackbootimg 和 mkbootimg</p>
+</blockquote>
+<h2 id="导致其他应用走代理的问题"><a href="#导致其他应用走代理的问题" class="headerlink" title="导致其他应用走代理的问题"></a>导致其他应用走代理的问题</h2><p>因为无法信任这个代理火狐直接不给访问了，抓到的包也很杂，得搞一下</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/" title="Android手机使用charles抓https请求">https://mintind.github.io/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/14/CTF/env/AndroidStudio_virtual_device_network_error/" rel="prev" title="Android Studio虚拟设备连不上网">
+                  <i class="fa fa-angle-left"></i> Android Studio虚拟设备连不上网
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/24/UCAS/network_a&d_vunl_judge_labor/" rel="next" title="网络攻防基础实验三漏洞分析">
+                  网络攻防基础实验三漏洞分析 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/01/20/CTF/Reverse/Android_HTTPS_Traffic_Capture_with_Charles/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

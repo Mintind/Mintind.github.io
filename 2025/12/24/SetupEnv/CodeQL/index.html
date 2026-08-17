@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CodeQL">
+<meta property="og:url" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251226135451986.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251226135953847.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251225191631326.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251229192359914.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251226145231661.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228210315648.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251229111207597.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251229113523178.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228112450421.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228112539763.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228113219645.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228232428187.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251228232603480.png">
+<meta property="article:published_time" content="2025-12-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-24T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CodeQL">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/image-20251226135451986.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/","path":"2025/12/24/SetupEnv/CodeQL/","title":"CodeQL"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CodeQL | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CodeQL%E7%8E%AF%E5%A2%83"><span class="nav-number">1.</span> <span class="nav-text">CodeQL环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeQL%E8%A7%A3%E6%9E%90%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">CodeQL解析器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CodeQL-SDK"><span class="nav-number">1.2.</span> <span class="nav-text">CodeQL SDK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VSCode%E7%9A%84CodeQL%E6%8F%92%E4%BB%B6"><span class="nav-number">1.3.</span> <span class="nav-text">VSCode的CodeQL插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="nav-number">2.</span> <span class="nav-text">使用流程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-number">2.1.</span> <span class="nav-text">生成数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Python"><span class="nav-number">2.1.1.</span> <span class="nav-text">Python</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C"><span class="nav-number">2.1.2.</span> <span class="nav-text">C</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#database-analyse"><span class="nav-number">2.2.</span> <span class="nav-text">database analyse</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.2.1.</span> <span class="nav-text">自定义查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89yml%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.2.2.</span> <span class="nav-text">自定义yml配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C"><span class="nav-number">2.2.3.</span> <span class="nav-text">执行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#codeql-query%EF%BC%88%E8%BF%99%E6%9D%A1%E7%BA%BF%E5%85%88%E5%BC%83%E4%BA%86"><span class="nav-number">2.3.</span> <span class="nav-text">codeql query（这条线先弃了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%BB%93%E6%9E%9C"><span class="nav-number">2.4.</span> <span class="nav-text">查看结果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SARIF-Viewer%E6%8F%92%E4%BB%B6"><span class="nav-number">2.4.1.</span> <span class="nav-text">SARIF Viewer插件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ql%E7%BC%96%E5%86%99"><span class="nav-number">3.</span> <span class="nav-text">ql编写</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CodeQL | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CodeQL<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvU2V0dXBFbnYvQ29kZVFMLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-25 00:00:00" itemprop="dateCreated datePublished" datetime="2025-12-25T00:00:00+08:00">2025-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SetupEnv/" itemprop="url" rel="index"><span itemprop="name">SetupEnv</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly93ZW55dW53Lm1lLzIwMjMvMDcvMjcvY29kZXFsL2luZGV4Lmh0bWw=">https://wenyunw.me/2023/07/27/codeql/index.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>文档：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdpdGh1Yi5jb20vZW4vY29kZS1zZWN1cml0eS9jb2RlcWwtY2xpL2dldHRpbmctc3RhcnRlZC13aXRoLXRoZS1jb2RlcWwtY2xpL2FuYWx5emluZy15b3VyLWNvZGUtd2l0aC1jb2RlcWwtcXVlcmllcw==">用 CodeQL 查询分析你的代码 - GitHub Docs<i class="fa fa-external-link-alt"></i></span></p>
+<p>命令查询库：<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcWwuZ2l0aHViLmNvbS9jb2RlcWwtc3RhbmRhcmQtbGlicmFyaWVzL3NlYXJjaC5odG1s">CodeQL standard libraries<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="CodeQL环境"><a href="#CodeQL环境" class="headerlink" title="CodeQL环境"></a>CodeQL环境</h2><h3 id="CodeQL解析器"><a href="#CodeQL解析器" class="headerlink" title="CodeQL解析器"></a>CodeQL解析器</h3><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9jb2RlcWwtY2xpLWJpbmFyaWVzL3JlbGVhc2Vz">https://github.com/github/codeql-cli-binaries/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>Release 2.23.7 (2025-12-05) <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9jb2RlcWwtY2xpLWJpbmFyaWVzL3JlbGVhc2VzL2Rvd25sb2FkL3YyLjIzLjcvY29kZXFsLWxpbnV4NjQuemlw">     codeql-linux64.zip      <i class="fa fa-external-link-alt"></i></span></p>
+<p>~&#x2F;.bashrc加环境变量</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=/home/mintind/codeql:<span class="variable">$PATH</span></span><br><span class="line"><span class="built_in">source</span> ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>验证</p>
+<p>不建议装主目录</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251226135451986.png" alt="image-20251226135451986"></p>
+<p>改一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:<span class="variable">$HOME</span>/CodeQL/codeql2.23.7</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251226135953847.png" alt="image-20251226135953847"></p>
+<h3 id="CodeQL-SDK"><a href="#CodeQL-SDK" class="headerlink" title="CodeQL SDK"></a>CodeQL SDK</h3><p>是数据库</p>
+<p>下载：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9jb2RlcWw=">https://github.com/github/codeql<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="VSCode的CodeQL插件"><a href="#VSCode的CodeQL插件" class="headerlink" title="VSCode的CodeQL插件"></a>VSCode的CodeQL插件</h3><p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251225191631326.png" alt="image-20251225191631326"></p>
+<p>这个插件呢，我一开始安装的时候发现他自动在远程下载最新版的CodeQL CLI了。后面由于不知道啥问题一直Client is not running。最后是指定了已经安装的cli路径，扩大了memory之后重启vscode窗口（蛮重要的，不重启好像有些配置更新不了），发现他认了这个cli</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251229192359914.png" alt="image-20251229192359914"></p>
+<h2 id="使用流程"><a href="#使用流程" class="headerlink" title="使用流程"></a>使用流程</h2><h3 id="生成数据库"><a href="#生成数据库" class="headerlink" title="生成数据库"></a>生成数据库</h3><p>会在当前目录下生成数据库目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database create 数据库名 --language=cpp --source-root=源码路径 --<span class="built_in">command</span>=<span class="string">&quot;编译命令&quot;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>–language 要根据具体项目的编译语言指定<br>–command 参数如果不指定，会使用默认的编译命令和参数<br>–source-root 源码路径（目录）<br>–overwrite 表示 create 的目标 database 对已有的 database 做覆盖</p>
+</blockquote>
+<p>–language的对应关系：</p>
+<table>
+<thead>
+<tr>
+<th><strong>Language</strong></th>
+<th><strong>Identity</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>C&#x2F;C++</td>
+<td>cpp</td>
+</tr>
+<tr>
+<td>C#</td>
+<td>csharp</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>go</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>java</td>
+</tr>
+<tr>
+<td>javascript&#x2F;Typescript</td>
+<td>javascript</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>python</td>
+</tr>
+</tbody></table>
+<p>–command 中指定的脚本的要求：</p>
+<pre><code>Confirm that there is some source code for the specified language in the project.
+For codebases written in Go, JavaScript, TypeScript, and Python, do not specify an explicit –command.
+For other languages, the –command must specify a “clean” build which compiles all the source code files without
+reusing existing build artefacts. 即如果项目中原本有任何编译产生的临时或最终文件，都需要删除，一定保证编译过程完全“
+clean ”。
+</code></pre>
+<h4 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database create vul_py --language=python --source-root=/home/mintind/workspace/vul_py</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="C"><a href="#C" class="headerlink" title="C"></a>C</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql database create vul_c --language=cpp --source-root=/home/mintind/workspace/vun_c</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251226145231661.png" alt="image-20251226145231661"></p>
+<h3 id="database-analyse"><a href="#database-analyse" class="headerlink" title="database analyse"></a>database analyse</h3><p>命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">codeql database analyze &lt;database&gt; --format=&lt;format&gt; \</span><br><span class="line">    --sarif-category=&lt;language-specifier&gt; --output=&lt;output&gt; \</span><br><span class="line">    &lt;packs,queries&gt;</span><br></pre></td></tr></table></figure>
+
+<p>数据库、输出路径、查询路径都可以自定义</p>
+<p>这个好像是使用官方预设的查询来分析数据库</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">codeql database analyze \</span><br><span class="line">  vul_py \</span><br><span class="line">  --format=sarif-latest \</span><br><span class="line">  --output=vul_py.sarif \</span><br><span class="line">  codeql/python-queries</span><br></pre></td></tr></table></figure>
+
+<p>不错，终于跑起来了</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228210315648.png" alt="image-20251228210315648"></p>
+<h4 id="自定义查询"><a href="#自定义查询" class="headerlink" title="自定义查询"></a>自定义查询</h4><p><span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmdpdGh1Yi5jb20vZW4vY29kZS1zZWN1cml0eS9jb2RlLXNjYW5uaW5nL2NyZWF0aW5nLWFuLWFkdmFuY2VkLXNldHVwLWZvci1jb2RlLXNjYW5uaW5nL2N1c3RvbWl6aW5nLXlvdXItYWR2YW5jZWQtc2V0dXAtZm9yLWNvZGUtc2Nhbm5pbmcjdXNpbmctYS1jdXN0b20tY29uZmlndXJhdGlvbi1maWxl">自定义你的高级代码扫描设置 - GitHub Docs<i class="fa fa-external-link-alt"></i></span></p>
+<p>工作区：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2dpdGh1Yi9kb2NzL2Jsb2IvbWFpbi9jb250ZW50L2NvZGUtc2VjdXJpdHkvY29kZXFsLWNsaS91c2luZy10aGUtYWR2YW5jZWQtZnVuY3Rpb25hbGl0eS1vZi10aGUtY29kZXFsLWNsaS9hYm91dC1jb2RlcWwtd29ya3NwYWNlcy5tZA==">docs&#x2F;content&#x2F;code-security&#x2F;codeql-cli&#x2F;using-the-advanced-functionality-of-the-codeql-cli&#x2F;about-codeql-workspaces.md at main ·GitHub&#x2F;Docs ·GitHub<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="自定义yml配置文件"><a href="#自定义yml配置文件" class="headerlink" title="自定义yml配置文件"></a>自定义yml配置文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">name:</span> <span class="string">codeql/myprqueries</span></span><br><span class="line"><span class="attr">version:</span> <span class="number">1.7</span><span class="number">.4</span><span class="string">-dev</span></span><br><span class="line"><span class="attr">dependencies:</span></span><br><span class="line">  <span class="attr">codeql/python-all:</span> <span class="string">&quot;*&quot;</span></span><br><span class="line"><span class="attr">extractor:</span> <span class="string">python</span></span><br><span class="line"><span class="attr">warnOnImplicitThis:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251229111207597.png" alt="image-20251229111207597"></p>
+<p>说要codeql pack install，就运行了。然后发现是会在之前说到的那个默认目录（<code>~/.codeql/packages</code>）下又把包下载一遍。随后会自动重新生成一个lock.yml</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251229113523178.png" alt="image-20251229113523178"></p>
+<p>大概理解了，就是在项目里的yml里加入依赖，然后运行pack install，codeql解析依赖自动生成lock.yml。codeql会在这两个文件里找依赖。所以改了yml之后也得重新pack install</p>
+<p>现在问题就是我明明已经在SDK文件夹里下载了这些包了，有没有办法改成已有的包的路径</p>
+<h4 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h4><p>自己指定ql文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">codeql database analyze \</span><br><span class="line">  ~/workspace/codeqlDatabase/vul_py \</span><br><span class="line">  --format=sarif-latest \</span><br><span class="line">  --output=~/workspace/codeqlres/vul_py.sarif \</span><br><span class="line">  ~/workspace/codequery/vul_py/py_1.ql</span><br></pre></td></tr></table></figure>
+
+<p>也可以指定查询包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">codeql database analyze \</span><br><span class="line">  ~/workspace/codeqlDatabase/vul_py \</span><br><span class="line">  --format=sarif-latest \</span><br><span class="line">  --output=~/workspace/codeqlres/vul_py.sarif \</span><br><span class="line">  codeql/myprqueries</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="codeql-query（这条线先弃了"><a href="#codeql-query（这条线先弃了" class="headerlink" title="codeql query（这条线先弃了"></a>codeql query（这条线先弃了</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql query run --database=/home/mintind/workspace/codeqlDatabase/vul_py py_1.ql</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228112450421.png" alt="image-20251228112450421"></p>
+<p>说没找到python包。使用命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql pack download codeql/python-all</span><br></pre></td></tr></table></figure>
+
+<p>下载包，又说有包，说明就是没找到</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228112539763.png" alt="image-20251228112539763"></p>
+<p>进入CodeQL解析器目录执行pack ls命令，可以查看包。只有一个裸pack，所以CodeQL认为有包了</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228113219645.png" alt="image-20251228113219645"></p>
+<p>查看CLI 在哪些目录里查找 packs，以及找到了哪些 pack。有的</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql resolve packs --format=json</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codeql query run ~/workspace/codequery/py_1.ql --database ~/workspace/codeqlDatabase/vul_py --search-path /home/mintind/CodeQL/codeqlsdk/python/ql -o py.sarif</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="查看结果"><a href="#查看结果" class="headerlink" title="查看结果"></a>查看结果</h3><h4 id="SARIF-Viewer插件"><a href="#SARIF-Viewer插件" class="headerlink" title="SARIF Viewer插件"></a>SARIF Viewer插件</h4><p>结果保存在sarif文件中，下一个sarif插件。</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228232428187.png" alt="image-20251228232428187"></p>
+<p>侧边栏会列出所有告警，点击直接跳源码。</p>
+<p><img src="/2025/12/24/SetupEnv/CodeQL/image-20251228232603480.png" alt="image-20251228232603480"></p>
+<h2 id="ql编写"><a href="#ql编写" class="headerlink" title="ql编写"></a>ql编写</h2><p>官方lib：<span class="exturl" data-url="aHR0cHM6Ly9jb2RlcWwuZ2l0aHViLmNvbS9jb2RlcWwtc3RhbmRhcmQtbGlicmFyaWVzL2luZGV4Lmh0bWw=">CodeQL standard libraries<i class="fa fa-external-link-alt"></i></span></p>
+<p>教程：<span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWJ1Zi5jb20vc2VjdG9vbC80MjQ2NTAuaHRtbA==">https://www.freebuf.com/sectool/424650.html<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/" title="CodeQL">https://mintind.github.io/2025/12/24/SetupEnv/CodeQL/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CodeQL/" rel="tag"># CodeQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/24/UCAS/network_protocol_security_review/" rel="prev" title="【网络协议安全】review">
+                  <i class="fa fa-angle-left"></i> 【网络协议安全】review
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/01/UCAS/detect_with_snort3/" rel="next" title="【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测">
+                  【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/12/24/SetupEnv/CodeQL/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/12/24/SetupEnv/CodeQL/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Codex">
+<meta property="og:url" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260515104316287.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260515103809459.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260515101658735.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260528103202266.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260528113610591.png">
+<meta property="article:published_time" content="2026-05-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-13T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Codex">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/05/13/AI/Agents/Codex/image-20260515104316287.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/05/13/AI/Agents/Codex/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/05/13/AI/Agents/Codex/","path":"2026/05/13/AI/Agents/Codex/","title":"Codex"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Codex | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Codex-CLI"><span class="nav-number">1.</span> <span class="nav-text">Codex CLI</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">基础使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.1.2.</span> <span class="nav-text">会话</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%81%A2%E5%A4%8D%E4%BC%9A%E8%AF%9D"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">恢复会话</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4-%E5%BF%AB%E6%8D%B7%E9%94%AE"><span class="nav-number">1.2.</span> <span class="nav-text">命令&amp;快捷键</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#statusline"><span class="nav-number">1.2.1.</span> <span class="nav-text">&#x2F;statusline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%93%E6%96%AD"><span class="nav-number">1.2.2.</span> <span class="nav-text">打断</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transcript%EF%BC%9A%E5%9B%9E%E9%80%80-%E6%9F%A5%E7%9C%8B%E8%AF%A6%E7%BB%86%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.3.</span> <span class="nav-text">transcript：回退&amp; 查看详细信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%81%E8%AE%B8%E7%BC%96%E8%BE%91%EF%BC%9F"><span class="nav-number">1.2.4.</span> <span class="nav-text">允许编辑？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.3.</span> <span class="nav-text">项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AGENTS-md"><span class="nav-number">1.3.1.</span> <span class="nav-text">AGENTS.md</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rules"><span class="nav-number">1.3.2.</span> <span class="nav-text">rules</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#skills"><span class="nav-number">1.3.3.</span> <span class="nav-text">skills</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E8%87%AA%E5%8A%A8%E5%8E%8B%E7%BC%A9%E5%A4%A7%E5%B0%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">设置自动压缩大小</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%81%E7%A7%BB%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.4.2.</span> <span class="nav-text">迁移默认配置路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sandbox%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.4.3.</span> <span class="nav-text">sandbox模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#plugins-skills"><span class="nav-number">1.5.</span> <span class="nav-text">plugins&amp;skills</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Codex%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Codex应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8-1"><span class="nav-number">2.1.</span> <span class="nav-text">基础使用</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%81%8A%E4%B8%80%E8%81%8A"><span class="nav-number">3.</span> <span class="nav-text">聊一聊</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Codex%E5%92%8CClaude-Code"><span class="nav-number">3.1.</span> <span class="nav-text">Codex和Claude Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codex%E7%9A%84%E5%91%BD%E4%BB%A4%E6%9C%BA%E5%88%B6"><span class="nav-number">3.2.</span> <span class="nav-text">Codex的命令机制</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Codex-CLI%E5%92%8CCodex%E5%BA%94%E7%94%A8%E4%B9%8B%E9%97%B4%E7%9A%84%E4%BC%9A%E8%AF%9D%E5%88%87%E6%8D%A2"><span class="nav-number">4.1.</span> <span class="nav-text">Codex CLI和Codex应用之间的会话切换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E5%8E%8B%E7%BC%A9%E5%A4%B1%E8%B4%A5"><span class="nav-number">4.2.</span> <span class="nav-text">自动压缩失败</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/05/13/AI/Agents/Codex/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Codex | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Codex<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQUkvQWdlbnRzL0NvZGV4Lm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-05-14T00:00:00+08:00">2026-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Agents/" itemprop="url" rel="index"><span itemprop="name">Agents</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h1 id="Codex-CLI"><a href="#Codex-CLI" class="headerlink" title="Codex CLI"></a>Codex CLI</h1><h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install <span class="literal">-g</span> @openai/codex</span><br></pre></td></tr></table></figure>
+
+<p>Windows直接运行会报错，不允许运行ps1脚本</p>
+<p>可以换成命令：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codex.cmd</span><br></pre></td></tr></table></figure>
+
+<p>那为什么不直接用cmd呢？</p>
+<h3 id="会话"><a href="#会话" class="headerlink" title="会话"></a>会话</h3><h4 id="恢复会话"><a href="#恢复会话" class="headerlink" title="恢复会话"></a>恢复会话</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">codex.cmd resume</span><br></pre></td></tr></table></figure>
+
+<p>发现用这个命令可以恢复到Codex应用中的会话，有没有其他限制暂时不知</p>
+<p>发现一个相比于claude code的优点，codex不会把只启动了一下什么都没说的会话加入到会话历史里。给cc一拳</p>
+<p>后面加上会话名，恢复特定会话</p>
+<h2 id="命令-快捷键"><a href="#命令-快捷键" class="headerlink" title="命令&amp;快捷键"></a>命令&amp;快捷键</h2><h3 id="statusline"><a href="#statusline" class="headerlink" title="&#x2F;statusline"></a>&#x2F;statusline</h3><p>差不多是可以自定义常驻显示信息栏的功能</p>
+<p>这边强烈建议加上context-used、five-hour-limit和context-used</p>
+<h3 id="打断"><a href="#打断" class="headerlink" title="打断"></a>打断</h3><p>esc</p>
+<h3 id="transcript：回退-查看详细信息"><a href="#transcript：回退-查看详细信息" class="headerlink" title="transcript：回退&amp; 查看详细信息"></a>transcript：回退&amp; 查看详细信息</h3><p>（在Codex没在运行的时候，在转的时候别按会打断）两次ESC</p>
+<p>或者任何时候：Ctrl + T。</p>
+<p>就会进入transcript模式，内容多了之后这一步会有点慢。</p>
+<p>上下键滚动查看历史，左右键选择历史消息，enter选中消息进行编辑，q退出。这个模式下滚动速度有点慢</p>
+<p>用了几回之后发现，好像下一次启动会话transcript中就会丢失详细信息？？就只能看到对话内容和执行命令的记录了</p>
+<h3 id="允许编辑？"><a href="#允许编辑？" class="headerlink" title="允许编辑？"></a>允许编辑？</h3><p><img src="/2026/05/13/AI/Agents/Codex/image-20260515104316287.png" alt="image-20260515104316287"></p>
+<h2 id="项目"><a href="#项目" class="headerlink" title="项目"></a>项目</h2><h3 id="AGENTS-md"><a href="#AGENTS-md" class="headerlink" title="AGENTS.md"></a>AGENTS.md</h3><h3 id="rules"><a href="#rules" class="headerlink" title="rules"></a>rules</h3><h3 id="skills"><a href="#skills" class="headerlink" title="skills"></a>skills</h3><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="设置自动压缩大小"><a href="#设置自动压缩大小" class="headerlink" title="设置自动压缩大小"></a>设置自动压缩大小</h3><p>修改配置文件 <code>~/.codex/config.toml</code>里的model_auto_compact_token_limit</p>
+<p>默认的是80m</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 当 token 使用量达到 80m 时自动触发压缩</span><br><span class="line">model_auto_compact_token_limit = 800000</span><br></pre></td></tr></table></figure>
+
+<h3 id="迁移默认配置路径"><a href="#迁移默认配置路径" class="headerlink" title="迁移默认配置路径"></a>迁移默认配置路径</h3><p>默认配置路径<code>C:\Users\usr\.codex</code>，把文件全部贴到目标位置，然后设置环境变量</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setx CODEX_HOME <span class="string">&quot;D:\target\.codex&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="sandbox模式"><a href="#sandbox模式" class="headerlink" title="sandbox模式"></a>sandbox模式</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  Set up the Codex agent sandbox to protect your files and control network access. Learn more</span><br><span class="line">  &lt;https://developers.openai.com/codex/windows&gt;</span><br><span class="line"></span><br><span class="line">  1. Set up default sandbox (requires Administrator permissions)</span><br><span class="line">› 2. Use non-admin sandbox (higher risk if prompt injected)</span><br><span class="line">  3. Quit</span><br></pre></td></tr></table></figure>
+
+<p>选项一就是elevated，选项二是unelevated</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>elevated</code> (首选)</th>
+<th><code>unelevated</code> (备选)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>权限级别</strong></td>
+<td>专用低权限沙箱用户</td>
+<td>从当前用户派生的受限令牌</td>
+</tr>
+<tr>
+<td><strong>文件系统隔离</strong></td>
+<td>基于 ACL 的严格边界</td>
+<td>基于 ACL 的边界（较弱）</td>
+</tr>
+<tr>
+<td><strong>网络控制</strong></td>
+<td>防火墙规则 + 专用离线用户规则</td>
+<td>环境级离线控制（无专用防火墙规则）</td>
+</tr>
+<tr>
+<td><strong>本地策略</strong></td>
+<td>会应用本地策略更改</td>
+<td>不应用</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>管理员允许的环境，最强安全</td>
+<td>企业策略阻止管理员设置时的降级方案</td>
+</tr>
+<tr>
+<td><strong>UI 隔离</strong></td>
+<td>默认使用私有桌面（<code>Winsta0\Default</code>）</td>
+<td>同上</td>
+</tr>
+</tbody></table>
+<p>建议是<strong>优先使用 <code>elevated</code></strong>，除非因企业组策略等原因无法启用管理员权限的配置。unelevated作为fallback</p>
+<h2 id="plugins-skills"><a href="#plugins-skills" class="headerlink" title="plugins&amp;skills"></a>plugins&amp;skills</h2><p>换了路径之后不推荐用npm安装plugin，因为很可能装到默认位置去，很麻烦</p>
+<p>目前用的是在Codex中输入<code>/plugins</code>然后手动输入仓库地址的方法，也可以输入仓库或者作者名。</p>
+<p>使用方法：和claude code不一样，提示符是<code>$</code></p>
+<h1 id="Codex应用"><a href="#Codex应用" class="headerlink" title="Codex应用"></a>Codex应用</h1><h2 id="基础使用-1"><a href="#基础使用-1" class="headerlink" title="基础使用"></a>基础使用</h2><h1 id="聊一聊"><a href="#聊一聊" class="headerlink" title="聊一聊"></a>聊一聊</h1><h2 id="Codex和Claude-Code"><a href="#Codex和Claude-Code" class="headerlink" title="Codex和Claude Code"></a>Codex和Claude Code</h2><p>codex不会把只启动了一下什么都没说的会话加入到会话历史里，cc会</p>
+<p>Codex申请命令许可时会显式说明这条命令的作用，如：</p>
+<p><img src="/2026/05/13/AI/Agents/Codex/image-20260515103809459.png" alt="image-20260515103809459"></p>
+<p>Codex和Claude Code运行命令的方式似乎有差别，同样的脚本同样的skill，有些对cc有效，但是Codex运行不了</p>
+<h2 id="Codex的命令机制"><a href="#Codex的命令机制" class="headerlink" title="Codex的命令机制"></a>Codex的命令机制</h2><p>发现了他运行命令的方式</p>
+<p>D:\Usr.codex.sandbox-bin\codex-command-runner-0.130.0.exe</p>
+<h1 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h1><h2 id="Codex-CLI和Codex应用之间的会话切换"><a href="#Codex-CLI和Codex应用之间的会话切换" class="headerlink" title="Codex CLI和Codex应用之间的会话切换"></a>Codex CLI和Codex应用之间的会话切换</h2><p>正如前面所说，我发现使用codex resume可以恢复Codex应用中的会话。但是我之前问他是否能够切换，他告诉我的是依赖于本地文件记忆。切换后我再问他：</p>
+<p><img src="/2026/05/13/AI/Agents/Codex/image-20260515101658735.png" alt="image-20260515101658735"></p>
+<p>多聊了几句，看起来他是对的，因为他又犯了之前在Codex应用里的错误（</p>
+<p>应该是可以读取上下文，但是上下文窗口是独立的？纯猜测                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     </p>
+<p>再切换回Codex应用，发现也同步了修改，会显示修改的文件和部分会话历史，会话名修改也同步了，但是引导消息没有同步进来</p>
+<h2 id="自动压缩失败"><a href="#自动压缩失败" class="headerlink" title="自动压缩失败"></a>自动压缩失败</h2><p>其实手动压缩也失败了。</p>
+<p>这个issue很多人提到了：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL29wZW5haS9jb2RleC9pc3N1ZXMvMTczOTI=">https://github.com/openai/codex/issues/17392<i class="fa fa-external-link-alt"></i></span></p>
+<p>出现了这样的问题之后，会话难以恢复。手动compact，发消息，重启，都没有办法继续</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">■ Error running remote compact task: stream disconnected before completion: error sending request for url</span><br><span class="line">(https://chatgpt.com/backend-api/codex/responses/compact)</span><br></pre></td></tr></table></figure>
+
+<p>（小红书上看到的）好像是codex新版的一个很多人碰到的问题。如果上下文完全用尽了就没办法了，如果还有的话可以试着切换到比较老的模型，然后压缩，再切换回来</p>
+<p>逗我玩呢？？？压缩失败了就直接给我清空是吧</p>
+<p><img src="/2026/05/13/AI/Agents/Codex/image-20260528103202266.png" alt="image-20260528103202266"></p>
+<p>还有闪回😡</p>
+<p><img src="/2026/05/13/AI/Agents/Codex/image-20260528113610591.png" alt="image-20260528113610591"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/05/13/AI/Agents/Codex/" title="Codex">https://mintind.github.io/2026/05/13/AI/Agents/Codex/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Codex/" rel="tag"># Codex</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/12/SetupEnv/penetration_tools_behinder_antsword/" rel="prev" title="冰蝎&amp;蚁剑">
+                  <i class="fa fa-angle-left"></i> 冰蝎&蚁剑
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/05/18/SetupEnv/zerotier/" rel="next" title="Zerotier笔记">
+                  Zerotier笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/05/13/AI/Agents/Codex/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/05/13/AI/Agents/Codex/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

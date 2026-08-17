@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="花开蜂蝶绕绕残酒渐消">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络威胁感知与溯源【上】：NSSA">
+<meta property="og:url" content="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="花开蜂蝶绕绕残酒渐消">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/image-20260615164139188.png">
+<meta property="article:published_time" content="2026-06-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-14T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="网络威胁感知与溯源">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/image-20260615164139188.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/","path":"2026/06/14/UCAS/网络威胁感知与溯源笔记/","title":"网络威胁感知与溯源【上】：NSSA"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络威胁感知与溯源【上】：NSSA | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5"><span class="nav-number">1.1.1.</span> <span class="nav-text">态势感知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%EF%BC%88NSA%EF%BC%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">网络态势感知（NSA）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%EF%BC%88NSSA%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">网络安全态势感知（NSSA）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%EF%BC%88NSA%EF%BC%89-1"><span class="nav-number">1.2.</span> <span class="nav-text">网络态势感知（NSA）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D"><span class="nav-number">1.2.1.</span> <span class="nav-text">定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">1.2.2.</span> <span class="nav-text">三个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E8%AE%A1%E7%AE%97%E5%92%8C%E9%80%86%E5%90%91%E8%A7%A3%E6%9E%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">正向计算和逆向解析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%8C%85%E6%A3%80%E6%B5%8B%EF%BC%88DPI%EF%BC%89"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">深度包检测（DPI）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%EF%BC%88NSSA%EF%BC%89-1"><span class="nav-number">2.</span> <span class="nav-text">网络安全态势感知（NSSA）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BB%E8%A6%81%E7%A0%94%E7%A9%B6%E6%84%8F%E4%B9%89%E3%80%81%E6%96%B9%E5%90%91%E5%92%8C%E7%8E%B0%E7%8A%B6"><span class="nav-number">2.1.</span> <span class="nav-text">主要研究意义、方向和现状</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.</span> <span class="nav-text">网络空间态势感知模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#JDL%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.0.1.</span> <span class="nav-text">JDL数据融合模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OODA%E5%86%B3%E7%AD%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.0.2.</span> <span class="nav-text">OODA决策模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Endsley%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.0.3.</span> <span class="nav-text">Endsley态势感知模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tim-Bass%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.2.0.4.</span> <span class="nav-text">Tim Bass态势感知模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%A9%BA%E9%97%B4%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E6%80%A7%E8%83%BD%E5%92%8C%E6%9C%89%E6%95%88%E5%BA%A6%E9%87%8F"><span class="nav-number">2.3.</span> <span class="nav-text">网络空间态势感知性能和有效度量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BF%A1%E6%81%AF%E6%AF%94%EF%BC%88DIR%EF%BC%89"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">数据信息比（DIR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%AE%E4%BF%A1%E5%BA%A6"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">置信度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%AF%E5%BA%A6"><span class="nav-number">2.3.0.3.</span> <span class="nav-text">纯度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%B9%E6%95%88%E6%AF%94"><span class="nav-number">2.3.0.4.</span> <span class="nav-text">费效比</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E5%88%86%E5%80%BC"><span class="nav-number">2.3.0.5.</span> <span class="nav-text">攻击分值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E6%95%88%E6%80%A7"><span class="nav-number">2.3.0.6.</span> <span class="nav-text">时效性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E8%A6%81%E7%B4%A0%E8%9E%8D%E5%90%88"><span class="nav-number">2.4.</span> <span class="nav-text">安全态势要素融合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E8%A6%81%E7%B4%A0%E8%9E%8D%E5%90%88%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">2.4.1.</span> <span class="nav-text">安全态势要素融合技术分类方法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Whyte%E7%9A%84%E5%9F%BA%E4%BA%8E%E6%95%B0%E6%8D%AE%E6%BA%90%E5%85%B3%E7%B3%BB%E5%88%86%E7%B1%BB"><span class="nav-number">2.4.1.0.1.</span> <span class="nav-text">Whyte的基于数据源关系分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dasarathy%E7%9A%84%E5%9F%BA%E4%BA%8E%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E5%88%86%E7%B1%BB"><span class="nav-number">2.4.1.0.2.</span> <span class="nav-text">Dasarathy的基于输入输出分类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#JDL%E6%95%B0%E6%8D%AE%E8%9E%8D%E5%90%88%E6%A8%A1%E5%9E%8B-1"><span class="nav-number">2.4.1.0.3.</span> <span class="nav-text">JDL数据融合模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E8%A6%81%E7%B4%A0%E8%9E%8D%E5%90%88%E4%B8%BB%E8%A6%81%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.2.</span> <span class="nav-text">安全态势要素融合主要技术</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%B1%82%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.2.0.1.</span> <span class="nav-text">数据层处理技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B1%82%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.2.0.2.</span> <span class="nav-text">特征层处理技术</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E5%B1%82%E5%A4%84%E7%90%86%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.2.0.3.</span> <span class="nav-text">决策层处理技术</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E5%88%86%E6%9E%90%E4%B8%8E%E8%AF%84%E4%BC%B0"><span class="nav-number">2.5.</span> <span class="nav-text">网络安全态势分析与评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%A6%E6%9C%AC%E8%B4%A8"><span class="nav-number">2.5.1.</span> <span class="nav-text">数学本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.2.</span> <span class="nav-text">分类方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%88%E5%93%88%E5%B7%A5%E5%A4%A7-%E6%9D%8E%E5%BF%97%E4%B8%9C-2012%EF%BC%89"><span class="nav-number">2.5.2.1.</span> <span class="nav-text">分类方法一（哈工大-李志东-2012）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%88%E4%B8%9C%E5%8D%97%E5%A4%A7%E5%AD%A6-%E9%BE%9A%E4%BF%AD-2016%EF%BC%89"><span class="nav-number">2.5.2.2.</span> <span class="nav-text">分类方法二（东南大学-龚俭-2016）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.3.</span> <span class="nav-text">评估方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E4%B8%AD%E7%9A%84%E6%95%B0%E5%AD%A6%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.4.</span> <span class="nav-text">实际应用中的数学模型方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E6%AC%A1%E5%88%86%E6%9E%90%E6%B3%95%EF%BC%88AHP%EF%BC%89"><span class="nav-number">2.5.4.1.</span> <span class="nav-text">层次分析法（AHP）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B4%9D%E5%8F%B6%E6%96%AF%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.4.2.</span> <span class="nav-text">贝叶斯方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#D-S%E8%AF%81%E6%8D%AE%E7%90%86%E8%AE%BA"><span class="nav-number">2.5.4.3.</span> <span class="nav-text">D-S证据理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%96%B9%E6%B3%95%EF%BC%88%E6%96%B0%E8%B6%8B%E5%8A%BF%EF%BC%89"><span class="nav-number">2.5.4.4.</span> <span class="nav-text">大模型方法（新趋势）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.5.</span> <span class="nav-text">网络安全态势预测方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%97%B6%E9%97%B4%E5%BA%8F%E5%88%97%E9%A2%84%E6%B5%8B%E6%B3%95"><span class="nav-number">2.5.5.1.</span> <span class="nav-text">时间序列预测法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E4%B8%8E%E9%9A%90%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.5.2.</span> <span class="nav-text">马尔科夫与隐马尔科夫预测算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ARIMA%E6%97%B6%E5%BA%8F%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.5.3.</span> <span class="nav-text">ARIMA时序分析算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%88%86%E6%9E%90%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.5.4.</span> <span class="nav-text">机器学习分析算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RNN%E4%B8%8ELSTM%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95"><span class="nav-number">2.5.5.5.</span> <span class="nav-text">RNN与LSTM预测算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A2%84%E6%B5%8B%E7%AE%97%E6%B3%95%E9%80%89%E5%8F%96%E8%A7%84%E5%88%99"><span class="nav-number">2.5.5.6.</span> <span class="nav-text">预测算法选取规则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E9%A2%84%E6%B5%8B%E6%96%B9%E6%B3%95%EF%BC%88%E6%96%B0%E8%B6%8B%E5%8A%BF%EF%BC%89"><span class="nav-number">2.5.5.7.</span> <span class="nav-text">大模型预测方法（新趋势）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E5%9B%BE%E8%B0%B1%E6%9E%84%E5%BB%BA%E4%B8%8E%E6%8E%A8%E7%90%86"><span class="nav-number">2.6.</span> <span class="nav-text">安全态势图谱构建与推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E9%9C%80%E8%A6%81%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1"><span class="nav-number">2.6.1.</span> <span class="nav-text">网络安全态势感知需要知识图谱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E6%9E%84%E5%BB%BA%E6%8A%80%E6%9C%AF"><span class="nav-number">2.6.2.</span> <span class="nav-text">知识图谱构建技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1%E7%BB%84%E6%88%90"><span class="nav-number">2.6.2.1.</span> <span class="nav-text">知识图谱组成</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84"><span class="nav-number">2.6.2.2.</span> <span class="nav-text">技术架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.6.2.3.</span> <span class="nav-text">知识表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E8%9E%8D%E5%90%88"><span class="nav-number">2.6.2.4.</span> <span class="nav-text">知识融合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%8E%A8%E7%90%86"><span class="nav-number">2.6.2.5.</span> <span class="nav-text">知识推理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E5%AD%98%E5%82%A8"><span class="nav-number">2.6.2.6.</span> <span class="nav-text">知识存储</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E6%9C%AC%E4%BD%93%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.6.3.</span> <span class="nav-text">网络安全态势感知本体模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E4%BD%93%E6%A8%A1%E5%9E%8B%E5%B1%82%E6%AC%A1"><span class="nav-number">2.6.3.1.</span> <span class="nav-text">本体模型层次</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%AD%90%E6%9C%AC%E4%BD%93%E7%B1%BB%E5%9E%8B"><span class="nav-number">2.6.3.2.</span> <span class="nav-text">原子本体类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E4%BD%93%E6%9E%84%E5%BB%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.6.3.3.</span> <span class="nav-text">本体构建方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E5%9B%BE%E8%B0%B1%E5%BA%94%E7%94%A8"><span class="nav-number">2.6.4.</span> <span class="nav-text">网络安全态势感知图谱应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E7%94%BB%E5%83%8F"><span class="nav-number">2.6.4.1.</span> <span class="nav-text">攻击者画像</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%A2%E4%BC%99%E5%8F%91%E7%8E%B0"><span class="nav-number">2.6.4.2.</span> <span class="nav-text">团伙发现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E7%B3%BB%E6%8E%A8%E7%90%86"><span class="nav-number">2.6.4.3.</span> <span class="nav-text">关系推理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E4%B8%8E%E5%BD%92%E5%9B%A0"><span class="nav-number">2.6.4.4.</span> <span class="nav-text">攻击溯源与归因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BA%AF%E6%BA%90%E5%9B%BE%EF%BC%88Provenance-Graph%EF%BC%89%E5%BA%94%E7%94%A8"><span class="nav-number">2.6.4.5.</span> <span class="nav-text">溯源图（Provenance Graph）应用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A8%81%E8%83%81%E9%A2%84%E8%AD%A6%EF%BC%88UCO%EF%BC%89"><span class="nav-number">2.6.4.6.</span> <span class="nav-text">威胁预警（UCO）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.7.</span> <span class="nav-text">网络安全态势可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">2.7.1.</span> <span class="nav-text">什么是安全态势可视化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E7%B1%BB"><span class="nav-number">2.7.1.1.</span> <span class="nav-text">可视化分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Stuart-Card%E4%BF%A1%E6%81%AF%E5%8F%AF%E8%A7%86%E5%8C%96%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.7.1.2.</span> <span class="nav-text">Stuart Card信息可视化模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%81%E5%8A%BF%E5%8F%AF%E8%A7%86%E5%8C%96%E7%90%86%E8%AE%BA%E5%9F%BA%E7%A1%80"><span class="nav-number">2.7.2.</span> <span class="nav-text">安全态势可视化理论基础</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E6%B5%81%E6%B0%B4%E7%BA%BF"><span class="nav-number">2.7.2.1.</span> <span class="nav-text">数据可视化流水线</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%88%86%E6%9E%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.7.2.2.</span> <span class="nav-text">大数据可视分析技术</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E4%BA%92%E6%8A%80%E6%9C%AF"><span class="nav-number">2.7.2.3.</span> <span class="nav-text">交互技术</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E5%AE%B6%E7%BA%A7%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E5%B9%B3%E5%8F%B0%E6%8A%80%E6%9C%AF%E5%88%86%E6%9E%90"><span class="nav-number">2.8.</span> <span class="nav-text">国家级态势感知平台技术分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%8E%E5%9B%BD%E6%80%81%E5%8A%BF%E6%84%9F%E7%9F%A5%E8%83%BD%E5%8A%9B%E7%8E%B0%E7%8A%B6"><span class="nav-number">2.8.1.</span> <span class="nav-text">美国态势感知能力现状</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%BD%E5%8A%9B%E4%BD%93%E7%B3%BB"><span class="nav-number">2.8.1.1.</span> <span class="nav-text">能力体系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E9%94%AE%E9%A1%B9%E7%9B%AE"><span class="nav-number">2.8.1.2.</span> <span class="nav-text">关键项目</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络威胁感知与溯源【上】：NSSA | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络威胁感知与溯源【上】：NSSA<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/nvZHnu5zlqIHog4HmhJ/nn6XkuI7muq/mupDnrJTorrAubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T00:00:00+08:00">2026-06-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>花开蜂蝶绕绕残酒渐消</p>
+<span id="more"></span>
+
+<p>包含ai整理内容</p>
+<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p>NSSA属于NSA的一部分，也存在词语混用现象</p>
+<h3 id="态势感知"><a href="#态势感知" class="headerlink" title="态势感知"></a>态势感知</h3><p><strong>定义</strong>：在一定时间和空间内对环境因素的<strong>获取</strong>、<strong>理解</strong>和对未来短期的<strong>预测</strong></p>
+<p><strong>三级模型</strong>：</p>
+<ul>
+<li><strong>态势识别</strong>（一级）：感知环境中的要素</li>
+<li><strong>态势理解</strong>（二级）：综合理解当前环境</li>
+<li><strong>态势预测</strong>（三级）：预测环境未来状态</li>
+</ul>
+<h3 id="网络态势感知（NSA）"><a href="#网络态势感知（NSA）" class="headerlink" title="网络态势感知（NSA）"></a>网络态势感知（NSA）</h3><p><strong>定义</strong>：</p>
+<ul>
+<li><strong>网络态势</strong>：网络连接行为的实时状态以及状态的突发和变异的趋势</li>
+<li><strong>网络态势感知（NSA）</strong>：通过收集、分析网络中的各类数据（流量、日志、告警等），实时掌握网络的运行状态、安全威胁分布与发展趋势，为安全决策提供全面精准的信息支撑</li>
+</ul>
+<p><strong>分层架构</strong>：数据感知层 → 分析理解层 → 态势呈现层 → 响应决策层</p>
+<h3 id="网络安全态势感知（NSSA）"><a href="#网络安全态势感知（NSSA）" class="headerlink" title="网络安全态势感知（NSSA）"></a>网络安全态势感知（NSSA）</h3><p><strong>定义</strong>：利用<strong>数据融合、数据挖掘、智能分析和可视化</strong>等技术，分析并理解网络环境的安全状况和发展趋势，支撑网络安全决策。</p>
+<p><strong>目的</strong>：了解网络的状态、受攻击情况、攻击来源以及哪些服务易受攻击，掌握安全状态和趋势，做好防范准备，制定有预见性的应急预案。</p>
+<p><strong>技术组成</strong>：安全元素感知 → 安全态势预测 → 态势综合分析（态势分析算法、基于模型的安全态势预测、安全态势综合呈现）</p>
+<p>与实体态势感知的区别：</p>
+<ul>
+<li>实体态势感知依赖特定硬件传感器和信号处理技术</li>
+<li>网络空间态势感知依赖IDS、日志文件传感器、反病毒系统、防火墙等网络传感器</li>
+</ul>
+<h2 id="网络态势感知（NSA）-1"><a href="#网络态势感知（NSA）-1" class="headerlink" title="网络态势感知（NSA）"></a>网络态势感知（NSA）</h2><h3 id="定位"><a href="#定位" class="headerlink" title="定位"></a>定位</h3><p>网络通信分为三个层次</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>描述</th>
+<th>对应OSI模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>承载层</strong></td>
+<td>由网络终端、网络设备（如路由器）和连接介质（如光纤）组成，TCP&#x2F;IP保证互连互通</td>
+<td>第1-4层</td>
+</tr>
+<tr>
+<td><strong>应用层</strong></td>
+<td>完全开放的共享环境，体现个性化的”公平”使用，用户可自行开发私有协议封装在标准协议中传输</td>
+<td>第5-7层</td>
+</tr>
+<tr>
+<td><strong>行为层</strong></td>
+<td>处于7层以上的虚拟层，用户行为的多样性和利益驱动是互联网繁荣的因素，也是安全威胁的主要来源</td>
+<td>虚拟层</td>
+</tr>
+</tbody></table>
+<p>在针对网络安全的研究中，对承载层可以通过已知的数学模型和先验知识进行评估（标准化），但是这种方法对应用层和行为层难以奏效（应用层：私有协议的泛滥，行为层：人的不可建模性）。而<strong>网络态势感知是目前研究应用层安全的主要方法</strong></p>
+<h3 id="三个阶段"><a href="#三个阶段" class="headerlink" title="三个阶段"></a>三个阶段</h3><p><strong>第一阶段——信息提取</strong>：</p>
+<ul>
+<li>行为感知：从信息流中捕捉端到端对偶的并发连接</li>
+<li>协议感知：从信息包中识别深层的私有协议和应用类型（白名单或黑名单）</li>
+<li>异动感知：新的行为和未知的应用协议（灰名单）</li>
+<li>统计感知：超出安全基线的非常态行为</li>
+</ul>
+<p><strong>第二阶段——识别（多模式匹配）</strong>：</p>
+<ul>
+<li>单个连接行为与并发连接的匹配</li>
+<li>私有协议与指纹&#x2F;特征库的匹配</li>
+<li>并发流占用资源与网络共享资源匹配</li>
+<li>突发访问量与终端容量匹配</li>
+<li>多维关联匹配的结果即是<strong>态势</strong></li>
+</ul>
+<p><strong>第三阶段——评估和预测</strong>：</p>
+<ul>
+<li>将态势与”安全阈度”比较，启动即时处置</li>
+<li>深层内容挖掘（文字、图像、语音）采用离线方式</li>
+</ul>
+<h3 id="正向计算和逆向解析"><a href="#正向计算和逆向解析" class="headerlink" title="正向计算和逆向解析"></a>正向计算和逆向解析</h3><p>区分：分析方法。正向计算使用<strong>先验知识、预定模式</strong>；逆向解析<strong>实时感知</strong>网络的实际态势，不依赖预定义的模式。</p>
+<p>表现：</p>
+<table>
+<thead>
+<tr>
+<th>正向计算</th>
+<th>逆向解析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>抽象（以数学模型为基础）</td>
+<td>实际（实时网络态势感知和认知）</td>
+</tr>
+<tr>
+<td>宏观（以整合采样数据为依据）</td>
+<td>微观（深度流分析和数据包分析）</td>
+</tr>
+<tr>
+<td>概括（以平均的概率为原理）</td>
+<td>精准（检测每一个流和数据包头）</td>
+</tr>
+<tr>
+<td>人为（以先验知识为推理）</td>
+<td>客观（求异和积累）</td>
+</tr>
+<tr>
+<td>延时（以事后分析为导向）</td>
+<td>即时（对黑、白、灰名单的处置）</td>
+</tr>
+<tr>
+<td>静态（以相对固定匹配为模式）</td>
+<td>动态（可灵活配置和动态扩展）</td>
+</tr>
+</tbody></table>
+<h4 id="深度包检测（DPI）"><a href="#深度包检测（DPI）" class="headerlink" title="深度包检测（DPI）"></a>深度包检测（DPI）</h4><p>并发连接会话的实时态势解析深度包检测（DPI）。是逆向解析的关键实现技术</p>
+<table>
+<thead>
+<tr>
+<th>维度</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>协议深度</strong></td>
+<td>对被<strong>封装在标准应用协议</strong>中的<strong>私有协议检测和识别</strong></td>
+</tr>
+<tr>
+<td><strong>检测深度</strong></td>
+<td>为完成一次识别可能需要对多个IP数据包的检测，并发会话处理能力保证包关联的完整性和一致性</td>
+</tr>
+<tr>
+<td><strong>识别深度</strong></td>
+<td>协议的多种版本各有不同的指纹，需识别所有版本（如迅雷有至少十二种版本</td>
+</tr>
+</tbody></table>
+<h1 id="网络安全态势感知（NSSA）-1"><a href="#网络安全态势感知（NSSA）-1" class="headerlink" title="网络安全态势感知（NSSA）"></a>网络安全态势感知（NSSA）</h1><table>
+<thead>
+<tr>
+<th>环节</th>
+<th>核心任务</th>
+<th>关键技术</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1. 数据采集与感知</td>
+<td>从网络中获取原始数据：流量、日志、告警、资产信息</td>
+<td>DPI（深度包检测）、并发连接处理、协议逆向解析、正向计算&#x2F;逆向解析方法、网络分层观</td>
+</tr>
+<tr>
+<td>2. <strong>要素融合</strong>与归一化</td>
+<td>清洗、对齐、消歧多源异构数据，形成统一安全信息</td>
+<td>数据层（清洗&#x2F;集成&#x2F;变换&#x2F;归约）、特征层（聚类&#x2F;关联）、决策层（贝叶斯&#x2F;D-S证据&#x2F;决策树&#x2F;知识融合）、JDL模型、Dasarathy分类法</td>
+</tr>
+<tr>
+<td>3. 态势<strong>分析与评估</strong></td>
+<td>将融合信息映射为量化的安全态势值</td>
+<td>层次分析法(AHP)、贝叶斯网络、D-S证据理论、大模型方法（GraphRAG、SecOps Agent）</td>
+</tr>
+<tr>
+<td>4. 态势<strong>预测</strong></td>
+<td>基于历史态势序列预测未来趋势</td>
+<td>时间序列分析（ARIMA）、马尔科夫&#x2F;HMM、RNN&#x2F;LSTM、机器学习方法、大模型推演（攻击路径概率推演、红蓝对抗仿真）</td>
+</tr>
+<tr>
+<td>5. <strong>图谱构建</strong>与推理</td>
+<td>构建安全知识图谱，关联多源实体，推理隐含关系</td>
+<td>实体&#x2F;关系&#x2F;属性抽取、知识表示（RDF&#x2F;OWL）、知识融合与对齐、知识推理（逻辑&#x2F;图模型&#x2F;表示学习）、网络安全本体模型</td>
+</tr>
+<tr>
+<td>6. <strong>可视化</strong>呈现</td>
+<td>将抽象态势信息转化为图形化交互界面</td>
+<td>InfoGraphics、科学可视化、信息可视化、可视分析（D3.js&#x2F;Echarts&#x2F;Gephi等）、隐藏模式发现、异常&#x2F;关联&#x2F;趋势发现</td>
+</tr>
+<tr>
+<td>7. 安全<strong>决策与响应</strong></td>
+<td>基于态势结论做出安全决策，触发处置行动</td>
+<td>OODA决策循环</td>
+</tr>
+</tbody></table>
+<h2 id="主要研究意义、方向和现状"><a href="#主要研究意义、方向和现状" class="headerlink" title="主要研究意义、方向和现状"></a>主要研究意义、方向和现状</h2><p><strong>面临的威胁形势</strong></p>
+<ul>
+<li>攻击面不断扩大：传统IT、供应链、工业控制、公有云&#x2F;私有云、BYOD&#x2F;IoT、线上线下融合</li>
+<li>攻击成本降低：商业军火、军火失窃、黑产大数据、僵尸网络与劫持利用、比特币结算</li>
+<li>攻击方式立体：电磁手段与网络手段融合、威胁情报反用、供应链预制、信息流劫持</li>
+<li>传统安全防护技术力不从心</li>
+</ul>
+<p><strong>学术界主要研究方向</strong></p>
+<p>11个研究方向：网络安全流量透视、安全异常发现、安全事件发掘、安全态势评估、态势要素融合分析、安全态势预测、安全态势可视化分析、安全博弈决策、态势感知人机交互、态势感知应用框架模型、工控&#x2F;应急&#x2F;军事等领域态势感知</p>
+<h2 id="网络空间态势感知模型"><a href="#网络空间态势感知模型" class="headerlink" title="网络空间态势感知模型"></a>网络空间态势感知模型</h2><h4 id="JDL数据融合模型"><a href="#JDL数据融合模型" class="headerlink" title="JDL数据融合模型"></a>JDL数据融合模型</h4><ul>
+<li>JDL（Joint Director’s of Laboratory）模型，Llinas, Hall, White提出（1992）</li>
+<li><strong>五级模型</strong>：<ul>
+<li>Level 0（次目标数据评估）：数据预处理，偏差修正，时空对齐</li>
+<li>Level 1（目标评估）：目标区分、追踪、属性获取，精准识别</li>
+<li>Level 2（态势评估）：构建整体态势认知</li>
+<li>Level 3（影响评估）：预测事件走向、目标意图</li>
+<li>Level 4（过程优化）：监控数据融合流程性能，优化系统运行效率</li>
+</ul>
+</li>
+<li>自底向上，数据驱动；大多数工作集中在0&#x2F;1&#x2F;4级</li>
+</ul>
+<h4 id="OODA决策模型"><a href="#OODA决策模型" class="headerlink" title="OODA决策模型"></a>OODA决策模型</h4><ul>
+<li>Observation → Orientation → Decision → Action</li>
+<li>信息战领域概念，分析者的OODA循环比攻击者快，则可”进入”对方循环，占据优势</li>
+</ul>
+<h4 id="Endsley态势感知模型"><a href="#Endsley态势感知模型" class="headerlink" title="Endsley态势感知模型"></a>Endsley态势感知模型</h4><ul>
+<li>M. Endsley（1995）提出，从网络状况认知角度</li>
+<li>三级：感知 → 理解 → 预测（自上而下，目标驱动）</li>
+</ul>
+<h4 id="Tim-Bass态势感知模型"><a href="#Tim-Bass态势感知模型" class="headerlink" title="Tim Bass态势感知模型"></a>Tim Bass态势感知模型</h4><ul>
+<li>基于传感器信息融合</li>
+<li>数据 → 信息 → 知识三个层面</li>
+<li>输入：入侵检测传感器信息 → 第0层（数据预处理）→ 第1层（感知对象刻画）→ 第2层（态势刻画）→ 第3层（威胁评估）→ 输出：入侵检测知识</li>
+</ul>
+<h2 id="网络空间态势感知性能和有效度量"><a href="#网络空间态势感知性能和有效度量" class="headerlink" title="网络空间态势感知性能和有效度量"></a>网络空间态势感知性能和有效度量</h2><h4 id="数据信息比（DIR）"><a href="#数据信息比（DIR）" class="headerlink" title="数据信息比（DIR）"></a>数据信息比（DIR）</h4><ul>
+<li>用户面临的困难：数据巨大缺乏背景、必须依赖专业经验理解、必须进行思维加工（融合&#x2F;评价&#x2F;推断）</li>
+<li>DIR用于衡量用户所获得”信息”的总体简化情况，在相对较高层面上有指导性</li>
+</ul>
+<h4 id="置信度"><a href="#置信度" class="headerlink" title="置信度"></a>置信度</h4><ul>
+<li>衡量系统检测出真正攻击轨迹（对攻击的假设）的效果</li>
+<li>攻击轨迹分为三类：已知攻击轨迹、检测到的攻击轨迹、正确检测到的攻击轨迹</li>
+</ul>
+<h4 id="纯度"><a href="#纯度" class="headerlink" title="纯度"></a>纯度</h4><ul>
+<li>表明正确检测到的攻击质量，调查证据在攻击轨迹中的关联和聚合程度</li>
+</ul>
+<h4 id="费效比"><a href="#费效比" class="headerlink" title="费效比"></a>费效比</h4><ul>
+<li>系统发现”重要或关键”攻击轨迹的能力（相对于成本）</li>
+</ul>
+<h4 id="攻击分值"><a href="#攻击分值" class="headerlink" title="攻击分值"></a>攻击分值</h4><ul>
+<li>“令人感兴趣的活动（AOI）分值”的较新版本</li>
+<li>实际攻击在优先级排序表上的位置越低，需花费越多无用功</li>
+</ul>
+<h4 id="时效性"><a href="#时效性" class="headerlink" title="时效性"></a>时效性</h4><ul>
+<li>系统在时间要求内在特定领域作出响应的能力</li>
+</ul>
+<h2 id="安全态势要素融合"><a href="#安全态势要素融合" class="headerlink" title="安全态势要素融合"></a>安全态势要素融合</h2><p>将来自多源、异构、多维的网络安全数据（告警、日志、流量、漏洞等），通过数据层清洗对齐、特征层聚类关联、决策层证据合成 ，消除不一致与冲突，形成统一的、可支撑后续态势分析的高质量安全信息。</p>
+<h3 id="安全态势要素融合技术分类方法"><a href="#安全态势要素融合技术分类方法" class="headerlink" title="安全态势要素融合技术分类方法"></a>安全态势要素融合技术分类方法</h3><h5 id="Whyte的基于数据源关系分类"><a href="#Whyte的基于数据源关系分类" class="headerlink" title="Whyte的基于数据源关系分类"></a>Whyte的基于数据源关系分类</h5><ul>
+<li><strong>互补式</strong>：不同来源的数据相互补充</li>
+<li><strong>冗余式</strong>：多源数据交叉验证</li>
+<li><strong>合作式</strong>：多源数据协同分析</li>
+</ul>
+<h5 id="Dasarathy的基于输入输出分类"><a href="#Dasarathy的基于输入输出分类" class="headerlink" title="Dasarathy的基于输入输出分类"></a>Dasarathy的基于输入输出分类</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>输入 → 输出</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>数据进-数据出（DAI-DAO）</td>
+<td>原始数据 → 处理后的数据</td>
+</tr>
+<tr>
+<td>数据进-特征出（DAI-FEO）</td>
+<td>原始数据 → 提取的特征</td>
+</tr>
+<tr>
+<td>特征进-特征出（FEI-FEO）</td>
+<td>特征 → 优化后的特征</td>
+</tr>
+<tr>
+<td>特征进-决策出（FEI-DEO）</td>
+<td>特征 → 决策结果</td>
+</tr>
+<tr>
+<td>决策进-决策出（DEI-DEO）</td>
+<td>多个决策 → 融合决策</td>
+</tr>
+</tbody></table>
+<h5 id="JDL数据融合模型-1"><a href="#JDL数据融合模型-1" class="headerlink" title="JDL数据融合模型"></a>JDL数据融合模型</h5><p>由美国国防部数据融合联合指挥实验室提出</p>
+<ul>
+<li>分层融合架构：信号&#x2F;数据级 → 特征级 → 决策级</li>
+</ul>
+<h3 id="安全态势要素融合主要技术"><a href="#安全态势要素融合主要技术" class="headerlink" title="安全态势要素融合主要技术"></a>安全态势要素融合主要技术</h3><h5 id="数据层处理技术"><a href="#数据层处理技术" class="headerlink" title="数据层处理技术"></a>数据层处理技术</h5><p><strong>数据清洗（Data Cleaning）</strong>：</p>
+<ul>
+<li>填充缺失数据：使用属性均值、同类样本均值、全局常量、最可能的值等</li>
+<li>消除噪音数据</li>
+<li>去除外部无关数据</li>
+<li>确保一致性</li>
+</ul>
+<p><strong>数据集成（Data Integration）</strong>：</p>
+<ul>
+<li>集成多源数据集和数据文件</li>
+<li>核心问题：模式集成和对象匹配问题、冗余问题、元组重复、数据值冲突的检测与处理</li>
+<li>方法：分箱方法（等深&#x2F;等宽&#x2F;最小熵）、聚类方法（K-means&#x2F;分层聚类&#x2F;DBSCAN）、回归分析方法（SVM&#x2F;神经网络&#x2F;决策树）</li>
+</ul>
+<p><strong>数据变换（Data Transformation）</strong>：</p>
+<ul>
+<li>光滑（去噪）、聚集（汇总）、数据泛化（概念分层）、规范化（缩放到特定区间）、属性构造</li>
+</ul>
+<p><strong>数据归约（Data Reduction）</strong>：</p>
+<ul>
+<li>在不破坏数据完整性的前提下，使用更小规模的子集进行融合</li>
+<li>维度归约：小波变换、PCA主成分分析、特征选取</li>
+<li>数值压缩：回归分析、采样、数据压缩</li>
+<li>离散化、概念分层</li>
+</ul>
+<h5 id="特征层处理技术"><a href="#特征层处理技术" class="headerlink" title="特征层处理技术"></a>特征层处理技术</h5><p><strong>聚类</strong>：</p>
+<ul>
+<li>将对象集合分组成由相似对象组成的多个类或簇</li>
+<li>聚类算法要求：可扩展性、处理不同类型属性、发现任意形状的聚类、处理噪声、输入参数最少、高维问题等</li>
+<li><strong>K-Means</strong>（划分式）：通过距离度量（欧氏距离、曼哈顿距离、闵可夫斯基距离、切比雪夫距离）迭代聚类</li>
+<li><strong>DBSCAN</strong>（基于密度）：从核心对象扩展，密度可达的对象形成一个聚类；阈值设置关键——过大导致分割，过小导致合并</li>
+<li><strong>基于模型的聚类</strong>：EM统计算法、COBWEB概念聚类、SOM自组织特征图</li>
+</ul>
+<p><strong>关联分析</strong>：</p>
+<ul>
+<li>从数据集中识别频繁出现的属性值集（频繁项集），创建关联规则</li>
+<li>两步过程：发现频繁项集 → 生成关联规则</li>
+<li>经典算法：Apriori、DHP、FP-Growth、ECLAT、COFI、MAFIA、GenMax</li>
+</ul>
+<h5 id="决策层处理技术"><a href="#决策层处理技术" class="headerlink" title="决策层处理技术"></a>决策层处理技术</h5><p><strong>贝叶斯方法</strong>：</p>
+<ul>
+<li>提供计算假设概率的方法</li>
+<li>优势：独特的不确定性知识表达、丰富的概率表达能力、综合先验知识的增量学习特性</li>
+<li><strong>贝叶斯网络</strong>：有向无环图，表示变量间概率依赖关系</li>
+<li>包含：先验概率P(h)、P(D)、P(D|h)；后验概率P(h|D)；条件概率表CPT</li>
+</ul>
+<p><strong>D-S证据理论</strong>：</p>
+<ul>
+<li>满足比Bayes概率理论更弱的条件（不必满足概率可加性）</li>
+<li>具有直接表达”不确定”和”不知道”的能力</li>
+<li>核心：Dempster合成规则，将多个独立证据源组合为新证据</li>
+<li>优势：不需要精确了解概率分布，形式灵活，可与模糊逻辑、神经网络、专家系统结合</li>
+<li>缺点：证据需独立、合成规则理论基础有争议、计算上存在指数爆炸风险</li>
+</ul>
+<p><strong>决策树方法</strong>：</p>
+<ul>
+<li>选择最有分类标识能力的属性作为决策节点</li>
+<li>根据属性值划分子集，直到满足三个条件之一：子集元组属于同一类、遍历所有决策属性、剩余属性取值完全相同</li>
+<li>剪枝策略：基于代价复杂度、悲观修剪、最小描述长度修剪</li>
+<li>先剪枝（Pre-pruning）vs 后剪枝（Post-pruning）</li>
+</ul>
+<p><strong>知识融合与推理方法</strong>：</p>
+<ul>
+<li>知识融合：将多个数据源抽取的知识进行融合</li>
+<li>模式匹配：寻找本体中属性和概念的对应关系（启发式、概率、基于图、基于学习、基于推理）</li>
+<li>实例匹配：评估异构知识源之间实例对的相似度</li>
+<li>知识推理：基于符号的推理（经典逻辑及其变异）和基于统计的推理（关系机器学习）</li>
+</ul>
+<h2 id="网络安全态势分析与评估"><a href="#网络安全态势分析与评估" class="headerlink" title="网络安全态势分析与评估"></a>网络安全态势分析与评估</h2><h3 id="数学本质"><a href="#数学本质" class="headerlink" title="数学本质"></a>数学本质</h3><ul>
+<li>态势评估、态势预测、态势可视化是网络安全态势感知的<strong>核心环节</strong></li>
+<li>本质：<strong>态势因子集合到态势集合的映射</strong></li>
+<li>即在融合各安全信息并简单处理的基础上，通过数学方法或模型，得到对当前网络安全状态的整体描述</li>
+</ul>
+<h3 id="分类方法"><a href="#分类方法" class="headerlink" title="分类方法"></a>分类方法</h3><h4 id="分类方法一（哈工大-李志东-2012）"><a href="#分类方法一（哈工大-李志东-2012）" class="headerlink" title="分类方法一（哈工大-李志东-2012）"></a>分类方法一（哈工大-李志东-2012）</h4><p><strong>按评估侧重点</strong>：风险评估 vs 威胁评估</p>
+<p><strong>按实时性</strong>：静态评估 vs 动态评估</p>
+<p><strong>按形式</strong>：定性评估 vs 定量评估</p>
+<p><strong>按理论技术基础（三类）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法类别</th>
+<th>核心思想</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基于数学模型的方法</strong></td>
+<td>构造从安全指标集合到安全态势的映射，归结为多属性聚集计算或多指标综合评价问题，能给出明确的数学表达式和确定性结果</td>
+</tr>
+<tr>
+<td><strong>基于知识推理的方法</strong></td>
+<td>凭借专家知识经验建立评估模型，通过逻辑推理评估安全态势。细分为基于产生式规则的推理（模糊推理）、基于图模型的推理（贝叶斯网络、马尔可夫过程）和基于证据理论的推理</td>
+</tr>
+<tr>
+<td><strong>基于模式分类的方法</strong></td>
+<td>将安全要素视为模式属性、态势值视为模式类别&#x2F;分类器输出，先训练构建模型，再按模式分类思想评估</td>
+</tr>
+</tbody></table>
+<h4 id="分类方法二（东南大学-龚俭-2016）"><a href="#分类方法二（东南大学-龚俭-2016）" class="headerlink" title="分类方法二（东南大学-龚俭-2016）"></a>分类方法二（东南大学-龚俭-2016）</h4><ul>
+<li>将网络安全态势分为：<strong>态势觉察、态势理解和态势投射</strong>（态势评估）</li>
+<li>研究方法三类：<ul>
+<li><strong>知识推理方法</strong>：基于图模型推理（贝叶斯网络、模糊认知图FCM）、基于证据理论推理（D-S证据推理）</li>
+<li><strong>统计分析方法</strong>：权重分析法、层次分析法（AHP），关键是求得态势要素的重要性权值</li>
+<li><strong>灰度理论方法</strong>：以”部分信息已知、部分信息未知的小样本、贫信息”的不确定性系统为研究对象</li>
+</ul>
+</li>
+</ul>
+<h3 id="评估方法"><a href="#评估方法" class="headerlink" title="评估方法"></a>评估方法</h3><h3 id="实际应用中的数学模型方法"><a href="#实际应用中的数学模型方法" class="headerlink" title="实际应用中的数学模型方法"></a>实际应用中的数学模型方法</h3><ul>
+<li>研究报警的整体时序特征，寻找特定网络的受攻击特征、攻击爆发程度、周期性</li>
+<li>多采用网络流量分析技术，发现流量变化趋势和突变</li>
+<li>方法包括：分类统计、过滤、分析、TopN排序、模式匹配</li>
+<li><strong>缺点</strong>：网络安全具有突发性和快速变化特点，这些方法准确性较低，不能给出深层次结果</li>
+</ul>
+<h4 id="层次分析法（AHP）"><a href="#层次分析法（AHP）" class="headerlink" title="层次分析法（AHP）"></a>层次分析法（AHP）</h4><ul>
+<li>T.L.Saaty于20世纪70年代提出</li>
+<li><strong>思路</strong>：将问题层次化，分解为不同组成因素，按相互关联影响及隶属关系形成多层次分析结构模型</li>
+<li><strong>方法</strong>：引入1-9比率标度方法，写成判断矩阵，计算最大特征根及对应特征向量，得出相对重要性权值</li>
+<li><strong>应用</strong>：网络中各种要素的重要程度和被关注程度排序问题</li>
+<li><strong>指标选取</strong>：需综合考虑不同层次（宏观网络&#x2F;局部网络&#x2F;主机&#x2F;服务&#x2F;攻击漏洞）、不同信息来源（流量&#x2F;报警&#x2F;日志&#x2F;静态配置）和不同需求（普通用户&#x2F;管理者&#x2F;维护者）</li>
+<li>三个指标体系：不同层次的网络安全指标、针对不同使用对象的指标、使用不同检测&#x2F;监控手段的指标</li>
+</ul>
+<h4 id="贝叶斯方法"><a href="#贝叶斯方法" class="headerlink" title="贝叶斯方法"></a>贝叶斯方法</h4><ul>
+<li><strong>定义</strong>：贝叶斯网络是概率分析和图论结合的产物，是一种有向图模型，用于不确定性知识的表达和推理</li>
+<li><strong>思路</strong>：给定贝叶斯网络所有事件（节点）联合概率分布，理论上能回答所有推理问题</li>
+<li><strong>三种推理方式</strong>：<ul>
+<li>因果推理（由因推果）：已知安全态势数据和威胁概率关系，判断发生某威胁的可能</li>
+<li>诊断推理（由果推因）：结合系统安全报警，反推问题由什么隐患引起</li>
+<li>支持推理：提供解释支持现象</li>
+</ul>
+</li>
+<li><strong>态势计算应用</strong>：<ul>
+<li>构建多种安全态势指标：综合安全态势、主机安全态势、攻击威胁安全态势、病毒疫情安全态势、网络安全态势等级</li>
+<li>通过测试数据训练，确定每个指标关于安全态势等级的条件概率</li>
+<li>采用最大似然估计（MLE）计算节点CPD参数</li>
+</ul>
+</li>
+</ul>
+<h4 id="D-S证据理论"><a href="#D-S证据理论" class="headerlink" title="D-S证据理论"></a>D-S证据理论</h4><ul>
+<li>由Dempster和Shafer提出，是进行不确定性推理的重要方法</li>
+<li>强调事物客观性，也强调人类对事物估计的主观性</li>
+<li><strong>优点</strong>：处理不确定性和无知性的区别，给出信息的信任测度和似然测度，具有怀疑能力</li>
+<li><strong>缺点</strong>：证据需独立（不易满足）、合成理论基础有争议、计算有潜在指数爆炸</li>
+<li><strong>应用过程</strong>：建立证据和命题间逻辑关系 → 确定基本概率分配 → 使用证据合成规则合成 → 送到决策逻辑判断 → 置信度超阈值即认为命题成立</li>
+<li>克服了用概率描述不确定性的不足，当先验概率难以获得时较概率论更有效</li>
+<li>形式灵活：可与模糊逻辑、神经网络、专家系统相结合</li>
+</ul>
+<h4 id="大模型方法（新趋势）"><a href="#大模型方法（新趋势）" class="headerlink" title="大模型方法（新趋势）"></a>大模型方法（新趋势）</h4><ul>
+<li>态势评估进化为基于多模态大模型（Multimodal LLMs）与RAG的深度认知过程</li>
+<li><strong>全域数据语义化</strong>：利用大模型NLU能力，将异构安全数据统一转化为高维向量表示</li>
+<li><strong>动态知识图谱构建</strong>：通过GraphRAG技术实时提取实体及关系，自动关联看似无关的事件</li>
+<li><strong>智能归因与定级</strong>：部署SecOps Agents，模拟分析师思维链进行多步推理，给出带置信度评分的评估结论</li>
+</ul>
+<h3 id="网络安全态势预测方法"><a href="#网络安全态势预测方法" class="headerlink" title="网络安全态势预测方法"></a>网络安全态势预测方法</h3><h4 id="时间序列预测法"><a href="#时间序列预测法" class="headerlink" title="时间序列预测法"></a>时间序列预测法</h4><ul>
+<li><strong>定义</strong>：将预测目标的历史数据按时间顺序排列成时间序列，分析随时间变化趋势，外推预测未来值</li>
+<li><strong>核心思想</strong>：将影响预测目标的一切因素都由”时间”综合描述</li>
+<li>分类：确定性时间序列预测法和随机时间序列预测法</li>
+<li><strong>三种变化形式</strong>：趋势变动（持续上升&#x2F;下降&#x2F;平稳）、周期变动（按固定周期波动）、随机变动（偶然因素导致的不规则波动）</li>
+</ul>
+<h4 id="马尔科夫与隐马尔科夫预测算法"><a href="#马尔科夫与隐马尔科夫预测算法" class="headerlink" title="马尔科夫与隐马尔科夫预测算法"></a>马尔科夫与隐马尔科夫预测算法</h4><p><strong>马尔科夫预测</strong>：</p>
+<ul>
+<li>基本原则：状态转移概率仅依据紧接的前一种状态推算，与原始状态和此前过程无关（无后效性）</li>
+<li>转移概率矩阵：所有状态转移概率的排列</li>
+<li>应用案例（攻击变化预测）：①调查不同攻击行为占比 → ②调查攻击者行为变动情况，得出转移概率矩阵 → ③计算下一步攻击占有率 → ④计算稳定后的攻击占有率</li>
+</ul>
+<p><strong>隐马尔可夫模型（HMM）</strong>：</p>
+<ul>
+<li>状态不完全可见，但受状态影响的变量可见</li>
+<li>三个要素：隐含状态x、可观察输出y、状态转换概率a、输出概率b</li>
+</ul>
+<h4 id="ARIMA时序分析算法"><a href="#ARIMA时序分析算法" class="headerlink" title="ARIMA时序分析算法"></a>ARIMA时序分析算法</h4><ul>
+<li><strong>全称</strong>：自回归移动平均模型（Autoregressive Integrated Moving Average Model）</li>
+<li>统计模型中最常见的时序预测模型</li>
+<li><strong>发展历程</strong>：1927年Yule提出AR模型 → 1931年Walker建立MA和ARMA模型 → 20世纪60年代Burg提出最大熵谱估计 → 70年代Box-Jenkins方法</li>
+</ul>
+<p><strong>基本流程</strong>：</p>
+<ol>
+<li>数据可视化，识别平稳性</li>
+<li>对非平稳数据做差分，得到平稳序列</li>
+<li>建立合适模型（AR&#x2F;MA&#x2F;ARMA）</li>
+<li>参数估计（常用最小二乘法）</li>
+<li>假设检验（判断残差序列是否为白噪声）</li>
+<li>利用已通过检验的模型进行预测</li>
+</ol>
+<p><strong>参数确定</strong>：</p>
+<ul>
+<li><strong>d（差分阶数）</strong>：通过ADF检验确定平稳性，一般不超过2次</li>
+<li><strong>p（自回归项数）、q（滑动平均项数）</strong>：使用auto.arima()自动获取或通过ACF&#x2F;PACF图观察确定</li>
+<li>AIC和BIC值最小的那组为理想阶数</li>
+</ul>
+<p><strong>模型检验</strong>：残差图检查、ACF自相关性检测、Ljung-Box测试（P-value&gt;0.05说明残差为高斯白噪声）</p>
+<h4 id="机器学习分析算法"><a href="#机器学习分析算法" class="headerlink" title="机器学习分析算法"></a>机器学习分析算法</h4><p><strong>应用流程</strong>：特征选择&#x2F;降维 → 模型选择 → 模型验证&#x2F;优化 → 模型部署</p>
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>思想</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>人工神经网络</strong></td>
+<td>利用典型攻击行为训练分类引擎</td>
+<td>可准确检出已知攻击，受样本质量影响大</td>
+</tr>
+<tr>
+<td><strong>支持向量机（SVM）</strong></td>
+<td>由正常与异常序列训练得到支持向量与参数</td>
+<td>小样本高检测率，复杂攻击效果一般</td>
+</tr>
+<tr>
+<td><strong>遗传算法</strong></td>
+<td>分析网络数据集进行适应度评价生成规则集</td>
+<td>考虑信息全面，但易早熟，效果不稳定</td>
+</tr>
+<tr>
+<td><strong>时间序列分析法</strong></td>
+<td>通过前N个态势值预测后M个态势值</td>
+<td>可操作性强，对非线性、非正态分布效果不理想</td>
+</tr>
+</tbody></table>
+<h4 id="RNN与LSTM预测算法"><a href="#RNN与LSTM预测算法" class="headerlink" title="RNN与LSTM预测算法"></a>RNN与LSTM预测算法</h4><p><strong>RNN（递归神经网络）</strong>：</p>
+<ul>
+<li>每次隐含层计算结果与当前输入及上一次隐含层结果相关，具备记忆能力</li>
+<li>局限：长期记忆需关联前n次计算，计算量呈指数式增长</li>
+</ul>
+<p><strong>LSTM（长短期记忆）</strong>：</p>
+<ul>
+<li>RNN的变型，通过添加阀门节点解决长期记忆问题</li>
+<li>三类阀门：遗忘阀门（forget gate）、输入阀门（input gate）、输出阀门（output gate）</li>
+<li>阀门通过sigmoid函数判断记忆态是否达到阈值加入计算</li>
+</ul>
+<p><strong>应用案例</strong>（预测攻击数量）：</p>
+<ul>
+<li>步骤一：将数据正则化，设定训练&#x2F;测试数据比例</li>
+<li>步骤二：建立LSTM模型（输入层→隐藏层4个LSTM cell→输出层）</li>
+<li>步骤三：训练与预测</li>
+<li>步骤四：计算误差（RMSE）</li>
+</ul>
+<h4 id="预测算法选取规则"><a href="#预测算法选取规则" class="headerlink" title="预测算法选取规则"></a>预测算法选取规则</h4><ul>
+<li>没有单一方法适用所有数据集</li>
+<li>需综合考虑：精确度、训练时间、鲁棒性、可解释性、可扩展性</li>
+</ul>
+<h4 id="大模型预测方法（新趋势）"><a href="#大模型预测方法（新趋势）" class="headerlink" title="大模型预测方法（新趋势）"></a>大模型预测方法（新趋势）</h4><ul>
+<li><strong>攻击路径概率推演</strong>：利用MITRE ATT&amp;CK知识库和因果推理引擎，生成多种”What-if Scenarios”</li>
+<li><strong>红蓝对抗智能体仿真</strong>：在数字孪生环境中自动扮演红队&#x2F;蓝队，通过大量快速仿真预判薄弱环节</li>
+<li><strong>动态风险热力图生成</strong>：结合Transformer时序预测，实时生成未来风险分布热力图，量化业务中断时间和数据泄露规模</li>
+</ul>
+<h2 id="安全态势图谱构建与推理"><a href="#安全态势图谱构建与推理" class="headerlink" title="安全态势图谱构建与推理"></a>安全态势图谱构建与推理</h2><h3 id="网络安全态势感知需要知识图谱"><a href="#网络安全态势感知需要知识图谱" class="headerlink" title="网络安全态势感知需要知识图谱"></a>网络安全态势感知需要知识图谱</h3><p><img src="/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/image-20260615164139188.png" alt="image-20260615164139188"></p>
+<p>传统方法的局限</p>
+<ul>
+<li>安全态势要素的考虑不够全面：IDS警报等单一要素只能部分反映网络安全状态</li>
+<li>安全要素概念和指标定义过于抽象：宽泛抽象的定义导致本体的实用性和可操作性较差</li>
+<li>安全态势要素过于离散：海量、多维度、异构的态势数据长期单独处理，缺乏信息协作与共享</li>
+</ul>
+<p>知识图谱的价值</p>
+<ul>
+<li>面向网络安全态势感知的知识图谱能够<strong>统一表示代表性强、语义丰富的安全态势要素</strong></li>
+<li>通过分类和提取构建基于本体的网络安全态势要素知识库模型</li>
+<li>可实现态势信息的<strong>表达、共享和复用</strong>，提升网络入侵和检测能力</li>
+</ul>
+<p>“确定性”的态势研判</p>
+<ul>
+<li>传统基于各种预测算法的态势预测方法准确性差，需要向”确定性”研判演变</li>
+<li><strong>确定性</strong>：攻击已经发生或已处于实施过程当中</li>
+<li>包括基于特征已知的攻击事件进行影响度研判和预测，以及对特征未知攻击事件的深度识别</li>
+</ul>
+<h3 id="知识图谱构建技术"><a href="#知识图谱构建技术" class="headerlink" title="知识图谱构建技术"></a>知识图谱构建技术</h3><h4 id="知识图谱组成"><a href="#知识图谱组成" class="headerlink" title="知识图谱组成"></a>知识图谱组成</h4><ul>
+<li><strong>本体层（Ontology）</strong>：概念、子类、属性关系</li>
+<li><strong>实例层（Instance）</strong>：实例、属性值</li>
+<li><strong>实体三元组</strong>：(实体1, 关系, 实体2)</li>
+</ul>
+<h4 id="技术架构"><a href="#技术架构" class="headerlink" title="技术架构"></a>技术架构</h4><p><strong>知识获取</strong>：</p>
+<ul>
+<li>结构化数据：D2R转换 → RDF三元组</li>
+<li>半结构化数据：包装器 → 多元组事件</li>
+<li>文本数据：信息抽取 → 知识单元</li>
+<li>链接数据：图映射</li>
+</ul>
+<p><strong>知识抽取三要素</strong>：</p>
+<ul>
+<li><strong>实体抽取</strong>（NER，命名实体识别）<ul>
+<li>基于规则与词典的方法</li>
+<li>基于统计机器学习的方法</li>
+<li>面向开放域的抽取方法</li>
+</ul>
+</li>
+<li><strong>关系抽取</strong><ul>
+<li>基于模式匹配的方法</li>
+<li>基于统计机器学习的方法</li>
+<li>面向开放域的抽取方法</li>
+</ul>
+</li>
+<li><strong>属性抽取</strong><ul>
+<li>基于规则和启发式的方法</li>
+<li>基于数据挖掘的方法</li>
+</ul>
+</li>
+</ul>
+<h4 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h4><ul>
+<li>基于语义网：RDF（资源描述框架）、OWL（Web本体语言）、SPARQL（RDF查询语言）、Json-LD</li>
+<li>其他表示法：谓词逻辑、产生式、框架、语义逻辑、面向对象、基于本体、基于关系模式、基于模糊逻辑、基于Petri网等</li>
+<li><strong>描述逻辑（DL）</strong>：用于知识表示的逻辑语言，描述概念分类及其关系，要素为概念（concept）、属性（role）、个体（individual）</li>
+</ul>
+<h4 id="知识融合"><a href="#知识融合" class="headerlink" title="知识融合"></a>知识融合</h4><ul>
+<li><strong>实体对齐</strong>：消除异构数据中实体冲突、指向不明、多重指代等不一致性问题<ul>
+<li>成对实体对齐方法（传统概率模型、机器学习）</li>
+<li>局部集体实体对齐方法</li>
+<li>全局集体实体对齐方法（相似性传播、概率模型）</li>
+</ul>
+</li>
+<li><strong>知识加工</strong>：本体构建、知识推理、质量评估</li>
+<li><strong>知识更新</strong>：持续维护和更新知识库</li>
+</ul>
+<h4 id="知识推理"><a href="#知识推理" class="headerlink" title="知识推理"></a>知识推理</h4><ul>
+<li><strong>目的</strong>：从已有实体关系数据出发，建立实体间新关联，拓展和丰富知识网络</li>
+<li>方法分类：<ul>
+<li>基于逻辑的推理：一阶谓词逻辑、描述逻辑及规则</li>
+<li>基于图模型的推理：路径随机游走、路径排序</li>
+<li>基于表示学习的推理：翻译模型、语义匹配模型</li>
+</ul>
+</li>
+</ul>
+<h4 id="知识存储"><a href="#知识存储" class="headerlink" title="知识存储"></a>知识存储</h4><ul>
+<li>RDF三元组存储</li>
+<li>图数据库存储（如Neo4j）</li>
+<li>关系型数据库存储</li>
+</ul>
+<h3 id="网络安全态势感知本体模型"><a href="#网络安全态势感知本体模型" class="headerlink" title="网络安全态势感知本体模型"></a>网络安全态势感知本体模型</h3><h4 id="本体模型层次"><a href="#本体模型层次" class="headerlink" title="本体模型层次"></a>本体模型层次</h4><ul>
+<li><strong>顶层本体</strong>：定义通用概念框架</li>
+<li><strong>应用本体</strong>：面向具体安全场景</li>
+</ul>
+<h4 id="原子本体类型"><a href="#原子本体类型" class="headerlink" title="原子本体类型"></a>原子本体类型</h4><ul>
+<li><strong>网络环境本体</strong>：网络拓扑、设备、服务等</li>
+<li><strong>漏洞本体</strong>：CVE、CVSS评分、漏洞类型</li>
+<li><strong>攻击本体</strong>：攻击类型、攻击链、TTPs</li>
+<li><strong>安全事件本体</strong>：告警、日志、事件关联</li>
+<li><strong>人员组织本体</strong>：攻击者、受害者、安全团队</li>
+</ul>
+<h4 id="本体构建方法"><a href="#本体构建方法" class="headerlink" title="本体构建方法"></a>本体构建方法</h4><ul>
+<li><strong>自顶向下</strong>：专家手工编辑形成数据模式</li>
+<li><strong>自底向上</strong>：基于现有标准转换或从高质量数据源映射</li>
+</ul>
+<h3 id="网络安全态势感知图谱应用"><a href="#网络安全态势感知图谱应用" class="headerlink" title="网络安全态势感知图谱应用"></a>网络安全态势感知图谱应用</h3><h4 id="攻击者画像"><a href="#攻击者画像" class="headerlink" title="攻击者画像"></a>攻击者画像</h4><ul>
+<li>提取攻击者特征，构建攻击者画像</li>
+<li>包括攻击手法、目标偏好、基础设施等</li>
+</ul>
+<h4 id="团伙发现"><a href="#团伙发现" class="headerlink" title="团伙发现"></a>团伙发现</h4><ul>
+<li>基于攻击特征相似度进行团伙聚类</li>
+<li>发现关联攻击组织</li>
+</ul>
+<h4 id="关系推理"><a href="#关系推理" class="headerlink" title="关系推理"></a>关系推理</h4><ul>
+<li>推断攻击者之间的潜在关系</li>
+<li>发现攻击基础设施关联</li>
+</ul>
+<h4 id="攻击溯源与归因"><a href="#攻击溯源与归因" class="headerlink" title="攻击溯源与归因"></a>攻击溯源与归因</h4><ul>
+<li>基于知识图谱进行攻击路径还原</li>
+<li>关联攻击事件与攻击组织</li>
+</ul>
+<h4 id="溯源图（Provenance-Graph）应用"><a href="#溯源图（Provenance-Graph）应用" class="headerlink" title="溯源图（Provenance Graph）应用"></a>溯源图（Provenance Graph）应用</h4><ul>
+<li>构建系统级因果关系图</li>
+<li>结合知识图谱进行APT检测</li>
+</ul>
+<h4 id="威胁预警（UCO）"><a href="#威胁预警（UCO）" class="headerlink" title="威胁预警（UCO）"></a>威胁预警（UCO）</h4><ul>
+<li>基于知识图谱实现统一网络安全本体（Unified Cybersecurity Ontology）</li>
+<li>威胁情报与态势关联预警</li>
+</ul>
+<h2 id="网络安全态势可视化"><a href="#网络安全态势可视化" class="headerlink" title="网络安全态势可视化"></a>网络安全态势可视化</h2><h3 id="什么是安全态势可视化"><a href="#什么是安全态势可视化" class="headerlink" title="什么是安全态势可视化"></a>什么是安全态势可视化</h3><ul>
+<li>将复杂、抽象的安全数据和态势信息转化为直观的图形化表示</li>
+<li>支撑安全分析、决策和响应</li>
+</ul>
+<h4 id="可视化分类"><a href="#可视化分类" class="headerlink" title="可视化分类"></a>可视化分类</h4><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>英文</th>
+<th>起源时间</th>
+<th>核心特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>信息图</strong></td>
+<td>InfoGraphics</td>
+<td>19世纪</td>
+<td>信息的视觉化表达，具有创造性、趣味性，广泛应用于新闻传媒、科技视觉化、教育、IT等领域</td>
+</tr>
+<tr>
+<td><strong>科学可视化</strong></td>
+<td>Scientific Visualization</td>
+<td>1987年</td>
+<td>1987年美国NSF报告首次提出，利用计算机图形学处理大规模科学数值模型（生物、医学、气象等）</td>
+</tr>
+<tr>
+<td><strong>信息可视化</strong></td>
+<td>Information Visualization</td>
+<td>1989年</td>
+<td>Stuart Card等人创造，<strong>从数据中提取信息并通过图形化方式表达</strong>，利用人类视觉能力辅以交互手段，揭示数据中隐含信息</td>
+</tr>
+<tr>
+<td><strong>可视分析</strong></td>
+<td>Visual Analytics</td>
+<td>2005年</td>
+<td>美国可视化与分析中心提出，通过交互可视界面进行分析、推理和决策的交叉学科，涉及计算机图形学、人机交互、感知和认知等</td>
+</tr>
+</tbody></table>
+<h4 id="Stuart-Card信息可视化模型"><a href="#Stuart-Card信息可视化模型" class="headerlink" title="Stuart Card信息可视化模型"></a>Stuart Card信息可视化模型</h4><ul>
+<li><strong>四个阶段</strong>：原始数据 → 数据表 → 可视化结构 → 视图</li>
+<li><strong>三类变换</strong>：数据变换 → 可视化映射 → 视图变换</li>
+<li>用户通过人机交互针对特定任务与可视化流程交互</li>
+</ul>
+<h3 id="安全态势可视化理论基础"><a href="#安全态势可视化理论基础" class="headerlink" title="安全态势可视化理论基础"></a>安全态势可视化理论基础</h3><h4 id="数据可视化流水线"><a href="#数据可视化流水线" class="headerlink" title="数据可视化流水线"></a>数据可视化流水线</h4><ul>
+<li>数据获取 → 数据预处理 → 数据映射 → 渲染呈现</li>
+<li>每个环节的可视化编码与交互</li>
+</ul>
+<h4 id="大数据可视分析技术"><a href="#大数据可视分析技术" class="headerlink" title="大数据可视分析技术"></a>大数据可视分析技术</h4><ul>
+<li>渐进式可视分析</li>
+<li>沉浸式可视分析</li>
+<li>多视图可视分析</li>
+</ul>
+<h4 id="交互技术"><a href="#交互技术" class="headerlink" title="交互技术"></a>交互技术</h4><ul>
+<li>缩放、平移、旋转</li>
+<li>刷选（Brush）、联动（Link）</li>
+<li>聚焦+上下文（Focus+Context）</li>
+<li>细节按需（Details on Demand）</li>
+</ul>
+<h2 id="国家级态势感知平台技术分析"><a href="#国家级态势感知平台技术分析" class="headerlink" title="国家级态势感知平台技术分析"></a>国家级态势感知平台技术分析</h2><h3 id="美国态势感知能力现状"><a href="#美国态势感知能力现状" class="headerlink" title="美国态势感知能力现状"></a>美国态势感知能力现状</h3><h4 id="能力体系"><a href="#能力体系" class="headerlink" title="能力体系"></a>能力体系</h4><ul>
+<li>从政府到军方、从情报机构到产业界，形成多层次的态势感知能力体系</li>
+<li>代表性能力：全球范围的信息收集、网络空间地图测绘、威胁预警、攻击溯源</li>
+</ul>
+<h4 id="关键项目"><a href="#关键项目" class="headerlink" title="关键项目"></a>关键项目</h4><ul>
+<li><strong>爱因斯坦计划</strong>（EINSTEIN）：联邦政府网络安全监测与防御</li>
+<li><strong>藏宝图计划</strong>（TreasureMap）：全球网络空间态势感知</li>
+<li><strong>X计划</strong>（Plan X）：网络空间作战平台</li>
+<li><strong>SHINE计划</strong>：本土关键基础设施安全态势感知</li>
+<li><strong>CSAAC&#x2F;BDP</strong>：基于大数据的态势分析能力</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/" title="网络威胁感知与溯源【上】：NSSA">https://mintind.github.io/2026/06/14/UCAS/网络威胁感知与溯源笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90/" rel="tag"># 网络威胁感知与溯源</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/" rel="prev" title="网络威胁感知与溯源【下】：溯源取证">
+                  <i class="fa fa-angle-left"></i> 网络威胁感知与溯源【下】：溯源取证
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/20/Read/FirmAgent%20Leveraging%20Fuzzing%20to%20Assist%20LLM%20%20Agents%20with%20IoT%20Firmware%20Vulnerability%20Discovery/" rel="next" title="FirmAgent: Leveraging Fuzzing to Assist LLM  Agents with IoT Firmware Vulnerability Discovery">
+                  FirmAgent: Leveraging Fuzzing to Assist LLM  Agents with IoT Firmware Vulnerability Discovery <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

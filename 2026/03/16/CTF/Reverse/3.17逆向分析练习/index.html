@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="“真相在代码中沉睡，等待逆向者将其唤醒…”">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3.17逆向分析练习">
+<meta property="og:url" content="https://mintind.github.io/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="“真相在代码中沉睡，等待逆向者将其唤醒…”">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-16T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-16T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="高级网络攻防">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/","path":"2026/03/16/CTF/Reverse/3.17逆向分析练习/","title":"3.17逆向分析练习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>3.17逆向分析练习 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ezzre"><span class="nav-number">1.</span> <span class="nav-text">ezzre</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#re2"><span class="nav-number">2.</span> <span class="nav-text">re2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easyyre"><span class="nav-number">3.</span> <span class="nav-text">easyyre</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="3.17逆向分析练习 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          3.17逆向分析练习<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2UvMy4xN+mAhuWQkeWIhuaekOe7g+S5oC5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-17 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-17T00:00:00+08:00">2026-03-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>798</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>“真相在代码中沉睡，等待逆向者将其唤醒…”</p>
+<span id="more"></span>
+
+<p>老师说要写像研究生的报告…</p>
+<p>题目链接：<span class="exturl" data-url="aHR0cDovLzEyNC4xNi43NS4xMTY6NTIwMTQvY2hhbGxlbmdlcw==">http://124.16.75.116:52014/challenges<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="ezzre"><a href="#ezzre" class="headerlink" title="ezzre"></a>ezzre</h2><p>使用ExeinfoPE对目标进行检查，目标是一个64位exe文件，有upx壳。使用upx命令脱壳后用ida查看</p>
+<p>main的主要逻辑：用户输入flag，对flag进行s78操作得到flag2，如果flag2的每一位都等于answer每一位加一，就输出Good</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">printf_0(<span class="string">&quot;plz input your flag:&quot;</span>);</span><br><span class="line">Stream = __iob_func();</span><br><span class="line">fgets_0(flag, <span class="number">100</span>, Stream);</span><br><span class="line">flag[strcspn_0(flag, <span class="string">&quot;\n&quot;</span>)] = <span class="number">0</span>;</span><br><span class="line">input_length = <span class="built_in">strlen</span>(flag);</span><br><span class="line">flag2 = s78(flag, input_length);</span><br><span class="line">MAX = <span class="number">1</span>;</span><br><span class="line">qmemcpy(answer, <span class="string">&quot;YlwgY2snLGceY17vYE82LGIKWykucU8DLVPgeP@@&quot;</span>, <span class="number">40</span>);</span><br><span class="line">*(_WORD *)&amp;answer[<span class="number">40</span>] = <span class="number">255</span>;</span><br><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; <span class="built_in">strlen</span>(flag2); ++i )</span><br><span class="line">&#123;</span><br><span class="line">  <span class="keyword">if</span> ( flag2[i] != answer[i] + <span class="number">1</span> )</span><br><span class="line">    MAX = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> ( MAX == <span class="number">1</span> )</span><br><span class="line">  printf_0(<span class="string">&quot;Good&quot;</span>);</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">  printf_0(<span class="string">&quot;Wrong!&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>（使用了ChatGPT）</p>
+<p>s78是base64加密</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">encoded_data[j] = base64_table[(triple &gt;&gt; <span class="number">18</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">encoded_data[j + <span class="number">1</span>] = base64_table[(triple &gt;&gt; <span class="number">12</span>) &amp; <span class="number">0x3F</span>];</span><br><span class="line">encoded_data[j + <span class="number">2</span>] = base64_table[(triple &gt;&gt; <span class="number">6</span>) &amp; <span class="number">0x3F</span>];</span><br></pre></td></tr></table></figure>
+
+<p>所以总体关系是Base64(flag) &#x3D; answer + 1，对answer +1进行base64解码得到flag</p>
+<p>解密脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"></span><br><span class="line">answer = <span class="string">&quot;YlwgY2snLGceY17vYE82LGIKWykucU8DLVPgeP@@&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 每个字符 +1</span></span><br><span class="line">flag2 = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(<span class="built_in">ord</span>(c) + <span class="number">1</span>) <span class="keyword">for</span> c <span class="keyword">in</span> answer)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Base64:&quot;</span>, flag2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Base64 解码</span></span><br><span class="line">flag = base64.b64decode(flag2)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Flag:&quot;</span>, flag.decode())</span><br></pre></td></tr></table></figure>
+
+<p>运行得到</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Base64: ZmxhZ3toMHdfZ28wZF93MHJLXzlvdV9EMWQhfQAA</span><br><span class="line">Flag: flag&#123;h0w_go0d_w0rK_9ou_D1d!&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="re2"><a href="#re2" class="headerlink" title="re2"></a>re2</h2><p>（ChatGPT分析）</p>
+<p>main：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> ( fgets(s, <span class="number">256</span>, <span class="built_in">stdin</span>) )</span><br><span class="line">  &#123;</span><br><span class="line">    n29_1 = <span class="built_in">strcspn</span>(s, <span class="string">&quot;\n&quot;</span>);</span><br><span class="line">    n7 = <span class="number">7</span>;</span><br><span class="line">    n29 = <span class="number">0</span>;</span><br><span class="line">    s[n29_1] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> ( (_DWORD)n29_1 == <span class="number">29</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">while</span> ( v9[n29 + <span class="number">11</span>] == __ROL1__(v9[(<span class="type">unsigned</span> <span class="type">int</span>)n29 % <span class="number">0xB</span>] ^ n7 ^ s[n29], (<span class="type">unsigned</span> <span class="type">int</span>)n29 % <span class="number">5</span>) )</span><br><span class="line">      &#123;</span><br><span class="line">        ++n29;</span><br><span class="line">        n7 += <span class="number">13</span>;</span><br><span class="line">        <span class="keyword">if</span> ( n29 == <span class="number">29</span> )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;OK&quot;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;NO&quot;</span>);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>校验方程：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v9[n29 + 11] = rol( v9[n29 % 11] ^ n7 ^ s[n29], n29 % 5 )</span><br></pre></td></tr></table></figure>
+
+<p>v9 的构造</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for (i = 0; i &lt; 11; i++)</span><br><span class="line">    v9[i] = byte_2040[i] ^ 0x74;</span><br><span class="line"></span><br><span class="line">for (j = 0; j &lt; 29; j++)</span><br><span class="line">    v9[j+11] = byte_2020[j] ^ 0x74;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>v9[0..10]</code> → key</li>
+<li><code>v9[11..39]</code> → target（用于校验）</li>
+</ul>
+<p>输入限制， flag 长度 &#x3D; 29</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if (strlen(s) == 29)</span><br></pre></td></tr></table></figure>
+
+<p> n7 变化</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">初始：n7 = 7;</span><br><span class="line">每轮: n7 += 13;</span><br><span class="line">第 i 轮：n7 = 7 + 13*i</span><br></pre></td></tr></table></figure>
+
+<p>逆向公式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v9[i+11] = rol(v9[i%11] ^ n7 ^ s[i], i%5)</span><br><span class="line">=&gt;</span><br><span class="line">ror(v9[i+11], i%5) = v9[i%11] ^ n7 ^ s[i]</span><br><span class="line">=&gt;</span><br><span class="line">s[i] = ror(v9[i+11], i%5) ^ v9[i%11] ^ n7</span><br></pre></td></tr></table></figure>
+
+<p>注意rol和n7、s等都是8位的，在python中运算要手动截断一下</p>
+<p>解密脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">rol</span>(<span class="params">x, r</span>):</span><br><span class="line">    <span class="keyword">return</span> ((x &lt;&lt; r) | (x &gt;&gt; (<span class="number">8</span> - r))) &amp; <span class="number">0xff</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">ror</span>(<span class="params">x, r</span>):</span><br><span class="line">    <span class="keyword">return</span> ((x &gt;&gt; r) | (x &lt;&lt; (<span class="number">8</span> - r))) &amp; <span class="number">0xff</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">byte_2040 = [<span class="number">74</span>, <span class="number">75</span>, <span class="number">229</span>, <span class="number">51</span>, <span class="number">46</span>, <span class="number">35</span>, <span class="number">89</span>, <span class="number">221</span>, <span class="number">107</span>, <span class="number">150</span>, <span class="number">160</span>]</span><br><span class="line">byte_2020 = [<span class="number">43</span>, <span class="number">250</span>, <span class="number">51</span>, <span class="number">4</span>, <span class="number">213</span>, <span class="number">31</span>, <span class="number">86</span>, <span class="number">226</span>, <span class="number">60</span>, <span class="number">104</span>, </span><br><span class="line">             <span class="number">95</span>, <span class="number">255</span>, <span class="number">123</span>, <span class="number">230</span>, <span class="number">156</span>, <span class="number">157</span>, </span><br><span class="line">             <span class="number">173</span>, <span class="number">198</span>, <span class="number">76</span>, <span class="number">45</span>, <span class="number">239</span>, <span class="number">47</span>, <span class="number">161</span>, <span class="number">135</span>, <span class="number">248</span>, </span><br><span class="line">             <span class="number">16</span>, <span class="number">150</span>, <span class="number">5</span>, <span class="number">109</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 构造 v9</span></span><br><span class="line">v9 = []</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">11</span>):</span><br><span class="line">    v9.append(byte_2040[i] ^ <span class="number">0x74</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">29</span>):</span><br><span class="line">    v9.append(byte_2020[j] ^ <span class="number">0x74</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 逆推出 s</span></span><br><span class="line">res = []</span><br><span class="line">n7 = <span class="number">7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">29</span>):</span><br><span class="line">    target = v9[i + <span class="number">11</span>]</span><br><span class="line">    r = i % <span class="number">5</span></span><br><span class="line"></span><br><span class="line">    val = ror(target, r) ^ v9[i % <span class="number">11</span>] ^ n7</span><br><span class="line">    res.append(val &amp; <span class="number">0xff</span>)</span><br><span class="line"></span><br><span class="line">    n7 = (n7 + <span class="number">13</span>) &amp; <span class="number">0xff</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> res)</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>运行得到flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;tiny_vm_style_transform&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="easyyre"><a href="#easyyre" class="headerlink" title="easyyre"></a>easyyre</h2><p>（ChatGPT分析）</p>
+<p>是一道RUST题，看着吓人，逻辑还挺简单的</p>
+<p>main函数主要逻辑：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//处理输入</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">input</span> = <span class="title function_ invoke__">stdin</span>().<span class="title function_ invoke__">read_line</span>().<span class="title function_ invoke__">trim_end</span>().<span class="title function_ invoke__">to_string</span>();</span><br><span class="line"><span class="comment">//翻转</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">rev</span> = input.<span class="title function_ invoke__">chars</span>().<span class="title function_ invoke__">rev</span>().collect::&lt;<span class="type">String</span>&gt;();</span><br><span class="line"><span class="comment">//转字节</span></span><br><span class="line"><span class="keyword">let</span> <span class="variable">bytes</span> = rev.<span class="title function_ invoke__">as_bytes</span>();</span><br></pre></td></tr></table></figure>
+
+<p>链式异或。key（n85）是每一轮更新的</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">key</span> = <span class="number">85</span>;</span><br><span class="line"><span class="keyword">let</span> <span class="keyword">mut </span><span class="variable">out</span> = <span class="type">String</span>::<span class="title function_ invoke__">new</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> <span class="variable">b</span> <span class="keyword">in</span> bytes &#123;</span><br><span class="line">    <span class="keyword">let</span> <span class="variable">x</span> = b ^ key;</span><br><span class="line">    out.<span class="title function_ invoke__">push</span>(x <span class="keyword">as</span> <span class="type">char</span>);</span><br><span class="line">    key = x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最后与目标字符串比较。找到目标字符串的值：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.rodata:000000000004D129 28 4F 29 4C 28 4B 29 48 33 54…    _O_L_K_H3T5Y? db &#x27;(O)L(K)H3T5Y?&#x27;   </span><br></pre></td></tr></table></figure>
+
+<p>脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">target = <span class="string">&quot;(O)L(K)H3T5Y?&quot;</span></span><br><span class="line">t = [<span class="built_in">ord</span>(c) <span class="keyword">for</span> c <span class="keyword">in</span> target]</span><br><span class="line"></span><br><span class="line">res = []</span><br><span class="line">key = <span class="number">85</span></span><br><span class="line"><span class="keyword">for</span> x <span class="keyword">in</span> t:</span><br><span class="line">    res.append(x ^ key)</span><br><span class="line">    key = x</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;bytes:&quot;</span>, res)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hex:&quot;</span>, [<span class="built_in">hex</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> res])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;repr:&quot;</span>, <span class="built_in">repr</span>(<span class="string">&#x27;&#x27;</span>.join(<span class="built_in">chr</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> res[::-<span class="number">1</span>])))</span><br></pre></td></tr></table></figure>
+
+<p>得到flag</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;abcdefg&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/" title="3.17逆向分析练习">https://mintind.github.io/2026/03/16/CTF/Reverse/3.17逆向分析练习/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/%E9%AB%98%E7%BA%A7%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2/" rel="tag"># 高级网络攻防</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/09/AI/Agents/ClaudeCode/" rel="prev" title="Claude Code笔记">
+                  <i class="fa fa-angle-left"></i> Claude Code笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/19/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/%E5%9F%BA%E4%BA%8E%E4%B8%89%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/" rel="next" title="基于三层神经网络实现手写数字分类">
+                  基于三层神经网络实现手写数字分类 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/03/16/CTF/Reverse/3.17%E9%80%86%E5%90%91%E5%88%86%E6%9E%90%E7%BB%83%E4%B9%A0/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="答案仓库败北了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyTorch自定义CPU 算子-Transformer架构实现与应用">
+<meta property="og:url" content="https://mintind.github.io/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="答案仓库败北了">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-05-07T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-07T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/","path":"2026/05/07/UCAS/智能计算系统/实验/5PyTorch自定义CPU 算子-Transformer架构实现与应用/","title":"PyTorch自定义CPU 算子-Transformer架构实现与应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PyTorch自定义CPU 算子-Transformer架构实现与应用 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9F%BA%E4%BA%8E-PyTorch-%E7%9A%84-CPU-%E7%AE%97%E5%AD%90"><span class="nav-number">1.</span> <span class="nav-text">自定义基于 PyTorch 的 CPU 算子</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8"><span class="nav-number">1.1.</span> <span class="nav-text">代码补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid%E7%AE%97%E5%AD%90%E7%9A%84-C-%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.1.1.</span> <span class="nav-text">sigmoid算子的 C++ 实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%AD%90%E7%BC%96%E8%AF%91"><span class="nav-number">1.1.2.</span> <span class="nav-text">算子编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%AD%90%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.3.</span> <span class="nav-text">算子测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A24-2%E8%8A%82%E5%AE%9E%E6%97%B6%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB%E6%8E%A8%E7%90%86%E5%AE%9E%E9%AA%8C%E7%9A%84sigmoid%E7%AE%97%E5%AD%90"><span class="nav-number">1.1.4.</span> <span class="nav-text">替换4.2节实时风格迁移推理实验的sigmoid算子</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">1.2.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Transformer-%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Transformer 架构实现与应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8-1"><span class="nav-number">2.1.</span> <span class="nav-text">代码补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-%E5%9F%BA%E6%9C%AC%E5%8D%95%E5%85%83%E6%A8%A1%E5%9D%97%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.1.1.</span> <span class="nav-text">Transformer 基本单元模块实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%8D%E5%B5%8C%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">词嵌入模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B1%82%E5%BD%92%E4%B8%80%E5%8C%96%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">层归一化模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.3.</span> <span class="nav-text">位置编码模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.4.</span> <span class="nav-text">多头注意力机制模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.5.</span> <span class="nav-text">前馈神经网络模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%E5%B9%B3%E6%BB%91%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.1.6.</span> <span class="nav-text">标签平滑模块</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-%E7%BF%BB%E8%AF%91%E6%A8%A1%E5%9E%8B%E6%9E%84%E5%BB%BA"><span class="nav-number">2.1.2.</span> <span class="nav-text">Transformer 翻译模型构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer-%E7%BF%BB%E8%AF%91%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0"><span class="nav-number">2.1.3.</span> <span class="nav-text">Transformer 翻译模型评估</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E4%B8%8E%E4%BE%9D%E8%B5%96%E5%AF%BC%E5%85%A5%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.3.1.</span> <span class="nav-text">环境与依赖导入模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E4%B8%8E%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.3.2.</span> <span class="nav-text">模型推理与结果评估模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%85%A5%E5%8F%A3%E4%B8%8E%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.3.3.</span> <span class="nav-text">程序入口与参数配置模块</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="nav-number">2.2.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PyTorch自定义CPU 算子-Transformer架构实现与应用 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PyTorch自定义CPU 算子-Transformer架构实现与应用<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v5a6e6aqMLzVQeVRvcmNo6Ieq5a6a5LmJQ1BVIOeul+WtkC1UcmFuc2Zvcm1lcuaetuaehOWunueOsOS4juW6lOeUqC5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-08 00:00:00" itemprop="dateCreated datePublished" datetime="2026-05-08T00:00:00+08:00">2026-05-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.3k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>答案仓库败北了</p>
+<span id="more"></span>
+
+<h1 id="自定义基于-PyTorch-的-CPU-算子"><a href="#自定义基于-PyTorch-的-CPU-算子" class="headerlink" title="自定义基于 PyTorch 的 CPU 算子"></a>自定义基于 PyTorch 的 CPU 算子</h1><p><strong>实验目的</strong>  </p>
+<p>掌握如何在 PyTorch 中新增自定义的 mysigmoid 算子。具体包括:  </p>
+<ol>
+<li>熟悉 PyTorch 整体设计机理;  </li>
+<li>通过在 PyTorch 框架中添加自定义的 mysigmoid 算子,加深对 PyTorch 算子实现机  制的理解,以在 PyTorch 中添加自定义 CPU 算子为例,为后续在 PyTorch 中添加自定义的  DLP 算子奠定基础。</li>
+</ol>
+<p><strong>实验环境</strong>：</p>
+<p>硬件平台:MLU 云平台环境（只使用CPU）。  </p>
+<p>软件环境:编程框架 PyTorch、Python 3 及相关的扩展库 Pillow、Numpy、Scipy。</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-student-1.22.1 ：v4.2</p>
+<p><strong>实验内容</strong>：</p>
+<p>基于第4.2节实时风格迁移推理实验,我们将其中的 Sigmoid 算子替换为自定义的 mysigmoid 算子。该实验不仅涉及使用 C++ 扩展的方式实现 mysigmoid 算子的添加,还需要在推  理文件中调用 mysigmoid 算子,并进行测试。</p>
+<p><strong>实验目录：</strong></p>
+<p>&#x2F;opt&#x2F;code_chap_4&#x2F;exp_4_4_mysigmoid&#x2F;</p>
+<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><h3 id="sigmoid算子的-C-实现"><a href="#sigmoid算子的-C-实现" class="headerlink" title="sigmoid算子的 C++ 实现"></a>sigmoid算子的 C++ 实现</h3><p>mysigmoid.cpp</p>
+<h3 id="算子编译"><a href="#算子编译" class="headerlink" title="算子编译"></a>算子编译</h3><p>setup.py</p>
+<p>利用 Python 中提供的 Setuptools 模块完成编译流程,将包含算子的 C++ 文件,  编译为一个动态链接库(在 Linux 平台是一个.so 后缀文件),可以让 Python 调用其中实现的函数功能</p>
+<p>要注意的一点是后面导入这个算子的时候，因为import默认只在当前目录下找库，但是算子又在op_mysigmoid目录下，跟测试文件隔了一层，import找不到。说是可以通过移动文件位置或者pip安装库来解决，但是交上去的文件也不知道评测的时候会怎么处理，感觉最好还是手动扩展一下path</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入自定义连接库</span></span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">current_dir = os.path.dirname(os.path.abspath(__file__))</span><br><span class="line">module_path = os.path.join(current_dir, <span class="string">&#x27;op_mysigmoid&#x27;</span>)</span><br><span class="line">sys.path.append(module_path)</span><br><span class="line"><span class="keyword">import</span> mysigmoid_cpp</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="算子测试"><a href="#算子测试" class="headerlink" title="算子测试"></a>算子测试</h3><p>test_mysigmoid.py</p>
+<h3 id="替换4-2节实时风格迁移推理实验的sigmoid算子"><a href="#替换4-2节实时风格迁移推理实验的sigmoid算子" class="headerlink" title="替换4.2节实时风格迁移推理实验的sigmoid算子"></a>替换4.2节实时风格迁移推理实验的sigmoid算子</h3><p>evaluate_cpu.py</p>
+<p>先将4.2节的代码贴过来，然后替换成mysigmoid算子</p>
+<p>几个注意点，和4.2节的代码不一样的地方：</p>
+<p>一些文件夹的位置和之前实验不一样了，需要修改</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">COCODataSet</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="built_in">super</span>(COCODataSet, <span class="variable language_">self</span>).__init__()</span><br><span class="line">        <span class="variable language_">self</span>.zip_files = ZipFile(<span class="string">&#x27;../data/train2014_small.zip&#x27;</span>)</span><br><span class="line">---</span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    ---</span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> 从/models文件夹下加载网络参数到g_net中</span></span><br><span class="line">    g_net.load_state_dict(torch.load(<span class="string">&#x27;../models/fst.pth&#x27;</span>, map_location=<span class="string">&#x27;cpu&#x27;</span>))</span><br><span class="line">    ---</span><br><span class="line">            save_image(torch.cat((image_c, image_g), dim=<span class="number">3</span>), <span class="string">f&#x27;../out/cpu/<span class="subst">&#123;i&#125;</span>.jpg&#x27;</span>)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;TEST RESULT PASS!\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>去掉网络结构里的sigmoid部分，因为后面forward的时候会调用自定义的sigmoid</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">TransNet</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">            <span class="comment">#TODO： sigmoid激活函数</span></span><br><span class="line">            nn.Sigmoid() <span class="comment"># 去掉这行</span></span><br></pre></td></tr></table></figure>
+
+<p>main里最后有个break</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">    save_image(torch.cat((image_c, image_g), dim=<span class="number">3</span>), <span class="string">f&#x27;../out/cpu/<span class="subst">&#123;i&#125;</span>.jpg&#x27;</span>)</span><br><span class="line">    <span class="keyword">break</span> <span class="comment"># 记得加上</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;TEST RESULT PASS!\n&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h2><p>全部补全之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进行算子编译生成动态链接库。看到so pass就过了</span></span><br><span class="line">python setup.py build_ext --inplace、</span><br><span class="line"><span class="comment"># 进行算子测试</span></span><br><span class="line">python test_mysigmoid.py</span><br><span class="line"><span class="comment"># 进行模型推理</span></span><br><span class="line">python evaluate_cpu.py</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Transformer-架构实现与应用"><a href="#Transformer-架构实现与应用" class="headerlink" title="Transformer 架构实现与应用"></a>Transformer 架构实现与应用</h1><p><strong>实验目的</strong></p>
+<p>掌握 Transformer 模型的核心原理与 PyTorch 实现方法。通过模块化编程、模型搭建与  推理评估,深入理解 Transformer 的工作机制,并具备在 PyTorch 中实现复杂深度学习模型  的能力。具体包括:  </p>
+<ol>
+<li>理解 Transformer 模型的整体架构,包括编码器-解码器结构及其关键组件;  </li>
+<li>掌握位置编码、多头注意力、前馈神经网络等核心模块的原理与实现方法;  </li>
+<li>熟悉在 PyTorch 中完成 Transformer 模型搭建与推理的流程;  </li>
+<li>能够在 DLP 上完成翻译任务的性能验证,并具备基础的模型分析能力。</li>
+</ol>
+<p><strong>实验环境</strong>：</p>
+<p>硬件平台:MLU 云平台环境</p>
+<p>软件环境:编程框架 PyTorch、计算加速库 CNNL、云端开发工具集 CNToolkit、Python3  及相关的扩展库。</p>
+<p>数据集:IWSLT2016 ，国际机器翻译公开基准数据集</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-student-1.22.1 ：v4.2</p>
+<p><strong>实验目录：</strong></p>
+<p>&#x2F;opt&#x2F;code_chap_4&#x2F;exp_4_5 _transformer&#x2F;</p>
+<h2 id="代码补全-1"><a href="#代码补全-1" class="headerlink" title="代码补全"></a>代码补全</h2><h3 id="Transformer-基本单元模块实现"><a href="#Transformer-基本单元模块实现" class="headerlink" title="Transformer 基本单元模块实现"></a>Transformer 基本单元模块实现</h3><p>modules.py</p>
+<h4 id="词嵌入模块"><a href="#词嵌入模块" class="headerlink" title="词嵌入模块"></a>词嵌入模块</h4><h4 id="层归一化模块"><a href="#层归一化模块" class="headerlink" title="层归一化模块"></a>层归一化模块</h4><h4 id="位置编码模块"><a href="#位置编码模块" class="headerlink" title="位置编码模块"></a>位置编码模块</h4><h4 id="多头注意力机制模块"><a href="#多头注意力机制模块" class="headerlink" title="多头注意力机制模块"></a>多头注意力机制模块</h4><h4 id="前馈神经网络模块"><a href="#前馈神经网络模块" class="headerlink" title="前馈神经网络模块"></a>前馈神经网络模块</h4><h4 id="标签平滑模块"><a href="#标签平滑模块" class="headerlink" title="标签平滑模块"></a>标签平滑模块</h4><h3 id="Transformer-翻译模型构建"><a href="#Transformer-翻译模型构建" class="headerlink" title="Transformer 翻译模型构建"></a>Transformer 翻译模型构建</h3><p>AttModel.py</p>
+<p>模块实现了一个基于 Transformer  结构的 Seq2Seq 模型,可用于机器翻译等任务。模型由编码器和解码器两部分组成,调用  了基本单元模块中的嵌入模块、层归一化模块、位置编码模块、多头注意力机制模块、前  馈神经网络模块以及标签平滑模块。</p>
+<h3 id="Transformer-翻译模型评估"><a href="#Transformer-翻译模型评估" class="headerlink" title="Transformer 翻译模型评估"></a>Transformer 翻译模型评估</h3><h4 id="环境与依赖导入模块"><a href="#环境与依赖导入模块" class="headerlink" title="环境与依赖导入模块"></a>环境与依赖导入模块</h4><h4 id="模型推理与结果评估模块"><a href="#模型推理与结果评估模块" class="headerlink" title="模型推理与结果评估模块"></a>模型推理与结果评估模块</h4><h4 id="程序入口与参数配置模块"><a href="#程序入口与参数配置模块" class="headerlink" title="程序入口与参数配置模块"></a>程序入口与参数配置模块</h4><p>device的问题</p>
+<p>参与同一次运算的 tensor 必须在同一个 device 上，但是有些tensor默认是在cpu的。需要加一行，把它放到和 <code>queries</code> 同一个设备上。有三个地方需要</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">key_masks = torch.sign(torch.<span class="built_in">abs</span>(torch.<span class="built_in">sum</span>(keys, dim=-<span class="number">1</span>)))  <span class="comment"># (N, T_k)</span></span><br><span class="line">key_masks = key_masks.repeat(<span class="variable language_">self</span>.num_heads, <span class="number">1</span>)  <span class="comment"># (h*N, T_k)</span></span><br><span class="line">key_masks = torch.unsqueeze(key_masks, <span class="number">1</span>).repeat(<span class="number">1</span>, queries.size()[<span class="number">1</span>], <span class="number">1</span>)  <span class="comment"># (h*N, T_q, T_k)</span></span><br><span class="line">key_masks = key_masks.to(queries.device)</span><br><span class="line"></span><br><span class="line">masks = Variable(torch.unsqueeze(tril, <span class="number">0</span>).repeat(outputs.size()[<span class="number">0</span>], <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">masks = masks.to(outputs.device)</span><br><span class="line"></span><br><span class="line">query_masks = torch.sign(torch.<span class="built_in">abs</span>(torch.<span class="built_in">sum</span>(queries, dim=-<span class="number">1</span>)))</span><br><span class="line">query_masks = query_masks.repeat(<span class="variable language_">self</span>.num_heads, <span class="number">1</span>)</span><br><span class="line">query_masks = torch.unsqueeze(query_masks, <span class="number">2</span>).repeat(<span class="number">1</span>, <span class="number">1</span>, keys.size()[<span class="number">1</span>])</span><br><span class="line">query_masks = query_masks.to(outputs.device)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在CPU上 运 行</span></span><br><span class="line">bash run_transformer_cpu.sh</span><br><span class="line"><span class="comment"># 在DLP上 运 行</span></span><br><span class="line">bash run_transformer_mlu.sh</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/" title="PyTorch自定义CPU 算子-Transformer架构实现与应用">https://mintind.github.io/2026/05/07/UCAS/智能计算系统/实验/5PyTorch自定义CPU 算子-Transformer架构实现与应用/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/28/AI/Agents/OpenCode/" rel="prev" title="OpenCode">
+                  <i class="fa fa-angle-left"></i> OpenCode
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/05/12/SetupEnv/penetration_tools_behinder_antsword/" rel="next" title="冰蝎&amp;蚁剑">
+                  冰蝎&蚁剑 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/05/07/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/5PyTorch%E8%87%AA%E5%AE%9A%E4%B9%89CPU%20%E7%AE%97%E5%AD%90-Transformer%E6%9E%B6%E6%9E%84%E5%AE%9E%E7%8E%B0%E4%B8%8E%E5%BA%94%E7%94%A8/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

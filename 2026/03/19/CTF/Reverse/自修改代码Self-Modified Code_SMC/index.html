@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自修改代码Self-Modified Code（SMC）">
+<meta property="og:url" content="https://mintind.github.io/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-19T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="SMC">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/","path":"2026/03/19/CTF/Reverse/自修改代码Self-Modified Code_SMC/","title":"自修改代码Self-Modified Code（SMC）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>自修改代码Self-Modified Code（SMC） | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified-Code%EF%BC%88SMC%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">自修改代码Self-Modified Code（SMC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SMC%E5%87%BA%E9%A2%98-%E9%A2%98%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">SMC出题&amp;题解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%BA%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">出题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">2.2.</span> <span class="nav-text">题解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#IDA%E8%84%9A%E6%9C%AC%E8%A7%A3%E5%AF%86"><span class="nav-number">2.2.1.</span> <span class="nav-text">IDA脚本解密</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#gdb"><span class="nav-number">2.2.2.</span> <span class="nav-text">gdb</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%BC%8E%E6%9D%AF-2020-%E9%9D%92%E9%BE%99%E7%BB%84-jocker"><span class="nav-number">3.</span> <span class="nav-text">[网鼎杯 2020 青龙组]jocker</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="自修改代码Self-Modified Code（SMC） | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          自修改代码Self-Modified Code（SMC）<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2Uv6Ieq5L+u5pS55Luj56CBU2VsZi1Nb2RpZmllZCBDb2RlX1NNQy5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-20 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-20T00:00:00+08:00">2026-03-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h2 id="自修改代码Self-Modified-Code（SMC）"><a href="#自修改代码Self-Modified-Code（SMC）" class="headerlink" title="自修改代码Self-Modified Code（SMC）"></a>自修改代码Self-Modified Code（SMC）</h2><p>是一类特殊的代码技术，即<strong>在运行时修改自身代码</strong>，从而使得程序实际行为与反汇编结果不符，同时修改前的代码段数据也可能非合法指令，从而无法被反汇编器识</p>
+<p>解法：</p>
+<p>根据静态分析结果直接修改程序二进制文件</p>
+<p>在动态调试时将解密后的程序从内存中 dump 下来。</p>
+<h2 id="SMC出题-题解"><a href="#SMC出题-题解" class="headerlink" title="SMC出题&amp;题解"></a>SMC出题&amp;题解</h2><p>明明还不懂就要出题了（</p>
+<h3 id="出题"><a href="#出题" class="headerlink" title="出题"></a>出题</h3><p>这次出题有一个重大发现….原来smc是先生成未加密的二进制，然后另外用脚本去加密的。思路打开了</p>
+<p>challenge.c</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* * 禁用优化并阻止内联，确保函数机器码原汁原味并且在 ELF 中顺序固定。</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">stage2_end</span><span class="params">(<span class="type">void</span>)</span> __<span class="title function_">attribute__</span><span class="params">((optimize(<span class="string">&quot;O0&quot;</span>)))</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">encrypt_stage2</span><span class="params">(<span class="type">char</span> *half_flag)</span> __<span class="title function_">attribute__</span><span class="params">((noinline, optimize(<span class="string">&quot;O0&quot;</span>)))</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">stage1_end</span><span class="params">(<span class="type">void</span>)</span> __<span class="title function_">attribute__</span><span class="params">((optimize(<span class="string">&quot;O0&quot;</span>)))</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">encrypt_stage1</span><span class="params">(<span class="type">char</span> *a1)</span> __<span class="title function_">attribute__</span><span class="params">((noinline, optimize(<span class="string">&quot;O0&quot;</span>)))</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">encrypt_stage2</span><span class="params">(<span class="type">char</span> *half_flag)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 目标后半段明文: &quot;v3ry_c00l&#125;&quot;</span></span><br><span class="line">    <span class="comment">// 运算规则: ~(half_flag[i] ^ 0x42)</span></span><br><span class="line">    <span class="type">char</span> target[<span class="number">10</span>] = &#123;</span><br><span class="line">        (<span class="type">char</span>)(~(<span class="string">&#x27;v&#x27;</span> ^ <span class="number">0x42</span>)), (<span class="type">char</span>)(~(<span class="string">&#x27;3&#x27;</span> ^ <span class="number">0x42</span>)),</span><br><span class="line">        (<span class="type">char</span>)(~(<span class="string">&#x27;r&#x27;</span> ^ <span class="number">0x42</span>)), (<span class="type">char</span>)(~(<span class="string">&#x27;y&#x27;</span> ^ <span class="number">0x42</span>)),</span><br><span class="line">        (<span class="type">char</span>)(~(<span class="string">&#x27;_&#x27;</span> ^ <span class="number">0x42</span>)), (<span class="type">char</span>)(~(<span class="string">&#x27;c&#x27;</span> ^ <span class="number">0x42</span>)),</span><br><span class="line">        (<span class="type">char</span>)(~(<span class="string">&#x27;0&#x27;</span> ^ <span class="number">0x42</span>)), (<span class="type">char</span>)(~(<span class="string">&#x27;0&#x27;</span> ^ <span class="number">0x42</span>)),</span><br><span class="line">        (<span class="type">char</span>)(~(<span class="string">&#x27;l&#x27;</span> ^ <span class="number">0x42</span>)), (<span class="type">char</span>)(~(<span class="string">&#x27;&#125;&#x27;</span> ^ <span class="number">0x42</span>))&#125;;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ((<span class="type">char</span>)(~half_flag[i] ^ <span class="number">0x42</span>) != target[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">stage2_end</span><span class="params">(<span class="type">void</span>)</span> &#123; <span class="keyword">asm</span>(<span class="string">&quot;nop&quot;</span>); &#125; <span class="comment">// 填充汇编指令防止被编译器优化掉</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">encrypt_stage1</span><span class="params">(<span class="type">char</span> *a1)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 前 16 字节验证: &quot;flag&#123;SMC_n3st3d_&quot;</span></span><br><span class="line">    <span class="type">char</span> expected[<span class="number">17</span>] = <span class="string">&quot;flag&#123;SMC_n3st3d_&quot;</span>;</span><br><span class="line">    <span class="type">int</span> i, j;</span><br><span class="line">    <span class="type">int</span> pagesize;</span><br><span class="line">    <span class="type">void</span> *aligned_addr;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> stage2_size;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">16</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (a1[i] != expected[i])</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二层 SMC 解密准备</span></span><br><span class="line">    pagesize = sysconf(_SC_PAGESIZE);</span><br><span class="line">    aligned_addr = (<span class="type">void</span> *)((<span class="type">unsigned</span> <span class="type">int</span>)encrypt_stage2 &amp; ~(pagesize - <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 赋予 RWX 权限</span></span><br><span class="line">    mprotect(aligned_addr, pagesize * <span class="number">2</span>, PROT_READ | PROT_WRITE | PROT_EXEC);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 动态计算 stage2 函数体的大小</span></span><br><span class="line">    stage2_size = (<span class="type">unsigned</span> <span class="type">int</span>)stage2_end - (<span class="type">unsigned</span> <span class="type">int</span>)encrypt_stage2;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; stage2_size; ++j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 用输入的前 4 个字节 (&quot;flag&quot;) 作为 rolling key 动态解密</span></span><br><span class="line">        *((<span class="type">unsigned</span> <span class="type">char</span> *)encrypt_stage2 + j) ^= a1[j % <span class="number">4</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> encrypt_stage2(a1 + <span class="number">16</span>); <span class="comment">// 将剩余的 10 字节传给第二阶段</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">void</span> <span class="title function_">stage1_end</span><span class="params">(<span class="type">void</span>)</span> &#123; <span class="keyword">asm</span>(<span class="string">&quot;nop&quot;</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ================= MAIN =================</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> **argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> Str[<span class="number">60</span>];</span><br><span class="line">    <span class="type">size_t</span> v4;</span><br><span class="line">    <span class="type">int</span> i;</span><br><span class="line">    <span class="type">int</span> pagesize;</span><br><span class="line">    <span class="type">void</span> *aligned_addr;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> stage1_size;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;Please input your flag:&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">scanf</span>(<span class="string">&quot;%50s&quot;</span>, Str) != <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">    v4 = <span class="built_in">strlen</span>(Str);</span><br><span class="line">    <span class="keyword">if</span> (v4 != <span class="number">26</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Wrong length!&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第一层 SMC 解密准备</span></span><br><span class="line">    pagesize = sysconf(_SC_PAGESIZE);</span><br><span class="line">    aligned_addr = (<span class="type">void</span> *)((<span class="type">unsigned</span> <span class="type">int</span>)encrypt_stage1 &amp; ~(pagesize - <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (mprotect(aligned_addr, pagesize * <span class="number">2</span>, PROT_READ | PROT_WRITE | PROT_EXEC) != <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        perror(<span class="string">&quot;mprotect failed&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    stage1_size = (<span class="type">unsigned</span> <span class="type">int</span>)stage1_end - (<span class="type">unsigned</span> <span class="type">int</span>)encrypt_stage1;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; stage1_size; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// 用硬编码的 0x33 解密第一层</span></span><br><span class="line">        *((<span class="type">unsigned</span> <span class="type">char</span> *)encrypt_stage1 + i) ^= <span class="number">0x33</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (encrypt_stage1(Str))</span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Congratulations! You got the real flag!&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="built_in">puts</span>(<span class="string">&quot;Wrong! Try again.&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>build.py</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1. 加载未加密的原始 ELF</span></span><br><span class="line">elf = ELF(<span class="string">&#x27;./challenge_raw&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 获取函数在文件中的地址和大小</span></span><br><span class="line">stage1_addr = elf.symbols[<span class="string">&#x27;encrypt_stage1&#x27;</span>]</span><br><span class="line">stage1_end = elf.symbols[<span class="string">&#x27;stage1_end&#x27;</span>]</span><br><span class="line">stage1_size = stage1_end - stage1_addr</span><br><span class="line"></span><br><span class="line">stage2_addr = elf.symbols[<span class="string">&#x27;encrypt_stage2&#x27;</span>]</span><br><span class="line">stage2_end = elf.symbols[<span class="string">&#x27;stage2_end&#x27;</span>]</span><br><span class="line">stage2_size = stage2_end - stage2_addr</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[*] Stage 1 Size: <span class="subst">&#123;stage1_size&#125;</span> bytes&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">f&quot;[*] Stage 2 Size: <span class="subst">&#123;stage2_size&#125;</span> bytes&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 读取明文机器码</span></span><br><span class="line">stage1_code = <span class="built_in">bytearray</span>(elf.read(stage1_addr, stage1_size))</span><br><span class="line">stage2_code = <span class="built_in">bytearray</span>(elf.read(stage2_addr, stage2_size))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4. 加密 Stage 2 (Key 是 &quot;flag&quot;)</span></span><br><span class="line">key = <span class="string">b&quot;flag&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(stage2_size):</span><br><span class="line">    stage2_code[i] ^= key[i % <span class="number">4</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将加密后的 Stage 2 覆盖回 ELF</span></span><br><span class="line">elf.write(stage2_addr, <span class="built_in">bytes</span>(stage2_code))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5. 加密 Stage 1 (Key 是 0x33)</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(stage1_size):</span><br><span class="line">    stage1_code[i] ^= <span class="number">0x33</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 将加密后的 Stage 1 覆盖回 ELF</span></span><br><span class="line">elf.write(stage1_addr, <span class="built_in">bytes</span>(stage1_code))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 6. 保存最终的 Challenge ELF 并在文件系统赋权</span></span><br><span class="line">elf.save(<span class="string">&#x27;./smc_revenge&#x27;</span>)</span><br><span class="line">os.chmod(<span class="string">&#x27;./smc_revenge&#x27;</span>, <span class="number">0o755</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;[+] SMC Challenge successfully built: ./smc_revenge&quot;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>编译</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">//32位的，可能需要</span><br><span class="line"><span class="built_in">sudo</span> apt install gcc-multilib</span><br><span class="line">//编译和加密</span><br><span class="line">gcc -m32 -O0 challenge.c -o challenge_raw</span><br><span class="line">python3 build.py</span><br><span class="line">strip ./smc_revenge </span><br></pre></td></tr></table></figure>
+
+<h3 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h3><p>SMC解题的两种方法。如果加密比较复杂，就不如直接使用gdb查看解密后的代码了。不过这种可能就会加上点反调试手段</p>
+<p>这就是解题的博弈吗</p>
+<h4 id="IDA脚本解密"><a href="#IDA脚本解密" class="headerlink" title="IDA脚本解密"></a>IDA脚本解密</h4><p>main里能看到stage1的加密逻辑。异或0x33</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>; (<span class="type">char</span> *)stage1_end - (<span class="type">char</span> *)encrypt_stage1 &gt; i; ++i )</span><br><span class="line">  *((_BYTE *)encrypt_stage1 + i) ^= <span class="number">0x33u</span>;</span><br></pre></td></tr></table></figure>
+
+<p>解密stage1的ida python脚本：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">start = <span class="number">0x000012A4</span>  <span class="comment"># encrypt_stage1 的起始地址</span></span><br><span class="line">end = <span class="number">0x000013DD</span>    <span class="comment"># stage1_end 的地址</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(start, end):</span><br><span class="line">    patch_byte(i, get_wide_byte(i) ^ <span class="number">0x33</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Decryption done!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>得到stage1，得到半段flag：<code>flag{SMC_n3st3d_</code>，以及stage2的加密逻辑，以<code>flag</code>为key进行异或</p>
+<p>解密stage2</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">start = <span class="number">0x0000120D</span>  <span class="comment"># encrypt_stage2 的起始地址</span></span><br><span class="line">end = <span class="number">0x00001293</span>    <span class="comment"># 下一个函数的起始地址</span></span><br><span class="line"></span><br><span class="line">key = <span class="string">&quot;flag&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(end - start):</span><br><span class="line">    addr = start + i</span><br><span class="line">    byte = get_wide_byte(addr)</span><br><span class="line">    <span class="comment"># 异或 flag 的对应字符</span></span><br><span class="line">    patch_byte(addr, byte ^ <span class="built_in">ord</span>(key[i % <span class="number">4</span>]))</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Stage 2 Decrypted!&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h4><p>在call stage1那一行下断点。因为开了PIE所以要加偏移</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; breakrva 0x152C</span><br><span class="line">Breakpoint 2 at 0x5655652c</span><br></pre></td></tr></table></figure>
+
+<p>因为有判断长度的逻辑，运行后输入一个长度正确的字符串，不然不会跑到解密去。到断点之后查看指令是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0x5655652c    call   0x565562a4                  &lt;0x565562a4&gt;</span><br></pre></td></tr></table></figure>
+
+<p>0x565562a4就是stage1的地址了。用x&#x2F;i指令查看stage1的汇编，可以直接分析也可以patch到IDA里反编译。得到半段flag：<code>flag{SMC_n3st3d_</code>，并且发现需要以输入的前四位为key解密stage2，所以要求输入一个flag开头的长度正确的值，再次运行。</p>
+<p>后面就不说了，就是停在stage2再查看汇编</p>
+<h2 id="网鼎杯-2020-青龙组-jocker"><a href="#网鼎杯-2020-青龙组-jocker" class="headerlink" title="[网鼎杯 2020 青龙组]jocker"></a>[网鼎杯 2020 青龙组]jocker</h2><p>题目链接：<span class="exturl" data-url="aHR0cHM6Ly9idXVvai5jbi9jaGFsbGVuZ2VzI1slRTclQkQlOTElRTklQkMlOEUlRTYlOUQlQUYlMjAyMDIwJTIwJUU5JTlEJTkyJUU5JUJFJTk5JUU3JUJCJTg0XWpvY2tlcg==">https://buuoj.cn/challenges#[%E7%BD%91%E9%BC%8E%E6%9D%AF%202020%20%E9%9D%92%E9%BE%99%E7%BB%84]jocker<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/" title="自修改代码Self-Modified Code（SMC）">https://mintind.github.io/2026/03/19/CTF/Reverse/自修改代码Self-Modified Code_SMC/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/SMC/" rel="tag"># SMC</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/19/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/%E5%9F%BA%E4%BA%8E%E4%B8%89%E5%B1%82%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E5%88%86%E7%B1%BB/" rel="prev" title="基于三层神经网络实现手写数字分类">
+                  <i class="fa fa-angle-left"></i> 基于三层神经网络实现手写数字分类
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/23/CTF/PWN/ORW&%E6%A0%88%E8%BF%81%E7%A7%BB/" rel="next" title="ORW (Open-Read-Write)策略&amp;栈迁移">
+                  ORW (Open-Read-Write)策略&栈迁移 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/03/19/CTF/Reverse/%E8%87%AA%E4%BF%AE%E6%94%B9%E4%BB%A3%E7%A0%81Self-Modified%20Code_SMC/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

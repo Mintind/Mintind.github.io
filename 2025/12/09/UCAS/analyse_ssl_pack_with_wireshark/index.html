@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="嗯…好混乱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【网络协议安全】Wireshark抓包和解密TLS">
+<meta property="og:url" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="嗯…好混乱">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210192537213-17653772077261.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210192643885-17653772077262.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193035665-17653772077263.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193125700-17653772077264.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210194120321-17653772077265.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193921602-17653772077266.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210200419301-17653772077277.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210195146008-17653772077278.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251211094040141.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251211094917806.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211435074-17653772077279.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211858482-176537720772710.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211957143-176537720772711.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210214246838-176537720772712.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215411792-176537720772713.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215439712-176537720772714.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215655254-176537720772715.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220135922-176537720772716.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220149994-176537720772717.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215957341-176537720772718.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220652504-176537720772719.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221340095-176537720772720.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221453194-176537720772721.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221606735-176537720772822.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221649450-176537720772823.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210222846850-176537720772824.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20260106223924043.png">
+<meta property="article:published_time" content="2025-12-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-09T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Network">
+<meta property="article:tag" content="网络协议安全">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210192537213-17653772077261.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/","path":"2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/","title":"【网络协议安全】Wireshark抓包和解密TLS"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【网络协议安全】Wireshark抓包和解密TLS | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS1-3"><span class="nav-number">1.1.</span> <span class="nav-text">TLS1.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E6%96%B9%E6%A1%88"><span class="nav-number">1.1.1.</span> <span class="nav-text">抓包方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E5%AF%86%EF%BC%88%E5%A4%B1%E8%B4%A5%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">解密（失败）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AEsshlog"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">设置sshlog</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2Diffile-Hellman"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">禁止Diffile-Hellman</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TLS1-2"><span class="nav-number">1.2.</span> <span class="nav-text">TLS1.2</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8A%93%E5%8C%85%E6%96%B9%E6%A1%88-1"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">抓包方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B-1"><span class="nav-number">1.2.0.2.</span> <span class="nav-text">查看</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8C%87%E5%AE%9ARSA"><span class="nav-number">1.2.0.3.</span> <span class="nav-text">指定RSA</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【网络协议安全】Wireshark抓包和解密TLS | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【网络协议安全】Wireshark抓包和解密TLS<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy9hbmFseXNlX3NzbF9wYWNrX3dpdGhfd2lyZXNoYXJrLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-10 00:00:00" itemprop="dateCreated datePublished" datetime="2025-12-10T00:00:00+08:00">2025-12-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>嗯…好混乱</p>
+<span id="more"></span>
+
+<h1 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h1><p><strong>目标：</strong></p>
+<p>1.了解 TLS&#x2F;SSL协议过程<br>2.通过抓包验证 TLS&#x2F;SSL协议的实现</p>
+<p><strong>工具：</strong></p>
+<p>Wireshark</p>
+<p><strong>简介：</strong></p>
+<p>SSL(Socket Secure Layer)是TLS(Transport Layer Security)的前身，TLS 1.0在SSL 3.0的基础上提出，即TLS是 SSL的后续版本。TLS和SSL的原理相同，但加密方法有所不同，目前常用的是 TLS1.2。SSL&#x2F;TLS协议是使用最广泛的密码通信方法，它应用了密码学中的对称密码，消息认证码，公钥密码，数字签名，伪随机数生成器等机制，属于传输层安全协议。基于SSL&#x2F;TLS 的HTTP,就叫HTTPoverSSL或HTTP over TLS,也就是常说的 HTTPS(HTTPSecure)。</p>
+<h2 id="TLS1-3"><a href="#TLS1-3" class="headerlink" title="TLS1.3"></a>TLS1.3</h2><h3 id="抓包方案"><a href="#抓包方案" class="headerlink" title="抓包方案"></a>抓包方案</h3><p>使用浏览器（火狐和Edge）产生流量，Wireshark在本地环回网卡抓包。输入<code>tls</code>过滤</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210192537213-17653772077261.png" alt="image-20251210192537213"></p>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h3><p>查看加密套件Cipher Suite。这是客户端可用的</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210192643885-17653772077262.png" alt="image-20251210192643885"></p>
+<p>查看握手过程使用的各参数</p>
+<p>客户端随机数。ClientHello 帧 → 展开 <code>Transport Layer Security → TLSv1.2 Record Layer: Handshake Protocol: Client Hello → Random</code></p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193035665-17653772077263.png" alt="image-20251210193035665"></p>
+<p>服务端随机数。ServerHello 帧 ，Server Hello → Random</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193125700-17653772077264.png" alt="image-20251210193125700"></p>
+<p>共享密钥key share</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210194120321-17653772077265.png" alt="image-20251210194120321"></p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210193921602-17653772077266.png" alt="image-20251210193921602"></p>
+<h3 id="解密（失败）"><a href="#解密（失败）" class="headerlink" title="解密（失败）"></a>解密（失败）</h3><h4 id="设置sshlog"><a href="#设置sshlog" class="headerlink" title="设置sshlog"></a>设置sshlog</h4><p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUxNzQ0MTMzL2FydGljbGUvZGV0YWlscy8xNDM2NDk0MjY=">https://blog.csdn.net/m0_51744133/article/details/143649426<i class="fa fa-external-link-alt"></i></span></p>
+<p>没解密导致Wireshark显示不全，看不到其他信息。全是encrypted data</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210200419301-17653772077277.png" alt="image-20251210200419301"></p>
+<p>创建一个log文件，然后在系统环境变量新建一个，命名为SSLKEYLOGFILE（这个名字好像，一定要对），加上log文件的路径，</p>
+<p>在Wireshark中进行配置。编辑-&gt;首选项-&gt;协议Protocols-&gt;TLS（或者SSL），在（pre）-Master-Secret log filename一栏中添加刚才的log文件位置。</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210195146008-17653772077278.png" alt="image-20251210195146008"></p>
+<p>然后重新抓包</p>
+<p>原理：</p>
+<blockquote>
+<p>Firefox和Chrome浏览器等一些浏览器会在系统中名为 <code>SSLKEYLOGFILE</code> 的环境变量已经设置的情况下，将每个 HTTPS 连接产生的客户端或服务端的随机数、preMasterSecret、MasterSecret 全部获取到并保存在这个环境变量指定的文件中，通过第二步设置让wireshark可以读取到这些参数，报文内加密的证书等信息就自然可以解密出来了</p>
+</blockquote>
+<p>重新抓包还是没解密，查看log文件发现没内容，说明浏览器没关联到日志文件。（没解决</p>
+<p>我又回来了，您猜怎么着，运行别的代码的时候发现了这报错。说明设环境变量值不小心带上了奇怪的字符，难怪不起效呢（好巧啊，才过了一天就发现问题了嘻嘻）</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251211094040141.png" alt="image-20251211094040141"></p>
+<p>重新设置。删除之后新建，选择手打或者打开文件，比较保险。然后在cmd验证（如果已经打开了终端，更改之后记得重开一个）</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="variable">%SSLKEYLOGFILE%</span></span><br></pre></td></tr></table></figure>
+
+<p>路径正确且没有现实奇怪字符才行：</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251211094917806.png" alt="image-20251211094917806"></p>
+<p>再查看log文件，有东西了，说明没问题了。</p>
+<h4 id="禁止Diffile-Hellman"><a href="#禁止Diffile-Hellman" class="headerlink" title="禁止Diffile-Hellman"></a>禁止Diffile-Hellman</h4><p>又去搜了，说是用DH的话不行。仔细看加密套件，有DHE（不对这里应该看服务端选择的算法）</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211435074-17653772077279.png" alt="image-20251210211435074"></p>
+<p>参考这篇：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vamFzeS9wLzE2MTU3Mzg4Lmh0bWw=">https://www.cnblogs.com/jasy/p/16157388.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>在火狐设置搜dhe，全改成false（记一下待会改回来）</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211858482-176537720772710.png" alt="image-20251210211858482"></p>
+<p>然后重启火狐（哎哟笑死我了）</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210211957143-176537720772711.png" alt="image-20251210211957143"></p>
+<p>还是不行，我没招了</p>
+<p>试试改用tls1.2 <span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vamFja2FkYW0vcC8xNjIwNzY0Mi5odG1s">https://www.cnblogs.com/jackadam/p/16207642.html<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210214246838-176537720772712.png" alt="image-20251210214246838"></p>
+<p>结果抓到的还是1.3，服了</p>
+<h2 id="TLS1-2"><a href="#TLS1-2" class="headerlink" title="TLS1.2"></a>TLS1.2</h2><h4 id="抓包方案-1"><a href="#抓包方案-1" class="headerlink" title="抓包方案"></a>抓包方案</h4><p>最后采用了，openssl直连。我这用的是Ubuntu虚拟机里的，所以Wireshark改成抓对应虚拟网卡的包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_2</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215411792-176537720772713.png" alt="image-20251210215411792"></p>
+<h4 id="查看-1"><a href="#查看-1" class="headerlink" title="查看"></a>查看</h4><p>Wireshark查看</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215439712-176537720772714.png" alt="image-20251210215439712"></p>
+<p>加密套件。服务端选择了Cipher Suite:TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xc02f)</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215655254-176537720772715.png" alt="image-20251210215655254"></p>
+<p>客户端随机数。在Client Hello</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220135922-176537720772716.png" alt="image-20251210220135922"></p>
+<p>服务端随机数。Server Hello</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220149994-176537720772717.png" alt="image-20251210220149994"></p>
+<p>服务器密钥。在 ServerKeyExchange 包里（Certificate 帧后面）：<br><code>Transport Layer Security → TLSv1.2 Record Layer: Handshake Protocol: Server Key Exchange → EC Diffie-Hellman Server Params → Pubkey</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">047d1c66aa8bbf43937342cfe86622a500f9a969899074a4f2cf662c030540b4f3968ff4195982aa5a9c911fb4e3efedb5e16c7d4c0bd0e14bbb8c480ff15cbeb2</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210215957341-176537720772718.png" alt="image-20251210215957341"></p>
+<p>预主密钥。加密了，只能找到客户端公钥</p>
+<p>ClientKeyExchange 帧 →<br><code>Transport Layer Security → TLSv1.2 Record Layer: Handshake Protocol: Client Key Exchange → EC Diffie-Hellman Client Params → Pubkey</code></p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210220652504-176537720772719.png" alt="image-20251210220652504"></p>
+<h4 id="指定RSA"><a href="#指定RSA" class="headerlink" title="指定RSA"></a>指定RSA</h4><p>因为还是采用了DH，看不到预主密钥，试一下指定RSA</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl s_client -connect www.baidu.com:443 -tls1_2 -cipher <span class="string">&#x27;RSA&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221340095-176537720772720.png" alt="image-20251210221340095"></p>
+<p>前面就略过了</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221453194-176537720772721.png" alt="image-20251210221453194"></p>
+<p>证书这块长这样</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221606735-176537720772822.png" alt="image-20251210221606735"></p>
+<p>预主密钥</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210221649450-176537720772823.png" alt="image-20251210221649450"></p>
+<p>握手流程图（不保真）</p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20251210222846850-176537720772824.png" alt="image-20251210222846850"></p>
+<p><img src="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/image-20260106223924043.png" alt="image-20260106223924043"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/" title="【网络协议安全】Wireshark抓包和解密TLS">https://mintind.github.io/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Network/" rel="tag"># Network</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE%E5%AE%89%E5%85%A8/" rel="tag"># 网络协议安全</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/08/Notes/windows%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/" rel="prev" title="windows将应用&#x2F;命令添加到右键菜单">
+                  <i class="fa fa-angle-left"></i> windows将应用/命令添加到右键菜单
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/14/Knowledge/%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8fastcall_stdcall_cdecl/" rel="next" title="函数调用：__cdecl、__stdcall和__fastcall">
+                  函数调用：__cdecl、__stdcall和__fastcall <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/12/09/UCAS/analyse_ssl_pack_with_wireshark/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

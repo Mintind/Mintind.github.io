@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gdb笔记">
+<meta property="og:url" content="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/image-20260311103639090.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/image-20260311141454326.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/image-20260307173724265.png">
+<meta property="article:published_time" content="2026-03-06T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-06T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="GDB">
+<meta property="article:tag" content="Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/image-20260311103639090.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/","path":"2026/03/06/CTF/Reverse/gdb_notes/","title":"gdb笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>gdb笔记 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93"><span class="nav-number">1.</span> <span class="nav-text">命令总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5"><span class="nav-number">2.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%AD%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">断点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text">获取信息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E6%89%BEfind"><span class="nav-number">4.1.</span> <span class="nav-text">查找find</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#x-examine"><span class="nav-number">4.2.</span> <span class="nav-text">x (examine)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E5%AF%84%E5%AD%98%E5%99%A8"><span class="nav-number">4.3.</span> <span class="nav-text">查看寄存器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8D%95%E6%8D%89"><span class="nav-number">5.</span> <span class="nav-text">捕捉</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#watch"><span class="nav-number">5.1.</span> <span class="nav-text">watch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#catch"><span class="nav-number">5.2.</span> <span class="nav-text">catch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9"><span class="nav-number">6.</span> <span class="nav-text">修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">7.1.</span> <span class="nav-text">线程相关的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E5%BD%B1%E5%93%8D%E5%BD%93%E5%89%8D%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">7.2.</span> <span class="nav-text">只影响当前线程的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%89%80%E6%9C%89%E7%BA%BF%E7%A8%8B%E7%94%9F%E6%95%88%E7%9A%84%E5%91%BD%E4%BB%A4"><span class="nav-number">7.3.</span> <span class="nav-text">对所有线程生效的命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E7%8B%AC%E5%AF%B9%E6%9F%90%E4%B8%AA%EF%BC%88%E4%BA%9B%EF%BC%89%E7%BA%BF%E7%A8%8B%E6%89%A7%E8%A1%8C%E5%91%BD%E4%BB%A4-thread-apply"><span class="nav-number">7.4.</span> <span class="nav-text">单独对某个（些）线程执行命令-thread apply</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%88%E5%B8%A7"><span class="nav-number">8.</span> <span class="nav-text">栈帧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%B0%E5%BD%95record"><span class="nav-number">9.</span> <span class="nav-text">记录record</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%86%E8%A7%A3%E5%BD%93%E5%89%8D%E6%83%85%E5%86%B5%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">10.</span> <span class="nav-text">了解当前情况的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gdb%E8%84%9A%E6%9C%AC"><span class="nav-number">11.</span> <span class="nav-text">gdb脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pwndgb"><span class="nav-number">12.</span> <span class="nav-text">pwndgb</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="gdb笔记 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          gdb笔记<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2UvZ2RiX25vdGVzLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-07 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-07T00:00:00+08:00">2026-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h2 id="命令总结"><a href="#命令总结" class="headerlink" title="命令总结"></a>命令总结</h2><p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2NvZGVFeHBsb3JlSHViL0dEQkRlYnVn">https://github.com/codeExploreHub/GDBDebug<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>gdb连接进程分为两种（可能？）</p>
+<p>使用gdb打开文件，然后开始运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb file</span><br><span class="line">(gdb) r</span><br></pre></td></tr></table></figure>
+
+<p>使用gdb连接到一个已经在运行的进程</p>
+<p>例如使用qemu模拟的一个qcow2内核镜像。这里需要注意的是，另外起的进程一般不会自动停住，等运行完连上去就晚了，所以需要控制启动后停止，例如qemu的参数就是<code>-S</code>，开机后暂停 CPU。</p>
+<p>然后s等同 gdb tcp::1234，在本机监听 1234 端口作为 gdb server，让gdb能连上去</p>
+<p>（其他参数都略过了）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-x86_64 -hda sys.qcow2 -S -s</span><br></pre></td></tr></table></figure>
+
+<p>这边启动完成，另起终端打开gdb，连接到QEMU的调试端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> gdb</span><br><span class="line">(gdb) target remote :1234</span><br></pre></td></tr></table></figure>
+
+<p>如果说调试的镜像文件没有符号，但是你手头有一个有符号的文件symbol（？）可以为gdb调试镜像文件提供调试信息，那么可以在一开始用gdb打开它：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) file ./symbol    <span class="comment"># 加载符号文件（如果之前没加载）</span></span><br><span class="line">(gdb) target remote :1234 </span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb ./symbol</span><br><span class="line">(gdb) target remote :1234 </span><br></pre></td></tr></table></figure>
+
+<p>解析：</p>
+<p><code>symbol</code>是带符号的elf，为gdb提供函数名、变量名、类型信息、行号等调试信息</p>
+<p>gdb与qemu通过远程调试协议在端口1234进行连接</p>
+<p>模拟器qemu实际执行的是要调试的内核镜像文件sys.qcow2</p>
+<h2 id="断点"><a href="#断点" class="headerlink" title="断点"></a>断点</h2><p>函数断点。不讲</p>
+<p>地址断点。形如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b *0xFFFFFFFF82890FBC</span><br></pre></td></tr></table></figure>
+
+<p>删除断点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) delete 3        # 删除编号为 3 的断点</span><br></pre></td></tr></table></figure>
+
+<p>禁用&#x2F;启用断点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) disable 3       # 禁用断点 3（暂时不用，但保留）</span><br><span class="line">(gdb) enable 3        # 重新启用断点 3</span><br></pre></td></tr></table></figure>
+
+<p>条件断点</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) break *0xffffffff8289260e thread 2 if $r14d == 0x10</span><br><span class="line"># 给现有断点加条件（或修改条件</span><br><span class="line">(gdb) condition 16 $r14d &gt; *(unsigned int*)($rsp + 0x14)</span><br><span class="line"># 删除条件（变成普通断点）</span><br><span class="line">(gdb) condition 16</span><br></pre></td></tr></table></figure>
+
+<h2 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h2><h3 id="查找find"><a href="#查找find" class="headerlink" title="查找find"></a>查找find</h3><p>基础命令形如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find addr_start, addr_end, (内容)</span><br></pre></td></tr></table></figure>
+
+<p>也可以是<code>addr_start, +0x10000（地址范围</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) find /b 0xFFFFFFFF82891E7C, 0xFFFFFFFF82892000, 0xe8, 0x74, 0x54</span><br></pre></td></tr></table></figure>
+
+<h3 id="x-examine"><a href="#x-examine" class="headerlink" title="x (examine)"></a><code>x</code> (examine)</h3><p>基础命令形如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">x/(多少个)(格式) addr</span><br></pre></td></tr></table></figure>
+
+<p>按指令显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/5i 0x12345680</span><br></pre></td></tr></table></figure>
+
+<p>按字节显示十六进制格式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) x/5bx 0x12345680</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/03/06/CTF/Reverse/gdb_notes/image-20260311103639090.png" alt="image-20260311103639090"></p>
+<h3 id="查看寄存器"><a href="#查看寄存器" class="headerlink" title="查看寄存器"></a>查看寄存器</h3><p>info或者p</p>
+<p>查看所有寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(gdb) info all-registers</span><br></pre></td></tr></table></figure>
+
+<p>查看特定寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 查看rax寄存器的值</span><br><span class="line">(gdb) info register rax</span><br><span class="line"># 或简写</span><br><span class="line">(gdb) p $rax</span><br></pre></td></tr></table></figure>
+
+<h2 id="捕捉"><a href="#捕捉" class="headerlink" title="捕捉"></a>捕捉</h2><h3 id="watch"><a href="#watch" class="headerlink" title="watch"></a>watch</h3><p>观察点一般用来观察某个表达式（变量也是一种表达式）的值是否有变化了，如果有变化，则马上停住。</p>
+<h3 id="catch"><a href="#catch" class="headerlink" title="catch"></a>catch</h3><h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>set</p>
+<p>改变某处的指令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set &#123;unsigned char&#125;0xffffffff8280000 = 0xeb</span><br></pre></td></tr></table></figure>
+
+<p>改变寄存器</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set $rax = 0x123456789abcdef0</span><br></pre></td></tr></table></figure>
+
+<h2 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h2><h3 id="线程相关的命令"><a href="#线程相关的命令" class="headerlink" title="线程相关的命令"></a>线程相关的命令</h3><p>查看线程列表</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">info thread</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/03/06/CTF/Reverse/gdb_notes/image-20260311141454326.png" alt="image-20260311141454326"></p>
+<p>切换线程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">thread 4</span><br></pre></td></tr></table></figure>
+
+<p>查看当前线程</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">thread</span><br></pre></td></tr></table></figure>
+
+<p>只在线程2上调试，其他线程冻结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb) thread 2</span><br><span class="line">(gdb) set scheduler-locking on</span><br><span class="line">(gdb) c                           # 只运行线程2</span><br></pre></td></tr></table></figure>
+
+<h3 id="只影响当前线程的命令"><a href="#只影响当前线程的命令" class="headerlink" title="只影响当前线程的命令"></a>只影响当前线程的命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(gdb) next          # 只执行当前线程的下一行</span><br><span class="line">(gdb) step          # 只执行当前线程的下一步</span><br><span class="line">(gdb) finish        # 只完成当前线程的函数</span><br><span class="line">(gdb) set $rax = 0  # 只修改当前线程的寄存器</span><br><span class="line">(gdb) x/10i $pc     # 只看当前线程的指令</span><br></pre></td></tr></table></figure>
+
+<h3 id="对所有线程生效的命令"><a href="#对所有线程生效的命令" class="headerlink" title="对所有线程生效的命令"></a>对所有线程生效的命令</h3><p>输入 continue 时，所有线程都开始运行。哪个线程先遇到事件（断点、信号等），GDB 就会自动切换到那个线程并暂停。</p>
+<p>按下Ctrl+C时，所有线程都会停止，但 GDB 会显示当前线程（通常是收到信号的线程）</p>
+<p>断点（不指明线程时）对所有线程有效。GDB 默认在<strong>全停模式</strong>：当一个线程到达断点时，所有线程都会停止。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(gdb) continue      # 所有线程都会继续运行</span><br><span class="line">(gdb) signal SIGINT # 所有线程都会收到信号</span><br><span class="line">(gdb) b main    # 所有线程都可能触发这个断点</span><br></pre></td></tr></table></figure>
+
+<h3 id="单独对某个（些）线程执行命令-thread-apply"><a href="#单独对某个（些）线程执行命令-thread-apply" class="headerlink" title="单独对某个（些）线程执行命令-thread apply"></a>单独对某个（些）线程执行命令-thread apply</h3><p>不用切换线程的情况下对其他线程进行操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(gdb) thread apply all bt        # 让所有线程执行 bt</span><br><span class="line">(gdb) thread apply 2 5 x/10i $pc # 让线程2和5执行 x/10i $pc</span><br></pre></td></tr></table></figure>
+
+<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># 切换到指定帧（如 #2）</span><br><span class="line">(gdb) frame 2</span><br><span class="line"></span><br><span class="line"># 查看当前帧信息</span><br><span class="line">(gdb) info frame</span><br><span class="line"></span><br><span class="line"># 查看当前帧的局部变量</span><br><span class="line">(gdb) info locals</span><br><span class="line"></span><br><span class="line"># 查看当前帧的参数</span><br><span class="line">(gdb) info args</span><br><span class="line"></span><br><span class="line"># 向上/向下移动一帧</span><br><span class="line">(gdb) up</span><br><span class="line">(gdb) down</span><br></pre></td></tr></table></figure>
+
+
+
+<p>其他</p>
+<p>中止Ctrl+z</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># 方法1：恢复到前台（最常用）</span><br><span class="line">fg</span><br><span class="line"></span><br><span class="line"># 方法2：恢复到后台（继续在后台运行）</span><br><span class="line">bg</span><br><span class="line"></span><br><span class="line"># 方法3：查看后台作业</span><br><span class="line">jobs</span><br><span class="line"># 输出示例：[1]+  Stopped                 sudo gdb ./vmlinux_full.dump.fgt.elf</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="记录record"><a href="#记录record" class="headerlink" title="记录record"></a>记录record</h2><h2 id="了解当前情况的方法"><a href="#了解当前情况的方法" class="headerlink" title="了解当前情况的方法"></a>了解当前情况的方法</h2><p>看不出来运行到哪里了怎么办？（运行太久了我都怀疑是不是已经跑空了）</p>
+<p>在gdb界面按ctrl+c中止一下，程序收到 SIGINT（中断信号），冻结，这时可以进行操作。bt查看栈帧</p>
+<p><img src="/2026/03/06/CTF/Reverse/gdb_notes/image-20260307173724265.png" alt="image-20260307173724265"></p>
+<h2 id="gdb脚本"><a href="#gdb脚本" class="headerlink" title="gdb脚本"></a>gdb脚本</h2><p>使用方法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gdb file</span><br><span class="line">(gdb) source solve.py</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="pwndgb"><a href="#pwndgb" class="headerlink" title="pwndgb"></a>pwndgb</h2><p>breakrva：会自动给加基址偏移，在开了地址随机化的题目里可以用这个下断点</p>
+<p>比如说基址是0x56555000，下断点，会自动计算0x56555000 + 0x152C &#x3D; 0x5655652C：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pwndbg&gt; breakrva 0x152C</span><br><span class="line">Breakpoint 2 at 0x5655652c</span><br></pre></td></tr></table></figure>
+
+<p>rebase：还是加偏移的问题，加上rebase之后地址会自动加上vmmap里的基址</p>
+<p>nearpc：会显示当前指令及其前后各 5-10 条指令，并自动标注跳转方向。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/" title="gdb笔记">https://mintind.github.io/2026/03/06/CTF/Reverse/gdb_notes/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Notes/" rel="tag"># Notes</a>
+              <a href="/tags/GDB/" rel="tag"># GDB</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/04/CTF/Reverse/bindiff/" rel="prev" title="BinDiff">
+                  <i class="fa fa-angle-left"></i> BinDiff
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/07/CTF/Reverse/z3_constraint/" rel="next" title="z3约束求解">
+                  z3约束求解 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/03/06/CTF/Reverse/gdb_notes/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/03/06/CTF/Reverse/gdb_notes/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

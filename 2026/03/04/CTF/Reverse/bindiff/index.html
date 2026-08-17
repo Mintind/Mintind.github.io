@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BinDiff">
+<meta property="og:url" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/image-20260307225958149.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/image-20260307114359825.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/image-20260307114525852.png">
+<meta property="og:image" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/image-20260305144930270.png">
+<meta property="article:published_time" content="2026-03-04T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-04T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="IDA">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/image-20260307225958149.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/","path":"2026/03/04/CTF/Reverse/bindiff/","title":"BinDiff"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>BinDiff | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#IDA-BinDiff"><span class="nav-number">1.</span> <span class="nav-text">IDA-BinDiff</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Matched-Functions"><span class="nav-number">1.1.1.</span> <span class="nav-text">Matched Functions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Statics"><span class="nav-number">1.1.2.</span> <span class="nav-text">Statics</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Primary-unmatch"><span class="nav-number">1.1.3.</span> <span class="nav-text">Primary unmatch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Secondary-Unmatch"><span class="nav-number">1.1.4.</span> <span class="nav-text">Secondary Unmatch</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E7%89%88%E6%9C%AC%E4%B9%8B%E9%97%B4%E8%BF%81%E7%A7%BB%E7%AC%A6%E5%8F%B7%E8%A1%A8%E7%AD%89%E4%BF%A1%E6%81%AF"><span class="nav-number">1.2.1.</span> <span class="nav-text">不同版本之间迁移符号表等信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E4%BF%AE%E8%A1%A5%E5%89%8D%E5%90%8E%E7%89%88%E6%9C%AC%E6%AF%94%E5%AF%B9%EF%BC%8C%E6%89%BE%E5%87%BA%E6%BC%8F%E6%B4%9E%E7%82%B9"><span class="nav-number">1.2.2.</span> <span class="nav-text">漏洞修补前后版本比对，找出漏洞点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%AD%98%E4%B8%8E%E9%87%8D%E7%94%A8"><span class="nav-number">1.3.</span> <span class="nav-text">保存与重用</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="BinDiff | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          BinDiff<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2UvYmluZGlmZi5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-03-05 00:00:00" itemprop="dateCreated datePublished" datetime="2026-03-05T00:00:00+08:00">2026-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>579</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<p>BinDiff 是一款独立工具，可为 SRE（软件逆向工程） 工具提供导出插件。其中一个适用于 IDA、Ghidra 和 BinaryNinja。</p>
+<h2 id="IDA-BinDiff"><a href="#IDA-BinDiff" class="headerlink" title="IDA-BinDiff"></a>IDA-BinDiff</h2><p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLm5zZm9jdXMubmV0L2JpbmRpZmYvJUVGJUJDJTg4JUU5JTk5JUE0JUU0JUJBJTg2JUU2JUFGJTk0JUU1JUFGJUI5JUU3JUJCJTkzJUU2JTlFJTlDJUU4JUE3JUEzJUU2JTlFJTkwJUU0JUI5JThCJUU1JUE0JTk2JUU4JUJGJTk4JUU2JTlDJTg5JUU4JUJGJTg3JUU2JUJCJUE0JUUzJTgwJTgxJUU2JThFJTkyJUU1JUJBJThGJUVGJUJDJThDJUU1JUFGJUJCJUU2JTg5JUJFJUU1JThDJUI5JUU5JTg1JThEJUU0JUJCJUEzJUU3JUEwJTgxJUVGJUJDJTg5">https://blog.nsfocus.net/bindiff/（除了比对结果解析之外还有过滤、排序，寻找匹配代码）<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly8xMjNkb2submV0L2FydGljbGUvdXNpbmctYmluZGlmZi1tYWx3YXJlLWFuYWx5c3Qtcy1jb29rYm9vay1hbmQtZHZkLnlyM2o4d2o4P3V0bV9zb3VyY2U9Y2hhdGdwdC5jb20=">Using BinDiff - Malware Analyst’s Cookbook and DVD<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>使用前需要先获得两个二进制文件的IDA数据库（.i64）文件（用IDA打开并保存数据库）</p>
+<p><strong>Primary File基准文件：当前使用IDA打开的文件</strong></p>
+<p><strong>Secondary File对比文件：选择的要与之比较的文件</strong></p>
+<p>假设当前文件是new.i64（Primary File），在Edit-&gt;Plugins-&gt;BinDiff (Ctrl-6)-&gt;Diff Database-&gt;选中old.i64（Secondary File）。diff完成会出现四个窗口：</p>
+<h4 id="Matched-Functions"><a href="#Matched-Functions" class="headerlink" title="Matched Functions"></a><strong>Matched Functions</strong></h4><p>匹配的函数</p>
+<p><strong>参数含义</strong>：</p>
+<p>单行颜色：越绿表示相似度最高，越红表示相似度越低<br>Similarity：[0,1]区间的值，指明new与old的相似度。1表示完全一样。缺省对Similarity降序排列显示<br>Confidence：[0,1]区间的值，指明Similarity的可信度，值越接近1表示Similarity可信度越高。Confidence实际代表了识别算法的强弱。<br>高Similarity、低Confidence表示一个弱算法找到一个强匹配；低 Similarity、高Confidence表示一个强算法找到一个弱匹配。显然，强算法找到的强匹配是最佳匹配</p>
+<p><img src="/2026/03/04/CTF/Reverse/bindiff/image-20260307225958149.png" alt="image-20260307225958149"></p>
+<h4 id="Statics"><a href="#Statics" class="headerlink" title="Statics"></a><strong>Statics</strong></h4><p>A summary of the overall similarity between the two files Matched functions</p>
+<p><img src="/2026/03/04/CTF/Reverse/bindiff/image-20260307114359825.png" alt="image-20260307114359825"></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Primary函数：<span class="number">41565</span></span><br><span class="line">Secondary函数：<span class="number">41844</span></span><br><span class="line">匹配函数：<span class="number">41565</span></span><br></pre></td></tr></table></figure>
+
+<p>Primary全部函数都找到了匹配，Secondary多了279个函数</p>
+<p><img src="/2026/03/04/CTF/Reverse/bindiff/image-20260307114525852.png" alt="image-20260307114525852"></p>
+<p>Similarity表示两个程序结构相似度，Confidence表示匹配可靠度</p>
+<h4 id="Primary-unmatch"><a href="#Primary-unmatch" class="headerlink" title="Primary unmatch"></a><strong>Primary unmatch</strong></h4><p>主文件中的未匹配。在Primary File中存在，在Secondary File中未找到匹配</p>
+<h4 id="Secondary-Unmatch"><a href="#Secondary-Unmatch" class="headerlink" title="Secondary Unmatch"></a><strong>Secondary Unmatch</strong></h4><p>对比文件中的不匹配。在Secondary File中存在，在Primary File中未找到匹配</p>
+<p><img src="/2026/03/04/CTF/Reverse/bindiff/image-20260305144930270.png" alt="image-20260305144930270"></p>
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="不同版本之间迁移符号表等信息"><a href="#不同版本之间迁移符号表等信息" class="headerlink" title="不同版本之间迁移符号表等信息"></a>不同版本之间迁移符号表等信息</h4><p>用BinDiff迁移符号的要点是，先打开new，再比较old，最后右键Import符号</p>
+<h4 id="漏洞修补前后版本比对，找出漏洞点"><a href="#漏洞修补前后版本比对，找出漏洞点" class="headerlink" title="漏洞修补前后版本比对，找出漏洞点"></a>漏洞修补前后版本比对，找出漏洞点</h4><h3 id="保存与重用"><a href="#保存与重用" class="headerlink" title="保存与重用"></a>保存与重用</h3><p>保存后得到的文件形如<code>Primary File_vs_Secondary File.BinDiff</code></p>
+<p>再次打开bindiff文件，需要先用IDA打开Primary File，然后Edit-&gt;Plugins-&gt;BinDiff，选择<code>Load Results...</code>，然后选中保存的文件（略麻烦）</p>
+<p>也可以直接使用BinDiff的GUI打开</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/" title="BinDiff">https://mintind.github.io/2026/03/04/CTF/Reverse/bindiff/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/IDA/" rel="tag"># IDA</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/03/Notes/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/" rel="prev" title="文献阅读笔记">
+                  <i class="fa fa-angle-left"></i> 文献阅读笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/06/CTF/Reverse/gdb_notes/" rel="next" title="gdb笔记">
+                  gdb笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/03/04/CTF/Reverse/bindiff/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/03/04/CTF/Reverse/bindiff/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

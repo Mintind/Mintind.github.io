@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能计算系统复习第三章">
+<meta property="og:url" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142135605.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142353248.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142603337.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142858964.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612145441313.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612152437894.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612152653022.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612153451309.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612153750577.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612160409236.png">
+<meta property="article:published_time" content="2026-06-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-11T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142135605.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/","path":"2026/06/11/UCAS/智能计算系统/笔记/第三章笔记/","title":"智能计算系统复习第三章"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>智能计算系统复习第三章 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%BA%94%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">第三章 深度学习应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88CNN%EF%BC%89"><span class="nav-number">1.1.</span> <span class="nav-text">卷积神经网络（CNN）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.</span> <span class="nav-text">网络结构</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E5%B1%82"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">卷积层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E5%B1%82%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E7%89%B9%E5%BE%81"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">卷积层如何检测特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B1%A0%E5%8C%96%E5%B1%82%EF%BC%88Pooling-Layer%EF%BC%89"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">池化层（Pooling Layer）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E8%BF%9E%E6%8E%A5%E5%B1%82"><span class="nav-number">1.1.1.5.</span> <span class="nav-text">全连接层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Softmax"><span class="nav-number">1.1.1.6.</span> <span class="nav-text">Softmax</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%EF%BC%88CNN%EF%BC%89%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.1.7.</span> <span class="nav-text">卷积神经网络结构（CNN）结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.2.</span> <span class="nav-text">初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%8F%E6%9C%BA%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">随机初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Xavier%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">Xavier初始化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Kaiming%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.2.3.</span> <span class="nav-text">Kaiming初始化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D"><span class="nav-number">1.1.3.</span> <span class="nav-text">梯度下降</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D%E6%B3%95GD"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">梯度下降法GD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mini-batch-SGD"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">Mini-batch SGD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A8%E9%87%8FMomentum"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">动量Momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nesterov-Accelerated-Gradient-NAG"><span class="nav-number">1.1.3.4.</span> <span class="nav-text">Nesterov Accelerated Gradient (NAG)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87"><span class="nav-number">1.1.4.</span> <span class="nav-text">学习率</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaGrad"><span class="nav-number">1.1.4.1.</span> <span class="nav-text">AdaGrad</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AdaDelta"><span class="nav-number">1.1.4.2.</span> <span class="nav-text">AdaDelta</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSProp"><span class="nav-number">1.1.4.3.</span> <span class="nav-text">RMSProp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">1.1.4.4.</span> <span class="nav-text">Adam</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AdamW"><span class="nav-number">1.1.4.5.</span> <span class="nav-text">AdamW</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.1.5.</span> <span class="nav-text">图像分类的卷积神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%A7%88"><span class="nav-number">1.1.5.1.</span> <span class="nav-text">概览</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%AF%B9%E6%AF%94"><span class="nav-number">1.1.5.2.</span> <span class="nav-text">任务对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">目标检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%84%E6%B5%8B%E6%8C%87%E6%A0%87"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">评测指标</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8ECNN%E7%9A%84%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB"><span class="nav-number">1.1.6.2.</span> <span class="nav-text">基于CNN的目标检测算法分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN"><span class="nav-number">1.1.6.3.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#One-Stage%EF%BC%9AYOLO"><span class="nav-number">1.1.6.4.</span> <span class="nav-text">One-Stage：YOLO</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E7%9A%84%E5%8D%B7%E7%A7%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.1.7.</span> <span class="nav-text">图像生成的卷积神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Driving-Example%EF%BC%9A%E5%9B%BE%E5%83%8F%E9%A3%8E%E6%A0%BC%E8%BF%81%E7%A7%BB%EF%BC%88Image-Style-Transfer%EF%BC%89"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">Driving Example：图像风格迁移（Image Style Transfer）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.7.2.</span> <span class="nav-text">图像生成模型概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C%EF%BC%88GAN%EF%BC%89"><span class="nav-number">1.1.7.3.</span> <span class="nav-text">生成对抗网络（GAN）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%82%E5%90%88%E8%AF%AD%E9%9F%B3-%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E7%9A%84%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89"><span class="nav-number">1.2.</span> <span class="nav-text">适合语音&#x2F;文本处理的循环神经网络（RNN）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BE%AA%E7%8E%AF%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%EF%BC%88RNN%EF%BC%89%EF%BC%88%E5%8E%9F%E5%A7%8B%E7%A7%8D%EF%BC%89"><span class="nav-number">1.2.1.</span> <span class="nav-text">循环神经网络（RNN）（原始种）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">语言模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">文本处理流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RNN%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">RNN结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RNN%E7%9A%84%E6%A2%AF%E5%BA%A6%E6%B6%88%E5%A4%B1%E4%B8%8E%E6%A2%AF%E5%BA%A6%E7%88%86%E7%82%B8"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">RNN的梯度消失与梯度爆炸</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86%E6%A8%A1%E5%9E%8B%EF%BC%88LSTM%EF%BC%89"><span class="nav-number">1.2.2.</span> <span class="nav-text">长短期记忆模型（LSTM）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%A8%E6%8E%A7%E5%BE%AA%E7%8E%AF%E5%8D%95%E5%85%83%EF%BC%88GRU%EF%BC%89"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">门控循环单元（GRU）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%88%B0%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.</span> <span class="nav-text">从深度学习到大模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Seq2Seq%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">Seq2Seq模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.2.</span> <span class="nav-text">注意力机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">基本注意力机制</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%A9%E6%94%BE%E7%82%B9%E7%A7%AF%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%88Scaled-Dot-Product-Attention%EF%BC%89"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">缩放点积注意力（Scaled Dot-Product Attention）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%88Self-Attention%EF%BC%89"><span class="nav-number">1.3.2.3.</span> <span class="nav-text">自注意力（Self-Attention）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B%EF%BC%88Multi-Head-Attention%EF%BC%89"><span class="nav-number">1.3.2.4.</span> <span class="nav-text">多头注意力（Multi-Head Attention）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Transformer"><span class="nav-number">1.3.3.</span> <span class="nav-text">Transformer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">整体架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%EF%BC%88Encoder%EF%BC%89"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">编码器（Encoder）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8%EF%BC%88Decoder%EF%BC%89"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">解码器（Decoder）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BE%93%E5%87%BA"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">输出</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80%E5%A4%84%E7%90%86%E5%A4%A7%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.3.4.</span> <span class="nav-text">自然语言处理大模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E7%A7%8D%E6%9E%B6%E6%9E%84"><span class="nav-number">1.3.4.1.</span> <span class="nav-text">三种架构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#BERT%EF%BC%88Encoder-Only%EF%BC%89"><span class="nav-number">1.3.4.2.</span> <span class="nav-text">BERT（Encoder-Only）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#GPT%E7%B3%BB%E5%88%97"><span class="nav-number">1.3.4.2.1.</span> <span class="nav-text">GPT系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Llama%E7%B3%BB%E5%88%97"><span class="nav-number">1.3.4.2.2.</span> <span class="nav-text">Llama系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#DeepSeek%E7%B3%BB%E5%88%97"><span class="nav-number">1.3.4.2.3.</span> <span class="nav-text">DeepSeek系列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Decoder-Only%E6%88%90%E4%B8%BA%E4%B8%BB%E6%B5%81%E7%9A%84%E5%8E%9F%E5%9B%A0%E6%8E%A2%E8%AE%A8"><span class="nav-number">1.3.4.2.4.</span> <span class="nav-text">Decoder-Only成为主流的原因探讨</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%AD%E7%9A%84%E5%87%BD%E6%95%B0-%E6%96%B9%E6%B3%95%E5%8F%98%E4%BD%93"><span class="nav-number">1.3.4.3.</span> <span class="nav-text">大模型中的函数&#x2F;方法变体</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.4.3.1.</span> <span class="nav-text">激活函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">1.3.4.3.2.</span> <span class="nav-text">归一化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E5%8F%98%E4%BD%93"><span class="nav-number">1.3.4.3.3.</span> <span class="nav-text">注意力变体</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#KV-cache"><span class="nav-number">1.3.4.3.4.</span> <span class="nav-text">KV cache</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Test-time-Scaling%EF%BC%88TTS%EF%BC%89"><span class="nav-number">1.3.4.4.</span> <span class="nav-text">Test-time Scaling（TTS）</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="智能计算系统复习第三章 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          智能计算系统复习第三章<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v56yU6K6wL+esrOS4ieeroOeslOiusC5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-12 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-12T00:00:00+08:00">2026-06-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>9.5k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h1 id="第三章-深度学习应用"><a href="#第三章-深度学习应用" class="headerlink" title="第三章 深度学习应用"></a>第三章 深度学习应用</h1><h2 id="卷积神经网络（CNN）"><a href="#卷积神经网络（CNN）" class="headerlink" title="卷积神经网络（CNN）"></a>卷积神经网络（CNN）</h2><h3 id="网络结构"><a href="#网络结构" class="headerlink" title="网络结构"></a>网络结构</h3><p>不是所有像素之间都有联系→没必要用全连接</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142135605.png" alt="image-20260612142135605"></p>
+<h4 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h4><p><strong>卷积核（Filter&#x2F;Kernel）</strong>：一个小尺寸的权重矩阵，在输入图像上滑动进行<strong>局部连接</strong>和<strong>权值共享</strong>。</p>
+<p><strong>局部连接</strong>（Local Connectivity）：每个神经元只与输入的一个局部区域（感受野）连接，而非全连接。</p>
+<p><strong>权值共享</strong>（Weight Sharing）：同一个卷积核在整个图像上共享权重，大幅减少参数量。</p>
+<p>可有效减少权重参数，避免过拟合，为增加卷积层数提供可能</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142353248.png" alt="image-20260612142353248"></p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142603337.png" alt="image-20260612142603337"></p>
+<p>卷积运算可转换为矩阵相乘：</p>
+<ol>
+<li>卷积的相乘再相加过程可转换为向量内积</li>
+<li>多输入输出通道卷积可转换为矩阵相乘</li>
+</ol>
+<h4 id="卷积层如何检测特征"><a href="#卷积层如何检测特征" class="headerlink" title="卷积层如何检测特征"></a>卷积层如何检测特征</h4><p>卷积核的选择</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612142858964.png" alt="image-20260612142858964"></p>
+<h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>卷积核大小</strong>（Kernel Size）</td>
+<td>通常为3x3、5x5等</td>
+</tr>
+<tr>
+<td><strong>步长</strong>（Stride）</td>
+<td>卷积核滑动的步长</td>
+</tr>
+<tr>
+<td><strong>填充</strong>（Padding）</td>
+<td>在输入边缘填充像素（如零填充）</td>
+</tr>
+</tbody></table>
+<p>输入尺寸：$H \times W$，卷积核尺寸：$K \times K$，填充：$P$，步长：$S$</p>
+<p>$$<br>output &#x3D; \left( \left\lfloor \frac{H + 2p - K}{s} \right\rfloor + 1 \right) \times \left( \left\lfloor \frac{W + 2p - K}{s} \right\rfloor + 1 \right)<br>$$</p>
+<h4 id="池化层（Pooling-Layer）"><a href="#池化层（Pooling-Layer）" class="headerlink" title="池化层（Pooling Layer）"></a>池化层（Pooling Layer）</h4><ul>
+<li><strong>降维</strong>：减少图片尺寸，降低计算量</li>
+<li>减少参数量和计算量，防止过拟合</li>
+<li>提供<strong>平移不变性</strong></li>
+<li>不引入额外参数</li>
+</ul>
+<p><strong>最大池化</strong>（Max Pooling）：取池化窗口内的最大值，可保留特征最大值，提高特征鲁棒性。</p>
+<p><strong>平均池化</strong>（Average Pooling）：取池化窗口内的平均值。</p>
+<h4 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h4><p><strong>卷积层和池化层构成特征提取器，全连接层则为分类器</strong><br>将特征提取得到的<strong>高维特征图映射成一维特征向</strong>量，该特征向量包含所有特征信息，可转化为各个类别的概率</p>
+<h4 id="Softmax"><a href="#Softmax" class="headerlink" title="Softmax"></a>Softmax</h4><p>通常作为网络的最后一层，对输出进行归一化，<strong>输出分类概率</strong>：</p>
+<p>$$\text{softmax}(x_i) &#x3D; \frac{e^{x_i}}{\sum_{j&#x3D;0}^{K} e^{x_j}}$$</p>
+<p>凸显其中最大的值并抑制远低于最大值的其他分量。Softmax层的输入、输出数据规模相同。</p>
+<h4 id="卷积神经网络结构（CNN）结构"><a href="#卷积神经网络结构（CNN）结构" class="headerlink" title="卷积神经网络结构（CNN）结构"></a>卷积神经网络结构（CNN）结构</h4><p>为什么选择”深”而非”广”的结构：</p>
+<p>即使只有一层隐层，只要有足够的神经元，神经网络理论上可以拟合任意连续函数。但深层网络更好，因为：</p>
+<ul>
+<li>深度网络可从<strong>局部到整体”理解图像”</strong>：浅层卷积层感受野小，学习局部特征；深层卷积层感受野大，学习整体特征</li>
+<li>深度网络可<strong>减少权重数量</strong>：以宽度换深度，用多个小卷积替代一个大卷积，获得更多样特征的同时所需权重数量也更少</li>
+</ul>
+<h3 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h3><h4 id="随机初始化"><a href="#随机初始化" class="headerlink" title="随机初始化"></a>随机初始化</h4><p><strong>均匀分布初始化</strong>：从均匀分布 <code>U(-a, a)</code> 中随机抽取值来初始化参数值。</p>
+<p><strong>正态分布初始化</strong>：通常使用均值为0、标准差为σ的正态分布 <code>N(0, σ²)</code> 生成参数值。</p>
+<h4 id="Xavier初始化"><a href="#Xavier初始化" class="headerlink" title="Xavier初始化"></a>Xavier初始化</h4><p><strong>Glorot条件</strong>：为保证神经网络模型的稳定性和有效性，避免梯度消失或梯度爆炸，需满足两个条件：</p>
+<ol>
+<li>前向传播时，<strong>每一层的输入的方差保持一致</strong></li>
+<li>反向传播时，每一层的梯度的方差保持一致</li>
+</ol>
+<p>第 <code>i</code> 层权重 <code>W_i</code> 的方差需满足：</p>
+<p>$$Var[W_i] &#x3D; \frac{2}{n_i + n_{i+1}}$$</p>
+<ul>
+<li>满足均匀分布的权重初值：$$W \sim U\left[-\frac{\sqrt{6}}{\sqrt{n_i + n_{i+1}}}, \frac{\sqrt{6}}{\sqrt{n_i + n_{i+1}}}\right]$$</li>
+<li>满足正态分布的权重初值：$$W \sim N\left(0, \frac{2}{n_i + n_{i+1}}\right)$$</li>
+</ul>
+<p>其中 <code>n_i</code> 表示第 <code>i</code> 层中包含的神经元个数。Xavier方法适用于关于0对称、在原点处具有单位导数的激活函数（如tanh）。</p>
+<h4 id="Kaiming初始化"><a href="#Kaiming初始化" class="headerlink" title="Kaiming初始化"></a>Kaiming初始化</h4><p>对于ReLU、PReLU这种非对称的激活函数，Xavier方法效果并不好。Kaiming初始化在满足Glorot条件的基础上，考虑使用ReLU激活函数情况：</p>
+<p>第 <code>i</code> 层权重 <code>W_i</code> 的方差需满足：</p>
+<p>$$Var[W_i] &#x3D; \frac{2}{n_i}$$</p>
+<ul>
+<li>均匀分布：$$W \sim U\left[-\frac{\sqrt{6}}{\sqrt{n_i}}, \frac{\sqrt{6}}{\sqrt{n_i}}\right]$$</li>
+<li>正态分布：$$W \sim N\left(0, \frac{2}{n_i}\right)$$</li>
+</ul>
+<p>适用于具有ReLU激活函数的神经网络，在计算机视觉任务上应用较多</p>
+<h3 id="梯度下降"><a href="#梯度下降" class="headerlink" title="梯度下降"></a>梯度下降</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>更新梯度</th>
+<th>计算梯度的样本</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>GD</td>
+<td>theta &lt;- theta - alpha * grad_theta L</td>
+<td>全部训练样本</td>
+<td>计算复杂度高</td>
+</tr>
+<tr>
+<td>SGD</td>
+<td>theta &lt;- theta - alpha * grad_theta L_i</td>
+<td>随机抽取一个样本</td>
+<td>随机性过大，优化效率低</td>
+</tr>
+<tr>
+<td>Mini-batch SGD</td>
+<td>theta &lt;- theta - alpha * (1&#x2F;B)sum(grad_theta L_i)</td>
+<td>随机抽取的mini-batch样本</td>
+<td>计算复杂度低，优化效率高</td>
+</tr>
+</tbody></table>
+<h4 id="梯度下降法GD"><a href="#梯度下降法GD" class="headerlink" title="梯度下降法GD"></a>梯度下降法GD</h4><p>原理：损失函数关于参数𝐀的负梯度方向是损失函数下降最快的方向，因此用负梯度方向对参数进行更新</p>
+<h4 id="Mini-batch-SGD"><a href="#Mini-batch-SGD" class="headerlink" title="Mini-batch SGD"></a>Mini-batch SGD</h4><ul>
+<li>目前深度学习领域的SGD通常指mini-batch随机梯度下降法</li>
+<li>SGD的缺点：选择合适的学习率十分困难；容易收敛到局部最优点，可能困在鞍点</li>
+</ul>
+<h4 id="动量Momentum"><a href="#动量Momentum" class="headerlink" title="动量Momentum"></a>动量Momentum</h4><ul>
+<li>目的：通过积累历史梯度，减小梯度方向的改变，抑制梯度的震荡，加快收敛速度</li>
+</ul>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612145441313.png" alt="image-20260612145441313"></p>
+<h4 id="Nesterov-Accelerated-Gradient-NAG"><a href="#Nesterov-Accelerated-Gradient-NAG" class="headerlink" title="Nesterov Accelerated Gradient (NAG)"></a>Nesterov Accelerated Gradient (NAG)</h4><ul>
+<li>添加矫正因子的Momentum</li>
+<li>原理：先用当前速度更新一遍参数，再用更新的临时参数计算梯度</li>
+<li>相比Momentum梯度方向更加稳定，进一步减少震荡</li>
+</ul>
+<h3 id="学习率"><a href="#学习率" class="headerlink" title="学习率"></a>学习率</h3><h4 id="AdaGrad"><a href="#AdaGrad" class="headerlink" title="AdaGrad"></a>AdaGrad</h4><p>使每个参数获得不同的学习率</p>
+<p>原理：全局学习率除以历史梯度平方和的平方根，使得每个参数学习率不同</p>
+<ul>
+<li>对更新频率高的参数使用小学习率，更新频率低的参数使用大学习率</li>
+<li>优势：对稀疏梯度效果好，稳定性高</li>
+<li>局限性：训练后期学习率快速缩小，导致参数更新提前停止</li>
+</ul>
+<h4 id="AdaDelta"><a href="#AdaDelta" class="headerlink" title="AdaDelta"></a>AdaDelta</h4><ul>
+<li>AdaGrad的改进：不是累积所有过去的梯度，而是将<strong>累积窗口限制在固定大小</strong></li>
+<li>使用最近梯度的局部估计，缓解学习率快速衰减的问题</li>
+</ul>
+<h4 id="RMSProp"><a href="#RMSProp" class="headerlink" title="RMSProp"></a>RMSProp</h4><ul>
+<li>AdaGrad的改进：增加<strong>衰减系数控制历史梯度的积累量</strong>，对梯度计算指数衰减的移动平均</li>
+<li>优势：缓解AdaGrad训练后期学习率快速减小的问题，善于处理非平稳目标</li>
+<li>目前常用在训练RNN相关的深度学习模型中</li>
+</ul>
+<h4 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h4><p>带有动量项的RMSProp</p>
+<p>利用梯度的一阶矩估计和二阶矩估计动态调整每个参数的学习率</p>
+<ul>
+<li>结合了AdaGrad善于处理稀疏梯度和RMSProp善于处理非平稳目标的优点</li>
+<li>适用于大多非凸优化、大数据集和高维空间，训练稳定，收敛速度快</li>
+</ul>
+<h4 id="AdamW"><a href="#AdamW" class="headerlink" title="AdamW"></a>AdamW</h4><ul>
+<li>改进版Adam：权重衰减与梯度更新步骤解耦</li>
+<li><strong>解耦了权重衰减与优化器的更新过程</strong>（把权重衰减从梯度更新中拆出来单独做，权重衰减不再受自适应学习率缩放的影响），防止过拟合</li>
+</ul>
+<h3 id="图像分类的卷积神经网络"><a href="#图像分类的卷积神经网络" class="headerlink" title="图像分类的卷积神经网络"></a>图像分类的卷积神经网络</h3><h4 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h4><table>
+<thead>
+<tr>
+<th>网络</th>
+<th>年份</th>
+<th>层数</th>
+<th>参数量</th>
+<th>Top-5 错误率</th>
+<th>主要贡献</th>
+<th>存在的问题</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LeNet-5</td>
+<td>1998</td>
+<td>5</td>
+<td>—</td>
+<td>—</td>
+<td>首个手写字体识别 CNN</td>
+<td>—</td>
+</tr>
+<tr>
+<td>AlexNet</td>
+<td>2012</td>
+<td>8</td>
+<td>60M</td>
+<td>15.3%</td>
+<td>使用 ReLU 激活函数（收敛速度快）；LRN 局部归一化；MaxPool；Dropout 防止过拟合；数据增强</td>
+<td>LRN 后来被研究者发现无明显效果，现很少使用</td>
+</tr>
+<tr>
+<td>VGG16</td>
+<td>2014</td>
+<td>16</td>
+<td>138M</td>
+<td>7.5% (VGG)</td>
+<td>规整的卷积-池化结构（kernel&#x3D;3×3, stride&#x3D;1, pad&#x3D;SAME）；多层小卷积替代大卷积减少参数，且相同感受野下决策区分能力更强；由浅网络预初始化深网络加速收敛</td>
+<td>参数量大（138M），计算开销高</td>
+</tr>
+<tr>
+<td>VGG19</td>
+<td>2014</td>
+<td>19</td>
+<td>143M</td>
+<td>—</td>
+<td>同上，层数更深</td>
+<td>参数量更大</td>
+</tr>
+<tr>
+<td>GoogLeNet (Inception-v1)</td>
+<td>2014</td>
+<td>22</td>
+<td>7M</td>
+<td>6.67%</td>
+<td>提出 Inception 结构叠加多种卷积&#x2F;池化获得多尺度特征；1×1 卷积降维（瓶颈层）大幅减少参数量；Softmax 辅助分类器防止梯度消失</td>
+<td>结构较复杂</td>
+</tr>
+<tr>
+<td>BN-Inception</td>
+<td>2015</td>
+<td>—</td>
+<td>—</td>
+<td>4.82%</td>
+<td>提出 <strong>Batch Normalization</strong> 替代 LRN&#x2F;Dropout&#x2F;L2；用两个 3×3 替代 5×5 卷积；提高收敛速度和训练速度，可用更高学习率</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Inception-v3</td>
+<td>2015</td>
+<td>42</td>
+<td>23.9M</td>
+<td>3.5%</td>
+<td>Factorization 思想：将 3×3 卷积拆分为 1×3 和 3×1，减少参数并增加特征多样性；辅助分类器全连接层做 BN</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Inception-v4</td>
+<td>2016</td>
+<td>—</td>
+<td>—</td>
+<td>3.08%</td>
+<td>Inception 模块化，结合 ResNet 的跳转结构</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ResNet-18</td>
+<td>2015</td>
+<td>18</td>
+<td>11.7M</td>
+<td>—</td>
+<td>提出<strong>残差学习</strong>（Residual Learning），跳转连接解决深层网络退化问题；残差块：CNN 拟合差值 output−input，对数据波动更灵敏</td>
+<td>—</td>
+</tr>
+<tr>
+<td>ResNet-152</td>
+<td>2015</td>
+<td>152</td>
+<td>60.2M</td>
+<td>3.57%</td>
+<td>同上，极深网络也能有效训练</td>
+<td>层数过多，推理延迟高</td>
+</tr>
+</tbody></table>
+<h4 id="任务对比"><a href="#任务对比" class="headerlink" title="任务对比"></a>任务对比</h4><table>
+<thead>
+<tr>
+<th></th>
+<th>分类</th>
+<th>定位+分类</th>
+<th>目标检测</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>输入</td>
+<td>single and big object</td>
+<td>single and big object</td>
+<td>multi and small object</td>
+</tr>
+<tr>
+<td>输出</td>
+<td>label</td>
+<td>label &amp; bounding box</td>
+<td>multi label &amp; bounding box</td>
+</tr>
+<tr>
+<td>评价</td>
+<td>accuracy (top1&#x2F;top5)</td>
+<td>IoU (交并比)</td>
+<td>mAP (平均精度均值)</td>
+</tr>
+</tbody></table>
+<h3 id="目标检测"><a href="#目标检测" class="headerlink" title="目标检测"></a>目标检测</h3><h4 id="评测指标"><a href="#评测指标" class="headerlink" title="评测指标"></a>评测指标</h4><p><strong>IoU（交并比）</strong>：衡量定位准确度，一般 IoU &gt;&#x3D; 0.5 可认为定位成功。</p>
+<p>$$\text{IoU} &#x3D; \frac{\text{Area of Overlap}}{\text{Area of Union}}$$</p>
+<p><strong>mAP（平均精度均值）</strong>：</p>
+<ul>
+<li>召回率&#x2F;查全率 (Recall) &#x3D; TP &#x2F; (TP + FN) &#x3D; k &#x2F; M</li>
+<li>精度&#x2F;查准率 (Precision) &#x3D; TP &#x2F; (TP + FP) &#x3D; k &#x2F; N</li>
+<li>选择的样本数越多，召回率越高，查准率越低</li>
+</ul>
+<p>AP：对每个 recall 值，取最大的 precision 求平均</p>
+<p>mAP：所有类别的 AP 取均值</p>
+<h4 id="基于CNN的目标检测算法分类"><a href="#基于CNN的目标检测算法分类" class="headerlink" title="基于CNN的目标检测算法分类"></a>基于CNN的目标检测算法分类</h4><ul>
+<li><strong>两阶段（Two-Stage）算法</strong>：基于候选区域方法，先产生边界框，再做 CNN 分类（R-CNN 系列）</li>
+<li><strong>一阶段（One-Stage）算法</strong>：对输入图像直接处理，同时输出定位及其类别（YOLO 系列、SSD）</li>
+</ul>
+<h4 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h4><p><strong>R-CNN 主要步骤</strong>：</p>
+<ol>
+<li>候选区域提取：Selective Search 从输入图片提取约2000个候选区域</li>
+<li>特征提取：所有候选区域裁切缩放为固定大小后，用 AlexNet 提取图像特征</li>
+<li>线性分类：特定类别的线性 SVM 对每个候选区域做分类</li>
+<li>BBox 回归：线性回归修正边界框位置与大小</li>
+</ol>
+<p><strong>R-CNN 缺点</strong>：重复计算（2000个候选框各自做 CNN）；SVM 在数据充足时非最优选择；多个步骤分散，中间数据需保存；检测速度慢（GPU 13秒&#x2F;帧，CPU 53秒&#x2F;帧）。</p>
+<p><strong>非极大值抑制（NMS）</strong>：</p>
+<p>R-CNN问题：同一目标的位置可能产生多个候选框，而这些候选框之间可能会有重叠</p>
+<p>按检测得分排序 → 选最高分框 $M$ 加入输出 → 计算 $M$ 与其余框的 IoU → 删除 IoU &gt; 阈值的框 → 重复直至候选框列表为空。</p>
+<p><strong>Fast R-CNN 改进</strong>：</p>
+<ul>
+<li><strong>直接对整张图像做卷积</strong>，不再对每个候选区域分别做卷积，减少大量重复计算</li>
+<li>用 ROI Pooling 对不同候选框的特征进行尺寸归一化</li>
+<li>将边界框回归器放进网络一起训练，每个类别对应一个回归器</li>
+<li>用 Softmax 代替 SVM 分类器</li>
+</ul>
+<p><strong>ROI Pooling</strong>：将不同尺寸的 ROI 对应的卷积特征图转换为固定大小的特征图。输出尺寸与输入尺寸无关。</p>
+<p><strong>Faster R-CNN</strong> &#x3D; 候选区域生成网络RPN + Fast R-CNN。引入 RPN 直接在特征图上生成候选区域。（选框也改成卷积）</p>
+<ul>
+<li><strong>Anchor机制</strong>：feature map 每个位置输出 9 个可能的候选框（3种面积 128x128&#x2F;256x256&#x2F;512x512 × 3种长宽比 2:1&#x2F;1:2&#x2F;1:1）</li>
+<li>每个位置输出 2k 个得分（前景&#x2F;背景概率）和 4k 个框位置参数 [x, y, w, h]</li>
+<li>RPN 步骤：3x3 卷积 → 分两路（softmax 二分类前景&#x2F;背景 + bbox regression）→ NMS 去除冗余 → 输出候选区域</li>
+</ul>
+<p><strong>FPN（Feature Pyramid Networks）</strong>：</p>
+<ul>
+<li>问题：卷积操作拥有固定感受野，难以稳健地面对尺度多变的目标</li>
+<li>方法：Backbone 自下而上生成多尺度特征图 → 自上而下融合高层语义特征与低层特征</li>
+<li>显著提升了 Faster R-CNN 在小目标和中目标上的性能</li>
+</ul>
+<h4 id="One-Stage：YOLO"><a href="#One-Stage：YOLO" class="headerlink" title="One-Stage：YOLO"></a>One-Stage：YOLO</h4><p><strong>YOLO（You Only Look Once）</strong>：将目标检测问题转换为<strong>直接从图像中提取 bbox 和类别概率的单一回归问题</strong>。YOLO 开创了 one-stage 检测的先河，实现了端到端的目标检测，速度达到 45 帧&#x2F;秒。</p>
+<p><strong>统一检测具体实现</strong>：</p>
+<ul>
+<li>将输入图像分为 SxS 个格子</li>
+<li>每个格子预测 B 个 bbox</li>
+<li>每个 bbox 包含 5 个预测值：x, y, w, h 和 confidence</li>
+<li>confidence 综合考虑目标存在可能性 Pr(Object) 和定位准确性 IoU(pred|truth)</li>
+</ul>
+<p>$$\text{confidence} &#x3D; \text{Pr}(\text{Object}) \times \text{IoU}_{\text{pred}}^{\text{truth}}$$</p>
+<p>每个格子还要预测分别属于 C 种类别的条件概率 Pr(Class|Object)。最终某 bbox 的类别置信度为：</p>
+<p>$$\text{Pr}(\text{Class}<em>i|\text{Object}) \times \text{Pr}(\text{Object}) \times \text{IoU}</em>{\text{pred}}^{\text{truth}} &#x3D; \text{Pr}(\text{Class}<em>i) \times \text{IoU}</em>{\text{pred}}^{\text{truth}}$$</p>
+<p>最终输出 tensor 维度：$S \times S \times (B \times 5 + C)$。PASCAL VOC 中 S&#x3D;7, B&#x3D;2, C&#x3D;20，输出 7x7x30。</p>
+<p><strong>YOLO(v1)优点</strong>：</p>
+<ol>
+<li>检测速度快（Titan X GPU 上 45 FPS，Fast YOLO 可达 155 FPS）</li>
+<li>背景误判少（每个 cell 使用全局信息做预测）</li>
+<li>泛化性更好（学习到目标的泛化表示，能迁移到其他领域）</li>
+</ol>
+<p><strong>YOLO(v1)缺点</strong>：</p>
+<ol>
+<li>邻近物体检测精度低（每个 cell 只预测两个 bbox 和一个分类）</li>
+<li>损失函数设计过于简单（用坐标和分类的 MSE 作为损失函数不合理）</li>
+<li>训练不易收敛（直接预测 bbox 位置，相比预测偏移量，模型收敛不稳定）</li>
+</ol>
+<p><strong>YOLO v2&#x2F;v3&#x2F;v4 拓展</strong>：</p>
+<ul>
+<li>v2：提高训练图像分辨率，引入 anchor box 思想，使用 Darknet-19 网络</li>
+<li>v3：类似 FPN 的多尺度预测，Darknet-53（结合 ResNet），Sigmoid 代替 Softmax 用于多标签分类</li>
+<li>v4：FPN+PAN 多尺度结构，引入加权残差连接（WRC）、跨阶段部分连接（CSP）、跨批量标准化（CmBN）、自对抗训练（SAT）、Mish 激活函数等技巧</li>
+</ul>
+<p><strong>YOLOv5</strong>：</p>
+<ul>
+<li>Backbone：类似 ResNet，由 1 个 Stem Layer 和 4 个 Stage Layer 组成</li>
+<li>Neck：FPN + PAN（FPN 自顶向下传递强语义特征，PAN 自底向上传递强定位特征）</li>
+<li>Head：耦合检测头，使用共同的 MLP 层预测类别和回归包围框</li>
+<li>CIoU 损失：最大化 IoU + 最小化中心距离 + 最小化长宽比差异</li>
+<li>最受欢迎的 YOLO 版本之一</li>
+</ul>
+<p><strong>YOLO系列演化总结</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>版本</th>
+<th>问题</th>
+<th>关键方法</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>v1</td>
+<td>二阶段检测器较为繁琐</td>
+<td>直接在每个格点预测类别和回归框</td>
+<td>提出首个一阶段检测器</td>
+</tr>
+<tr>
+<td>v2</td>
+<td>最后一层特征分辨率低，定位不准确</td>
+<td>使用旁路层融合高分辨率和低分辨率特征</td>
+<td>增强小物体检测能力</td>
+</tr>
+<tr>
+<td>v3</td>
+<td>对多尺度目标的稳健性差</td>
+<td>引入残差网络架构和FPN</td>
+<td>增强多尺度物体检测能力</td>
+</tr>
+<tr>
+<td>v4</td>
+<td>特征复用率低</td>
+<td>用PAN替代FPN，引入CSPNet作为Backbone</td>
+<td>保证计算量同时提升精度</td>
+</tr>
+<tr>
+<td>v5</td>
+<td>当预测框与GT框不重合时（IoU&#x3D;0），无法计算损失</td>
+<td>提出CIoU损失</td>
+<td>良好整合各类方法，最受欢迎版本之一</td>
+</tr>
+<tr>
+<td>X</td>
+<td>类别和回归框都使用同一网络预测</td>
+<td>解耦检测头</td>
+<td>解耦检测头得到广泛应用</td>
+</tr>
+<tr>
+<td>v7</td>
+<td>需要更深的网络，传统辅助损失难以收敛</td>
+<td>提出ELAN作为Backbone；设计Coarse to Fine标签分配</td>
+<td>进一步提升性能</td>
+</tr>
+<tr>
+<td>v8</td>
+<td>对v5进行重构，进一步整合现有方法</td>
+<td>C2F模块替换C3；解耦检测头；优化底层代码</td>
+<td>成为现今主流项目的基检测器</td>
+</tr>
+<tr>
+<td>v9</td>
+<td>探索训练时更高效的梯度反传</td>
+<td>提出可编程梯度信息模块PGI辅助训练</td>
+<td>增强可解释性、鲁棒性和通用性</td>
+</tr>
+<tr>
+<td>v10</td>
+<td>NMS策略面临多对一困境，卷积无法建模全局关系</td>
+<td>引入一对一检测头，匈牙利匹配；提出PSA融合卷积和Transformer</td>
+<td>进一步提高训练效率和准确性</td>
+</tr>
+</tbody></table>
+<h3 id="图像生成的卷积神经网络"><a href="#图像生成的卷积神经网络" class="headerlink" title="图像生成的卷积神经网络"></a>图像生成的卷积神经网络</h3><h4 id="Driving-Example：图像风格迁移（Image-Style-Transfer）"><a href="#Driving-Example：图像风格迁移（Image-Style-Transfer）" class="headerlink" title="Driving Example：图像风格迁移（Image Style Transfer）"></a>Driving Example：图像风格迁移（Image Style Transfer）</h4><ul>
+<li>使用在 ImageNet 上训练好的 VGG19（去除最后的全连接层和 softmax）</li>
+<li>给定一张风格图像 $a$ 和一张内容图像 $p$，输入一张随机噪声图像 $x$</li>
+<li>损失函数希望 $x$ 既保持内容图像 $p$ 的内容，又有风格图像 $a$ 的风格</li>
+</ul>
+<p><strong>内容损失函数</strong>（只取 conv4 单层特征）：</p>
+<p>$$\mathcal{L}<em>{\text{content}}(p, x, l) &#x3D; \frac{1}{2}\sum</em>{i,j}(F_{ij}^l - P_{ij}^l)^2$$</p>
+<p>其中 $F_{ij}^l$ 为生成图片在第 $l$ 层第 $i$ 个特征图上位置 $j$ 处的特征值，$P_{ij}^l$ 为内容图片的对应特征值。</p>
+<p><strong>风格损失函数</strong>（取 conv1~conv5 共5层特征，使用 Gram 矩阵表示图像风格）：</p>
+<p>$$G_{ij}^l &#x3D; \sum_k F_{ik}^l F_{jk}^l$$</p>
+<p>$$\mathcal{L}<em>{\text{style}}(a, x) &#x3D; \sum</em>{l&#x3D;0}^L w_l \frac{1}{4N_l^2 M_l^2}\sum_{i,j}(G_{ij}^l - A_{ij}^l)^2$$</p>
+<p>其中 $w_l$ 为各层权重（文中都取 0.2），$A_{ij}^l$ 为风格图片在第 $l$ 层的 Gram 矩阵。</p>
+<p><strong>Real-Time Image Style Transfer</strong>：</p>
+<ul>
+<li>对每张待转换图片都要进行前馈和反馈调优过程，无法做到实时转换</li>
+<li>提前训练好图像转换网络（Image Transform Net），风格转换过程不需要进行反向训练</li>
+<li>Image Transform Net 参考 DCGAN 设计：用步长卷积和小数步长卷积替代 pooling、每个卷积层后接 BatchNorm 和 ReLU、增加残差结构</li>
+</ul>
+<h4 id="图像生成模型概述"><a href="#图像生成模型概述" class="headerlink" title="图像生成模型概述"></a>图像生成模型概述</h4><ul>
+<li>判别模型：学习数据的<strong>模式&#x2F;特征</strong>（图像识别）</li>
+<li>生成模型：学习数据的<strong>分布</strong>（图像生成）</li>
+<li>生成模型分类：GAN、VAE、Flow-based、Diffusion</li>
+</ul>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612152437894.png" alt="image-20260612152437894"></p>
+<h4 id="生成对抗网络（GAN）"><a href="#生成对抗网络（GAN）" class="headerlink" title="生成对抗网络（GAN）"></a>生成对抗网络（GAN）</h4><p>解决的问题：<strong>从训练样本中学习出新样本</strong>。为无监督、预测学习提供算法框架</p>
+<ul>
+<li><p><strong>生成器</strong>（伪装者）：找出观测数据内部的统计规律，尽可能生成能够以假乱真的样本</p>
+</li>
+<li><p><strong>判别器</strong>（警察）：判断输入数据是来自真实样本集还是生成样本集</p>
+</li>
+</ul>
+<p><strong>训练过程</strong>：</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612152653022.png" alt="image-20260612152653022"></p>
+<ul>
+<li>更新判别网络：输入真样本 $x$ 时输出接近1，输入生成样本 $G(z)$ 时输出接近0</li>
+<li>更新生成网络：生成的假样本 $G(z)$ 被判别器判断为接近1，即 $1 - D(G(z))$ 越小越好</li>
+</ul>
+<p>GAN训练是极小极大博弈问题（或零和博弈）</p>
+<p>$$\min_G \max_D V(D,G) &#x3D; \mathbb{E}<em>{x \sim p</em>{\text{data}}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]$$</p>
+<p><strong>GAN问题</strong>：</p>
+<ul>
+<li><strong>梯度消失</strong>：当判别器以高置信度成功判断生成器生成的样本为假时，生成器的梯度会消失。应对方法：修改生成器的代价函数</li>
+<li><strong>模式崩溃（Model Collapse）</strong>：生成器只生成几种模式的样本，生成样本缺乏多样性。应对方法：采用更平滑的损失函数（如 Wasserstein GAN）</li>
+</ul>
+<p><strong>DCGAN</strong>：将全连接神经网络扩展到卷积神经网络。判别器用步长卷积，生成器用小数步长卷积取代池化层；使用 BatchNorm；生成器用 Tanh 输出，ReLU 其他层；判别器用 LeakyReLU</p>
+<p><strong>Conditional GAN（CGAN）</strong>：生成器和判别器输入中加入辅助信息（类别标签或其他模态数据），获得预期的输出</p>
+<ul>
+<li>其他：ResGAN（图像恢复）、SRGAN（超分辨率）、CycleGAN（图像转换）、InfoGAN、BiGAN、VAE-GAN 等</li>
+</ul>
+<p><strong>GAN应用</strong>：人脸生成、风格转换、超分辨率等。</p>
+<h2 id="适合语音-文本处理的循环神经网络（RNN）"><a href="#适合语音-文本处理的循环神经网络（RNN）" class="headerlink" title="适合语音&#x2F;文本处理的循环神经网络（RNN）"></a>适合语音&#x2F;文本处理的循环神经网络（RNN）</h2><h3 id="循环神经网络（RNN）（原始种）"><a href="#循环神经网络（RNN）（原始种）" class="headerlink" title="循环神经网络（RNN）（原始种）"></a>循环神经网络（RNN）（原始种）</h3><h4 id="语言模型"><a href="#语言模型" class="headerlink" title="语言模型"></a>语言模型</h4><p>序列数据：有先后顺序的一组数据，数据间有相互依赖关系。</p>
+<p>语言模型估计序列发生的概率分布：</p>
+<p>$$P(x_1, x_2, \cdots, x_T) &#x3D; \prod_{t&#x3D;1}^{T} P(x_t | x_1, x_2, \cdots, x_{t-1})$$</p>
+<h4 id="文本处理流程"><a href="#文本处理流程" class="headerlink" title="文本处理流程"></a>文本处理流程</h4><p><strong>分词（Tokenization）</strong>：将文本字符串划分为有意义的基本单元（词元&#x2F;Token）。</p>
+<p>Token 的不同粒度：</p>
+<ul>
+<li>Character-level：token 为字符（序列较长，字符本身无意义）</li>
+<li>Word-level：token 为单词（无法处理未见过的词，相近词划分成不相关 token，对无分隔符语言如中文难以划分）</li>
+<li>Subword-level：token 为 subword。词表构建是动态的，频率高的 word 有自己的 token，频率低的被划分为 subword</li>
+</ul>
+<p><strong>BPE（Byte Pair Encoding，字节对编码）</strong>：目前 LLM 中常用的词元化方法。</p>
+<ol>
+<li>初始化词表，每个字符为一个词元</li>
+<li>将频率最高的一对词元合并为一个词元，词表大小+1</li>
+<li>根据合并后的词元对语料重新分词</li>
+<li>重复第2-3步，直到词表大小达到要求</li>
+</ol>
+<p>GPT词表 40478：478 base characters + 40000次合并。</p>
+<p><strong>词元化后处理</strong>：建立词元到词表索引的字典，将文本中的词元转换为索引。词表需添加特殊字符（unk, pad, bos, eos 等）。</p>
+<p><strong>嵌入（Embedding）</strong>：将离散的 token 转化为固定维度的连续数值向量表示。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>One-hot</td>
+<td>长度为词表大小的向量，只有一个位置为1。缺陷：无法表达词间相似度，维度高，稀疏，计算不友好</td>
+</tr>
+<tr>
+<td>Word2Vec</td>
+<td>稠密表示，维度低，计算友好。能较准确表达不同词之间的相似性和关系。CBOW 和 Skip-gram 两种预训练方法</td>
+</tr>
+<tr>
+<td>Embedding 矩阵（Transformer用）</td>
+<td>输入 token 用 one-hot 编码，矩阵乘法简化为查表操作，在训练过程中学习权重</td>
+</tr>
+</tbody></table>
+<h4 id="RNN结构"><a href="#RNN结构" class="headerlink" title="RNN结构"></a>RNN结构</h4><p><strong>正向计算过程</strong>：</p>
+<p>初始时刻：$h_0$ 为输入的初始零向量。</p>
+<p>$$h(t) &#x3D; f(Wh(t-1) + Ux(t) + b)$$</p>
+<p>$$o(t) &#x3D; Vh(t) + c$$</p>
+<p>$$\hat{y}(t) &#x3D; \text{softmax}(o(t))$$</p>
+<p>其中 $f$ 常用 tanh 或 ReLU 激活函数。$W$、$U$、$V$、$b$、$c$ 在时间序列上共享参数。</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612153451309.png" alt="image-20260612153451309"></p>
+<p><strong>三个核心特性</strong>：</p>
+<ul>
+<li><strong>时序（Sequence）</strong>：前后输入数据 $x(t)$ 和 $x(t+1)$ 不独立，相互影响</li>
+<li><strong>循环（Recurrent）</strong>：对每个输入的操作都一样，循环往复，每时刻有相同参数（参数共享）</li>
+<li><strong>记忆（Memory）</strong>：隐藏层 $h(t)$ 捕捉所有时刻之前的信息，理论上记忆内容可以无限长</li>
+</ul>
+<p><strong>多种输入-输出结构</strong>：序列转化为序列、序列作为输出、序列作为输入、同步序列转化为序列。对序列的长度无要求，不用预先定义。</p>
+<p><strong>反向传播 BPTT（Back-Propagation Through Time）</strong>：</p>
+<p>单个时刻的损失函数：</p>
+<p>$$E(t) &#x3D; -y(t) \ln \hat{y}(t)$$</p>
+<p>整个序列的损失函数：</p>
+<p>$$E &#x3D; \sum_{t&#x3D;1}^{T} E(t) &#x3D; -\sum_{t&#x3D;1}^{T} y(t) \ln \hat{y}(t)$$</p>
+<p>损失函数对 $W$ 的偏导为：</p>
+<p>$$\frac{\partial E}{\partial W} &#x3D; \sum_{t&#x3D;1}^{T} \frac{\partial E(t)}{\partial \hat{y}(t)} \cdot \frac{\partial \hat{y}(t)}{\partial o(t)} \cdot \frac{\partial o(t)}{\partial h(t)} \cdot \frac{\partial h(t)}{\partial W}$$</p>
+<h4 id="RNN的梯度消失与梯度爆炸"><a href="#RNN的梯度消失与梯度爆炸" class="headerlink" title="RNN的梯度消失与梯度爆炸"></a>RNN的梯度消失与梯度爆炸</h4><ul>
+<li>由于梯度爆炸或梯度消失的存在，循环神经网络实际上<strong>只能学习到短期的依赖关系</strong></li>
+<li><strong>梯度爆炸</strong> → 梯度截断解决</li>
+<li><strong>梯度消失</strong> → 模型上的改进，如 LSTM、GRU 算法</li>
+</ul>
+<p>当相关信息和预测位置的间隔拉长时，RNN 无法学会连接信息。</p>
+<h3 id="长短期记忆模型（LSTM）"><a href="#长短期记忆模型（LSTM）" class="headerlink" title="长短期记忆模型（LSTM）"></a>长短期记忆模型（LSTM）</h3><p>隐藏状态：作为神经网络的记忆，保存着网络先前观察到的数据信息。引入”单元状态（Cell State）”$C(t)$ 作为信息传送带，通过三个门限管理信息的增加和删除。</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612153750577.png" alt="image-20260612153750577"></p>
+<p><strong>三个门限</strong>：</p>
+<p>遗忘门：记住前一时刻单元状态的多少内容</p>
+<p>输入门：写入多少输入到当前单元</p>
+<p>输出门：输出多少当前单元状态</p>
+<p><strong>LSTM cell输出</strong>：</p>
+<p>$$h_t &#x3D; o_t \times \tanh(C_t)$$</p>
+<p><strong>LSTM变体</strong>：</p>
+<ul>
+<li>窥视孔连接（Peephole Connection）：门值不仅取决于 $h_{t-1}$ 和 $x_t$，也取决于上一个单元状态 $C_{t-1}$</li>
+<li>耦合输入门和遗忘门：不单独决定遗忘和新增信息，在输入时一起做决定（$f_t &#x3D; 1 - i_t$）</li>
+</ul>
+<h4 id="门控循环单元（GRU）"><a href="#门控循环单元（GRU）" class="headerlink" title="门控循环单元（GRU）"></a>门控循环单元（GRU）</h4><p>在 LSTM 基础上，将单元状态和隐藏状态合并，将遗忘门和输入门合并为更新门，无输出门。</p>
+<p>更新门决定历史信息和当前信息如何相加；重置门决定保留多少历史信息。</p>
+<p><strong>LSTM与GRU对比</strong>：哪个模型更好无定论。GRU 参数量更少，训练速度快；数据充足时 LSTM 表征能力更强。</p>
+<h2 id="从深度学习到大模型"><a href="#从深度学习到大模型" class="headerlink" title="从深度学习到大模型"></a>从深度学习到大模型</h2><h3 id="Seq2Seq模型"><a href="#Seq2Seq模型" class="headerlink" title="Seq2Seq模型"></a>Seq2Seq模型</h3><p>Sequence-to-Sequence：<strong>序列到序列模型</strong>，将一种时序数据转换为另一种时序数据。应用：机器翻译、对话系统、自动文摘。</p>
+<p><strong>结构</strong>：由编码器（Encoder）和解码器（Decoder）组成。</p>
+<ul>
+<li>编码器根据输入数据生成语义编码 $e$</li>
+<li>解码器根据该语义编码输出处理结果</li>
+<li>适用于输入序列和输出序列不等长的情况</li>
+</ul>
+<p>传统 Seq2Seq 通常使用 RNN 或 LSTM 作为编码器和解码器。</p>
+<p><strong>Seq2Seq问题</strong>：</p>
+<ol>
+<li>固定长度的语义编码难以存储较长输入序列的所有信息，严重影响模型性能</li>
+<li>语义编码中每个元素权重相同，模型无法区分各个元素的重要程度<br> → 注意力机制解决</li>
+</ol>
+<h3 id="注意力机制"><a href="#注意力机制" class="headerlink" title="注意力机制"></a>注意力机制</h3><h4 id="基本注意力机制"><a href="#基本注意力机制" class="headerlink" title="基本注意力机制"></a>基本注意力机制</h4><p>注意力机制可以<strong>抽取少量重要信息，并聚焦于这些重要信息</strong>，忽略大多数不重要的信息。通过对输入部分赋予不同的权重，有效抽取关键信息。有效地提升基于RNN（LSTM）的Seq2Seq模型的信息处理能力</p>
+<p><strong>计算过程</strong>：</p>
+<ol>
+<li><strong>计算相似度：</strong></li>
+</ol>
+<p>$$a_{ij} &#x3D; \text{softmax}(f(s_{i-1}, h_j))$$</p>
+<p>其中 $f(Q, K) &#x3D; V^T \tanh(WQ + UK)$</p>
+<ol start="2">
+<li>注意力汇聚：</li>
+</ol>
+<p>$$c_i &#x3D; \sum_{j} a_{ij} h_j$$</p>
+<p>注意力的优势：聚焦关键信息使模型做出更准确的判断；可以并行运算，比 RNN 等序列化计算速度快。</p>
+<h4 id="缩放点积注意力（Scaled-Dot-Product-Attention）"><a href="#缩放点积注意力（Scaled-Dot-Product-Attention）" class="headerlink" title="缩放点积注意力（Scaled Dot-Product Attention）"></a>缩放点积注意力（Scaled Dot-Product Attention）</h4><p>输入：查询 $Q$、键 $K$、值 $V$，每个值 $V$ 都与一个键 $K$ 配对。</p>
+<blockquote>
+<ul>
+<li><strong>Q（查询，Query）</strong>：代表当前要“问”的位置，例如当前要翻译的目标词或要预测的位置。它来自目标序列（解码器）或源序列（自注意力）。</li>
+<li><strong>K（键，Key）</strong>：代表输入序列中每个位置的key，用于与 Q 匹配。在自注意力中，K 与 Q 来自同一个输入序列。在编码器-解码器注意力中，K 来自编码器输出。</li>
+<li><strong>V（值，Value）</strong>：代表输入位置携带的“实际内容”，根据 Q 与 K 匹配的权重来加权求和，得到输出。</li>
+</ul>
+</blockquote>
+<p>$$\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + \text{Mask}\right) V$$</p>
+<p><strong>点积</strong>：查询向量 Q 与每个键向量 K 做点积，得到一个分数，表示<strong>当前查询与各个输入位置的“匹配程度”</strong>。</p>
+<p><strong>缩放</strong>：除以 $\sqrt{d_k}$ 的原因：当 $d_k$ 较大时 $QK^T$ 内积值可能很大，除以 $\sqrt{d_k}$ 使 $QK^T$ 内积的方差变为1，获得较大的 softmax 梯度，防止梯度消失。</p>
+<h4 id="自注意力（Self-Attention）"><a href="#自注意力（Self-Attention）" class="headerlink" title="自注意力（Self-Attention）"></a>自注意力（Self-Attention）</h4><p>$Q$、$K$、$V$ 都来源于同一组输入</p>
+<p>自注意力 vs 传统注意力：</p>
+<ul>
+<li>自注意力：对输入自身进行计算，再把输入端的自注意力权重加入到对输出的影响中。不仅可以捕捉输入和输出的相关关系，还<strong>可以捕捉输入内部的相关关系</strong></li>
+<li>传统注意力：基于输入和输出计算注意力权重。仅能捕捉输入和输出之间的相关关系</li>
+</ul>
+<h4 id="多头注意力（Multi-Head-Attention）"><a href="#多头注意力（Multi-Head-Attention）" class="headerlink" title="多头注意力（Multi-Head Attention）"></a>多头注意力（Multi-Head Attention）</h4><p>基于相同的注意力机制学习不同的知识，再进行组合。</p>
+<p>$$\text{MultiHead}(Q, K, V) &#x3D; \text{Concat}(\text{head}_1, \dots, \text{head}_h) W^O$$</p>
+<p>$$\text{head}_i &#x3D; \text{Attention}(QW_i^Q, KW_i^K, VW_i^V)$$</p>
+<ul>
+<li>对 QKV 进行 <strong>$h$ 组不同的线性变换</strong></li>
+<li>将 $h$ 组不同线性变换后的 QKV 并行计算注意力</li>
+<li>将 $h$ 组注意力<strong>计算结果拼接</strong>在一起，并进行线性映射</li>
+</ul>
+<h3 id="Transformer"><a href="#Transformer" class="headerlink" title="Transformer"></a>Transformer</h3><h4 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h4><ul>
+<li>遵循 <strong>Seq2Seq 结构</strong>：<strong>编码器（Encoder）+ 解码器（Decoder）</strong></li>
+<li>去掉了循环神经网络结构（效率低，无法并行训练）</li>
+<li>大量重复使用 attention 机制</li>
+</ul>
+<p><strong>词元嵌入</strong>：通过学习 Embedding 矩阵将 token ID 转换为向量。</p>
+<p><strong>位置编码（Position Encoding）</strong>：使用波长从 $2\pi$ 到 $10000 \cdot 2\pi$ 的不同正弦和余弦函数计算。</p>
+<p><img src="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/image-20260612160409236.png" alt="image-20260612160409236"></p>
+<h4 id="编码器（Encoder）"><a href="#编码器（Encoder）" class="headerlink" title="编码器（Encoder）"></a>编码器（Encoder）</h4><p>由 N个相同的层组成（N&#x3D;6），每层包含两个子层：</p>
+<ul>
+<li><strong>多头自注意力（Multi-Head Self-Attention）</strong>：$Q$、$K$、$V$ 同源，无 mask</li>
+<li><strong>前馈网络（Feed-Forward Network）</strong>：先升维再降维（512→2048→512），使用 ReLU 引入非线性变换，序列中每个位置共享相同权重</li>
+</ul>
+<p>每个子层增加残差连接和<strong>层归一化（Layer Norm）</strong>：</p>
+<ul>
+<li>原理：将中间层的输入标准化为均值为0、方差为1的高斯分布</li>
+<li>沿 embedding 方向，对每个嵌入向量分别计算</li>
+<li>作用：缓解梯度消失问题，加快收敛速度；可以达到类似正则化的效果，防止过拟合；降低调参难度，可以使用较大的学习率</li>
+</ul>
+<h4 id="解码器（Decoder）"><a href="#解码器（Decoder）" class="headerlink" title="解码器（Decoder）"></a>解码器（Decoder）</h4><p>由 6 个相同的层组成，每层包含三个子层：</p>
+<ul>
+<li><strong>带 mask 的多头自注意力</strong>：捕捉输出序列内部的相关关系。mask 去掉当前位置后面 token 的影响，满足自回归性质</li>
+</ul>
+<p>$$\text{Attention}(Q, K, V) &#x3D; \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + M\right) V$$</p>
+<p>其中 mask 矩阵 $M$ 的右上角值设为 $-\infty$。</p>
+<ul>
+<li><strong>交叉注意力（Cross-Attention）</strong>：$Q$ 来自解码器自注意力子层的输出，$K$、$V$ 来自编码器输出，捕捉输入序列和输出序列之间的相关关系</li>
+<li><strong>前馈网络</strong></li>
+</ul>
+<p><strong>解码器的输入</strong>：</p>
+<ul>
+<li>编码器的输出，以及上一个位置的解码器输出</li>
+<li>训练时：有编码器输入对应的 label（整体向右偏移一位），可以并行处理</li>
+<li>推理时：没有 label，需要逐个位置进行解码，无法并行</li>
+</ul>
+<p><strong>输出</strong>：先经过线性变换（全连接层）将输出映射为词汇表空间，再经过 softmax 输出下一个词元的概率分布。</p>
+<p><strong>推理过程</strong>：</p>
+<ul>
+<li>Prefill 阶段：输入提示词，生成第一个词元。分析全部提示词，用时较长，同时将注意力模块中的 K、V 缓存下来（KV-Cache）</li>
+<li>Decode 阶段：自回归生成，直到生成终止符</li>
+</ul>
+<h4 id="输出"><a href="#输出" class="headerlink" title="输出"></a>输出</h4><p>先经过一个线性变换（全连接层），将输出映射为词汇表空间<br>再经过softmax，输出下一个词元的概率分布</p>
+<h3 id="自然语言处理大模型"><a href="#自然语言处理大模型" class="headerlink" title="自然语言处理大模型"></a>自然语言处理大模型</h3><h4 id="三种架构"><a href="#三种架构" class="headerlink" title="三种架构"></a>三种架构</h4><table>
+<thead>
+<tr>
+<th>架构</th>
+<th>代表模型</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Encoder-Decoder</td>
+<td>原始 Transformer, T5, GLM</td>
+<td>Seq2Seq 任务（机器翻译、生成对话）</td>
+</tr>
+<tr>
+<td>Encoder-Only</td>
+<td>BERT</td>
+<td>文本分类、情感分析等 NLU 任务</td>
+</tr>
+<tr>
+<td>Decoder-Only</td>
+<td>GPT, Llama, DeepSeek</td>
+<td>序列生成任务（从已有信息扩展出新内容）</td>
+</tr>
+</tbody></table>
+<h4 id="BERT（Encoder-Only）"><a href="#BERT（Encoder-Only）" class="headerlink" title="BERT（Encoder-Only）"></a>BERT（Encoder-Only）</h4><ul>
+<li>采用 Transformer 编码器部分，<strong>双向 Block 连接</strong>（无 mask，每个位置可以看到序列前后的位置）</li>
+</ul>
+<p><strong>预训练</strong>：利用互联网上大量无标签的语料数据进行自监督训练：</p>
+<ul>
+<li>完形填空（Masked LM）</li>
+<li>判断两句话之间是否有上下文关系（NSP）</li>
+</ul>
+<p><strong>微调</strong>：利用下游任务的有标签数据进行微调，可快速应用于文本分类、序列标注、信息检索等多种下游任务。</p>
+<p><strong>优势</strong>：大量无标签文本上无监督预训练；挖掘了预训练阶段的潜力；可<strong>通过微调快速迁移到各种下游任务</strong>；<strong>适合各种自然语言理解 NLU 任务</strong>。</p>
+<p><strong>不足</strong>：由于只使用了编码器部分且没有解码器结构，<strong>不适合直接处理自然语言生成 NLG 任务</strong>；只适合处理句子和段落级别的任务，不适合文档级别的任务。</p>
+<h5 id="GPT系列"><a href="#GPT系列" class="headerlink" title="GPT系列"></a>GPT系列</h5><p><strong>GPT</strong>：提出了 NLP 领域的预训练-微调统一框架。</p>
+<p>采用 Transformer 解码器结构：带 mask 的自注意力 + FFN。</p>
+<p><strong>预训练（无监督）</strong>：自回归，给定前 $k$ 个词预测第 $k+1$ 个词。</p>
+<p>目标函数为语言模型：</p>
+<p>$$\mathcal{L}<em>1(\mathcal{U}) &#x3D; \sum_i \log P(u_i | u</em>{i-k}, \cdots, u_{i-1}; \Theta)$$</p>
+<p>其中 $P$ 是 GPT 模型，使用 mask 保证仅利用前 $k$ 个词计算。</p>
+<p><strong>微调（有监督）</strong>：使用下游任务的数据集和标签，新添加的层从头训练，其他参数微调。最终目标函数为预训练与微调目标函数的加权求和。</p>
+<p>$$\mathcal{L}_3(\mathcal{C}) &#x3D; \mathcal{L}_2(\mathcal{C}) + \lambda \cdot \mathcal{L}_1(\mathcal{C})$$</p>
+<p>其中 $L_2(C)$ 为下游任务的目标函数。</p>
+<p><strong>GPT-2</strong>：</p>
+<ul>
+<li>核心思想：无需特定任务的监督微调，在预训练阶段使用语言模型建模多种下游任务</li>
+<li>采用 Pre-LN（Layer Norm 放在子层前面），使各子层的梯度范数保持不变，有利于稳定优化</li>
+<li>更大的参数量（对标 BERT-large 1.5B），更多层，更多训练数据（40GB vs 5GB）</li>
+</ul>
+<p><strong>GPT-3</strong>：</p>
+<ul>
+<li>无需微调，利用少量示例提升泛化能力（Few-Shot）</li>
+<li>96层&#x2F;96头&#x2F;12288维&#x2F;175B参数，数据量 540GB（filter后）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>GPT</th>
+<th>GPT-2</th>
+<th>GPT-3</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>框架</td>
+<td>预训练-微调</td>
+<td>仅预训练，无需微调</td>
+<td>仅预训练，无需微调</td>
+</tr>
+<tr>
+<td>参数量</td>
+<td>117M</td>
+<td>1.5B</td>
+<td>175B</td>
+</tr>
+<tr>
+<td>数据量</td>
+<td>5GB</td>
+<td>40GB</td>
+<td>540GB（filter后）</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>2018.6</td>
+<td>2019.2</td>
+<td>2020.5</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>尺度定律（Scaling Law）</strong>：增加模型计算量、训练数据量、模型参数规模，Loss 都会单调降低，模型效果越来越好</li>
+<li><strong>涌现能力（Emergent Ability）</strong>：当模型规模大到一定程度（约60B），模型能力出现飞跃</li>
+<li>Zero-shot&#x2F;One-shot&#x2F;Few-shot：零&#x2F;一个&#x2F;若干个示例，无参数更新。传统微调：样本用于参数更新</li>
+</ul>
+<p><strong>InstructGPT</strong>：使用来自人类反馈的强化学习（RLHF）对预训练大模型进行微调。</p>
+<ol>
+<li>人类标注产生数据，监督方式微调 GPT-3</li>
+<li>利用人类标注数据训练一个奖励模型</li>
+<li>利用奖励模型提供 reward，利用 PPO 微调 step1 的 GPT-3</li>
+</ol>
+<h5 id="Llama系列"><a href="#Llama系列" class="headerlink" title="Llama系列"></a>Llama系列</h5><p><strong>Llama 的改进</strong>：</p>
+<ul>
+<li>前置 <strong>RMSNorm</strong> 作为层归一化方法，增强训练稳定性</li>
+<li>采用 <strong>SwiGLU</strong> 激活函数，提高模型性能</li>
+<li>采用旋转位置编码 <strong>RoPE</strong>，建模长序列数据</li>
+<li>部分模型采用<strong>分组查询注意力机制 GQA</strong>，平衡效率和性能</li>
+</ul>
+<p><strong>RoPE（旋转位置编码）</strong></p>
+<p>使用旋转矩阵编码绝对位置，在自注意力操作中加入相对位置信息，在每个 Transformer 层中注入位置信息。</p>
+<p>$$f_{{q,k}}(x_m, m) &#x3D; R^d_{\Theta,m} W_{{q,k}} x_m$$</p>
+<p>任意偶数维的 RoPE 可以表示为二维形式的拼接。</p>
+<p>优势：支持长序列，并且随着相对距离增加，词元间依赖下降。</p>
+<h5 id="DeepSeek系列"><a href="#DeepSeek系列" class="headerlink" title="DeepSeek系列"></a>DeepSeek系列</h5><p><strong>DeepSeek-V3</strong>：</p>
+<ul>
+<li>671B 参数，每 token 激活 37B</li>
+<li>61层 Transformer layers，从第4层开始 FFN 替换为 MoE</li>
+<li>hidden dimension &#x3D; 7168，注意力头 128，单头维度 128</li>
+<li>KV 压缩维度 512，Q 压缩维度 1536，旋转位置编码维度 64</li>
+<li>SwiGLU 激活函数</li>
+<li>MoE：1 shared expert + 256 routed experts，每 token 激活 8 个 routed experts</li>
+</ul>
+<p><strong>MLA（Multi-head Latent Attention）</strong>：性能优于 MHA，KV cache 远低于 MHA（小 MoE 约14%，大 MoE 约4%）。</p>
+<h5 id="Decoder-Only成为主流的原因探讨"><a href="#Decoder-Only成为主流的原因探讨" class="headerlink" title="Decoder-Only成为主流的原因探讨"></a>Decoder-Only成为主流的原因探讨</h5><ul>
+<li>prompt <strong>可以更加直接地作用于 decoder 每一层的参数，无需经过编码器的转换</strong>，微调的信号更强</li>
+<li><strong>双向 attention 的注意力矩阵容易退化为低秩状态</strong>，而 causal attention 的注意力矩阵是下三角矩阵，必然是满秩的，建模能力更强</li>
+<li>causal attention 具有隐式的位置编码功能</li>
+<li>decoder-only <strong>支持复用 KV-Cache</strong>，计算效率更高</li>
+<li>Megatron 和 FlashAttention 等重要工具对 causal attention 支持更好</li>
+<li>实验表明 zero-shot 泛化性能和 in-context learning 能力更强</li>
+</ul>
+<h4 id="大模型中的函数-方法变体"><a href="#大模型中的函数-方法变体" class="headerlink" title="大模型中的函数&#x2F;方法变体"></a>大模型中的函数&#x2F;方法变体</h4><h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p><strong>Swish激活函数</strong>：</p>
+<p>$$\text{Swish}(x) &#x3D; x \cdot \text{sigmoid}(x)$$</p>
+<p>更加平滑，可以更好的优化和更快的收敛，减少过拟合提高泛化性。</p>
+<p><strong>SwiGLU激活函数</strong>（Llama3, DeepSeek 等）：</p>
+<p>$$\text{SwiGLU}(x, W, V, b, c) &#x3D; \text{SiLU}(xW + b) \odot (xV + c)$$</p>
+<h5 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h5><p><strong>RMSNorm（均方根归一化）</strong></p>
+<p>Layer Norm 中包含平移和缩放不变性，RMSNorm 去除平移，只保留缩放。效果相当，计算更简单，更稳定。</p>
+<h5 id="注意力变体"><a href="#注意力变体" class="headerlink" title="注意力变体"></a>注意力变体</h5><table>
+<thead>
+<tr>
+<th>类型</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>MHA（Multi-Head Attention）</td>
+<td>每个 head 有自己单独的 K、V</td>
+</tr>
+<tr>
+<td>MQA（Multi-Query Attention）</td>
+<td>所有 Q 共享 K、V</td>
+</tr>
+<tr>
+<td>GQA（Grouped-Query Attention）</td>
+<td>Q 分成 N 个组，每个组共享 K、V</td>
+</tr>
+</tbody></table>
+<p>GQA 和 MHA 效果相当，取得了 performance 和速度的 trade-off。</p>
+<h5 id="KV-cache"><a href="#KV-cache" class="headerlink" title="KV cache"></a>KV cache</h5><h4 id="Test-time-Scaling（TTS）"><a href="#Test-time-Scaling（TTS）" class="headerlink" title="Test-time Scaling（TTS）"></a>Test-time Scaling（TTS）</h4><p><strong>o1</strong>：通过延长推理时间使模型获得强大的推理能力。</p>
+<p><strong>R1 两大要素</strong>：</p>
+<ul>
+<li>准确率奖励：有一个几乎完美的验证器（rule-based reward）</li>
+<li>格式奖励：Question + Think + Answer</li>
+<li>训练算法：GRPO、PPO 或其他强化学习算法</li>
+</ul>
+<p><strong>R1-Zero 训练现象</strong>：</p>
+<ul>
+<li>仅通过两个简单的奖励（准确率奖励 + 格式奖励），模型似乎自己学会了 test-time scaling</li>
+<li>随着训练进行，准确率稳定上升，回答长度稳定上升</li>
+<li>R1 的 “aha moment”：大模型在某个中间训练步骤，自己学会了反思</li>
+<li>Budget forcing：强行给将要结束的回答添加 “wait”，模型会继续思考，并且准确率真的能继续提升</li>
+</ul>
+<p><strong>R1 完整训练流程</strong>：</p>
+<ol>
+<li>用 R1-zero 生成的 CoT 数据进行手工&#x2F;规则改写 → SFT → 阶段一模型</li>
+<li>准确率奖励 + 可读性奖励 → RL 训练</li>
+<li>阶段一模型生成的推理数据 + V3 通用数据 → SFT</li>
+<li>RLHF 的奖励模型 → 最终微调</li>
+</ol>
+<p><strong>推理能力的通用性</strong>：</p>
+<ul>
+<li>使用纯 Verilog R1 数据蒸馏能大幅提升代码模型的数学能力，达到非 R1 数学专用模型水平</li>
+<li>使用纯数学数据 RL 能大幅提升 Verilog 代码生成能力（32B 模型 performance 从 0.355 → 0.516）</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/" title="智能计算系统复习第三章">https://mintind.github.io/2026/06/11/UCAS/智能计算系统/笔记/第三章笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/" rel="prev" title="智能计算系统复习第4-6章">
+                  <i class="fa fa-angle-left"></i> 智能计算系统复习第4-6章
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/12/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E5%9F%BA%E4%BA%8E%20Triton%20%E7%9A%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" rel="next" title="基于 Triton 的大模型优化">
+                  基于 Triton 的大模型优化 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

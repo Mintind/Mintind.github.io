@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="这里好像一定得放点东西">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络威胁感知与溯源【下】：溯源取证">
+<meta property="og:url" content="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="这里好像一定得放点东西">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-06-14T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-14T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="网络威胁感知与溯源">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/","path":"2026/06/14/UCAS/网络威胁感知与溯源笔记2/","title":"网络威胁感知与溯源【下】：溯源取证"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络威胁感知与溯源【下】：溯源取证 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E5%8F%96%E8%AF%81"><span class="nav-number">1.</span> <span class="nav-text">网络攻击溯源取证</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90"><span class="nav-number">2.</span> <span class="nav-text">攻击溯源</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro"><span class="nav-number">2.1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%BA%AF%E6%BA%90%E9%9D%A2%E4%B8%B4%E7%9A%84%E5%9B%B0%E9%9A%BE"><span class="nav-number">2.1.1.</span> <span class="nav-text">网络溯源面临的困难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E7%9A%84%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E8%B7%AF%E5%BE%84%E6%A8%A1%E5%9E%8B"><span class="nav-number">2.1.2.</span> <span class="nav-text">典型的网络攻击路径模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E2%80%9C%E6%BA%AF%E6%BA%90%E2%80%9D%E5%92%8C%E2%80%9D%E5%8F%96%E8%AF%81%E2%80%9D%E7%9A%84%E5%86%85%E6%B6%B5"><span class="nav-number">2.1.3.</span> <span class="nav-text">“溯源”和”取证”的内涵</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%BA%AF%E6%BA%90%E7%9A%84%E5%B1%82%E6%AC%A1%E5%88%92%E5%88%86%E4%B8%8E%E5%85%B8%E5%9E%8B%E5%9C%BA%E6%99%AF"><span class="nav-number">2.1.4.</span> <span class="nav-text">网络溯源的层次划分与典型场景</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%84%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E7%9A%84%E5%B1%82%E6%AC%A1%E5%88%92%E5%88%86"><span class="nav-number">2.1.4.1.</span> <span class="nav-text">常规攻击溯源的层次划分</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E7%9A%84%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E5%9C%BA%E6%99%AF%E5%88%86%E7%B1%BB"><span class="nav-number">2.1.4.2.</span> <span class="nav-text">典型的攻击溯源场景分类</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%BA%AF%E6%BA%90%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E4%B8%8E%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82"><span class="nav-number">2.1.5.</span> <span class="nav-text">网络溯源中常用的数据与技术要求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E4%B8%AD%E5%B0%86%E4%BD%BF%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">2.1.5.1.</span> <span class="nav-text">攻击溯源中将使用的数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E7%9A%84%E8%AF%84%E4%BC%B0%E5%87%86%E5%88%99"><span class="nav-number">2.1.5.2.</span> <span class="nav-text">攻击溯源技术的评估准则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E7%9A%84%E5%BA%94%E7%94%A8%E5%87%86%E5%88%99"><span class="nav-number">2.1.5.3.</span> <span class="nav-text">攻击溯源技术的应用准则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E4%B8%BB%E6%9C%BA%E6%BA%AF%E6%BA%90"><span class="nav-number">2.2.</span> <span class="nav-text">攻击主机溯源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E5%B1%82%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.2.1.</span> <span class="nav-text">流量层溯源技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%B1%82%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.2.2.</span> <span class="nav-text">网络层溯源技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%B1%82%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.2.3.</span> <span class="nav-text">应用层溯源技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%BA%AF%E6%BA%90%E9%9D%A2%E4%B8%B4%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-number">2.2.4.</span> <span class="nav-text">主机溯源面临的挑战</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A7%E5%88%B6%E6%9C%BA%EF%BC%88C-C%EF%BC%89%E6%BA%AF%E6%BA%90"><span class="nav-number">2.3.</span> <span class="nav-text">控制机（C&amp;C）溯源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C-C%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">2.3.1.</span> <span class="nav-text">C&amp;C服务器概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E7%9A%84C-C%E5%8F%91%E7%8E%B0%E4%B8%8E%E6%BA%AF%E6%BA%90"><span class="nav-number">2.3.2.</span> <span class="nav-text">基于域名的C&amp;C发现与溯源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E8%A1%8C%E4%B8%BA%E7%9A%84C-C%E6%A3%80%E6%B5%8B"><span class="nav-number">2.3.3.</span> <span class="nav-text">基于网络行为的C&amp;C检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-C%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%BA%AF%E6%BA%90"><span class="nav-number">2.3.4.</span> <span class="nav-text">C&amp;C服务器基础设施溯源</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E8%80%85%E4%B8%8E%E6%94%BB%E5%87%BB%E7%BB%84%E7%BB%87%E7%9A%84%E6%BA%AF%E6%BA%90"><span class="nav-number">2.4.</span> <span class="nav-text">攻击者与攻击组织的溯源</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%88%86%E6%9E%90%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.4.1.</span> <span class="nav-text">基于分析对象的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.1.</span> <span class="nav-text">流量分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E6%A1%A3%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.2.</span> <span class="nav-text">文档分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E5%8F%8A%E9%80%9A%E4%BF%A1%E8%AE%B0%E5%BD%95%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.3.</span> <span class="nav-text">邮件及通信记录分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.4.</span> <span class="nav-text">攻击代码分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.5.</span> <span class="nav-text">威胁情报分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A4%BE%E5%B7%A5%E6%9F%A5%E8%AF%A2%E4%B8%8E%E4%BA%92%E8%81%94%E7%BD%91%E6%A3%80%E7%B4%A2"><span class="nav-number">2.4.1.6.</span> <span class="nav-text">社工查询与互联网检索</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%97%B6%E5%8C%BA%E7%9A%84%E6%BA%AF%E6%BA%90%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.4.1.7.</span> <span class="nav-text">基于时区的溯源定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF%E7%9A%84%E6%BA%AF%E6%BA%90%E5%AE%9A%E4%BD%8D"><span class="nav-number">2.4.1.8.</span> <span class="nav-text">基于域名信息的溯源定位</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%95%B0%E5%AD%97%E7%AD%BE%E5%90%8D-%E6%95%B0%E5%AD%97%E8%AF%81%E4%B9%A6%E5%85%B3%E8%81%94%E7%9A%84%E6%BA%AF%E6%BA%90%E5%BD%92%E5%9B%A0"><span class="nav-number">2.4.1.9.</span> <span class="nav-text">基于数字签名&#x2F;数字证书关联的溯源归因</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%BB%E5%87%BB%E6%89%8B%E6%B3%95%E5%88%86%E6%9E%90"><span class="nav-number">2.4.1.10.</span> <span class="nav-text">攻击手法分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E7%9A%84%E7%BB%84%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">2.4.2.</span> <span class="nav-text">溯源技术的组合使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%B7%A5%E5%85%B7"><span class="nav-number">2.4.3.</span> <span class="nav-text">典型工具</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E7%9A%84%E4%B8%BB%E5%8A%A8%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.</span> <span class="nav-text">网络攻击的主动溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Intro-1"><span class="nav-number">2.5.1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%BA%AF%E6%BA%90-vs-%E8%A2%AB%E5%8A%A8%E6%BA%AF%E6%BA%90"><span class="nav-number">2.5.1.1.</span> <span class="nav-text">主动溯源 vs 被动溯源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%BA%AF%E6%BA%90%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="nav-number">2.5.1.2.</span> <span class="nav-text">主动溯源的核心思想</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E5%8A%A8%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="nav-number">2.5.2.</span> <span class="nav-text">主动溯源技术分类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E5%90%8C%E6%BA%90%E5%88%86%E6%9E%90%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.3.</span> <span class="nav-text">基于同源分析的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%90%8C%E6%BA%90%E5%88%86%E6%9E%90"><span class="nav-number">2.5.3.2.</span> <span class="nav-text">恶意代码同源分析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%90%8C%E6%BA%90%E6%80%A7%E6%A6%82%E5%BF%B5"><span class="nav-number">2.5.3.2.1.</span> <span class="nav-text">程序同源性概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%90%8C%E6%BA%90%E5%88%86%E6%9E%90-1"><span class="nav-number">2.5.3.2.2.</span> <span class="nav-text">恶意代码同源分析</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%A1%8C%E4%B8%BA%E5%90%8C%E6%BA%90%E5%88%86%E6%9E%90"><span class="nav-number">2.5.3.3.</span> <span class="nav-text">网络行为同源分析</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.4.</span> <span class="nav-text">基于指纹识别的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8C%87%E7%BA%B9%E7%9A%84Web%E8%BF%BD%E8%B8%AA"><span class="nav-number">2.5.4.1.</span> <span class="nav-text">基于浏览器指纹的Web追踪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%AB%99%E6%8C%87%E7%BA%B9%E7%9A%84%E5%8C%BF%E5%90%8D%E7%BD%91%E7%BB%9C%E7%94%A8%E6%88%B7%E8%BF%BD%E8%B8%AA"><span class="nav-number">2.5.4.2.</span> <span class="nav-text">基于网站指纹的匿名网络用户追踪</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E6%8C%87%E7%BA%B9"><span class="nav-number">2.5.4.3.</span> <span class="nav-text">设备指纹</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E8%9C%9C%E7%BD%90%E8%AF%B1%E6%8D%95%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.5.</span> <span class="nav-text">基于蜜罐诱捕的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%9C%9C%E7%BD%90%E6%8A%80%E6%9C%AF%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.5.1.</span> <span class="nav-text">蜜罐技术概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%9C%9C%E7%BD%91%E4%B8%8E%E8%9C%9C%E5%9C%BA"><span class="nav-number">2.5.5.2.</span> <span class="nav-text">蜜网与蜜场</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%9C%9C%E7%BD%90%E6%8A%80%E6%9C%AF%E5%BA%94%E7%94%A8"><span class="nav-number">2.5.5.3.</span> <span class="nav-text">蜜罐技术应用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E6%B5%8B%E7%BB%98%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.6.</span> <span class="nav-text">基于网络测绘的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%8B%E7%BB%98%E6%A6%82%E8%BF%B0"><span class="nav-number">2.5.6.1.</span> <span class="nav-text">网络测绘概述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%B5%8B%E7%BB%98%E6%96%B9%E6%B3%95"><span class="nav-number">2.5.6.2.</span> <span class="nav-text">网络测绘方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%BD%91%E7%BB%9C%E6%B5%8B%E7%BB%98%E5%B7%A5%E5%85%B7"><span class="nav-number">2.5.6.3.</span> <span class="nav-text">常见网络测绘工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E%E7%BD%91%E7%BB%9C%E6%AC%BA%E9%AA%97%E7%9A%84%E6%BA%AF%E6%BA%90%E6%8A%80%E6%9C%AF"><span class="nav-number">2.5.7.</span> <span class="nav-text">基于网络欺骗的溯源技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%AC%BA%E9%AA%97%E7%9A%84%E6%8F%90%E5%87%BA"><span class="nav-number">2.5.7.1.</span> <span class="nav-text">网络欺骗的提出</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%AC%BA%E9%AA%97%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB"><span class="nav-number">2.5.7.2.</span> <span class="nav-text">网络欺骗技术分类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-3-%E7%BD%91%E7%BB%9C%E6%AC%BA%E9%AA%97%E6%8A%80%E6%9C%AF%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.5.7.3.</span> <span class="nav-text">6.3 网络欺骗技术的作用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%B1%E6%8D%95%E5%8F%8D%E5%88%B6%E9%98%B2%E6%8A%A4%E6%A8%A1%E5%9E%8B%EF%BC%88%E5%85%AD%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">2.5.7.4.</span> <span class="nav-text">诱捕反制防护模型（六部分）</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81"><span class="nav-number">3.</span> <span class="nav-text">数字取证</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro-2"><span class="nav-number">3.1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E7%9A%84%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95"><span class="nav-number">3.1.1.</span> <span class="nav-text">数字证据的获取方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9D%A2%E4%B8%B4%E7%9A%84%E4%B8%BB%E8%A6%81%E5%9B%B0%E9%9A%BE"><span class="nav-number">3.1.2.</span> <span class="nav-text">面临的主要困难</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%88%E7%AB%AF%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.2.</span> <span class="nav-text">终端数字证据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PC%E7%BB%88%E7%AB%AF%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.2.1.</span> <span class="nav-text">PC终端数字证据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A7%BB%E5%8A%A8%E7%BB%88%E7%AB%AF%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.2.2.</span> <span class="nav-text">移动终端数字证据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E7%BB%88%E7%AB%AF%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81%E5%8F%91%E5%B1%95%E6%96%B9%E5%90%91"><span class="nav-number">3.2.3.</span> <span class="nav-text">2.4 终端数字取证发展方向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.3.</span> <span class="nav-text">网络数字证据获取</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%BD%91%E7%BB%9C%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96%E8%83%8C%E6%99%AF"><span class="nav-number">3.3.1.</span> <span class="nav-text">3.1 网络数字证据获取背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E4%BA%92%E8%81%94%E7%BD%91%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.3.2.</span> <span class="nav-text">3.2 互联网数字证据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E4%B8%93%E7%BD%91%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.3.3.</span> <span class="nav-text">3.3 专网数字证据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E7%A7%BB%E5%8A%A8%E7%BD%91%E7%BB%9C%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.3.4.</span> <span class="nav-text">3.4 移动网络数字证据获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-%E4%BA%91%E7%AB%AF%E6%95%B0%E6%8D%AE%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E8%8E%B7%E5%8F%96"><span class="nav-number">3.3.5.</span> <span class="nav-text">3.5 云端数据数字证据获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81%E5%88%86%E6%9E%90%EF%BC%88%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">数字取证分析（第三部分）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%95%B0%E5%AD%97%E5%8F%96%E8%AF%81%E5%A4%84%E7%90%86%E4%B8%8E%E5%88%86%E6%9E%90"><span class="nav-number">3.4.1.</span> <span class="nav-text">1.1 数字取证处理与分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E4%BF%9D%E5%85%A8"><span class="nav-number">3.4.2.</span> <span class="nav-text">1.2 数字证据保全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E6%95%B0%E5%AD%97%E8%AF%81%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="nav-number">3.4.3.</span> <span class="nav-text">1.3 数字证据可视化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E8%AF%81%E6%8D%AE%E5%85%B3%E8%81%94%E4%B8%8E%E8%AF%81%E6%8D%AE%E9%93%BE%E6%9E%84%E5%BB%BA%EF%BC%88%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">二、证据关联与证据链构建（第四部分）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E8%AF%81%E6%8D%AE%E5%85%B3%E8%81%94%E5%92%8C%E8%AF%81%E6%8D%AE%E9%93%BE%E6%9E%84%E5%BB%BA%E6%A6%82%E8%BF%B0"><span class="nav-number">3.5.1.</span> <span class="nav-text">2.1 证据关联和证据链构建概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%AF%81%E6%8D%AE%E5%85%B3%E8%81%94%E6%8A%80%E6%9C%AF"><span class="nav-number">3.5.2.</span> <span class="nav-text">2.2 证据关联技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E8%AF%81%E6%8D%AE%E9%93%BE%E6%9E%84%E5%BB%BA%E6%8A%80%E6%9C%AF"><span class="nav-number">3.5.3.</span> <span class="nav-text">2.3 证据链构建技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E6%BA%AF%E6%BA%90%E5%9B%BE%E6%9E%84%E5%BB%BA%E4%B8%8E%E5%88%86%E6%9E%90%E6%8A%80%E6%9C%AF"><span class="nav-number">3.5.4.</span> <span class="nav-text">2.4 溯源图构建与分析技术</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%A4%9A%E7%B1%BB%E5%9E%8B%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%BA%8B%E4%BB%B6%E6%A0%B8%E6%9F%A5%E5%8F%96%E8%AF%81%E7%B3%BB%E7%BB%9F"><span class="nav-number">3.5.5.</span> <span class="nav-text">2.5 多类型网络安全事件核查取证系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E7%9A%84%E6%BA%AF%E6%BA%90%E5%8F%96%E8%AF%81%E6%A8%A1%E5%9E%8B"><span class="nav-number">3.6.</span> <span class="nav-text">网络攻击的溯源取证模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%BA%AF%E6%BA%90%E5%8F%96%E8%AF%81%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">3.6.1.</span> <span class="nav-text">一、溯源取证模型概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Kill-Chain%EF%BC%88%E6%9D%80%E4%BC%A4%E9%93%BE%EF%BC%89"><span class="nav-number">3.6.2.</span> <span class="nav-text">二、Kill Chain（杀伤链）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">3.6.3.</span> <span class="nav-text">2.1 模型概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%B8%83%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="nav-number">3.6.4.</span> <span class="nav-text">2.2 七个阶段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%9C%A8%E6%BA%AF%E6%BA%90%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7"><span class="nav-number">3.6.5.</span> <span class="nav-text">2.3 在溯源中的应用与局限性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%9F%BA%E4%BA%8EKill-Chain%E7%9A%84%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B"><span class="nav-number">3.6.6.</span> <span class="nav-text">2.4 基于Kill Chain的分析案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81ATT-CK%E6%A1%86%E6%9E%B6"><span class="nav-number">3.6.7.</span> <span class="nav-text">三、ATT&amp;CK框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">3.6.8.</span> <span class="nav-text">3.1 模型概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E6%A0%B8%E5%BF%83%E7%BB%84%E6%88%90"><span class="nav-number">3.6.9.</span> <span class="nav-text">3.2 核心组成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%9C%A8%E6%BA%AF%E6%BA%90%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">3.6.10.</span> <span class="nav-text">3.3 在溯源中的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-%E5%9F%BA%E4%BA%8EATT-CK%E7%9A%84%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B"><span class="nav-number">3.6.11.</span> <span class="nav-text">3.4 基于ATT&amp;CK的分析案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Diamond-Model%EF%BC%88%E9%92%BB%E7%9F%B3%E6%A8%A1%E5%9E%8B%EF%BC%89"><span class="nav-number">3.6.12.</span> <span class="nav-text">四、Diamond Model（钻石模型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%A8%A1%E5%9E%8B%E6%A6%82%E8%BF%B0"><span class="nav-number">3.6.13.</span> <span class="nav-text">4.1 模型概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%9B%9B%E5%85%83%E7%BB%84"><span class="nav-number">3.6.14.</span> <span class="nav-text">4.2 四元组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E5%9C%A8%E6%BA%AF%E6%BA%90%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="nav-number">3.6.15.</span> <span class="nav-text">4.3 在溯源中的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E5%9F%BA%E4%BA%8EDiamond%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B"><span class="nav-number">3.6.16.</span> <span class="nav-text">4.4 基于Diamond模型的分析案例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E9%9D%A2%E5%90%91%E5%BC%BA%E5%AF%B9%E6%8A%97%E6%80%A7APT%E7%9A%84%E6%BA%AF%E6%BA%90%E5%8F%96%E8%AF%81%EF%BC%88%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%89"><span class="nav-number">3.7.</span> <span class="nav-text">五、面向强对抗性APT的溯源取证（第二部分）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%AF%B9%E6%8A%97%E6%80%A7APT%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"><span class="nav-number">3.7.1.</span> <span class="nav-text">5.1 对抗性APT发展趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-APT%E5%BD%92%E5%9B%A0%E7%9A%84%E6%8C%91%E6%88%98"><span class="nav-number">3.7.2.</span> <span class="nav-text">5.2 APT归因的挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-APT%E6%94%BB%E5%87%BB%E4%BC%AA%E8%A3%85"><span class="nav-number">3.7.3.</span> <span class="nav-text">5.3 APT攻击伪装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-%E4%BA%BA%E6%9C%BA%E5%8D%8F%E5%90%8C%E7%9A%84%E6%94%BB%E5%87%BB%E5%BD%92%E5%9B%A0"><span class="nav-number">3.7.4.</span> <span class="nav-text">5.4 人机协同的攻击归因</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%AF%E6%BA%90%E5%9B%BE%E5%88%86%E6%9E%90"><span class="nav-number">3.8.</span> <span class="nav-text">溯源图分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81APT%E6%94%BB%E5%87%BB%E6%A6%82%E8%BF%B0"><span class="nav-number">3.8.1.</span> <span class="nav-text">一、APT攻击概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-APT%E6%94%BB%E5%87%BB%E5%AE%9A%E4%B9%89"><span class="nav-number">3.8.2.</span> <span class="nav-text">1.1 APT攻击定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-APT%E6%94%BB%E5%87%BB%E7%89%B9%E7%82%B9"><span class="nav-number">3.8.3.</span> <span class="nav-text">1.2 APT攻击特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%BA%AF%E6%BA%90%E5%9B%BE%EF%BC%88Provenance-Graph%EF%BC%89%E6%A6%82%E5%BF%B5"><span class="nav-number">3.8.4.</span> <span class="nav-text">二、溯源图（Provenance Graph）概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%AE%9A%E4%B9%89"><span class="nav-number">3.8.5.</span> <span class="nav-text">2.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%BA%AF%E6%BA%90%E5%9B%BE%E7%9A%84%E7%BB%84%E6%88%90%E8%A6%81%E7%B4%A0"><span class="nav-number">3.8.6.</span> <span class="nav-text">2.2 溯源图的组成要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%BA%AF%E6%BA%90%E5%9B%BE%E7%9A%84%E4%BB%B7%E5%80%BC"><span class="nav-number">3.8.7.</span> <span class="nav-text">2.3 溯源图的价值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%8E%B0%E6%9C%89%E6%96%B9%E6%B3%95"><span class="nav-number">3.9.</span> <span class="nav-text">三、现有方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99%E7%9A%84%E6%BA%AF%E6%BA%90%E5%9B%BE%E5%88%86%E6%9E%90"><span class="nav-number">3.9.1.</span> <span class="nav-text">3.1 基于规则的溯源图分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-%E5%9F%BA%E4%BA%8E%E5%AD%A6%E4%B9%A0%E7%9A%84%E6%BA%AF%E6%BA%90%E5%9B%BE%E5%88%86%E6%9E%90"><span class="nav-number">3.9.2.</span> <span class="nav-text">3.2 基于学习的溯源图分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-%E5%9F%BA%E4%BA%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E6%BA%AF%E6%BA%90%E5%9B%BE%E5%88%86%E6%9E%90"><span class="nav-number">3.9.3.</span> <span class="nav-text">3.3 基于大模型的溯源图分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94"><span class="nav-number">3.10.</span> <span class="nav-text">四、三种方法对比</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E6%BA%AF%E6%BA%90%E5%9B%BE%E5%88%86%E6%9E%90%E7%9A%84%E5%85%B3%E9%94%AE%E6%8C%91%E6%88%98"><span class="nav-number">3.11.</span> <span class="nav-text">五、溯源图分析的关键挑战</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%AD%E3%80%81%E5%9F%BA%E4%BA%8E%E5%A8%81%E8%83%81%E6%83%85%E6%8A%A5%E7%9A%84%E6%97%A5%E5%BF%97%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95"><span class="nav-number">3.12.</span> <span class="nav-text">六、基于威胁情报的日志生成方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%83%E3%80%81%E5%9F%BA%E4%BA%8E%E5%A4%A7%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%AE%89%E5%85%A8%E9%98%B2%E5%BE%A1"><span class="nav-number">3.13.</span> <span class="nav-text">七、基于大模型的安全防御</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络威胁感知与溯源【下】：溯源取证 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络威胁感知与溯源【下】：溯源取证<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/nvZHnu5zlqIHog4HmhJ/nn6XkuI7muq/mupDnrJTorrAyLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-15 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-15T00:00:00+08:00">2026-06-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>这里好像一定得放点东西</p>
+<span id="more"></span>
+
+<p>包含ai整理内容</p>
+<h1 id="网络攻击溯源取证"><a href="#网络攻击溯源取证" class="headerlink" title="网络攻击溯源取证"></a>网络攻击溯源取证</h1><p><strong>网络攻击溯源取证（Cyber Attack Attribution &amp; Forensics）</strong>：<br>通过网络逆向追踪攻击者使用的中间介质，提取攻击证据，并最终确定网络攻击者身份或位置，还原攻击路径，构建证据链。</p>
+<h1 id="攻击溯源"><a href="#攻击溯源" class="headerlink" title="攻击溯源"></a>攻击溯源</h1><h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><p><strong>溯源内容</strong>：</p>
+<ul>
+<li>追查入侵者的<strong>身份</strong>（姓名、账号及相关信息）</li>
+<li><strong>网络位置</strong>（IP&#x2F;MAC地址、物理住所）</li>
+<li>攻击<strong>目标</strong>和<strong>方法</strong></li>
+<li><strong>证据</strong>：攻击路径、攻击时序、攻击模式、日志、恶意代码、社交信息等</li>
+</ul>
+<p>Attribution vs Traceback：</p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>含义</th>
+<th>侧重点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Attribution</strong>（归因）</td>
+<td>近年常用，强调对攻击者及组织的分析</td>
+<td>追溯、定位与刻画</td>
+</tr>
+<tr>
+<td><strong>Traceback</strong>（回溯）</td>
+<td>早期术语，强调在线追踪</td>
+<td>大部分针对主机层面，如IP-Track</td>
+</tr>
+</tbody></table>
+<h3 id="网络溯源面临的困难"><a href="#网络溯源面临的困难" class="headerlink" title="网络溯源面临的困难"></a>网络溯源面临的困难</h3><ul>
+<li><strong>缺乏足够的数据</strong>：有效数据是攻击溯源必不可少的资源</li>
+<li><strong>溯源成功概率低</strong>：高级攻击通常采用反溯源技术</li>
+<li><strong>非对称博弈</strong>：攻击者隐藏成本低，防御者溯源成本高</li>
+</ul>
+<h3 id="典型的网络攻击路径模型"><a href="#典型的网络攻击路径模型" class="headerlink" title="典型的网络攻击路径模型"></a>典型的网络攻击路径模型</h3><ul>
+<li>Kill Chain（杀伤链）</li>
+<li>ATT&amp;CK框架</li>
+<li>Diamond Model（钻石模型）</li>
+</ul>
+<h3 id="“溯源”和”取证”的内涵"><a href="#“溯源”和”取证”的内涵" class="headerlink" title="“溯源”和”取证”的内涵"></a>“溯源”和”取证”的内涵</h3><p><strong>溯源三要素</strong>：</p>
+<ul>
+<li><strong>线索扩展（Pivot）</strong>：通过猜测木马二进制文件中遗留的信息，结合搜索引擎和互联网资源对攻击者进行搜索</li>
+<li><strong>灰网反制（Outwit）</strong>：在网络中或终端上布设陷阱，等待攻击者将陷阱取回查看，获取攻击者真实网络地址</li>
+<li><strong>主动攻击</strong>：通过口令猜解、网络攻击、溢出控制端程序等方法获得后台管理权限后进一步分析</li>
+</ul>
+<p><strong>取证四方面</strong>：</p>
+<ul>
+<li>木马事件流量分析</li>
+<li>恶意软件分析</li>
+<li>日志、证据文件分析提取</li>
+<li>反入侵取证、终端木马检测、硬盘恢复</li>
+</ul>
+<h3 id="网络溯源的层次划分与典型场景"><a href="#网络溯源的层次划分与典型场景" class="headerlink" title="网络溯源的层次划分与典型场景"></a>网络溯源的层次划分与典型场景</h3><h4 id="常规攻击溯源的层次划分"><a href="#常规攻击溯源的层次划分" class="headerlink" title="常规攻击溯源的层次划分"></a>常规攻击溯源的层次划分</h4><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>溯源目标</th>
+<th>典型数据来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>第一层：主机溯源</strong></td>
+<td>确定攻击源头的主机&#x2F;IP</td>
+<td>流量日志、NetFlow、DPI</td>
+</tr>
+<tr>
+<td><strong>第二层：控制机溯源</strong></td>
+<td>确定C&amp;C服务器</td>
+<td>恶意代码逆向、DNS分析、网络行为分析</td>
+</tr>
+<tr>
+<td><strong>第三层：攻击者溯源</strong></td>
+<td>确定攻击者&#x2F;组织身份</td>
+<td>多维度情报关联、社工信息、语言特征、攻击手法</td>
+</tr>
+</tbody></table>
+<h4 id="典型的攻击溯源场景分类"><a href="#典型的攻击溯源场景分类" class="headerlink" title="典型的攻击溯源场景分类"></a>典型的攻击溯源场景分类</h4><ul>
+<li>DDoS攻击溯源</li>
+<li>APT攻击溯源</li>
+<li>Web攻击溯源</li>
+<li>勒索软件溯源</li>
+<li>数据泄露溯源</li>
+</ul>
+<h3 id="网络溯源中常用的数据与技术要求"><a href="#网络溯源中常用的数据与技术要求" class="headerlink" title="网络溯源中常用的数据与技术要求"></a>网络溯源中常用的数据与技术要求</h3><h4 id="攻击溯源中将使用的数据"><a href="#攻击溯源中将使用的数据" class="headerlink" title="攻击溯源中将使用的数据"></a>攻击溯源中将使用的数据</h4><ul>
+<li><strong>流量数据</strong>：NetFlow、全包捕获（PCAP）</li>
+<li><strong>日志数据</strong>：系统日志、应用日志、安全设备日志</li>
+<li><strong>恶意代码数据</strong>：样本文件、行为分析报告</li>
+<li><strong>情报数据</strong>：威胁情报、漏洞情报、资产信息</li>
+<li><strong>注册&#x2F;配置数据</strong>：域名注册信息、IP归属信息、证书信息</li>
+<li><strong>社工数据</strong>：社交网络信息、公开信息检索</li>
+</ul>
+<h4 id="攻击溯源技术的评估准则"><a href="#攻击溯源技术的评估准则" class="headerlink" title="攻击溯源技术的评估准则"></a>攻击溯源技术的评估准则</h4><ul>
+<li>准确率（Precision）</li>
+<li>召回率（Recall）</li>
+<li>时效性（Timeliness）</li>
+<li>可解释性（Explainability）</li>
+<li>证据力（Evidential Weight）</li>
+</ul>
+<h4 id="攻击溯源技术的应用准则"><a href="#攻击溯源技术的应用准则" class="headerlink" title="攻击溯源技术的应用准则"></a>攻击溯源技术的应用准则</h4><ul>
+<li>合法合规</li>
+<li>数据完整性保持</li>
+<li>证据保全链</li>
+<li>隐私保护</li>
+</ul>
+<h2 id="攻击主机溯源"><a href="#攻击主机溯源" class="headerlink" title="攻击主机溯源"></a>攻击主机溯源</h2><ul>
+<li><strong>目标</strong>：确定发起攻击的直接源头主机&#x2F;IP</li>
+<li><strong>意义</strong>：攻击溯源的第一步，是<strong>后续溯源工作的基础</strong></li>
+</ul>
+<h3 id="流量层溯源技术"><a href="#流量层溯源技术" class="headerlink" title="流量层溯源技术"></a>流量层溯源技术</h3><ul>
+<li><strong>NetFlow&#x2F;SFlow分析</strong>：基于流量记录的统计分析</li>
+<li><strong>深度包检测（DPI）</strong>：识别应用层攻击流量特征</li>
+<li><strong>异常流量检测</strong>：基于基线的流量异常发现</li>
+</ul>
+<h3 id="网络层溯源技术"><a href="#网络层溯源技术" class="headerlink" title="网络层溯源技术"></a>网络层溯源技术</h3><ul>
+<li><strong>IP溯源（IP Traceback）</strong>：<ul>
+<li>包标记法（Packet Marking）</li>
+<li>链路测试法（Link Testing）</li>
+<li>日志记录法（Logging）</li>
+<li>ICMP追踪法</li>
+</ul>
+</li>
+<li><strong>路由分析</strong>：BGP路由信息分析、AS路径追溯</li>
+</ul>
+<h3 id="应用层溯源技术"><a href="#应用层溯源技术" class="headerlink" title="应用层溯源技术"></a>应用层溯源技术</h3><ul>
+<li>HTTP头部分析（User-Agent、Referer、Cookie等）</li>
+<li>应用指纹识别</li>
+<li>多层代理穿透方法</li>
+</ul>
+<h3 id="主机溯源面临的挑战"><a href="#主机溯源面临的挑战" class="headerlink" title="主机溯源面临的挑战"></a>主机溯源面临的挑战</h3><ul>
+<li>跳板机和代理（VPN&#x2F;Tor&#x2F;代理链）</li>
+<li>IP欺骗（IP Spoofing）</li>
+<li>NAT&#x2F;共享IP环境</li>
+<li>云环境的动态IP</li>
+</ul>
+<h2 id="控制机（C-C）溯源"><a href="#控制机（C-C）溯源" class="headerlink" title="控制机（C&amp;C）溯源"></a>控制机（C&amp;C）溯源</h2><h3 id="C-C服务器概述"><a href="#C-C服务器概述" class="headerlink" title="C&amp;C服务器概述"></a>C&amp;C服务器概述</h3><ul>
+<li><strong>定义</strong>：Command and Control服务器，攻击者用于控制被感染主机的命令与控制基础设施</li>
+<li><strong>重要性</strong>：C&amp;C是<strong>连接攻击者和受害主机的关键节点</strong>，溯源C&amp;C可以<strong>发现攻击基础设施</strong></li>
+<li>C&amp;C隐蔽技术：DGA域名生成、Fast-Flux、Domain-Flux、P2P C&amp;C</li>
+</ul>
+<h3 id="基于域名的C-C发现与溯源"><a href="#基于域名的C-C发现与溯源" class="headerlink" title="基于域名的C&amp;C发现与溯源"></a>基于域名的C&amp;C发现与溯源</h3><ul>
+<li><strong>DGA域名检测</strong>：基于字符特征、DNS查询行为异常的检测</li>
+<li><strong>域名注册信息分析</strong>：WHOIS查询、注册时间、注册者关联</li>
+<li><strong>DNS被动分析</strong>（Passive DNS）：域名解析历史、IP映射关系</li>
+<li><strong>域名信誉评估</strong>：基于威胁情报的域名信誉评分</li>
+</ul>
+<h3 id="基于网络行为的C-C检测"><a href="#基于网络行为的C-C检测" class="headerlink" title="基于网络行为的C&amp;C检测"></a>基于网络行为的C&amp;C检测</h3><ul>
+<li><strong>心跳检测</strong>：周期性通信模式识别</li>
+<li><strong>异常协议检测</strong>：非标准端口、私有协议识别</li>
+<li><strong>流量指纹匹配</strong>：已知C&amp;C通信模式匹配</li>
+<li><strong>TLS证书分析</strong>：SSL&#x2F;TLS指纹（JA3&#x2F;JA3S）关联</li>
+</ul>
+<h3 id="C-C服务器基础设施溯源"><a href="#C-C服务器基础设施溯源" class="headerlink" title="C&amp;C服务器基础设施溯源"></a>C&amp;C服务器基础设施溯源</h3><ul>
+<li><strong>IP地址归属分析</strong>：IP段、AS号、地理位置、托管方</li>
+<li><strong>服务器关联分析</strong>：共享IP&#x2F;域名&#x2F;CDN的主机关联</li>
+<li><strong>恶意基础设施图谱</strong>：构建攻击者基础设施的关系网络</li>
+<li><strong>Sinkhole技术</strong>：接管恶意域名，获取感染主机信息</li>
+</ul>
+<h2 id="攻击者与攻击组织的溯源"><a href="#攻击者与攻击组织的溯源" class="headerlink" title="攻击者与攻击组织的溯源"></a>攻击者与攻击组织的溯源</h2><ul>
+<li>攻击者溯源是溯源的<strong>最高层次</strong>，目标是将攻击关联到具体的个人或组织</li>
+<li>需要在主机溯源和控制机溯源的基础上，进行多维度、多层次的情报融合分析</li>
+<li>最终产出：攻击者ID、组织名称、地理位置、联络方式、语言习惯等</li>
+</ul>
+<h3 id="基于分析对象的溯源技术"><a href="#基于分析对象的溯源技术" class="headerlink" title="基于分析对象的溯源技术"></a>基于分析对象的溯源技术</h3><h4 id="流量分析"><a href="#流量分析" class="headerlink" title="流量分析"></a>流量分析</h4><ul>
+<li>分析攻击流量的特征模式</li>
+<li>提取TTPs（战术、技术与流程）指纹</li>
+<li>可用于攻击者或组织的<strong>画像</strong>构建</li>
+</ul>
+<h4 id="文档分析"><a href="#文档分析" class="headerlink" title="文档分析"></a>文档分析</h4><ul>
+<li>攻击文档（如钓鱼文档）的元数据分析</li>
+<li>文档作者信息、创建时间、编辑历史</li>
+<li>语言风格和用词习惯</li>
+</ul>
+<h4 id="邮件及通信记录分析"><a href="#邮件及通信记录分析" class="headerlink" title="邮件及通信记录分析"></a>邮件及通信记录分析</h4><ul>
+<li>邮件头的深度分析（X-Originating-IP、Received链）</li>
+<li>发件人行为模式分析</li>
+<li>通信时间模式（时区推断）</li>
+</ul>
+<h4 id="攻击代码分析"><a href="#攻击代码分析" class="headerlink" title="攻击代码分析"></a>攻击代码分析</h4><ul>
+<li>分析对象：PE&#x2F;ELF文件、脚本文件、代码片段</li>
+<li><strong>静态分析</strong>：哈希值、编程语言风格（Careto西班牙语、毒云藤台湾术语、黄金鼠阿拉伯语）、硬编码配置信息（IP&#x2F;域名&#x2F;账号&#x2F;URL）、标识性变量名（Troy）、反检测代码</li>
+<li><strong>动态分析</strong>：沙箱运行，记录API调用、文件行为、网络行为</li>
+</ul>
+<h4 id="威胁情报分析"><a href="#威胁情报分析" class="headerlink" title="威胁情报分析"></a>威胁情报分析</h4><ul>
+<li>标准：CybOX（词汇）、STIX（语法与框架）、TAXII（传输），STIX 2.0内置CybOX</li>
+<li>国标：GB&#x2F;T 36643-2018，包含八个威胁信息组件</li>
+<li>STIX在溯源中用于刻画攻击者，”threat actor”描述攻击源</li>
+<li>CNTIC：国家网络空间威胁情报共享开放平台（信工所牵头11家单位共建）</li>
+</ul>
+<h4 id="社工查询与互联网检索"><a href="#社工查询与互联网检索" class="headerlink" title="社工查询与互联网检索"></a>社工查询与互联网检索</h4><p>用账号、邮箱、电话等信息在泄露数据库中检索&#x2F;“撞库”，获取注册网站、密码、联系方式、住址等</p>
+<h4 id="基于时区的溯源定位"><a href="#基于时区的溯源定位" class="headerlink" title="基于时区的溯源定位"></a>基于时区的溯源定位</h4><ul>
+<li>从编译时间、域名注册时间、活动时间模式推断地区（暗象UTC+5、APT10在UTC+8~18）</li>
+</ul>
+<h4 id="基于域名信息的溯源定位"><a href="#基于域名信息的溯源定位" class="headerlink" title="基于域名信息的溯源定位"></a>基于域名信息的溯源定位</h4><ul>
+<li>Whois信息反查、域名隐私保护期过后获取、非动态域名历史记录</li>
+<li>DNS Sinkhole：DNS劫持指向受控IP获取受害者分布，监控C&amp;C域名过期抢注</li>
+</ul>
+<h4 id="基于数字签名-数字证书关联的溯源归因"><a href="#基于数字签名-数字证书关联的溯源归因" class="headerlink" title="基于数字签名&#x2F;数字证书关联的溯源归因"></a>基于数字签名&#x2F;数字证书关联的溯源归因</h4><ul>
+<li>使用同样证书进行连接&#x2F;软件签名关联（Hangover、Gucifer 2.0、摩诃草”Accelerate Technologies ltd”）</li>
+</ul>
+<h4 id="攻击手法分析"><a href="#攻击手法分析" class="headerlink" title="攻击手法分析"></a>攻击手法分析</h4><ul>
+<li>利用的漏洞（Office&#x2F;Flash&#x2F;IE&#x2F;Java）、感染方式（水坑&#x2F;鱼叉&#x2F;U盘）、远控模式（IRC&#x2F;论坛&#x2F;可信网站）</li>
+<li>行为序列对比（NavRAT与Group123的TTP shellcode几乎完全相同）</li>
+</ul>
+<h3 id="溯源技术的组合使用"><a href="#溯源技术的组合使用" class="headerlink" title="溯源技术的组合使用"></a>溯源技术的组合使用</h3><ul>
+<li>语言&#x2F;字体&#x2F;IP&#x2F;时区→直接定位；域名&#x2F;账号→二次关联定位；编程风格&#x2F;配置&#x2F;攻击手法→多维匹配</li>
+<li>最终输出：身份信息、社交活动、行为轨迹、组织架构、成员分工</li>
+</ul>
+<h3 id="典型工具"><a href="#典型工具" class="headerlink" title="典型工具"></a>典型工具</h3><ul>
+<li><strong>恶意代码分析工具</strong>：IDA Pro、Ghidra、x64dbg、Cuckoo Sandbox</li>
+<li><strong>社工查询与互联网检索工具</strong>：Maltego、Recon-ng、theHarvester</li>
+<li><strong>情报查询工具</strong>：VirusTotal、AlienVault OTX、Shodan、Censys</li>
+<li><strong>基于情报的分析系统</strong>：MISP、ThreatConnect、Anomali</li>
+</ul>
+<h2 id="网络攻击的主动溯源技术"><a href="#网络攻击的主动溯源技术" class="headerlink" title="网络攻击的主动溯源技术"></a>网络攻击的主动溯源技术</h2><h3 id="Intro-1"><a href="#Intro-1" class="headerlink" title="Intro"></a>Intro</h3><h4 id="主动溯源-vs-被动溯源"><a href="#主动溯源-vs-被动溯源" class="headerlink" title="主动溯源 vs 被动溯源"></a>主动溯源 vs 被动溯源</h4><p><strong>被动溯源的优势</strong>：不修改系统配置，不影响正常业务；可在事后进行详细分析。<br><strong>主动溯源的优势</strong>：攻击发生时主动发现并即刻溯源；可在网络攻击过程的任意时刻以”不影响业务正常流转”的方式进行攻击溯源。</p>
+<table>
+<thead>
+<tr>
+<th>被动溯源</th>
+<th>主动溯源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基于已有日志、流量数据事后分析</td>
+<td>主动部署诱捕设施或注入标记</td>
+</tr>
+<tr>
+<td>不改变攻击者行为，不影响业务</td>
+<td>可实时感知攻击，直接获取攻击者信息</td>
+</tr>
+<tr>
+<td>依赖历史数据质量和完整性</td>
+<td>需要主动部署和安全风险控制</td>
+</tr>
+</tbody></table>
+<h4 id="主动溯源的核心思想"><a href="#主动溯源的核心思想" class="headerlink" title="主动溯源的核心思想"></a>主动溯源的核心思想</h4><ul>
+<li>主动采取技术手段获取攻击者身份和位置信息</li>
+<li>利用攻击者的行为特征进行反向追踪</li>
+<li>“以攻为守”的防御思维</li>
+</ul>
+<h3 id="主动溯源技术分类"><a href="#主动溯源技术分类" class="headerlink" title="主动溯源技术分类"></a>主动溯源技术分类</h3><table>
+<thead>
+<tr>
+<th>技术类别</th>
+<th>核心思想</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基于同源分析的溯源技术</strong></td>
+<td>攻击者可能复用代码、工具，通过分析恶意代码&#x2F;网络行为的同源性发现攻击来源</td>
+<td>恶意代码家族识别、攻击组织关联</td>
+</tr>
+<tr>
+<td><strong>基于指纹识别的溯源技术</strong></td>
+<td>设备或浏览器存在唯一性指纹，通过指纹匹配追踪攻击者</td>
+<td>Web追踪、匿名网络用户追踪</td>
+</tr>
+<tr>
+<td><strong>基于蜜罐诱捕的溯源技术</strong></td>
+<td>部署虚假的脆弱系统吸引攻击者，捕获攻击行为并溯源</td>
+<td>攻击行为捕获、恶意样本采集</td>
+</tr>
+<tr>
+<td><strong>基于网络测绘的溯源技术</strong></td>
+<td>对网络空间实体及其属性进行探测、分析，掌握攻击者资产分布</td>
+<td>攻击者网络资产发现、反制</td>
+</tr>
+<tr>
+<td><strong>基于网络欺骗的溯源技术</strong></td>
+<td>利用骗局或假动作阻挠攻击者认知过程，延迟攻击并获取溯源信息</td>
+<td>APT防御、攻击诱捕反制</td>
+</tr>
+</tbody></table>
+<h3 id="基于同源分析的溯源技术"><a href="#基于同源分析的溯源技术" class="headerlink" title="基于同源分析的溯源技术"></a>基于同源分析的溯源技术</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p><strong>同源性概念</strong>：指两个或多个恶意代码或网络行为来自同一攻击者&#x2F;组织&#x2F;工具的关联性。攻击者为了节约时间，会复用之前写过的代码或借鉴别人的代码，形成程序或网络行为的”家族基因”。</p>
+<p><strong>同源分析的三个维度</strong>：</p>
+<ul>
+<li><strong>程序同源性</strong>：恶意代码本身的代码结构、编译特征等相似性</li>
+<li><strong>代码风格同源性</strong>：编程习惯、命名规范、代码组织方式等体现的作者风格</li>
+<li><strong>网络行为同源性</strong>：通信模式、协议特征、C2交互行为等的相似性</li>
+</ul>
+<h4 id="恶意代码同源分析"><a href="#恶意代码同源分析" class="headerlink" title="恶意代码同源分析"></a>恶意代码同源分析</h4><h5 id="程序同源性概念"><a href="#程序同源性概念" class="headerlink" title="程序同源性概念"></a>程序同源性概念</h5><ul>
+<li>代码的<strong>持续性与迭代性</strong>：攻击者会不断改进代码，但核心结构保留</li>
+<li><strong>家族基因</strong>：同一家族恶意代码可追溯的遗传特征（如Stuxnet和Duqu使用相同的加密算法和密钥管理方式）</li>
+<li><strong>家族谱系</strong>：同一恶意代码家族的演化关系树（如”熊猫烧香”变种演化）</li>
+</ul>
+<h5 id="恶意代码同源分析-1"><a href="#恶意代码同源分析-1" class="headerlink" title="恶意代码同源分析"></a>恶意代码同源分析</h5><ul>
+<li>基于图像纹理：二进制文件转灰度图像，纹理相似度比较</li>
+<li>基于系统调用序列：LCS等序列比对算法</li>
+<li>基于n-gram：二进制&#x2F;汇编指令n-gram切分，特征频率向量</li>
+<li>基于动态行为指纹：沙箱运行记录文件&#x2F;注册表&#x2F;网络行为</li>
+<li>基于控制流图：CFG结构特征图匹配</li>
+<li>基于调用习惯：数据挖掘构建编程习惯模型，频繁项离群检测</li>
+<li>基于多特征融合：模糊哈希过滤+LCS轨迹比对+多维样本相似性计算</li>
+</ul>
+<h4 id="网络行为同源分析"><a href="#网络行为同源分析" class="headerlink" title="网络行为同源分析"></a>网络行为同源分析</h4><ul>
+<li>即使通信内容加密，行为模式（连接建立、心跳机制、命令交互）仍可识别同源特征</li>
+<li>示例：PI木马不同版本变种尽管端口不同，但连接交互模式近乎一致；灰鸽子完整的通信状态机（上线→心跳→命令解析→执行）</li>
+<li>同源攻击行为有多维度类似性，但同一恶意代码也可能有不同网络行为表现</li>
+</ul>
+<h3 id="基于指纹识别的溯源技术"><a href="#基于指纹识别的溯源技术" class="headerlink" title="基于指纹识别的溯源技术"></a>基于指纹识别的溯源技术</h3><h4 id="基于浏览器指纹的Web追踪"><a href="#基于浏览器指纹的Web追踪" class="headerlink" title="基于浏览器指纹的Web追踪"></a>基于浏览器指纹的Web追踪</h4><ul>
+<li><strong>浏览器指纹</strong>：通过浏览器获取的属性配置信息（UA、屏幕分辨率、字体、插件、时区等）和HTTP报文特征信息</li>
+<li><strong>原理</strong>：信息收集→组合→哈希化（生成唯一指纹）→存储→比对（跨网站关联同一用户）</li>
+<li>通过JavaScript脚本和HTTP报文头获取，利用信息熵衡量指纹唯一性</li>
+</ul>
+<h4 id="基于网站指纹的匿名网络用户追踪"><a href="#基于网站指纹的匿名网络用户追踪" class="headerlink" title="基于网站指纹的匿名网络用户追踪"></a>基于网站指纹的匿名网络用户追踪</h4><ul>
+<li><strong>网站指纹（WFP）</strong>：Web服务组件的类型、版本等标记信息，即使使用VPN&#x2F;TOR也可用于追踪</li>
+<li>识别方法：Wappalyzer等工具、多粒度启发式识别算法、混合流分割算法</li>
+</ul>
+<h4 id="设备指纹"><a href="#设备指纹" class="headerlink" title="设备指纹"></a>设备指纹</h4><ul>
+<li>综合设备属性（插件、处理器）、操作系统、浏览器和网络属性（IP、签名哈希）形成设备唯一标识</li>
+</ul>
+<h3 id="基于蜜罐诱捕的溯源技术"><a href="#基于蜜罐诱捕的溯源技术" class="headerlink" title="基于蜜罐诱捕的溯源技术"></a>基于蜜罐诱捕的溯源技术</h3><h4 id="蜜罐技术概述"><a href="#蜜罐技术概述" class="headerlink" title="蜜罐技术概述"></a>蜜罐技术概述</h4><ul>
+<li><strong>定义</strong>：一种安全资源，其价值在于被扫描、被攻击和被攻陷，核心在于<strong>对攻击活动进行监视、检测和分析</strong></li>
+<li><strong>相关概念</strong>：蜜罐（模拟漏洞系统）、蜜饵（诱使打开的文件）、蜜标（植入隐蔽链接的蜜饵）、蜜网（多蜜罐连成网）</li>
+<li><strong>发展历程</strong>：1990-1997被攻陷真实主机 → 1997-2000虚拟蜜罐工具 → 2000至今被监控真实系统（融合数据捕获&#x2F;分析&#x2F;控制）</li>
+<li><strong>分类</strong>：按目的（产品型&#x2F;研究型）、按交互度（低交互&#x2F;高交互）、按使用性质（外观型&#x2F;测量型&#x2F;牺牲型）</li>
+<li><strong>评估指标</strong>：灵敏性、对策性、隐蔽性；单个蜜罐指标：DA（欺骗差异量）、LA（成功攻击量）、WT（浪费时间）</li>
+</ul>
+<h4 id="蜜网与蜜场"><a href="#蜜网与蜜场" class="headerlink" title="蜜网与蜜场"></a>蜜网与蜜场</h4><ul>
+<li><strong>蜜网</strong>：黑客诱捕网络体系架构，三大核心技术——数据控制（攻击包抑制+连接数限制）、数据捕获（网络+系统行为数据）、数据分析</li>
+<li><strong>HoneyWall网关</strong>：链路层桥接设备，对黑客不可见，eth0外网&#x2F;eth1蜜网&#x2F;eth2监控通道，对流入不限制、流出严格控制</li>
+<li><strong>数据捕获</strong>：快通道（Argus&#x2F;Snort&#x2F;p0f+Sebek）和慢通道（tcpdump），通过sys_socket关联</li>
+<li><strong>蜜场</strong>：分布式蜜罐，恶意访问重定向集中管理，蜜罐集中部署于受控仿真网络</li>
+</ul>
+<h4 id="蜜罐技术应用"><a href="#蜜罐技术应用" class="headerlink" title="蜜罐技术应用"></a>蜜罐技术应用</h4><ul>
+<li><strong>流量入侵检测</strong>：HoneyStat（局域网蠕虫）、HoneyMonkey（浏览器漏洞）、Google Safe Browsing</li>
+<li><strong>恶意样本捕获</strong>：Nepenthes、HoneyBow、WebPatrol等系统</li>
+<li><strong>溯源取证</strong>：攻击诱捕→发现弱点→溯源手法→收集证据；涵盖系统和服务的伪装、攻击诱捕、数据分析、反蜜罐对抗等机制</li>
+<li><strong>反蜜罐对抗</strong>：蜜罐识别（Honeypot Hunter、Sebek&#x2F;VMware识别）vs 反识别（虚拟层监控转移：Xebek、VMScope）</li>
+</ul>
+<h3 id="基于网络测绘的溯源技术"><a href="#基于网络测绘的溯源技术" class="headerlink" title="基于网络测绘的溯源技术"></a>基于网络测绘的溯源技术</h3><h4 id="网络测绘概述"><a href="#网络测绘概述" class="headerlink" title="网络测绘概述"></a>网络测绘概述</h4><ul>
+<li><strong>定义</strong>：对<strong>网络空间实体及属性</strong>进行探测、融合分析和绘制，形成全息地图</li>
+<li><strong>溯源应用</strong>：构建攻击服务信息库用于归因、发现利用来源节点漏洞、攻击网络劫持与反制</li>
+<li><strong>美国</strong>：X计划（DARPA）、藏宝图计划（NSA）、SHINE计划（DHS）</li>
+<li><strong>中国</strong>：网探D01、ZoomEye、FOEYE、360全息测绘、奇安信测绘系统</li>
+</ul>
+<h4 id="网络测绘方法"><a href="#网络测绘方法" class="headerlink" title="网络测绘方法"></a>网络测绘方法</h4><ul>
+<li><strong>动态测绘</strong>：以时间为维度，不间断探测资产变化趋势</li>
+<li><strong>时空测绘</strong>：收集不同时空数据按时间索引</li>
+<li><strong>交叉测绘</strong>：域名与IP交叉、明暗网交叉、IPv4与IPv6交叉</li>
+<li><strong>行为测绘</strong>：利用Banner、数字证书、端口开放行为等异常特征识别APT&#x2F;黑产组织（如Apache CAS指纹、ssh-hostkey、favicon图标）</li>
+</ul>
+<h4 id="常见网络测绘工具"><a href="#常见网络测绘工具" class="headerlink" title="常见网络测绘工具"></a>常见网络测绘工具</h4><ul>
+<li>NMAP、Nessus、ZoomEye、Quake（360）、Shodan</li>
+</ul>
+<h3 id="基于网络欺骗的溯源技术"><a href="#基于网络欺骗的溯源技术" class="headerlink" title="基于网络欺骗的溯源技术"></a>基于网络欺骗的溯源技术</h3><h4 id="网络欺骗的提出"><a href="#网络欺骗的提出" class="headerlink" title="网络欺骗的提出"></a>网络欺骗的提出</h4><ul>
+<li><strong>网络攻防的非对称博弈</strong>：工作量不对称、信息不对称、后果不对称 → 通过欺骗技术扭转三类不对称</li>
+<li><strong>定义</strong>（Gartner）：使用骗局或假动作阻挠攻击者认知过程，通过虚假响应、混淆、误导达到欺骗目的</li>
+<li>Gartner评估：处于”青春期”，预计5-10年成熟；2024年指出AI安全助手和ASM集成趋势</li>
+</ul>
+<h4 id="网络欺骗技术分类"><a href="#网络欺骗技术分类" class="headerlink" title="网络欺骗技术分类"></a>网络欺骗技术分类</h4><ul>
+<li><strong>影子服务技术</strong>：真实服务环境克隆+数据脱敏</li>
+<li><strong>虚拟网络拓扑技术</strong>：内网部署虚拟节点，对抗APT内网平移</li>
+<li><strong>蜜标技术</strong>：部署虚假诱饵（代码注释、数字证书、密码、密钥、邮箱口令等），蜜罐是欺骗技术的实现形式之一</li>
+</ul>
+<h4 id="6-3-网络欺骗技术的作用"><a href="#6-3-网络欺骗技术的作用" class="headerlink" title="6.3 网络欺骗技术的作用"></a>6.3 网络欺骗技术的作用</h4><ul>
+<li><strong>发现</strong>攻击：蜜饵非正常访问时告警 → <strong>粘住</strong>攻击：消耗攻击者时间精力 → <strong>释放</strong>攻击：暴露攻击手段和方法 → <strong>威慑</strong>攻击：形成反制</li>
+</ul>
+<h4 id="诱捕反制防护模型（六部分）"><a href="#诱捕反制防护模型（六部分）" class="headerlink" title="诱捕反制防护模型（六部分）"></a>诱捕反制防护模型（六部分）</h4><ol>
+<li>攻击流量自动识别与牵引</li>
+<li>网站镜像与数据脱敏</li>
+<li>攻击溯源与反制</li>
+<li>指纹信息获取（浏览器&#x2F;系统&#x2F;硬件&#x2F;网络信息）</li>
+<li>指纹信息处理（生成浏览器指纹、推测物理环境）</li>
+<li>指纹信息智能化分析（定位攻击者身份）</li>
+</ol>
+<h1 id="数字取证"><a href="#数字取证" class="headerlink" title="数字取证"></a>数字取证</h1><h2 id="Intro-2"><a href="#Intro-2" class="headerlink" title="Intro"></a>Intro</h2><ul>
+<li><strong>定义</strong>：运用科学验证的方法对数字证据进行发现、收集、保全、检验和分析的过程</li>
+<li><strong>核心原则</strong>：保持证据的原始性、完整性和连续性</li>
+</ul>
+<h3 id="数字证据的获取方法"><a href="#数字证据的获取方法" class="headerlink" title="数字证据的获取方法"></a>数字证据的获取方法</h3><p>数字证据特点：<strong>易失性</strong>、<strong>易修改性</strong>、<strong>隐蔽性</strong>、<strong>海量性</strong></p>
+<ul>
+<li><strong>在线取证</strong>：对运行中的系统进行证据采集</li>
+<li><strong>离线取证</strong>：对存储介质进行镜像和分析</li>
+<li><strong>网络取证</strong>：对网络通信数据的捕获和分析</li>
+<li><strong>内存取证</strong>：对系统内存的转储和分析</li>
+<li><strong>日志取证</strong>：对系统和应用日志的收集和分析</li>
+</ul>
+<h3 id="面临的主要困难"><a href="#面临的主要困难" class="headerlink" title="面临的主要困难"></a>面临的主要困难</h3><ul>
+<li>数据量大且分散</li>
+<li>加密和反取证技术</li>
+<li>跨司法管辖区协作</li>
+<li>时效性要求高</li>
+</ul>
+<h2 id="终端数字证据获取"><a href="#终端数字证据获取" class="headerlink" title="终端数字证据获取"></a>终端数字证据获取</h2><p>终端数字取证获取模型（5阶段）：<strong>资质认证→取证准备→数据收集→取证分析→证据提交</strong></p>
+<h3 id="PC终端数字证据获取"><a href="#PC终端数字证据获取" class="headerlink" title="PC终端数字证据获取"></a>PC终端数字证据获取</h3><ul>
+<li><strong>Windows取证</strong>：注册表分析（启动项、USB设备记录）、事件日志、Prefetch、Shellbags、LNK文件</li>
+<li><strong>Linux取证</strong>：系统日志（syslog&#x2F;auth.log）、Shell历史、cron任务、进程和网络状态</li>
+<li><strong>硬盘取证</strong>：磁盘镜像（DD&#x2F;E01）、文件系统分析（MFT&#x2F;inode）、文件雕刻（File Carving）、时间线分析</li>
+<li><strong>内存取证</strong>：内存转储、进程分析、网络连接提取、关键信息提取（口令&#x2F;密钥），工具：Volatility、Rekall</li>
+</ul>
+<h3 id="移动终端数字证据获取"><a href="#移动终端数字证据获取" class="headerlink" title="移动终端数字证据获取"></a>移动终端数字证据获取</h3><ul>
+<li>证据来源：手机内存、SIM卡、外置存储卡、移动网络运营商</li>
+<li>NIST SP800-101 Revision 1 五个取证层次：<strong>人工提取→逻辑提取→JTAG&#x2F;ISP→芯片分析→微读</strong></li>
+<li>Android&#x2F;iOS取证，应用数据提取（微信&#x2F;QQ等）</li>
+</ul>
+<h3 id="2-4-终端数字取证发展方向"><a href="#2-4-终端数字取证发展方向" class="headerlink" title="2.4 终端数字取证发展方向"></a>2.4 终端数字取证发展方向</h3><ul>
+<li><strong>新型终端取证</strong>：物联网设备（截至2025.6我国移动物联网终端用户28.31亿户）、工控设备、智能汽车</li>
+<li><strong>取证效率</strong>、<strong>取证对抗</strong>、<strong>隐私问题</strong></li>
+</ul>
+<h2 id="网络数字证据获取"><a href="#网络数字证据获取" class="headerlink" title="网络数字证据获取"></a>网络数字证据获取</h2><h3 id="3-1-网络数字证据获取背景"><a href="#3-1-网络数字证据获取背景" class="headerlink" title="3.1 网络数字证据获取背景"></a>3.1 网络数字证据获取背景</h3><ul>
+<li>数据来源：网络流量、安全设备日志、DNS&#x2F;DHCP记录等</li>
+</ul>
+<h3 id="3-2-互联网数字证据获取"><a href="#3-2-互联网数字证据获取" class="headerlink" title="3.2 互联网数字证据获取"></a>3.2 互联网数字证据获取</h3><ul>
+<li><strong>DNS日志</strong>：域名解析记录，发现异常域名查询</li>
+<li><strong>全流量取证</strong>：PCAP数据包捕获、NetFlow&#x2F;sFlow流量摘要</li>
+<li><strong>HTTP&#x2F;邮件日志</strong>：Web访问记录、邮件通信记录</li>
+<li><strong>安全设备日志</strong>：防火墙、IDS&#x2F;IPS、WAF、EDR日志</li>
+</ul>
+<h3 id="3-3-专网数字证据获取"><a href="#3-3-专网数字证据获取" class="headerlink" title="3.3 专网数字证据获取"></a>3.3 专网数字证据获取</h3><ul>
+<li>专网安全风险：逻辑边界不完整、身份认证缺失、访问控制缺失、内网主机漏洞</li>
+<li>物理隔离环境下的取证挑战</li>
+</ul>
+<h3 id="3-4-移动网络数字证据获取"><a href="#3-4-移动网络数字证据获取" class="headerlink" title="3.4 移动网络数字证据获取"></a>3.4 移动网络数字证据获取</h3><ul>
+<li><strong>移动互联网空口安全风险</strong>：身份假冒（SIM克隆&#x2F;MAC篡改）、信令干扰、空口协议漏洞、SS7漏洞</li>
+<li><strong>WiFi网络取证</strong>：获取终端身份（MAC&#x2F;位置&#x2F;通信行为）、中间人攻击获取用户数据</li>
+</ul>
+<h3 id="3-5-云端数据数字证据获取"><a href="#3-5-云端数据数字证据获取" class="headerlink" title="3.5 云端数据数字证据获取"></a>3.5 云端数据数字证据获取</h3><ul>
+<li>公有云安全日志（AWS CloudTrail、Azure Monitor等）</li>
+<li>容器环境取证、SASE&#x2F;SSE日志</li>
+</ul>
+<h2 id="数字取证分析（第三部分）"><a href="#数字取证分析（第三部分）" class="headerlink" title="数字取证分析（第三部分）"></a>数字取证分析（第三部分）</h2><h3 id="1-1-数字取证处理与分析"><a href="#1-1-数字取证处理与分析" class="headerlink" title="1.1 数字取证处理与分析"></a>1.1 数字取证处理与分析</h3><ul>
+<li><strong>认知任务模型</strong>：自下而上（搜索筛选→阅读提取→模式化→构建案例→讲故事）+ 自上而下（重新评估→寻求支持→寻找证据→搜索关系→搜索信息）</li>
+<li><strong>构建环境</strong>：取证实验室、取证塔</li>
+<li><strong>证据处理与分析技术</strong>：数据恢复、密码破解、仿真分析、残留数据分析、痕迹分析、内容搜索、内存分析、网络流取证分析、恶意代码取证分析、智能终端取证分析</li>
+<li><strong>证据处理与分析技术框架</strong>：基本框架（物理层→结构层→标识层→应用层）+ 扩展接口 + 应用程序接口</li>
+<li><strong>取证分析工具</strong>：Encase、FTK、美亚取证大师、磐石SafePlatform取证平台</li>
+<li><strong>反取证技术</strong>（简要提及）：数据擦除（Eraser&#x2F;CCleaner）、时间戳篡改（timestomp）、加密、隐藏（Stegsolve）</li>
+</ul>
+<h3 id="1-2-数字证据保全"><a href="#1-2-数字证据保全" class="headerlink" title="1.2 数字证据保全"></a>1.2 数字证据保全</h3><ul>
+<li><strong>保全原则</strong>：不改变原始证据、操作过程可追溯、保证完整性和连续性</li>
+<li><strong>Chain of Custody（监管链）</strong>：记录证据从收集到呈堂的全过程</li>
+<li><strong>保全技术</strong>：加密技术、网络数据保全公证（客户端-服务器架构）、<strong>基于区块链的证据保全</strong>（保全强度高、操作合约透明）</li>
+</ul>
+<h3 id="1-3-数字证据可视化"><a href="#1-3-数字证据可视化" class="headerlink" title="1.3 数字证据可视化"></a>1.3 数字证据可视化</h3><ul>
+<li><strong>网络流量可视化</strong>：SNAPS（消息层→网络层威胁判断）、NFlowVis（TreeMap映射NetFlow数据）</li>
+<li><strong>日志可视化</strong>：OCEANS（多级可视化，多维度网络状态展示）</li>
+<li><strong>中间设备输出可视化</strong>：VisAlert（警报类型×时间×位置三维展示）</li>
+<li><strong>碎片类型识别可视化</strong>：字节频谱、熵值可视化、可打印字符展示</li>
+</ul>
+<hr>
+<h2 id="二、证据关联与证据链构建（第四部分）"><a href="#二、证据关联与证据链构建（第四部分）" class="headerlink" title="二、证据关联与证据链构建（第四部分）"></a>二、证据关联与证据链构建（第四部分）</h2><h3 id="2-1-证据关联和证据链构建概述"><a href="#2-1-证据关联和证据链构建概述" class="headerlink" title="2.1 证据关联和证据链构建概述"></a>2.1 证据关联和证据链构建概述</h3><ul>
+<li>将分散的证据片段关联为完整的攻击叙事，还原攻击时间线</li>
+</ul>
+<h3 id="2-2-证据关联技术"><a href="#2-2-证据关联技术" class="headerlink" title="2.2 证据关联技术"></a>2.2 证据关联技术</h3><ul>
+<li><strong>时间线关联</strong>：超级时间线（Super Timeline）整合多源证据、NTP同步与时钟偏移计算</li>
+<li><strong>多源证据交叉验证</strong>：文件系统+注册表+事件日志、内存+磁盘、网络流量+终端日志</li>
+<li>攻击路径还原（基于Kill Chain&#x2F;ATT&amp;CK的阶段映射）</li>
+</ul>
+<h3 id="2-3-证据链构建技术"><a href="#2-3-证据链构建技术" class="headerlink" title="2.3 证据链构建技术"></a>2.3 证据链构建技术</h3><ul>
+<li>证据链构建中的推理技术：<strong>时间性推理</strong>（自动时间推理引擎）、<strong>功能性推理</strong>（假定情景的多解释分析）</li>
+<li>法律意义上的完整证据链条：主体证据+辅助证据+程序证据</li>
+</ul>
+<h3 id="2-4-溯源图构建与分析技术"><a href="#2-4-溯源图构建与分析技术" class="headerlink" title="2.4 溯源图构建与分析技术"></a>2.4 溯源图构建与分析技术</h3><ul>
+<li>溯源图概念：主体（进程&#x2F;用户）→对象（文件&#x2F;注册表&#x2F;网络连接），基于系统审计日志构建因果关系图</li>
+<li>代表工作：MAGIC（NDSS 2024，图表示学习应用于溯源图检测）</li>
+</ul>
+<h3 id="2-5-多类型网络安全事件核查取证系统"><a href="#2-5-多类型网络安全事件核查取证系统" class="headerlink" title="2.5 多类型网络安全事件核查取证系统"></a>2.5 多类型网络安全事件核查取证系统</h3><ul>
+<li>五层架构：<strong>证据采集层→证据归一化层→证据存储层→证据分析层→证据可视化层</strong></li>
+<li>证据分析层：事件分类→聚合→交叉关联→启发式关联→构建安全事件证据链</li>
+<li>数据可视化层：证据链溯源展示、NoSQL检索报表、报警统计分布</li>
+</ul>
+<h2 id="网络攻击的溯源取证模型"><a href="#网络攻击的溯源取证模型" class="headerlink" title="网络攻击的溯源取证模型"></a>网络攻击的溯源取证模型</h2><h3 id="一、溯源取证模型概述"><a href="#一、溯源取证模型概述" class="headerlink" title="一、溯源取证模型概述"></a>一、溯源取证模型概述</h3><ul>
+<li>网络攻击溯源是<strong>复杂的多阶段过程</strong>，模型提供标准化的分析框架</li>
+<li>三类主流模型：<strong>Kill Chain</strong>（Lockheed Martin，攻击阶段视角）、<strong>ATT&amp;CK</strong>（MITRE，技战术细节）、<strong>Diamond Model</strong>（美国情报界，四元组关系视角）</li>
+<li>本质是对攻击源、攻击目标、TTP（战术、技术、流程）、攻击过程、攻击影响等信息的<strong>不同组织形式</strong></li>
+</ul>
+<hr>
+<h3 id="二、Kill-Chain（杀伤链）"><a href="#二、Kill-Chain（杀伤链）" class="headerlink" title="二、Kill Chain（杀伤链）"></a>二、Kill Chain（杀伤链）</h3><h3 id="2-1-模型概述"><a href="#2-1-模型概述" class="headerlink" title="2.1 模型概述"></a>2.1 模型概述</h3><ul>
+<li>借用军事领域”杀伤链”概念（F2T2EA：发现→定位→跟踪→瞄准→打击→评估）</li>
+<li>从攻击者角度，以<strong>分段式任务模型</strong>描述网络入侵攻击的过程</li>
+</ul>
+<h3 id="2-2-七个阶段"><a href="#2-2-七个阶段" class="headerlink" title="2.2 七个阶段"></a>2.2 七个阶段</h3><ol>
+<li><strong>侦察</strong>（Reconnaissance）：收集目标信息（网络搜索、扫描嗅探）</li>
+<li><strong>武器化</strong>（Weaponization）：构造攻击载荷，研究目标漏洞</li>
+<li><strong>投递</strong>（Delivery）：通过邮件&#x2F;水坑&#x2F;U盘投送恶意代码</li>
+<li><strong>利用</strong>（Exploitation）：触发恶意代码，获取系统控制权限</li>
+<li><strong>安装</strong>（Installation）：植入后门并保持持久性（计划任务、注入系统进程）</li>
+<li><strong>命令与控制</strong>（C2）：建立远程通信控制（WEB&#x2F;DNS&#x2F;邮件隐藏通道）</li>
+<li><strong>目标行动</strong>（Actions on Objectives）：窃取数据、破坏系统、横向移动</li>
+</ol>
+<h3 id="2-3-在溯源中的应用与局限性"><a href="#2-3-在溯源中的应用与局限性" class="headerlink" title="2.3 在溯源中的应用与局限性"></a>2.3 在溯源中的应用与局限性</h3><ul>
+<li>按阶段收集对应证据，分析攻击者技术能力和资源投入</li>
+<li><strong>局限性</strong>：线性模型，现代攻击可能是非线性的；不涵盖内部威胁；粒度较粗</li>
+</ul>
+<h3 id="2-4-基于Kill-Chain的分析案例"><a href="#2-4-基于Kill-Chain的分析案例" class="headerlink" title="2.4 基于Kill Chain的分析案例"></a>2.4 基于Kill Chain的分析案例</h3><ul>
+<li>通过Kill Chain还原钓鱼邮件攻击的完整入侵过程（从侦察到数据窃取）</li>
+<li>攻击演进：侦察从目标本身延伸到供应链、0day漏洞多平台覆盖</li>
+</ul>
+<hr>
+<h3 id="三、ATT-CK框架"><a href="#三、ATT-CK框架" class="headerlink" title="三、ATT&amp;CK框架"></a>三、ATT&amp;CK框架</h3><h3 id="3-1-模型概述"><a href="#3-1-模型概述" class="headerlink" title="3.1 模型概述"></a>3.1 模型概述</h3><ul>
+<li>MITRE在Kill Chain基础上构建的<strong>更细粒度、更易共享的知识模型和框架</strong></li>
+<li>攻击活动并非线性，攻击者可随意切换战术来实现最终目标</li>
+<li>目前包括：PRE-ATT&amp;CK、ATT&amp;CK for Enterprise、ATT&amp;CK for Mobile</li>
+</ul>
+<h3 id="3-2-核心组成"><a href="#3-2-核心组成" class="headerlink" title="3.2 核心组成"></a>3.2 核心组成</h3><ul>
+<li><strong>Tactics（战术）</strong>：攻击者的阶段性目标（what）</li>
+<li><strong>Techniques（技术）</strong>：实现战术的具体方法（how）</li>
+<li><strong>Procedures（流程）</strong>：特定攻击组织的具体实现方式</li>
+</ul>
+<h3 id="3-3-在溯源中的应用"><a href="#3-3-在溯源中的应用" class="headerlink" title="3.3 在溯源中的应用"></a>3.3 在溯源中的应用</h3><ul>
+<li><strong>TTPs对比</strong>：将观察到的手法与已知攻击组织对比</li>
+<li><strong>技战术图谱</strong>：可视化攻击者的技战术使用情况，独特的技战术组合可作为组织特征指纹</li>
+</ul>
+<h3 id="3-4-基于ATT-CK的分析案例"><a href="#3-4-基于ATT-CK的分析案例" class="headerlink" title="3.4 基于ATT&amp;CK的分析案例"></a>3.4 基于ATT&amp;CK的分析案例</h3><ul>
+<li>代表案例：<strong>美司法部起诉俄情报人员干扰美国2016年大选</strong>、<strong>西工大遭NSA攻击的归因分析</strong></li>
+</ul>
+<hr>
+<h3 id="四、Diamond-Model（钻石模型）"><a href="#四、Diamond-Model（钻石模型）" class="headerlink" title="四、Diamond Model（钻石模型）"></a>四、Diamond Model（钻石模型）</h3><h3 id="4-1-模型概述"><a href="#4-1-模型概述" class="headerlink" title="4.1 模型概述"></a>4.1 模型概述</h3><ul>
+<li>将所有安全事件分为四个基本元素，以菱形连线代表关系</li>
+</ul>
+<h3 id="4-2-四元组"><a href="#4-2-四元组" class="headerlink" title="4.2 四元组"></a>4.2 四元组</h3><table>
+<thead>
+<tr>
+<th>元素</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Adversary</strong>（敌手）</td>
+<td>攻击者或攻击组织</td>
+</tr>
+<tr>
+<td><strong>Capabilities</strong>（能力）</td>
+<td>攻击者使用的工具、技术</td>
+</tr>
+<tr>
+<td><strong>Infrastructure</strong>（基础设施）</td>
+<td>IP、域名、C&amp;C服务器等</td>
+</tr>
+<tr>
+<td><strong>Victim</strong>（受害者）</td>
+<td>被攻击的目标</td>
+</tr>
+</tbody></table>
+<h3 id="4-3-在溯源中的应用"><a href="#4-3-在溯源中的应用" class="headerlink" title="4.3 在溯源中的应用"></a>4.3 在溯源中的应用</h3><ul>
+<li>通过一个已知元素推断其他元素，多个事件的菱形关联发现攻击者关联</li>
+<li>完整菱形代表高置信度归因</li>
+</ul>
+<h3 id="4-4-基于Diamond模型的分析案例"><a href="#4-4-基于Diamond模型的分析案例" class="headerlink" title="4.4 基于Diamond模型的分析案例"></a>4.4 基于Diamond模型的分析案例</h3><ul>
+<li>通过基础设施和能力的关联分析进行组织归因</li>
+</ul>
+<hr>
+<h2 id="五、面向强对抗性APT的溯源取证（第二部分）"><a href="#五、面向强对抗性APT的溯源取证（第二部分）" class="headerlink" title="五、面向强对抗性APT的溯源取证（第二部分）"></a>五、面向强对抗性APT的溯源取证（第二部分）</h2><h3 id="5-1-对抗性APT发展趋势"><a href="#5-1-对抗性APT发展趋势" class="headerlink" title="5.1 对抗性APT发展趋势"></a>5.1 对抗性APT发展趋势</h3><ul>
+<li>明确分工的小组，针对特定行业，共享部分代码或资源</li>
+<li>不同阶段使用不同工具减少被准确归因的概率（初期用开源工具，高价值目标用自有工具）</li>
+<li>目标行业延伸到传统行业、国家关键基础设施</li>
+<li>0day漏洞储备覆盖多平台（PC、服务器、移动终端、路由器、工控设备）</li>
+</ul>
+<h3 id="5-2-APT归因的挑战"><a href="#5-2-APT归因的挑战" class="headerlink" title="5.2 APT归因的挑战"></a>5.2 APT归因的挑战</h3><ul>
+<li>大多数安全公司的归因研判依据：恶意代码特性、文档特性、攻击资产、TTPs、地域&#x2F;语言&#x2F;时区</li>
+<li>攻击者尝试规避和隐藏线索，或通过**false flag（”假旗”行动）**混淆分析</li>
+<li>南亚多APT组织（蔓灵花&#x2F;摩诃草&#x2F;Confucius&#x2F;Bahamut）TTP存在重叠，增加归因难度</li>
+</ul>
+<h3 id="5-3-APT攻击伪装"><a href="#5-3-APT攻击伪装" class="headerlink" title="5.3 APT攻击伪装"></a>5.3 APT攻击伪装</h3><ul>
+<li>模仿其他组织的攻击特征（语言、工具、时间模式）进行反溯源</li>
+</ul>
+<h3 id="5-4-人机协同的攻击归因"><a href="#5-4-人机协同的攻击归因" class="headerlink" title="5.4 人机协同的攻击归因"></a>5.4 人机协同的攻击归因</h3><ul>
+<li>人工分析+自动化工具+威胁情报的多维融合</li>
+</ul>
+<h2 id="溯源图分析"><a href="#溯源图分析" class="headerlink" title="溯源图分析"></a>溯源图分析</h2><h3 id="一、APT攻击概述"><a href="#一、APT攻击概述" class="headerlink" title="一、APT攻击概述"></a>一、APT攻击概述</h3><h3 id="1-1-APT攻击定义"><a href="#1-1-APT攻击定义" class="headerlink" title="1.1 APT攻击定义"></a>1.1 APT攻击定义</h3><ul>
+<li><strong>APT</strong>（Advanced Persistent Threat，高级持续性威胁）</li>
+<li>是一种<strong>复杂的、长期的、针对特定目标</strong>的网络攻击</li>
+<li>通常由国家支持的黑客组织、有组织的犯罪集团或高度专业化的攻击者发起</li>
+<li>目标是窃取敏感信息、破坏关键基础设施或进行间谍活动</li>
+</ul>
+<h3 id="1-2-APT攻击特点"><a href="#1-2-APT攻击特点" class="headerlink" title="1.2 APT攻击特点"></a>1.2 APT攻击特点</h3><ul>
+<li><strong>隐蔽性</strong>：长期潜伏，避免被发现</li>
+<li><strong>持续性</strong>：不达目标不罢休</li>
+<li><strong>高度定制化</strong>：针对特定目标专门开发工具和方案</li>
+</ul>
+<hr>
+<h3 id="二、溯源图（Provenance-Graph）概念"><a href="#二、溯源图（Provenance-Graph）概念" class="headerlink" title="二、溯源图（Provenance Graph）概念"></a>二、溯源图（Provenance Graph）概念</h3><h3 id="2-1-定义"><a href="#2-1-定义" class="headerlink" title="2.1 定义"></a>2.1 定义</h3><ul>
+<li>溯源图是一种记录系统级因果关系的图结构</li>
+<li>可捕获<strong>完整的历史上下文</strong>以及系统主体（如程序）和对象（如文件）之间的<strong>所有因果关系</strong></li>
+<li>基于系统审计日志构建</li>
+</ul>
+<h3 id="2-2-溯源图的组成要素"><a href="#2-2-溯源图的组成要素" class="headerlink" title="2.2 溯源图的组成要素"></a>2.2 溯源图的组成要素</h3><ul>
+<li><strong>节点</strong>：主体（进程、用户）和对象（文件、注册表项、网络连接）</li>
+<li><strong>边</strong>：表示主体和对象之间的因果关系（如进程A 创建 文件B）</li>
+<li><strong>时间戳</strong>：记录每个操作的发生时间</li>
+</ul>
+<h3 id="2-3-溯源图的价值"><a href="#2-3-溯源图的价值" class="headerlink" title="2.3 溯源图的价值"></a>2.3 溯源图的价值</h3><ul>
+<li>提供细粒度的系统行为历史</li>
+<li>支持攻击检测和事故响应</li>
+<li>可用于攻击路径还原</li>
+</ul>
+<hr>
+<h2 id="三、现有方法"><a href="#三、现有方法" class="headerlink" title="三、现有方法"></a>三、现有方法</h2><h3 id="3-1-基于规则的溯源图分析"><a href="#3-1-基于规则的溯源图分析" class="headerlink" title="3.1 基于规则的溯源图分析"></a>3.1 基于规则的溯源图分析</h3><ul>
+<li><strong>方法</strong>：利用专家知识和已知的攻击行为来搜索攻击</li>
+<li><strong>优点</strong>：可解释性强，结果可靠</li>
+<li><strong>缺点</strong>：需要专家知识，容易忽略零日漏洞的攻击（只能发现已知攻击）</li>
+<li><strong>代表工作</strong>：<ul>
+<li>CONAN：实时APT检测系统，高准确率和效率</li>
+<li>结合梯度的轻量级自适应溯源检测（NDSS 2025）</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-2-基于学习的溯源图分析"><a href="#3-2-基于学习的溯源图分析" class="headerlink" title="3.2 基于学习的溯源图分析"></a>3.2 基于学习的溯源图分析</h3><ul>
+<li><strong>方法</strong>：应用机器学习方法对不同粒度的系统实体进行良性&#x2F;恶性的分类</li>
+<li><strong>优点</strong>：显示良好的检测性能，被广泛研究</li>
+<li><strong>缺点</strong>：需要标注数据，可解释性较弱</li>
+<li><strong>代表工作</strong>：<ul>
+<li>ShadeWatcher：基于推荐引导的溯源图威胁分析（S&amp;P 2022）</li>
+<li>ProGrapher：基于溯源图嵌入的异常检测系统</li>
+<li>GARNET：基于GoT的告警归约与叙事事件追踪（AAAI 2026）</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-3-基于大模型的溯源图分析"><a href="#3-3-基于大模型的溯源图分析" class="headerlink" title="3.3 基于大模型的溯源图分析"></a>3.3 基于大模型的溯源图分析</h3><ul>
+<li><strong>方法</strong>：基于大模型强大的领域知识和推理能力</li>
+<li><strong>优点</strong>：对未知威胁的检测能力强</li>
+<li><strong>缺点</strong>：检测成本高，计算资源需求大</li>
+</ul>
+<hr>
+<h2 id="四、三种方法对比"><a href="#四、三种方法对比" class="headerlink" title="四、三种方法对比"></a>四、三种方法对比</h2><table>
+<thead>
+<tr>
+<th>维度</th>
+<th>基于规则</th>
+<th>基于学习</th>
+<th>基于大模型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>检测未知威胁</strong></td>
+<td>弱</td>
+<td>中等</td>
+<td>强</td>
+</tr>
+<tr>
+<td><strong>可解释性</strong></td>
+<td>强</td>
+<td>中等</td>
+<td>弱</td>
+</tr>
+<tr>
+<td><strong>成本</strong></td>
+<td>低</td>
+<td>中等</td>
+<td>高</td>
+</tr>
+<tr>
+<td><strong>专家依赖</strong></td>
+<td>高</td>
+<td>中等</td>
+<td>低</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="五、溯源图分析的关键挑战"><a href="#五、溯源图分析的关键挑战" class="headerlink" title="五、溯源图分析的关键挑战"></a>五、溯源图分析的关键挑战</h2><ul>
+<li><strong>依赖爆炸</strong>：系统运行过程中因果关系数量巨大</li>
+<li><strong>实时性</strong>：如何在大规模图中快速检测攻击</li>
+<li><strong>假阳性控制</strong>：减少误报</li>
+<li><strong>对抗性环境</strong>：攻击者可能规避溯源图检测</li>
+</ul>
+<hr>
+<h2 id="六、基于威胁情报的日志生成方法"><a href="#六、基于威胁情报的日志生成方法" class="headerlink" title="六、基于威胁情报的日志生成方法"></a>六、基于威胁情报的日志生成方法</h2><ul>
+<li><strong>Sands to Mansions</strong>（Wang et al., 2024）：基于LLM的全生命周期攻击自动构建</li>
+<li><strong>PROVSYN</strong>（Huang et al., 2026）：合成溯源图用于IDS数据增强</li>
+<li><strong>TAGAPT</strong>（Cheng et al., TIFS 2025）：面向APT样本的溯源图粒度自动生成</li>
+</ul>
+<hr>
+<h2 id="七、基于大模型的安全防御"><a href="#七、基于大模型的安全防御" class="headerlink" title="七、基于大模型的安全防御"></a>七、基于大模型的安全防御</h2><ul>
+<li><strong>智能代码审计与漏洞挖掘</strong>：CI&#x2F;CD集成自动审查、遗留系统扫描、PoC自动生成</li>
+<li><strong>威胁情报自动化与黑市监控</strong>：Telegram&#x2F;暗网7×24监听、漏洞交易预警、攻击者团伙画像</li>
+<li><strong>自适应蜜罐与欺骗防御</strong>：高交互蜜罐与攻击者持久对话、钓鱼反制消耗攻击者资源</li>
+<li><strong>大模型驱动的自动代码修复</strong>：紧急漏洞（如Log4j）秒级扫描并生成PR</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/" title="网络威胁感知与溯源【下】：溯源取证">https://mintind.github.io/2026/06/14/UCAS/网络威胁感知与溯源笔记2/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90/" rel="tag"># 网络威胁感知与溯源</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/12/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/9%E5%9F%BA%E4%BA%8E%20Triton%20%E7%9A%84%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96/" rel="prev" title="基于 Triton 的大模型优化">
+                  <i class="fa fa-angle-left"></i> 基于 Triton 的大模型优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B0/" rel="next" title="网络威胁感知与溯源【上】：NSSA">
+                  网络威胁感知与溯源【上】：NSSA <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/06/14/UCAS/%E7%BD%91%E7%BB%9C%E5%A8%81%E8%83%81%E6%84%9F%E7%9F%A5%E4%B8%8E%E6%BA%AF%E6%BA%90%E7%AC%94%E8%AE%B02/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

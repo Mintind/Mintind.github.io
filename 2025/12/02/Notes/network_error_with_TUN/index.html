@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="一开始是发现进不去知乎，但是睁一只眼闭一只眼了。直到要下载东西但是百度和迅雷都进不去">
+<meta property="og:type" content="article">
+<meta property="og:title" content="其他网页和应用都能进但是进不了百度">
+<meta property="og:url" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="一开始是发现进不去知乎，但是睁一只眼闭一只眼了。直到要下载东西但是百度和迅雷都进不去">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203104921638.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203104952040.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203110130044.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203105120754.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203111037735.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203111401085.png">
+<meta property="article:published_time" content="2025-12-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-02T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Network">
+<meta property="article:tag" content="Notes">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/image-20251203104921638.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/","path":"2025/12/02/Notes/network_error_with_TUN/","title":"其他网页和应用都能进但是进不了百度"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>其他网页和应用都能进但是进不了百度 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B2%A1%E8%A7%A3%E5%86%B3"><span class="nav-number">2.</span> <span class="nav-text">没解决</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%B7%E6%96%B0dns"><span class="nav-number">2.1.</span> <span class="nav-text">刷新dns</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B3%E9%97%ADipv6"><span class="nav-number">2.2.</span> <span class="nav-text">关闭ipv6</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3"><span class="nav-number">3.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="nav-number">4.</span> <span class="nav-text">为什么</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A6%96%E5%85%88%E7%9C%8B%E4%B8%80%E4%B8%8B%E8%BF%99%E4%B8%AATUN%E6%A8%A1%E5%BC%8F%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">4.1.</span> <span class="nav-text">首先看一下这个TUN模式是什么</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TUN%E6%A8%A1%E5%BC%8F%E6%96%AD%E7%BD%91"><span class="nav-number">4.2.</span> <span class="nav-text">TUN模式断网</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="其他网页和应用都能进但是进不了百度 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          其他网页和应用都能进但是进不了百度<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvTm90ZXMvbmV0d29ya19lcnJvcl93aXRoX1RVTi5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-03 00:00:00" itemprop="dateCreated datePublished" datetime="2025-12-03T00:00:00+08:00">2025-12-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>597</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>一开始是发现进不去知乎，但是睁一只眼闭一只眼了。直到要下载东西但是百度和迅雷都进不去</p>
+<span id="more"></span>
+
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>现象：其他网页和应用都正常，但是（目前只发现了）知乎、百度、迅雷不行</p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203104921638.png" alt="image-20251203104921638"></p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203104952040.png" alt="image-20251203104952040"></p>
+<p>使用火绒扫描，显示网络适配器没开启TCP&#x2F;IP。并且修复失败（啧要你何用）</p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203110130044.png" alt="image-20251203110130044"></p>
+<h2 id="没解决"><a href="#没解决" class="headerlink" title="没解决"></a>没解决</h2><h3 id="刷新dns"><a href="#刷新dns" class="headerlink" title="刷新dns"></a>刷新dns</h3><p>刷网全家桶其实是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ipconfig /flushdns</span><br><span class="line">netsh interface ip reset</span><br><span class="line">netsh winsock reset</span><br></pre></td></tr></table></figure>
+
+<h3 id="关闭ipv6"><a href="#关闭ipv6" class="headerlink" title="关闭ipv6"></a>关闭ipv6</h3><p>有人说可能是ipv4、ipv6z冲突</p>
+<p>试了WLAN网络适配器关闭ipv6</p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203105120754.png" alt="image-20251203105120754"></p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>梯子关TUN模式….在这<span class="exturl" data-url="aHR0cHM6Ly9iYnMuaHVvcm9uZy5jbi90aHJlYWQtMTUyNTAwLTEtMS5odG1sJUU3JTlDJThCJUU1JTg4JUIwJUU3JTlBJTg0">https://bbs.huorong.cn/thread-152500-1-1.html看到的<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203111037735.png" alt="image-20251203111037735"></p>
+<p>立竿见影。百度也能上了迅雷也能下了火绒也活过来了</p>
+<p><img src="/2025/12/02/Notes/network_error_with_TUN/image-20251203111401085.png" alt="image-20251203111401085"></p>
+<h2 id="为什么"><a href="#为什么" class="headerlink" title="为什么"></a>为什么</h2><h3 id="首先看一下这个TUN模式是什么"><a href="#首先看一下这个TUN模式是什么" class="headerlink" title="首先看一下这个TUN模式是什么"></a>首先看一下这个TUN模式是什么</h3><p><span class="exturl" data-url="aHR0cHM6Ly9jbGFzaHhtLmNvbS8yODgv">https://clashxm.com/288/<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<p>TUN 模式也叫虚拟网卡模式。无论哪个客户端，TUN 模式指的都是一种<strong>真·全局代理模式</strong>。也就是说，你的系统软件也好，下载工具也好，网页也好，都会通过代理访问互联网。</p>
+<p>详细的说就是：TUN 模式会给电脑“虚拟”出一块新网卡，**把所有程序的流量（无论它是否支持代理设置）**统统的经过 Clash 客户端（或者是其他客户端），再按你设定的规则决定：直连、走代理还是拦截，实现真正的系统级代理。</p>
+<p>而如果你不开 TUN 模式，只是单独开了全局代理，那么只有HTTP的流量（通常就是网页访问，或者是一些聊天工具之类的）才会通过代理，而其他的流量不会通过代理。</p>
+</blockquote>
+<p>使用情景：如果要让http以外的流量也走代理但是又不想手动配置（比如 Git、npm，还看到一个说gemini的什么新功能得开TUN）</p>
+<p>嗯…我能说我一直没注意这个选项，一直以为系统代理开关关了就是关了吗。这意思是TUN开了代理就是开了，我学会了</p>
+<h3 id="TUN模式断网"><a href="#TUN模式断网" class="headerlink" title="TUN模式断网"></a>TUN模式断网</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL29wdXMvMTA0MTI2ODI2NzgxODE1NjA1Mg==">https://www.bilibili.com/opus/1041268267818156052<i class="fa fa-external-link-alt"></i></span></p>
+<p>以后用到再查一下吧….</p>
+<p>开启TUN之后先检查虚拟网卡有没有创建成功，检查订阅中有没有错误参数</p>
+<p>最后TUN和系统代理不要一起开</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/" title="其他网页和应用都能进但是进不了百度">https://mintind.github.io/2025/12/02/Notes/network_error_with_TUN/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Notes/" rel="tag"># Notes</a>
+              <a href="/tags/Network/" rel="tag"># Network</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/02/Vuln/CVE-2004-2685_CCProxy_BO/" rel="prev" title="CVE-2004-2685：CCProxy缓冲区溢出漏洞">
+                  <i class="fa fa-angle-left"></i> CVE-2004-2685：CCProxy缓冲区溢出漏洞
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/08/Notes/windows%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95/" rel="next" title="windows将应用&#x2F;命令添加到右键菜单">
+                  windows将应用/命令添加到右键菜单 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/12/02/Notes/network_error_with_TUN/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/12/02/Notes/network_error_with_TUN/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

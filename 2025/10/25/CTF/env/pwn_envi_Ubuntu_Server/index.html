@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="慢慢来，慢慢来… 用到再慢慢加好了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PWN环境搭建记录2 Ubuntu Server22.04和Windows11">
+<meta property="og:url" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="慢慢来，慢慢来… 用到再慢慢加好了">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208110910176.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208111102604.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208125618723.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208130308263.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208130432093.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208132441078.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208230531040.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208232308938.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209132958195.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209134453272.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209135715785.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140113049.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140620225.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140901193.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209143228339.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209145002516.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209155652747.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160422352.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160552298.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160635321.png">
+<meta property="article:published_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="IDA">
+<meta property="article:tag" content="PWN">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208110910176.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/","path":"2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/","title":"PWN环境搭建记录2 Ubuntu Server22.04和Windows11"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PWN环境搭建记录2 Ubuntu Server22.04和Windows11 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-Server22-04"><span class="nav-number">1.</span> <span class="nav-text">Ubuntu Server22.04</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gcc"><span class="nav-number">1.1.</span> <span class="nav-text">gcc</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#py"><span class="nav-number">1.2.</span> <span class="nav-text">py</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb"><span class="nav-number">1.3.</span> <span class="nav-text">gdb</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#pwndbg"><span class="nav-number">1.3.1.</span> <span class="nav-text">pwndbg</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%BF%9E%E4%B8%8D%E4%B8%8Agithub"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">连不上github</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pwngdb"><span class="nav-number">1.3.2.</span> <span class="nav-text">Pwngdb</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%81%94%E5%90%88"><span class="nav-number">1.3.3.</span> <span class="nav-text">联合</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pwntools"><span class="nav-number">1.4.</span> <span class="nav-text">pwntools</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ROPgadget"><span class="nav-number">1.5.</span> <span class="nav-text">ROPgadget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#one-gadget"><span class="nav-number">1.6.</span> <span class="nav-text">one_gadget</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#patchelf"><span class="nav-number">1.7.</span> <span class="nav-text">patchelf</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LibcSearcher"><span class="nav-number">1.8.</span> <span class="nav-text">LibcSearcher</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#seccomp-tools"><span class="nav-number">1.9.</span> <span class="nav-text">seccomp-tools</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows11"><span class="nav-number">2.</span> <span class="nav-text">Windows11</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IDA-Pro"><span class="nav-number">2.1.</span> <span class="nav-text">IDA Pro</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PyQt5-Shims"><span class="nav-number">2.1.0.1.</span> <span class="nav-text">PyQt5 Shims</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BC%80%E5%90%AF%E6%93%8D%E4%BD%9C%E7%A0%81%E6%98%BE%E7%A4%BA"><span class="nav-number">2.1.1.1.</span> <span class="nav-text">开启操作码显示</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95"><span class="nav-number">2.1.1.2.</span> <span class="nav-text">添加右键菜单</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6"><span class="nav-number">2.1.2.</span> <span class="nav-text">插件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gdb-1"><span class="nav-number">2.2.</span> <span class="nav-text">gdb</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PWN环境搭建记录2 Ubuntu Server22.04和Windows11 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PWN环境搭建记录2 Ubuntu Server22.04和Windows11<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL2Vudi9wd25fZW52aV9VYnVudHVfU2VydmVyLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-26 00:00:00" itemprop="dateCreated datePublished" datetime="2025-10-26T00:00:00+08:00">2025-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Environment/" itemprop="url" rel="index"><span itemprop="name">Environment</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>慢慢来，慢慢来…</p>
+<p>用到再慢慢加好了</p>
+<span id="more"></span>
+
+<h2 id="Ubuntu-Server22-04"><a href="#Ubuntu-Server22-04" class="headerlink" title="Ubuntu Server22.04"></a>Ubuntu Server22.04</h2><p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2oyODQ4ODYyMDIvYXJ0aWNsZS9kZXRhaWxzLzEzOTM1MjA2Nw==">https://blog.csdn.net/j284886202/article/details/139352067<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9jb2xsZWN0Y3JvcC5naXRodWIuaW8vYmxvZy8yMDI1LzAxLzI0LyVFNSVCRiVBQiVFOSU4MCU5RiVFNSU5QyVBODI0LTA0VWJ1bnR1JUU2JTkwJUFEJUU1JUJCJUJBcHduJUU3JThFJUFGJUU1JUEyJTgzLw==">https://collectcrop.github.io/blog/2025/01/24/%E5%BF%AB%E9%80%9F%E5%9C%A824-04Ubuntu%E6%90%AD%E5%BB%BApwn%E7%8E%AF%E5%A2%83/<i class="fa fa-external-link-alt"></i></span></p>
+<p>装完了打快照。</p>
+<h3 id="gcc"><a href="#gcc" class="headerlink" title="gcc"></a>gcc</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install gcc</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208110910176.png" alt="image-20251208110910176"></p>
+<h3 id="py"><a href="#py" class="headerlink" title="py"></a>py</h3><p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208111102604.png" alt="image-20251208111102604"></p>
+<p>python3-pip</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install python3-pip -y</span><br></pre></td></tr></table></figure>
+
+<h3 id="gdb"><a href="#gdb" class="headerlink" title="gdb"></a>gdb</h3><h4 id="pwndbg"><a href="#pwndbg" class="headerlink" title="pwndbg"></a>pwndbg</h4><p>注意要登得上github（傻的我</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/pwndbg/pwndbg</span><br><span class="line"><span class="built_in">cd</span> ~/pwndbg</span><br><span class="line">./setup.sh</span><br></pre></td></tr></table></figure>
+
+<h5 id="连不上github"><a href="#连不上github" class="headerlink" title="连不上github"></a>连不上github</h5><p><span class="exturl" data-url="aHR0cHM6Ly9qdWVqaW4uY24vcG9zdC82OTc1MzQ3NDkxMDQyNTA4ODEz">https://juejin.cn/post/6975347491042508813<i class="fa fa-external-link-alt"></i></span></p>
+<p>网络有问题。测了dns能解析，换个443的站点能通，说明不是防火墙拦443</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208125618723.png" alt="image-20251208125618723"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBhZGRyZXNzLmNvbS93ZWJzaXRlL2dpdGh1Yi5jb20v">https://www.ipaddress.com/website/github.com/<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208130308263.png" alt="image-20251208130308263"></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuaXBhZGRyZXNzLmNvbS93ZWJzaXRlL2Zhc3RseS5uZXQv">https://www.ipaddress.com/website/fastly.net/<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208130432093.png" alt="image-20251208130432093"></p>
+<p>然后在&#x2F;etc&#x2F;hosts加入这些内容，ip以刚刚查到的为准</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Github</span><br><span class="line">140.82.114.3    github.com</span><br><span class="line">151.101.1.6 github.global.ssl.fastly.net</span><br><span class="line">151.101.65.6 github.global.ssl.fastly.net</span><br><span class="line">151.101.129.6 github.global.ssl.fastly.net</span><br><span class="line">151.101.193.6 github.global.ssl.fastly.net</span><br></pre></td></tr></table></figure>
+
+<p>配完之后curl能通了，但是还有问题</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208132441078.png" alt="image-20251208132441078"></p>
+<p>后来试了些啥呢，更新git和清缓存之类的，最后卡了一天好像行了</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208230531040.png" alt="image-20251208230531040"></p>
+<h4 id="Pwngdb"><a href="#Pwngdb" class="headerlink" title="Pwngdb"></a>Pwngdb</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/scwuaptx/Pwngdb</span><br></pre></td></tr></table></figure>
+
+<p>然后把<code> ~/.gdbinit</code>文件拷到根目录下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cp</span> Pwngdb/.gdbinit ~/</span><br></pre></td></tr></table></figure>
+
+<h4 id="联合"><a href="#联合" class="headerlink" title="联合"></a>联合</h4><p>编辑<code> ~/.gdbinit</code>文件。下面的不用改，把pwndbg那个文件路径添加到peda后面就行（如果安装路径不是根目录需要改路径）。我这没装peda使用pwndbg在第一个</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">source ~/PWN/tools/pwndbg/gdbinit.py</span><br><span class="line">source ~/PWN/tools/Pwngdb/pwngdb.py</span><br><span class="line">source ~/PWN/tools/Pwngdb/angelheap/gdbinit.py</span><br><span class="line"></span><br><span class="line">define hook-run</span><br><span class="line">python</span><br><span class="line">import angelheap</span><br><span class="line">angelheap.init_angelheap()</span><br><span class="line">end</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>然后运行gdb验证。看来仍然有网络问题，uv那里还是不通</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251208232308938.png" alt="image-20251208232308938"></p>
+<h3 id="pwntools"><a href="#pwntools" class="headerlink" title="pwntools"></a>pwntools</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install pwntools</span><br></pre></td></tr></table></figure>
+
+<p>看了眼发现以前也碰到了这个问题，说安装目录不在path里</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209132958195.png" alt="image-20251209132958195"></p>
+<p>不过查了下发现path里有，那不管了。验证：</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209134453272.png" alt="image-20251209134453272"></p>
+<h3 id="ROPgadget"><a href="#ROPgadget" class="headerlink" title="ROPgadget"></a>ROPgadget</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m pip install ROPgadge</span><br></pre></td></tr></table></figure>
+
+<p>嗯？</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209135715785.png" alt="image-20251209135715785"></p>
+<h3 id="one-gadget"><a href="#one-gadget" class="headerlink" title="one_gadget"></a>one_gadget</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install one_gadget</span><br></pre></td></tr></table></figure>
+
+<h3 id="patchelf"><a href="#patchelf" class="headerlink" title="patchelf"></a>patchelf</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install patchelf </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140113049.png" alt="image-20251209140113049"></p>
+<h3 id="LibcSearcher"><a href="#LibcSearcher" class="headerlink" title="LibcSearcher"></a>LibcSearcher</h3><p>就装在线库吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install LibcSearcher</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140620225.png" alt="image-20251209140620225"></p>
+<h3 id="seccomp-tools"><a href="#seccomp-tools" class="headerlink" title="seccomp-tools"></a>seccomp-tools</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install gcc ruby-dev</span><br><span class="line"><span class="built_in">sudo</span> gem install seccomp-tools</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209140901193.png" alt="image-20251209140901193"></p>
+<p>使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seccomp-tools dump ./pwn</span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows11"><a href="#Windows11" class="headerlink" title="Windows11"></a>Windows11</h2><h3 id="IDA-Pro"><a href="#IDA-Pro" class="headerlink" title="IDA Pro"></a>IDA Pro</h3><p>教程：<span class="exturl" data-url="aHR0cHM6Ly93d3cuNTJwb2ppZS5jbi90aHJlYWQtMjAwNjgwMi0xLTEuaHRtbA==">https://www.52pojie.cn/thread-2006802-1-1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>更详细的教程：<span class="exturl" data-url="aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjg1NjA0Lmh0bQ==">https://bbs.kanxue.com/thread-285604.htm<i class="fa fa-external-link-alt"></i></span></p>
+<p>网盘链接失效了，用这个<span class="exturl" data-url="aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMTBMQTF0UlJRRF9lMXUzcWlzeWtlcEE/cHdkPW5yMzU=">https://pan.baidu.com/s/10LA1tRRQD_e1u3qisykepA?pwd=nr35<i class="fa fa-external-link-alt"></i></span></p>
+<p>居然是打包好的，伟大</p>
+<p>解压之后运行idapyswitch</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">idapyswitch.exe --force-path ./python311/python3.dll</span><br></pre></td></tr></table></figure>
+
+<p>然后点开ida.exe</p>
+<h5 id="PyQt5-Shims"><a href="#PyQt5-Shims" class="headerlink" title="PyQt5 Shims"></a>PyQt5 Shims</h5><p>ida虽然从QT5升级为QT6,但为了插件的兼容性,提供了<strong>PyQt5 Shims兼容层</strong></p>
+<blockquote>
+<p>官方绑定的是 PySide6。插件代码里却 <code>import PyQt5</code>，而 IDA 自带的 Python 环境已经没有 PyQt5 了。“PyQt5 shims” 是 IDA 提供的一个兼容垫片：它在运行时动态创建一堆假的 <code>PyQt5.*</code> 模块，实际底层转发到 IDA 自带的 PySide6。</p>
+</blockquote>
+<p>IDA检测到不兼容时会自动弹窗，选择yes即开启</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209143228339.png" alt="image-20251209143228339"></p>
+<p>居然没有别的弹窗了。得设置一下加右键菜单什么的</p>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><h5 id="开启操作码显示"><a href="#开启操作码显示" class="headerlink" title="开启操作码显示"></a>开启操作码显示</h5><p>options&gt;general，Number of opcode bytes, 输入10</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209145002516.png" alt="image-20251209145002516"></p>
+<h5 id="添加右键菜单"><a href="#添加右键菜单" class="headerlink" title="添加右键菜单"></a>添加右键菜单</h5><p>原理是修改注册表，在<code>\HKEY_CLASSES_ROOT\*\shell</code>里加一项IDA9。这个<code>*</code>是对所有类型的文件应该，网上的教程给的是到exefile子类里加，但我喜欢全都要</p>
+<p>下面新建一个command，这个应该意思是这项所做的操作。然后设置默认值，数值设成<code>IDA路径  &quot;%1&quot;</code></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;D:\CTFTools\IDA Professional 9.2\ida.exe&quot; &quot;%1&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209155652747.png" alt="image-20251209155652747"></p>
+<p>ok</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160422352.png" alt="image-20251209160422352"></p>
+<p>添加icon。在IDA9项里新建一个字符串，名字填icon，数值填路径</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160552298.png" alt="image-20251209160552298"></p>
+<p>有了</p>
+<p><img src="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/image-20251209160635321.png" alt="image-20251209160635321"></p>
+<h4 id="插件"><a href="#插件" class="headerlink" title="插件"></a>插件</h4><p>因为是打包好的，似乎。那就记一下</p>
+<table>
+<thead>
+<tr>
+<th>插件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>LazyIDA</td>
+<td>convert快速提取数据等</td>
+</tr>
+<tr>
+<td>Keypatch</td>
+<td>patch指令方便</td>
+</tr>
+<tr>
+<td>Patching</td>
+<td>patch16进制数据方便</td>
+</tr>
+<tr>
+<td>findcrypt-yara</td>
+<td>常见加密算法识别</td>
+</tr>
+<tr>
+<td>auto-enum</td>
+<td>自动恢复常见api的枚举变量</td>
+</tr>
+<tr>
+<td>Hrtng</td>
+<td>高亮括号,重定义关键函数声明,栈字符串识别,反ollvm等功能</td>
+</tr>
+<tr>
+<td>D810</td>
+<td>去ollvm混淆脚本,安装Hrtng后可不安装该插件</td>
+</tr>
+<tr>
+<td>classinformer</td>
+<td>反编译C++时, 可以根据RTTI等信息综合恢复类Class的相关信息，例如继承信息，类名等。</td>
+</tr>
+<tr>
+<td>deREferencing</td>
+<td>调试时使用,追踪栈和寄存器指向的内容</td>
+</tr>
+<tr>
+<td>HexRaysCodeXplorer</td>
+<td>自动识别结构体，显示C++虚函数，生成函数结构树等</td>
+</tr>
+<tr>
+<td>DataExportPlus</td>
+<td>提取数据增强版</td>
+</tr>
+</tbody></table>
+<h3 id="gdb-1"><a href="#gdb-1" class="headerlink" title="gdb"></a>gdb</h3>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/" title="PWN环境搭建记录2 Ubuntu Server22.04和Windows11">https://mintind.github.io/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/IDA/" rel="tag"># IDA</a>
+              <a href="/tags/PWN/" rel="tag"># PWN</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/24/CTF/Reverse/RE_N1BOOK_BabyAlgorithm/" rel="prev" title="[N1BOOK 第五章 CTF之RE章]BabyAlgorithm">
+                  <i class="fa fa-angle-left"></i> [N1BOOK 第五章 CTF之RE章]BabyAlgorithm
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/25/CTF/env/IDA_mcp/" rel="next" title="ida-pro-mcp配置">
+                  ida-pro-mcp配置 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

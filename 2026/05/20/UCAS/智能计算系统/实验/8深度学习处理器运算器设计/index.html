@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="8">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习处理器运算器设计">
+<meta property="og:url" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="8">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260521111516158.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528145357587.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528145654049.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528211028754.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528223524878.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528223504077.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528213835767.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528214531420.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528215305408.png">
+<meta property="og:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528221459628.png">
+<meta property="article:published_time" content="2026-05-20T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-05-20T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260521111516158.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/","path":"2026/05/20/UCAS/智能计算系统/实验/8深度学习处理器运算器设计/","title":"深度学习处理器运算器设计"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>深度学习处理器运算器设计 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1"><span class="nav-number">1.</span> <span class="nav-text">深度学习处理器运算器设计</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8"><span class="nav-number">1.1.</span> <span class="nav-text">代码补全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E7%A7%AF%E8%BF%90%E7%AE%97%E5%99%A8"><span class="nav-number">1.1.1.</span> <span class="nav-text">内积运算器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E5%90%91%E9%87%8F%E8%BF%90%E7%AE%97%E5%99%A8"><span class="nav-number">1.1.2.</span> <span class="nav-text">矩阵乘向量运算器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-1"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">代码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%98%E6%B3%95%E8%BF%90%E7%AE%97%E5%99%A8"><span class="nav-number">1.1.3.</span> <span class="nav-text">矩阵乘法运算器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81-2"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">代码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E8%B0%83%E8%AF%95"><span class="nav-number">1.2.</span> <span class="nav-text">编译调试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.1.</span> <span class="nav-text">工具安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E8%AF%91%E8%BF%90%E8%A1%8C"><span class="nav-number">1.2.2.</span> <span class="nav-text">编译运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#gtkwave%E4%BB%BF%E7%9C%9F"><span class="nav-number">1.3.</span> <span class="nav-text">gtkwave仿真</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E4%BB%BF%E7%9C%9F"><span class="nav-number">1.3.1.</span> <span class="nav-text">启动仿真</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E8%B0%83%E8%AF%95"><span class="nav-number">1.3.2.</span> <span class="nav-text">迭代调试</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="深度学习处理器运算器设计 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          深度学习处理器运算器设计<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v5a6e6aqMLzjmt7HluqblrabkuaDlpITnkIblmajov5Dnrpflmajorr7orqEubWQ=" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-05-21 00:00:00" itemprop="dateCreated datePublished" datetime="2026-05-21T00:00:00+08:00">2026-05-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>8</p>
+<span id="more"></span>
+
+<h1 id="深度学习处理器运算器设计"><a href="#深度学习处理器运算器设计" class="headerlink" title="深度学习处理器运算器设计"></a>深度学习处理器运算器设计</h1><p><strong>实验环境</strong>：</p>
+<p>通过 Verilog 语言实现的模块需要使用 HDL 仿真工具进行编译调试。本节使用 Ubuntu  24.04 LTS 版本的操作系统,在该环境上用 Verilator 和 GTKWave 仿真工具来完成实验。</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-for-student ：v8.1</p>
+<p>目录：</p>
+<p>代码文件组织：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">• 目录 src,包含编写的实验 Verilog 源代码。 </span><br><span class="line">• 目录 sim,仿真相关脚本、测试文件及编译产物。  </span><br><span class="line">– 文件 tb_top.cpp,测试顶层文件,生成激励信号,实例化矩阵运算子单元模块。 </span><br><span class="line">– 文件 Makefile,管理编译流程,定义如何将 Verilog 与 C++ 编译成可执行文件。 </span><br><span class="line">– 文件 compile.f,编译文件列表,用于指定编译脚本需要编译的文件。  </span><br><span class="line">• 目录 data,包含仿真输入输出数据文件。  </span><br><span class="line">– 向量规模描述文件 config,描述需进行内积计算的向量规模。 </span><br><span class="line">– 输入神经元文件 neuron,存储输入的神经元数据。 </span><br><span class="line">– 输入权重文件 weight,存储输入的权重数据。 </span><br><span class="line">– 输出结果文件 result,存储运算结果。</span><br></pre></td></tr></table></figure>
+
+<p><strong>实验内容：</strong></p>
+<p>本实验分为三个步骤,分别实现内积运算器、矩阵乘向量运算器和矩阵乘法运算器。最后介绍如何使用仿真工具对代 码进行编译和调试。</p>
+<h2 id="代码补全"><a href="#代码补全" class="headerlink" title="代码补全"></a>代码补全</h2><h3 id="内积运算器"><a href="#内积运算器" class="headerlink" title="内积运算器"></a>内积运算器</h3><p>内积运算器的核心功能是：实现向量的乘积累加,即输入神经元激活值向量与权重向量逐元素相乘,然后再将所有乘积结果累加到一起。</p>
+<p>以固定向量长度为 4 来展示一个例子：该示例采用同步复位、输入寄存器以及固定的两级流水线(输入采样一拍、计算输出一拍),每个时钟周期可完成一个完整的长度为 4 的内积运算。</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260521111516158.png" alt="image-20260521111516158"></p>
+<p>输入神经元和权重数据均需要声明为有符号数(signed),确保 Verilog 代码中使用的乘法运算符(*)能够正确生成有符号数乘法器。</p>
+<p>让ds老师做了个表</p>
+<table>
+<thead>
+<tr>
+<th>设备</th>
+<th>第1拍 (reset&#x3D;1)</th>
+<th>第2拍 (reset&#x3D;0, enable&#x3D;1, 输入A0&#x2F;W0)</th>
+<th>第3拍 (enable&#x3D;1, 输入A1&#x2F;W1)</th>
+<th>第4拍 (enable&#x3D;0, 输入A2&#x2F;W2无效)</th>
+<th>第5拍 (enable&#x3D;1, 输入A3&#x2F;W3)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>输入寄存器</strong> (activations_reg &amp; weights_reg)</td>
+<td>同步清零，输出全0</td>
+<td>时钟上升沿锁存 A0, W0</td>
+<td>时钟上升沿锁存 A1, W1</td>
+<td>保持 A1, W1（未锁存新数据）</td>
+<td>时钟上升沿锁存 A3, W3</td>
+</tr>
+<tr>
+<td><strong>乘法器</strong> (4个并行)</td>
+<td>输出全0（0×0）</td>
+<td>计算 A0×W0，输出四个32位乘积</td>
+<td>计算 A1×W1，输出四个32位乘积</td>
+<td>保持输出 A1×W1 的乘积（输入未变）</td>
+<td>计算 A3×W3，输出四个32位乘积</td>
+</tr>
+<tr>
+<td><strong>加法器</strong> (加法树)</td>
+<td>输出 0</td>
+<td>累加四个乘积，输出 sum0</td>
+<td>累加四个乘积，输出 sum1</td>
+<td>保持输出 sum1</td>
+<td>累加四个乘积，输出 sum3</td>
+</tr>
+<tr>
+<td><strong>结果寄存器</strong> (result)</td>
+<td>同步清零，输出 0</td>
+<td>保持 0（上一拍的值）</td>
+<td>时钟上升沿锁存 sum0，输出 sum0</td>
+<td>保持 sum0（使能无效不更新）</td>
+<td>时钟上升沿锁存 sum1，输出 sum1</td>
+</tr>
+</tbody></table>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><p>inner_product_4x16。这个是给好的</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">module <span class="title function_">inner_product_4x16</span> <span class="params">(</span></span><br><span class="line"><span class="params">    input wire clk,</span></span><br><span class="line"><span class="params">    input wire reset,</span></span><br><span class="line"><span class="params">    input wire enable,</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] activations [<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] weights [<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    output reg <span class="type">signed</span> [<span class="number">31</span>:<span class="number">0</span>] result</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">    <span class="comment">// 输入寄存器</span></span><br><span class="line">    reg <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] activations_reg [<span class="number">0</span>:<span class="number">3</span>];</span><br><span class="line">    reg <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] weights_reg [<span class="number">0</span>:<span class="number">3</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 组合逻辑部分</span></span><br><span class="line">    wire <span class="type">signed</span> [<span class="number">31</span>:<span class="number">0</span>] dot_product = </span><br><span class="line">        (activations_reg[<span class="number">0</span>] * weights_reg[<span class="number">0</span>]) +</span><br><span class="line">        (activations_reg[<span class="number">1</span>] * weights_reg[<span class="number">1</span>]) +</span><br><span class="line">        (activations_reg[<span class="number">2</span>] * weights_reg[<span class="number">2</span>]) +</span><br><span class="line">        (activations_reg[<span class="number">3</span>] * weights_reg[<span class="number">3</span>]);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 寄存器更新逻辑</span></span><br><span class="line">    integer i;</span><br><span class="line">    always @(posedge clk) begin</span><br><span class="line">        <span class="title function_">if</span> <span class="params">(reset)</span> begin</span><br><span class="line">            <span class="title function_">for</span> <span class="params">(i = <span class="number">0</span>; i &lt; <span class="number">4</span>; i = i + <span class="number">1</span>)</span> begin</span><br><span class="line">                activations_reg[i] &lt;= <span class="number">16</span><span class="string">&#x27;d0;</span></span><br><span class="line"><span class="string">                weights_reg[i] &lt;= 16&#x27;</span>d0;</span><br><span class="line">            end</span><br><span class="line">            result &lt;= <span class="number">32</span><span class="string">&#x27;d0;</span></span><br><span class="line"><span class="string">        end else if (enable) begin</span></span><br><span class="line"><span class="string">            for (i = 0; i &lt; 4; i = i + 1) begin</span></span><br><span class="line"><span class="string">                activations_reg[i] &lt;= activations[i];</span></span><br><span class="line"><span class="string">                weights_reg[i] &lt;= weights[i];</span></span><br><span class="line"><span class="string">            end</span></span><br><span class="line"><span class="string">            result &lt;= dot_product;</span></span><br><span class="line"><span class="string">        end</span></span><br><span class="line"><span class="string">    end</span></span><br><span class="line"><span class="string">endmodule</span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="矩阵乘向量运算器"><a href="#矩阵乘向量运算器" class="headerlink" title="矩阵乘向量运算器"></a>矩阵乘向量运算器</h3><p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528145357587.png" alt="image-20260528145357587"></p>
+<p>matrix_vector_mult_4x4x16</p>
+<p>该设计继承内积运算器的两级流水线时序特性。第一拍完成输入神经元激活值向量和 权重矩阵的锁存,第二拍四个内积运算器并行完成乘累加计算。在使能信号有效后的第二 个时钟上升沿,结果向量将稳定输出。该设计每个时钟周期可完成一次完整的 4 阶方矩阵 与长度为 4 的向量之间的乘法运算,但需要注意运算结果依然固定延迟 2 拍才产生。</p>
+<h4 id="代码-1"><a href="#代码-1" class="headerlink" title="代码"></a>代码</h4><p>注意最后要留一个空行</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">module <span class="title function_">matrix_vector_mult_4x4x16</span> <span class="params">(</span></span><br><span class="line"><span class="params">    input wire clk,</span></span><br><span class="line"><span class="params">    input wire reset,</span></span><br><span class="line"><span class="params">    input wire enable,</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] activations [<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] weights [<span class="number">0</span>:<span class="number">3</span>][<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    output wire <span class="type">signed</span> [<span class="number">31</span>:<span class="number">0</span>] results [<span class="number">0</span>:<span class="number">3</span>]</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">inner_product_4x16 <span class="title function_">ipu0</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations),</span></span><br><span class="line"><span class="params">    .weights(weights[<span class="number">0</span>]),</span></span><br><span class="line"><span class="params">    .result(results[<span class="number">0</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">inner_product_4x16 <span class="title function_">ipu1</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations),</span></span><br><span class="line"><span class="params">    .weights(weights[<span class="number">1</span>]),</span></span><br><span class="line"><span class="params">    .result(results[<span class="number">1</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">inner_product_4x16 <span class="title function_">ipu2</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations),</span></span><br><span class="line"><span class="params">    .weights(weights[<span class="number">2</span>]),</span></span><br><span class="line"><span class="params">    .result(results[<span class="number">2</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">inner_product_4x16 <span class="title function_">ipu3</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations),</span></span><br><span class="line"><span class="params">    .weights(weights[<span class="number">3</span>]),</span></span><br><span class="line"><span class="params">    .result(results[<span class="number">3</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">endmodule</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="矩阵乘法运算器"><a href="#矩阵乘法运算器" class="headerlink" title="矩阵乘法运算器"></a>矩阵乘法运算器</h3><p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528145654049.png" alt="image-20260528145654049"></p>
+<h4 id="代码-2"><a href="#代码-2" class="headerlink" title="代码"></a>代码</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">module <span class="title function_">matrix_mult_4x4x4x16</span> <span class="params">(</span></span><br><span class="line"><span class="params">    input wire clk,</span></span><br><span class="line"><span class="params">    input wire reset,</span></span><br><span class="line"><span class="params">    input wire enable,</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] activations [<span class="number">0</span>:<span class="number">3</span>][<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    input wire <span class="type">signed</span> [<span class="number">15</span>:<span class="number">0</span>] weights [<span class="number">0</span>:<span class="number">3</span>][<span class="number">0</span>:<span class="number">3</span>],</span></span><br><span class="line"><span class="params">    output wire <span class="type">signed</span> [<span class="number">31</span>:<span class="number">0</span>] results [<span class="number">0</span>:<span class="number">3</span>][<span class="number">0</span>:<span class="number">3</span>]</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">matrix_vector_mult_4x4x16 <span class="title function_">mxv0</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations[<span class="number">0</span>]),</span></span><br><span class="line"><span class="params">    .weights(weights),</span></span><br><span class="line"><span class="params">    .results(results[<span class="number">0</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">matrix_vector_mult_4x4x16 <span class="title function_">mxv1</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations[<span class="number">1</span>]),</span></span><br><span class="line"><span class="params">    .weights(weights),</span></span><br><span class="line"><span class="params">    .results(results[<span class="number">1</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">matrix_vector_mult_4x4x16 <span class="title function_">mxv2</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations[<span class="number">2</span>]),</span></span><br><span class="line"><span class="params">    .weights(weights),</span></span><br><span class="line"><span class="params">    .results(results[<span class="number">2</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line">matrix_vector_mult_4x4x16 <span class="title function_">mxv3</span> <span class="params">(</span></span><br><span class="line"><span class="params">    .clk(clk),</span></span><br><span class="line"><span class="params">    .reset(reset),</span></span><br><span class="line"><span class="params">    .enable(enable),</span></span><br><span class="line"><span class="params">    .activations(activations[<span class="number">3</span>]),</span></span><br><span class="line"><span class="params">    .weights(weights),</span></span><br><span class="line"><span class="params">    .results(results[<span class="number">3</span>])</span></span><br><span class="line"><span class="params">)</span>;</span><br><span class="line"></span><br><span class="line">endmodule</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="编译调试"><a href="#编译调试" class="headerlink" title="编译调试"></a>编译调试</h2><h3 id="工具安装"><a href="#工具安装" class="headerlink" title="工具安装"></a>工具安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装依赖工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get update</span><br><span class="line"><span class="built_in">sudo</span> apt-get install git help2man perl python3 make autoconf g++ flex bison ccache</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libgoogle-perftools-dev numactl perl-doc</span><br><span class="line"><span class="built_in">sudo</span> apt-get install libflib2         <span class="comment"># 仅针对Ubuntu，忽略错误</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install libflib-dev      <span class="comment"># 仅针对Ubuntu，忽略错误</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install zlibc zlib1g zlib1g-dev   <span class="comment"># 仅针对Ubuntu，忽略错误</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 下载 Verilator 源码（国内镜像）</span></span><br><span class="line">git <span class="built_in">clone</span> https://gitee.com/mirrors/Verilator.git</span><br><span class="line"></span><br><span class="line"><span class="comment"># （进入Verilator目录）编译安装 Verilator</span></span><br><span class="line">autoconf                <span class="comment"># 创建 configure 脚本</span></span><br><span class="line">./configure             <span class="comment"># 配置 Makefile 文件</span></span><br><span class="line">make -j `<span class="built_in">nproc</span>`         <span class="comment"># 编译 Verilator（如果出错可简化为 make）</span></span><br><span class="line"><span class="built_in">sudo</span> make install</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装 GTKWave 波形查看工具</span></span><br><span class="line"><span class="built_in">sudo</span> apt-get install gtkwave</span><br><span class="line"></span><br><span class="line"><span class="comment"># 安装检查</span></span><br><span class="line">verilator --version</span><br><span class="line">gtkwave --version</span><br></pre></td></tr></table></figure>
+
+<h3 id="编译运行"><a href="#编译运行" class="headerlink" title="编译运行"></a>编译运行</h3><p>编译命令（在sim目录下）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make inner_product_4x16</span><br><span class="line">make matrix_vector_mult_4x4x16</span><br><span class="line">make matrix_mult_4x4x4x16</span><br></pre></td></tr></table></figure>
+
+<p>运行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./obj_dir/inner_product_4x16/Vinner_product_4x16          <span class="comment"># 测试内积运算器</span></span><br><span class="line">./obj_dir/matrix_vector_mult_4x4x16/Vmatrix_vector_mult_4x4x16  <span class="comment"># 测试矩阵乘向量</span></span><br><span class="line">./obj_dir/matrix_mult_4x4x4x16/Vmatrix_mult_4x4x4x16      <span class="comment"># 测试矩阵乘法</span></span><br></pre></td></tr></table></figure>
+
+<p>这几个测试命令运行完会生成类似于wave_matrix_mult.vcd的文件，说明波形数据已经成功转储</p>
+<p>运行时报错：</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528211028754.png" alt="image-20260528211028754"></p>
+<p>模块 inner_product_4x16 输入 weights [0:3]（4个权重），它只需要4个权重值。报错中的 weight&#x3D;16 说明数据文件 weight 包含了16个数，与模块不匹配。所以需要修改数据文件，只保留前4个数</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 备份原文件</span></span><br><span class="line"><span class="built_in">cp</span> /opt/code_chap8/data/weight /opt/code_chap8/data/weight.full</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只保留前4个数据</span></span><br><span class="line"><span class="built_in">head</span> -4 /opt/code_chap8/data/weight.full &gt; /opt/code_chap8/data/weight</span><br><span class="line"></span><br><span class="line"><span class="comment"># (在sim目录下）重新运行测试</span></span><br><span class="line">./obj_dir/inner_product_4x16/Vinner_product_4x16</span><br></pre></td></tr></table></figure>
+
+<p>内积运算器：</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528223524878.png" alt="image-20260528223524878"></p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528223504077.png" alt="image-20260528223504077"></p>
+<p>矩阵乘向量测试：</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528213835767.png" alt="image-20260528213835767"></p>
+<p>做完了这个测试之后需要改回来，因为这俩又期望16个数据了。weight可以恢复，neuron和result只好复制粘贴了几遍</p>
+<p>矩阵乘矩阵测试：</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528214531420.png" alt="image-20260528214531420"></p>
+<p>让ds整理了一下数据规模：</p>
+<table>
+<thead>
+<tr>
+<th>测试目标</th>
+<th>neuron 文件</th>
+<th>weight 文件</th>
+<th>result 文件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>inner_product_4x16</td>
+<td>4 个数</td>
+<td>4 个数</td>
+<td>1 个数</td>
+</tr>
+<tr>
+<td>matrix_vector_mult_4x4x16</td>
+<td>4 个数</td>
+<td><strong>16 个数</strong>（4×4 矩阵）</td>
+<td><strong>4 个数</strong></td>
+</tr>
+<tr>
+<td>matrix_mult_4x4x4x16</td>
+<td><strong>16 个数</strong>（4×4 矩阵）</td>
+<td><strong>16 个数</strong></td>
+<td><strong>16 个数</strong></td>
+</tr>
+</tbody></table>
+<h2 id="gtkwave仿真"><a href="#gtkwave仿真" class="headerlink" title="gtkwave仿真"></a>gtkwave仿真</h2><p>这里最大的问题在于，我VSCode Server连接上去，不知道为什么终端打不开。于是使用ssh命令连接上去做的实验，是没有图形界面的，无法直接启动 GTKWave：</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528215305408.png" alt="image-20260528215305408"></p>
+<p>问了组员，本地下了一个GTKWave</p>
+<h3 id="启动仿真"><a href="#启动仿真" class="headerlink" title="启动仿真"></a>启动仿真</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gtkwave wave_inner.vcd wave_matrix_vector.vcd wave_matrix_mult.vcd</span><br></pre></td></tr></table></figure>
+
+<p>长这样</p>
+<p><img src="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/image-20260528221459628.png" alt="image-20260528221459628"></p>
+<h3 id="迭代调试"><a href="#迭代调试" class="headerlink" title="迭代调试"></a>迭代调试</h3><p>当发现仿真结果错误后,重新修改代码,执行以下步骤:  </p>
+<ol>
+<li>运行“make clean”清理旧的编译产物; </li>
+<li>运行“make”命令重新编译; </li>
+<li>执行仿真可执行文件启动 GTKWave,执行仿真观察结果; </li>
+<li>仿真完成后,退出仿真。</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/" title="深度学习处理器运算器设计">https://mintind.github.io/2026/05/20/UCAS/智能计算系统/实验/8深度学习处理器运算器设计/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/18/SetupEnv/zerotier/" rel="prev" title="Zerotier笔记">
+                  <i class="fa fa-angle-left"></i> Zerotier笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/05/26/AI/Agents/Hermes/" rel="next" title="Hermes">
+                  Hermes <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/05/20/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/8%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%A4%84%E7%90%86%E5%99%A8%E8%BF%90%E7%AE%97%E5%99%A8%E8%AE%BE%E8%AE%A1/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

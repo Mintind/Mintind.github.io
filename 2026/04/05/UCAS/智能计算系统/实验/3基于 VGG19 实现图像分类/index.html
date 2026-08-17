@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="曾赤脚在山坡 以为世界是我们的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于 VGG19 实现图像分类">
+<meta property="og:url" content="https://mintind.github.io/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="曾赤脚在山坡 以为世界是我们的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-05T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/","path":"2026/04/05/UCAS/智能计算系统/实验/3基于 VGG19 实现图像分类/","title":"基于 VGG19 实现图像分类"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>基于 VGG19 实现图像分类 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8E-VGG19-%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="nav-number">1.</span> <span class="nav-text">基于 VGG19 实现图像分类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CPU%E5%B9%B3%E5%8F%B0%E7%9A%84%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB"><span class="nav-number">2.</span> <span class="nav-text">CPU平台的图像分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.</span> <span class="nav-text">数据加载模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8D%95%E5%85%83%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.</span> <span class="nav-text">基本单元模块</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%B7%E7%A7%AF%E5%B1%82"><span class="nav-number">2.2.1.</span> <span class="nav-text">卷积层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.2.1.1.</span> <span class="nav-text">前向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.2.1.1.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.2.1.2.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-1"><span class="nav-number">2.2.1.2.1.</span> <span class="nav-text">实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E6%B1%A0%E5%8C%96%E5%B1%82"><span class="nav-number">2.2.2.</span> <span class="nav-text">最大池化层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD-1"><span class="nav-number">2.2.2.1.</span> <span class="nav-text">前向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-2"><span class="nav-number">2.2.2.1.1.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD-1"><span class="nav-number">2.2.2.2.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flatten-%E5%B1%82"><span class="nav-number">2.2.3.</span> <span class="nav-text">flatten 层</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%89%8D%E5%90%91%E4%BC%A0%E6%92%AD-2"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">前向传播</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.4.</span> <span class="nav-text">网络结构模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#VGG19-%E7%BD%91%E7%BB%9C%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84"><span class="nav-number">2.2.4.1.</span> <span class="nav-text">VGG19 网络的基本结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0-3"><span class="nav-number">2.2.4.2.</span> <span class="nav-text">实现</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9D%97"><span class="nav-number">2.2.5.</span> <span class="nav-text">网络推理模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C"><span class="nav-number">2.2.6.</span> <span class="nav-text">运行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%9D%E8%80%83"><span class="nav-number">2.3.</span> <span class="nav-text">思考</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MLU-%E5%B9%B3%E5%8F%B0%E4%B8%8A%E7%9A%84%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="nav-number">3.</span> <span class="nav-text">MLU 平台上的实验步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD%E6%A8%A1%E5%9D%97-1"><span class="nav-number">3.1.</span> <span class="nav-text">数据加载模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84%E6%A8%A1%E5%9D%97-1"><span class="nav-number">3.2.</span> <span class="nav-text">网络结构模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%8E%A8%E7%90%86%E6%A8%A1%E5%9D%97-1"><span class="nav-number">3.3.</span> <span class="nav-text">网络推理模块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C-1"><span class="nav-number">3.4.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="基于 VGG19 实现图像分类 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          基于 VGG19 实现图像分类<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v5a6e6aqMLzPln7rkuo4gVkdHMTkg5a6e546w5Zu+5YOP5YiG57G7Lm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-06 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-06T00:00:00+08:00">2026-04-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>曾赤脚在山坡 以为世界是我们的</p>
+<span id="more"></span>
+
+<h1 id="基于-VGG19-实现图像分类"><a href="#基于-VGG19-实现图像分类" class="headerlink" title="基于 VGG19 实现图像分类"></a>基于 VGG19 实现图像分类</h1><p><strong>实验目的：</strong></p>
+<p>本实验旨在加深对卷积神经网络设计原理与工程实现的理解,掌握 VGG19网络结  构在图像分类任务中的应用,能够用 Python 语言在 CPU 与 MLU 平台上分别实现该网络,  并分析其运行性能。</p>
+<p><strong>实验内容：</strong></p>
+<p>本实验使用 VGG19 网络在 CPU 和 MLU 平台上进行图像分类。首先建立 VGG19 的网  络结构,然后利用 VGG19 的官方模型参数对给定图像进行分类。VGG19 网络的模型参数  是在 ImageNet数据集上训练获得的,VGG19 网络的输出结果对应 ImageNet 数据集中的  1000 个类别概率。  在工程实现中,由于本实验只涉及 VGG19 网络的推理过程,因此本实验仅包括数据加  载模块、基本单元模块、网络结构模块、网络推理模块,不包括网络训练模块。</p>
+<p><strong>实验环境：</strong></p>
+<p>采用 ImageNet 图 像数据集,该数据集以.jpg 或.png 压缩文件格式存放每张 RGB 图像,且不同图像的尺寸可 能不同。</p>
+<p>本实验使用官方基于 ImageNet 数据集训练好的模型参数,不需  要使用 ImageNet 数据集进行 VGG19 模型的训练。</p>
+<p><strong>运行环境：</strong></p>
+<p>镜像收藏：mlu370_ubuntu22.04-for-student:v6.1</p>
+<p><strong>实验目录：</strong></p>
+<p>&#x2F;opt&#x2F;code_chap6&#x2F;exp_6_2_VGG19classification&#x2F;exp_6_2_1_infercpu&#x2F;  目录</p>
+<h1 id="CPU平台的图像分类"><a href="#CPU平台的图像分类" class="headerlink" title="CPU平台的图像分类"></a>CPU平台的图像分类</h1><h2 id="数据加载模块"><a href="#数据加载模块" class="headerlink" title="数据加载模块"></a>数据加载模块</h2><p>因为输入图像的尺寸可能不同，需要先统一输入的大小：</p>
+<ol>
+<li><p>将图像缩放到 224 × 224 大小,并存储在矩阵中</p>
+</li>
+<li><p>对输入图像做<strong>标准化</strong>,将输入值范围从 [0,255] 标准化为均值为 0 的区间。具体做法是每个像素值减去ImageNet数据集的像素均值</p>
+</li>
+<li><p>最后将图像矩阵转化为神经网络输入的统一维度,即 N × C × H × W。</p>
+<blockquote>
+<p>其中 N 是输入的样本数,由于图像是逐张读入的,因此 N &#x3D; 1。</p>
+<p>C 是输入的通道数,本实 验输入图像是 RGB 彩色图像,因此 C &#x3D; 3。</p>
+<p>H 和 W 分别表示输入图像的高和宽,本实验中缩放后的图像的高和宽均为 224。</p>
+</blockquote>
+</li>
+</ol>
+<h2 id="基本单元模块"><a href="#基本单元模块" class="headerlink" title="基本单元模块"></a>基本单元模块</h2><p>仅实现 VGG19 的推理过程,因此不需要实现反向传播计算和参数的更新,仅需实现层的初始化、参数初始化、前向传播计算、参数加载等基本操作。</p>
+<p>全连接层、ReLU 层和 Softmax  层可以直接使用第6.2节实验中已经实现的相应网络层,本节重点介绍卷积层和池化层的实现</p>
+<h3 id="卷积层"><a href="#卷积层" class="headerlink" title="卷积层"></a>卷积层</h3><p>与全连接层类似，卷积层中的参数包括权重（即卷积核）和偏置。VGG19 中使用的都是多输入输出特征图的卷积运算。</p>
+<p>其中 $N$ 是输入的样本个数，在本实验中 $N&#x3D;1$，$C_{in}$ 是输入的通道数，$H_{in}$ 和 $W_{in}$ 是输入特征图的高和宽。</p>
+<p>输入特征图 $\boldsymbol{X}$ ：维度为 $N \times C_{in} \times H_{in} \times W_{in}$</p>
+<p>卷积核张量 $\boldsymbol{W}$ ：四维矩阵，维度为 $C_{in} \times K \times K \times C_{out}$，其中 $K \times K$ 为卷积核的高度 $\times$ 宽度，也称为卷积窗口大小，$C_{out}$ 为输出特征图的通道数。</p>
+<p>卷积层的偏置 $\boldsymbol{b}$ ：一维向量，维度为 $C_{out}$。</p>
+<p>输入特征图的边界扩充大小 $p$、卷积步长 $s$。</p>
+<p>输出特征图 $\boldsymbol{Y}$ ：维度为 $N \times C_{out} \times H_{out} \times W_{out}$，其中 $H_{out}$ 和 $W_{out}$ 是输出特征图的高和宽。</p>
+<p>由  于 VGG19 网络中的所有卷积层都是 3 × 3 卷积核,即 K &#x3D; 3,边界扩充大小 p &#x3D; 1,步长  s &#x3D; 1,因此 VGG19 网络中的所有卷积层输出特征图的高和宽与输入特征图相同。（所以也可以直接就等于输入的高和宽）</p>
+<h4 id="前向传播"><a href="#前向传播" class="headerlink" title="前向传播"></a>前向传播</h4><p>总之就是先pad后传播</p>
+<p>对卷积层的输入 $\boldsymbol{X}$ 做边界扩充（padding）：为了保证卷积之后的有效输出尺寸与输入尺寸一致。就是在输入特征图的上下以及左右边界分别增加 $p$ 行以及 $p$ 列的 $0$。得到扩充后的特征图 $\boldsymbol{X}<em>{pad}$：<br>$$<br>\boldsymbol{X}</em>{pad}(n, c_{in}, h, w) &#x3D;<br>\begin{cases}<br>\boldsymbol{X}(n, c_{in}, h - p, w - p) , &amp; \text{如果 } (p \leq h &lt; p+H_{in}) &amp; (p \leq w &lt; p+W_{in}) \<br>0, &amp; \text{其他}<br>\end{cases} \tag{6.22}<br>$$</p>
+<p>其中 $n \in [0, N)$、$c_{in} \in [0, C_{in})$、$h \in [0, H_{in})$、$w \in [0, W_{in})$ 分别表示输入特征图的样本号、通道号、行号、列号，均为整数。$\boldsymbol{X}<em>{pad}$ 的维度为 $N \times C</em>{in} \times H_{pad} \times W_{pad}$，其中高度 $H_{pad}$ 和宽度 $W_{pad}$ 分别为：</p>
+<p>$$<br>H_{pad} &#x3D; H_{in} + 2p, \quad W_{pad} &#x3D; W_{in} + 2p \tag{6.23}<br>$$</p>
+<p>在$\boldsymbol{X}_{pad}$上<strong>滑动卷积窗口</strong>，依次计算窗口内的特征图数据<strong>与卷积核的矩阵内积</strong>再<strong>加上偏置</strong>得到输出特征图 $\boldsymbol{Y}$：</p>
+<p>$$<br>\boldsymbol{Y}(n, c_{out}, h, w) &#x3D; \sum_{c_{in}, k_h, k_w} \boldsymbol{W}(c_{in}, k_h, k_w, c_{out}) \boldsymbol{X}<em>{pad}(n, c</em>{in}, hs + k_h, ws + k_w) + \boldsymbol{b}(c_{out}) \tag{6.24}<br>$$</p>
+<p>其中 $n \in [0, N)$、$c_{out} \in [0, C_{out})$、$h \in [0, H_{out})$、$w \in [0, W_{out})$ 分别表示输出特征图的样本号、通道号、行号、列号；$k_h \in [0, K)$、$k_w \in [0, K)$ 表示卷积核的行号和列号；$c_{in} \in [0, C_{in})$ 表示输入特征图的通道号。这些符号的值均为整数。输出特征图 $\boldsymbol{Y}$ 的高度和宽度分别是：</p>
+<p>$$<br>H_{out} &#x3D; \left\lfloor \frac{H_{pad} - K}{s} \right\rfloor + 1 &#x3D; \left\lfloor \frac{H_{in} + 2p - K}{s} \right\rfloor + 1, \quad W_{out} &#x3D; \left\lfloor \frac{W_{pad} - K}{s} \right\rfloor + 1 &#x3D; \left\lfloor \frac{W_{in} + 2p - K}{s} \right\rfloor + 1 \tag{6.25}<br>$$</p>
+<h5 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h5><p>先扩展到pad，然后计算。计算时先算出Window更好理解</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    <span class="variable language_">self</span>.<span class="built_in">input</span> = <span class="built_in">input</span> <span class="comment"># [N, C, H, W]</span></span><br><span class="line">    <span class="comment"># <span class="doctag">TODO:</span> 边界扩充</span></span><br><span class="line">    height = <span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">2</span>] + <span class="number">2</span> * <span class="variable language_">self</span>.padding</span><br><span class="line">    width = <span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">3</span>] + <span class="number">2</span> * <span class="variable language_">self</span>.padding</span><br><span class="line">    <span class="variable language_">self</span>.input_pad = np.zeros([<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>], <span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">1</span>], height, width])</span><br><span class="line">    <span class="comment"># 保留所有样本（第一维）保留所有通道（第二维）</span></span><br><span class="line">    <span class="variable language_">self</span>.input_pad[:, :, <span class="variable language_">self</span>.padding:<span class="variable language_">self</span>.padding+<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">2</span>], <span class="variable language_">self</span>.padding:<span class="variable language_">self</span>.padding+<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">3</span>]] = <span class="variable language_">self</span>.<span class="built_in">input</span></span><br><span class="line">    height_out = (height - <span class="variable language_">self</span>.kernel_size) // <span class="variable language_">self</span>.stride + <span class="number">1</span></span><br><span class="line">    width_out = (width - <span class="variable language_">self</span>.kernel_size) // <span class="variable language_">self</span>.stride + <span class="number">1</span></span><br><span class="line">    <span class="variable language_">self</span>.output = np.zeros([<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>], <span class="variable language_">self</span>.channel_out, height_out, width_out])</span><br><span class="line">    <span class="keyword">for</span> idxn <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> idxc <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.channel_out):</span><br><span class="line">            <span class="keyword">for</span> idxh <span class="keyword">in</span> <span class="built_in">range</span>(height_out):</span><br><span class="line">                <span class="keyword">for</span> idxw <span class="keyword">in</span> <span class="built_in">range</span>(width_out):</span><br><span class="line">                    <span class="comment"># <span class="doctag">TODO:</span> 计算卷积层的前向传播，特征图与卷积核的内积再加偏置</span></span><br><span class="line">                   hs, ws = idxh * <span class="variable language_">self</span>.stride, idxw * <span class="variable language_">self</span>.stride</span><br><span class="line">                   <span class="comment"># 算Window</span></span><br><span class="line">                   window = <span class="variable language_">self</span>.input_pad[idxn, :, hs:hs+<span class="variable language_">self</span>.kernel_size, ws:ws+<span class="variable language_">self</span>.kernel_size]</span><br><span class="line">                   <span class="comment"># weight shape: [C_in, K, K, C_out]</span></span><br><span class="line">                   <span class="variable language_">self</span>.output[idxn, idxc, idxh, idxw] = np.<span class="built_in">sum</span>(window * <span class="variable language_">self</span>.weight[:, :, :, idxc]) + <span class="variable language_">self</span>.bias[idxc]</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.output</span><br></pre></td></tr></table></figure>
+
+<h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><p>假设损失函数为 $L$，损失函数对本层输出的偏导为 $\nabla_{\boldsymbol{Y}} L$，其维度与卷积层的输出特征图相同，均为 $N \times C_{out} \times H_{out} \times W_{out}$。根据链式法则，可以计算权重和偏置的梯度 $\nabla_{\boldsymbol{W}} L$、$\nabla_{\boldsymbol{b}} L$ 以及损失函数对边界扩充后的输入特征图的偏导 $\nabla_{\boldsymbol{X}<em>{pad}} L$，计算公式为：<br>$$<br>\nabla</em>{\boldsymbol{W}}(c_{in}, k_h, k_w, c_{out}) L &#x3D; \sum_{n, h, w} \nabla_{\boldsymbol{Y}}(n, c_{out}, h, w) L \cdot \boldsymbol{X}<em>{pad}(n, c</em>{in}, hs + k_h, ws + k_w)<br>$$</p>
+<p>$$<br>\nabla_{\boldsymbol{b}}(c_{out}) L &#x3D; \sum_{n, h, w} \nabla_{\boldsymbol{Y}}(n, c_{out}, h, w) L<br>$$</p>
+<p>$$<br>\nabla_{\boldsymbol{X}<em>{pad}}(n, c</em>{in}, hs + i_h, ws + i_w) L &#x3D; \sum_{c_{out}} \sum_{f_h&#x3D;0}^{\lfloor K&#x2F;s \rfloor - i_h} \sum_{f_w&#x3D;0}^{\lfloor K&#x2F;s \rfloor - i_w} \nabla_{\boldsymbol{Y}}(n, c_{out}, h - f_h, w - f_w) L \cdot \boldsymbol{W}(c_{in}, f_h s + i_h, f_w s + i_w, c_{out}) \tag{6.26}<br>$$</p>
+<p>其中，$n \in [0, N)$，$c_{in} \in [0, C_{in})$，$c_{out} \in [0, C_{out})$，$h \in [0, H_{out})$，$w \in [0, W_{out})$，$k_h \in [0, K)$，$k_w \in [0, K)$，$i_h \in [0, s)$，$i_w \in [0, s)$。之后剪裁掉 $\nabla_{\boldsymbol{X}<em>{pad}} L$ 中扩充的边界，得到本层的 $\nabla</em>{\boldsymbol{X}} L$，计算公式为：</p>
+<p>$$<br>\nabla_{\boldsymbol{X}}(n, c_{in}, h, w) L &#x3D; \nabla_{\boldsymbol{X}<em>{pad}}(n, c</em>{in}, h + p, w + p) L \tag{6.27}<br>$$</p>
+<p>其中 $n \in [0, N)$，$c_{in} \in [0, C_{in})$，$h \in [0, H_{in})$，$w \in [0, W_{in})$。</p>
+<h5 id="实现-1"><a href="#实现-1" class="headerlink" title="实现"></a>实现</h5><p>本次实验中没训练步骤所以没有反向传播部分的实现</p>
+<h3 id="最大池化层"><a href="#最大池化层" class="headerlink" title="最大池化层"></a>最大池化层</h3><p>输入特征图 $\boldsymbol{X}$ ：维度为 $N \times C \times H_{in} \times W_{in}$</p>
+<p>池化窗口：高和宽均为 $K$，池化步长为 $s$，</p>
+<p>输出特征图 $\boldsymbol{Y}$ ：维度为 $N \times C \times H_{out} \times W_{out}$，其中 $H_{out}$ 和 $W_{out}$ 是输出特征图的高和宽。</p>
+<h4 id="前向传播-1"><a href="#前向传播-1" class="headerlink" title="前向传播"></a>前向传播</h4><p>输出特征图 $\boldsymbol{Y}$ 中某一位置的值是输入特征图 $\boldsymbol{X}$ 的对应池化窗口内的最大值，计算公式为：<br>$$<br>\boldsymbol{Y}(n, c, h, w) &#x3D; \max_{k_h, k_w} \boldsymbol{X}(n, c, hs + k_h, ws + k_w) \tag{6.28}<br>$$</p>
+<p>其中 $n \in [0, N)$、$c \in [0, C)$、$h \in [0, H_{out})$、$w \in [0, W_{out})$ 分别表示输出特征图的样本号、通道号、行号、列号，$k_h \in [0, K)$、$k_w \in [0, K)$ 表示池化窗口内的坐标位置，均为整数。</p>
+<h5 id="实现-2"><a href="#实现-2" class="headerlink" title="实现"></a>实现</h5><p>先算出window，然后取最大值就好</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">    start_time = time.time()</span><br><span class="line">    <span class="variable language_">self</span>.<span class="built_in">input</span> = <span class="built_in">input</span> <span class="comment"># [N, C, H, W]</span></span><br><span class="line">    <span class="variable language_">self</span>.max_index = np.zeros(<span class="variable language_">self</span>.<span class="built_in">input</span>.shape)</span><br><span class="line">    height_out = (<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">2</span>] - <span class="variable language_">self</span>.kernel_size) // <span class="variable language_">self</span>.stride + <span class="number">1</span></span><br><span class="line">    width_out = (<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">3</span>] - <span class="variable language_">self</span>.kernel_size) // <span class="variable language_">self</span>.stride + <span class="number">1</span></span><br><span class="line">    <span class="variable language_">self</span>.output = np.zeros([<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>], <span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">1</span>], height_out, width_out])</span><br><span class="line">    <span class="keyword">for</span> idxn <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>]):</span><br><span class="line">        <span class="keyword">for</span> idxc <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">1</span>]):</span><br><span class="line">            <span class="keyword">for</span> idxh <span class="keyword">in</span> <span class="built_in">range</span>(height_out):</span><br><span class="line">                <span class="keyword">for</span> idxw <span class="keyword">in</span> <span class="built_in">range</span>(width_out):</span><br><span class="line">                    <span class="comment"># TODO： 计算最大池化层的前向传播， 取池化窗口内的最大值</span></span><br><span class="line">                    hs, ws = idxh * <span class="variable language_">self</span>.stride, idxw * <span class="variable language_">self</span>.stride</span><br><span class="line">                    window = <span class="variable language_">self</span>.<span class="built_in">input</span>[idxn, idxc, hs:hs+<span class="variable language_">self</span>.kernel_size, ws:ws+<span class="variable language_">self</span>.kernel_size]</span><br><span class="line">                    <span class="variable language_">self</span>.output[idxn, idxc, idxh, idxw] = np.<span class="built_in">max</span>(window)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.output</span><br></pre></td></tr></table></figure>
+
+<h4 id="反向传播-1"><a href="#反向传播-1" class="headerlink" title="反向传播"></a>反向传播</h4><p>给定损失函数对本层输出的偏导 $\nabla_{\boldsymbol{Y}} L$，其维度与最大池化层的输出特征图相同，均为 $N \times C \times H_{out} \times W_{out}$。由于最大池化层在前向传播后仅保留池化窗口内的最大值，因此在反向传播时，仅将后一层损失中对应该池化窗口的值传递给池化窗口内最大值所在位置，其他位置值置为 $0$。在反向传播时需先计算最大值所在位置 $\boldsymbol{p}$，计算公式为：<br>$$<br>\boldsymbol{p}(n, c, h, w) &#x3D; \underset{k_h, k_w}{\operatorname{argmax}} \left( \boldsymbol{X}(n, c, hs + k_h, ws + k_w) \right) \tag{6.29}<br>$$</p>
+<p>其中 $\underset{k_h, k_w}{\operatorname{argmax}}$ 代表取最大值所在位置的函数，返回最大值位于池化窗口中的坐标向量 $\boldsymbol{p}(n, c, h, w) &#x3D; [q(0), q(1)]$，其中 $q(0)$ 对应 $h$ 方向的坐标，$q(1)$ 对应 $w$ 方向的坐标。$n \in [0, N)$，$c \in [0, C)$，$h \in [0, H_{out})$，$w \in [0, W_{out})$，$k_h \in [0, K)$，$k_w \in [0, K)$ 分别为输入输出特征图和池化窗口上的位置坐标。利用最大值所在位置 $[q(0), q(1)]$ 可得最大池化层的 $\nabla_{\boldsymbol{X}} L$，计算公式为：</p>
+<p>$$<br>\nabla_{\boldsymbol{X}}(n, c, hs + q(0), ws + q(1)) L &#x3D; \nabla_{\boldsymbol{Y}}(n, c, h, w) L \tag{6.30}<br>$$</p>
+<h3 id="flatten-层"><a href="#flatten-层" class="headerlink" title="flatten 层"></a>flatten 层</h3><p>flatten 层用于改变特征图的维度,将输入特征图中每个样本的特征平铺成一个向量</p>
+<p>输入特征图 X ：维度为 N × C × H × W,其中 N 是输入的样  本个数,在本实验中 N &#x3D; 1,C 是输入的通道数,H 和 W 是输入特征图的高和宽。</p>
+<p>输出特征图：维度变为 N × (CHW)。</p>
+<h4 id="前向传播-2"><a href="#前向传播-2" class="headerlink" title="前向传播"></a>前向传播</h4><p>注意  VGG19 官方模型所使用的深度学习平台 MatConvNet的特征图存储方式与本实验不同。  MatConvNet 中特征图维度为 N × H × W × C,而本实验中特征图 X 的维度为 N × C × H × W。  因此需要将输入特征图进行维度交换,保持与 MatConvNet 的特征图存储方式一致。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, <span class="built_in">input</span></span>):</span><br><span class="line">    <span class="keyword">assert</span> <span class="built_in">list</span>(<span class="built_in">input</span>.shape[<span class="number">1</span>:]) == <span class="built_in">list</span>(<span class="variable language_">self</span>.input_shape)</span><br><span class="line">    <span class="variable language_">self</span>.<span class="built_in">input</span> = <span class="built_in">input</span></span><br><span class="line">    <span class="comment"># matconvnet feature map dim: [N, height, width, channel]</span></span><br><span class="line">    <span class="comment"># ours feature map dim: [N, channel, height, width]</span></span><br><span class="line">    <span class="variable language_">self</span>.<span class="built_in">input</span> = <span class="variable language_">self</span>.<span class="built_in">input</span>.transpose(<span class="number">0</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">1</span>) <span class="comment"># 转置</span></span><br><span class="line">    <span class="variable language_">self</span>.output = <span class="variable language_">self</span>.<span class="built_in">input</span>.reshape([<span class="variable language_">self</span>.<span class="built_in">input</span>.shape[<span class="number">0</span>]] + <span class="built_in">list</span>(<span class="variable language_">self</span>.output_shape))</span><br><span class="line">    show_matrix(<span class="variable language_">self</span>.output, <span class="string">&#x27;flatten out &#x27;</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">self</span>.output</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络结构模块"><a href="#网络结构模块" class="headerlink" title="网络结构模块"></a>网络结构模块</h3><h4 id="VGG19-网络的基本结构"><a href="#VGG19-网络的基本结构" class="headerlink" title="VGG19 网络的基本结构"></a>VGG19 网络的基本结构</h4><table>
+<thead>
+<tr>
+<th>名字</th>
+<th>类型</th>
+<th>卷积核&#x2F;池化核</th>
+<th>步长</th>
+<th>边界扩充</th>
+<th>输入通道数</th>
+<th>输出通道数</th>
+<th>输出特征图的高和宽</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>conv1_1</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>3</td>
+<td>64</td>
+<td>224</td>
+</tr>
+<tr>
+<td>conv1_2</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>64</td>
+<td>64</td>
+<td>224</td>
+</tr>
+<tr>
+<td>pool1</td>
+<td>最大池化层</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+<td>64</td>
+<td>64</td>
+<td>112</td>
+</tr>
+<tr>
+<td>conv2_1</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>64</td>
+<td>128</td>
+<td>112</td>
+</tr>
+<tr>
+<td>conv2_2</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>128</td>
+<td>128</td>
+<td>112</td>
+</tr>
+<tr>
+<td>pool2</td>
+<td>最大池化层</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+<td>128</td>
+<td>128</td>
+<td>56</td>
+</tr>
+<tr>
+<td>conv3_1</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>128</td>
+<td>256</td>
+<td>56</td>
+</tr>
+<tr>
+<td>conv3_2</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>256</td>
+<td>256</td>
+<td>56</td>
+</tr>
+<tr>
+<td>conv3_3</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>256</td>
+<td>256</td>
+<td>56</td>
+</tr>
+<tr>
+<td>conv3_4</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>256</td>
+<td>256</td>
+<td>56</td>
+</tr>
+<tr>
+<td>pool3</td>
+<td>最大池化层</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+<td>256</td>
+<td>256</td>
+<td>28</td>
+</tr>
+<tr>
+<td>conv4_1</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>256</td>
+<td>512</td>
+<td>28</td>
+</tr>
+<tr>
+<td>conv4_2</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>28</td>
+</tr>
+<tr>
+<td>conv4_3</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>28</td>
+</tr>
+<tr>
+<td>conv4_4</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>28</td>
+</tr>
+<tr>
+<td>pool4</td>
+<td>最大池化层</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+<td>512</td>
+<td>512</td>
+<td>14</td>
+</tr>
+<tr>
+<td>conv5_1</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>14</td>
+</tr>
+<tr>
+<td>conv5_2</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>14</td>
+</tr>
+<tr>
+<td>conv5_3</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>14</td>
+</tr>
+<tr>
+<td>conv5_4</td>
+<td>卷积层</td>
+<td>3</td>
+<td>1</td>
+<td>1</td>
+<td>512</td>
+<td>512</td>
+<td>14</td>
+</tr>
+<tr>
+<td>pool5</td>
+<td>最大池化层</td>
+<td>2</td>
+<td>2</td>
+<td>-</td>
+<td>512</td>
+<td>512</td>
+<td>7</td>
+</tr>
+<tr>
+<td>fc6</td>
+<td>全连接层</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>25088</td>
+<td>4096</td>
+<td>-</td>
+</tr>
+<tr>
+<td>fc7</td>
+<td>全连接层</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>4096</td>
+<td>4096</td>
+<td>-</td>
+</tr>
+<tr>
+<td>fc8</td>
+<td>全连接层</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>4096</td>
+<td>1000</td>
+<td>-</td>
+</tr>
+<tr>
+<td>Softmax</td>
+<td>损失层</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h4 id="实现-3"><a href="#实现-3" class="headerlink" title="实现"></a>实现</h4><p>卷积层的参数顺序是：(self, kernel_size, channel_in, channel_out, padding, stride)</p>
+<p>池化层的参数顺序：(self, kernel_size, stride)</p>
+<p>flatten层的参数顺序：(self, input_shape, output_shape)</p>
+<p>注意每个卷积层和前 2 个全连接层(fc6 层和 fc7 层)  后面都跟随有 ReLU 激活函数层。此外,pool5 层和 fc6 层中间有一个 flatten 层,用于改变 特征图的维度。在VGG19类中也有层的名称顺序。然后就按表格来</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">VGG19</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, param_path=<span class="string">&#x27;../../imagenet-vgg-verydeep-19.mat&#x27;</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.param_path = param_path</span><br><span class="line">        <span class="variable language_">self</span>.param_layer_name = (</span><br><span class="line">            <span class="string">&#x27;conv1_1&#x27;</span>, <span class="string">&#x27;relu1_1&#x27;</span>, <span class="string">&#x27;conv1_2&#x27;</span>, <span class="string">&#x27;relu1_2&#x27;</span>, <span class="string">&#x27;pool1&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;conv2_1&#x27;</span>, <span class="string">&#x27;relu2_1&#x27;</span>, <span class="string">&#x27;conv2_2&#x27;</span>, <span class="string">&#x27;relu2_2&#x27;</span>, <span class="string">&#x27;pool2&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;conv3_1&#x27;</span>, <span class="string">&#x27;relu3_1&#x27;</span>, <span class="string">&#x27;conv3_2&#x27;</span>, <span class="string">&#x27;relu3_2&#x27;</span>, <span class="string">&#x27;conv3_3&#x27;</span>, <span class="string">&#x27;relu3_3&#x27;</span>, <span class="string">&#x27;conv3_4&#x27;</span>, <span class="string">&#x27;relu3_4&#x27;</span>, <span class="string">&#x27;pool3&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;conv4_1&#x27;</span>, <span class="string">&#x27;relu4_1&#x27;</span>, <span class="string">&#x27;conv4_2&#x27;</span>, <span class="string">&#x27;relu4_2&#x27;</span>, <span class="string">&#x27;conv4_3&#x27;</span>, <span class="string">&#x27;relu4_3&#x27;</span>, <span class="string">&#x27;conv4_4&#x27;</span>, <span class="string">&#x27;relu4_4&#x27;</span>, <span class="string">&#x27;pool4&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;conv5_1&#x27;</span>, <span class="string">&#x27;relu5_1&#x27;</span>, <span class="string">&#x27;conv5_2&#x27;</span>, <span class="string">&#x27;relu5_2&#x27;</span>, <span class="string">&#x27;conv5_3&#x27;</span>, <span class="string">&#x27;relu5_3&#x27;</span>, <span class="string">&#x27;conv5_4&#x27;</span>, <span class="string">&#x27;relu5_4&#x27;</span>, <span class="string">&#x27;pool5&#x27;</span>,</span><br><span class="line">            <span class="string">&#x27;flatten&#x27;</span>, <span class="string">&#x27;fc6&#x27;</span>, <span class="string">&#x27;relu6&#x27;</span>, <span class="string">&#x27;fc7&#x27;</span>, <span class="string">&#x27;relu7&#x27;</span>, <span class="string">&#x27;fc8&#x27;</span>, <span class="string">&#x27;softmax&#x27;</span></span><br><span class="line">        )        </span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">build_model</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># TODO：定义VGG19 的网络结构</span></span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;Building vgg-19 model...&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers = &#123;&#125;</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv1_1&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">3</span>, <span class="number">64</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu1_1&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv1_2&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">64</span>, <span class="number">64</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu1_2&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;pool1&#x27;</span>] = MaxPoolingLayer(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv2_1&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">64</span>, <span class="number">128</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu2_1&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv2_2&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">128</span>, <span class="number">128</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu2_2&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;pool2&#x27;</span>] = MaxPoolingLayer(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv3_1&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">128</span>, <span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu3_1&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv3_2&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">256</span>, <span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu3_2&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv3_3&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">256</span>, <span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu3_3&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv3_4&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">256</span>, <span class="number">256</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu3_4&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;pool3&#x27;</span>] = MaxPoolingLayer(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv4_1&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">256</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu4_1&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv4_2&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu4_2&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv4_3&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu4_3&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv4_4&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu4_4&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;pool4&#x27;</span>] = MaxPoolingLayer(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv5_1&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu5_1&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv5_2&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu5_2&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv5_3&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu5_3&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;conv5_4&#x27;</span>] = ConvolutionalLayer(<span class="number">3</span>, <span class="number">512</span>, <span class="number">512</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu5_4&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;pool5&#x27;</span>] = MaxPoolingLayer(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;flatten&#x27;</span>] = FlattenLayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;fc6&#x27;</span>] = FullyConnectedLayer(<span class="number">512</span>*<span class="number">7</span>*<span class="number">7</span>, <span class="number">4096</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu6&#x27;</span>] = ReLULayer()</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;fc7&#x27;</span>] = FullyConnectedLayer(<span class="number">4096</span>, <span class="number">4096</span>)</span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;relu7&#x27;</span>] = ReLULayer()</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;fc8&#x27;</span>] = FullyConnectedLayer(<span class="number">4096</span>, <span class="number">1000</span>)</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.layers[<span class="string">&#x27;softmax&#x27;</span>] = SoftmaxLossLayer()</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.update_layer_list = []</span><br><span class="line">        <span class="keyword">for</span> layer_name <span class="keyword">in</span> <span class="variable language_">self</span>.layers.keys():</span><br><span class="line">            <span class="keyword">if</span> <span class="string">&#x27;conv&#x27;</span> <span class="keyword">in</span> layer_name <span class="keyword">or</span> <span class="string">&#x27;fc&#x27;</span> <span class="keyword">in</span> layer_name:</span><br><span class="line">                <span class="variable language_">self</span>.update_layer_list.append(layer_name)</span><br></pre></td></tr></table></figure>
+
+<h3 id="网络推理模块"><a href="#网络推理模块" class="headerlink" title="网络推理模块"></a>网络推理模块</h3><p>本实验使用的官方模型的下载地址为<span class="exturl" data-url="aHR0cDovL3d3dy52bGZlYXQub3JnL21hdGNvbnZuZXQvbW9kZWxzL2JldGExNi9pbWFnZW5ldC12Z2ctdmVyeWRlZXAtMTkubWF0JUVGJUJDJTg4JUU3JThFJUFGJUU1JUEyJTgzJUU0JUI4JUFEJUU1JUI3JUIyJUU3JUJCJThGJUU0JUI4JThCJUU1JUE1JUJEJUU0JUJBJTg2JUVGJUJDJTg5">http://www.vlfeat.org/matconvnet/models/beta16/imagenet-vgg-verydeep-19.mat（环境中已经下好了）<i class="fa fa-external-link-alt"></i></span></p>
+<p>本实验在 pool5 层和 fc6 层之间添加了 flatten 层来改变特征图的维度,而官方提供的模型不包含 flatten 层,因此 fc6 层及之后的层在读取参数时需要偏移。</p>
+<p>卷积层：MatConvNet 中卷积权重维度为 H × W × Cin × Cout ,而本实  验中权重的维度为 Cin × H × W × Cout。读取卷积层权重时需要对输入权重做维度交换</p>
+<h3 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h3><p>补全 stu_upload 中的 layer_1.py（可以直接贴实验1的）、layer_2.py、vgg_cpu.py 文件。</p>
+<p>全连接层的init_param改了bias的初始化</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">init_param</span>(<span class="params">self, std=<span class="number">0.01</span></span>):</span><br><span class="line">    <span class="variable language_">self</span>.weight = np.random.normal(loc=<span class="number">0.0</span>, scale=std, size=(<span class="variable language_">self</span>.num_input, <span class="variable language_">self</span>.num_output))</span><br><span class="line">    <span class="comment"># self.bias=np.zeros([1, self.num_output])</span></span><br><span class="line">    <span class="variable language_">self</span>.bias = np.zeros([<span class="variable language_">self</span>.num_output])</span><br></pre></td></tr></table></figure>
+
+<p>运行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main_infer_cpu.py</span><br></pre></td></tr></table></figure>
+
+<h2 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h2><p>在实现深度神经网络后,如何确保整个网络的实现是正确的？</p>
+<p>感觉最容易出错的就是每一层之间的维度有没有对应….weight和bias啥的全都出错了好几遍。或许可以打印出来检查一遍</p>
+<p>还有很容易错的就是什么维度展平啊转置啊，总之是因为训练数据的维度定义和本实验不一致，搞得头疼</p>
+<h1 id="MLU-平台上的实验步骤"><a href="#MLU-平台上的实验步骤" class="headerlink" title="MLU 平台上的实验步骤"></a>MLU 平台上的实验步骤</h1><p>结构几乎一模一样，不用自己写更简单了</p>
+<p>注意：使用pycnnl创建vgg网络不需要flatten层</p>
+<h2 id="数据加载模块-1"><a href="#数据加载模块-1" class="headerlink" title="数据加载模块"></a>数据加载模块</h2><p>调用 pycnnl 库的 Python 接口前需要将数据类型从 numpy.float32 转换为 numpy.float64。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">load_image</span>(<span class="params">self, image_dir</span>):</span><br><span class="line">    <span class="comment"># loading image</span></span><br><span class="line">    <span class="variable language_">self</span>.image = image_dir</span><br><span class="line">    image_mean = np.array([<span class="number">123.68</span>, <span class="number">116.779</span>, <span class="number">103.939</span>])</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Loading and preprocessing image from &#x27;</span> + image_dir)</span><br><span class="line">    input_image = imageio.imread(image_dir)</span><br><span class="line">    pil_img = Image.fromarray(input_image)</span><br><span class="line">    pil_img = pil_img.resize((<span class="number">224</span>, <span class="number">224</span>), Image.Resampling.LANCZOS)</span><br><span class="line">    input_image = np.array(pil_img, dtype=np.float32)</span><br><span class="line">    input_image -= image_mean</span><br><span class="line">    input_image = np.reshape(input_image, [<span class="number">1</span>]+<span class="built_in">list</span>(input_image.shape))</span><br><span class="line">    <span class="comment"># TODO：调整输入数据</span></span><br><span class="line">    input_data = input_image.flatten().astype(np.float64)</span><br><span class="line">    </span><br><span class="line">    <span class="variable language_">self</span>.net.setInputData(input_data)</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络结构模块-1"><a href="#网络结构模块-1" class="headerlink" title="网络结构模块"></a>网络结构模块</h2><p>VGG19 中包含的卷积层、ReLU 层、最大池化层、全连接层和 Softmax 层可以直接调  用 pycnnl 库来实现对应层的初始化、参数加载、前向传播等操作。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">VGG19</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># set up net</span></span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">self</span>.net = pycnnl.CnnlNet()</span><br><span class="line">        <span class="variable language_">self</span>.input_quant_params = []</span><br><span class="line">        <span class="variable language_">self</span>.filter_quant_params = []</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">build_model</span>(<span class="params">self, param_path=<span class="string">&#x27;../../imagenet-vgg-verydeep-19.mat&#x27;</span></span>):</span><br><span class="line">        <span class="variable language_">self</span>.param_path = param_path</span><br><span class="line"></span><br><span class="line">       </span><br><span class="line">        <span class="comment"># <span class="doctag">TODO:</span> 使用net的createXXXLayer接口搭建VGG19网络</span></span><br><span class="line">        <span class="comment"># creating layers</span></span><br><span class="line">        <span class="variable language_">self</span>.net.setInputShape(<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line">        <span class="comment"># conv1_1</span></span><br><span class="line">       </span><br><span class="line">        input_shape1=pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape1[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        input_shape1[<span class="number">1</span>]=<span class="number">3</span></span><br><span class="line">        input_shape1[<span class="number">2</span>]=<span class="number">224</span></span><br><span class="line">        input_shape1[<span class="number">3</span>]=<span class="number">224</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&#x27;conv1_1&#x27;</span>, input_shape1,<span class="number">64</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">             </span><br><span class="line">        <span class="comment"># relu1_1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&#x27;relu1_1&#x27;</span>)</span><br><span class="line">        <span class="comment"># conv1_2</span></span><br><span class="line">        </span><br><span class="line">        input_shape12=pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape12[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        input_shape12[<span class="number">1</span>]=<span class="number">64</span></span><br><span class="line">        input_shape12[<span class="number">2</span>]=<span class="number">224</span></span><br><span class="line">        input_shape12[<span class="number">3</span>]=<span class="number">224</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&#x27;conv1_2&#x27;</span>,input_shape12, <span class="number">64</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># relu1_2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&#x27;relu1_2&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        input_shapepool1 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapepool1[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapepool1[<span class="number">1</span>] = <span class="number">64</span></span><br><span class="line">        input_shapepool1[<span class="number">2</span>] = <span class="number">224</span></span><br><span class="line">        input_shapepool1[<span class="number">3</span>] = <span class="number">224</span></span><br><span class="line">        <span class="comment"># pool1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createPoolingLayer(<span class="string">&quot;pool1&quot;</span>, input_shapepool1, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># conv2_1</span></span><br><span class="line">        input_shape2 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape2[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape2[<span class="number">1</span>] = <span class="number">64</span></span><br><span class="line">        input_shape2[<span class="number">2</span>] = <span class="number">112</span></span><br><span class="line">        input_shape2[<span class="number">3</span>] = <span class="number">112</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv2_1&quot;</span>, input_shape2, <span class="number">128</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># relu2_1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu2_1&quot;</span>)</span><br><span class="line">        <span class="comment"># conv2_2</span></span><br><span class="line"></span><br><span class="line">        input_shape22 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape22[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape22[<span class="number">1</span>] = <span class="number">128</span></span><br><span class="line">        input_shape22[<span class="number">2</span>] = <span class="number">112</span></span><br><span class="line">        input_shape22[<span class="number">3</span>] = <span class="number">112</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv2_2&quot;</span>, input_shape22, <span class="number">128</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># relu2_2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu2_2&quot;</span>)</span><br><span class="line">        <span class="comment"># pool2</span></span><br><span class="line">        input_shapepool2 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapepool2[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapepool2[<span class="number">1</span>] = <span class="number">128</span></span><br><span class="line">        input_shapepool2[<span class="number">2</span>] = <span class="number">112</span></span><br><span class="line">        input_shapepool2[<span class="number">3</span>] = <span class="number">112</span></span><br><span class="line">        <span class="comment"># pool2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createPoolingLayer(<span class="string">&quot;pool2&quot;</span>, input_shapepool2, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># conv3_1</span></span><br><span class="line">        input_shape3 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape3[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape3[<span class="number">1</span>] = <span class="number">128</span></span><br><span class="line">        input_shape3[<span class="number">2</span>] = <span class="number">56</span></span><br><span class="line">        input_shape3[<span class="number">3</span>] = <span class="number">56</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv3_1&quot;</span>, input_shape3, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu3_1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu3_1&quot;</span>)</span><br><span class="line">        <span class="comment"># conv3_2</span></span><br><span class="line">        input_shape32 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape32[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape32[<span class="number">1</span>] = <span class="number">256</span></span><br><span class="line">        input_shape32[<span class="number">2</span>] = <span class="number">56</span></span><br><span class="line">        input_shape32[<span class="number">3</span>] = <span class="number">56</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv3_2&quot;</span>, input_shape32, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu3_2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu3_2&quot;</span>)</span><br><span class="line">        <span class="comment"># conv3_3</span></span><br><span class="line">        input_shape33 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape33[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape33[<span class="number">1</span>] = <span class="number">256</span></span><br><span class="line">        input_shape33[<span class="number">2</span>] = <span class="number">56</span></span><br><span class="line">        input_shape33[<span class="number">3</span>] = <span class="number">56</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv3_3&quot;</span>, input_shape33, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu3_3</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu3_3&quot;</span>)</span><br><span class="line">        <span class="comment"># conv3_4</span></span><br><span class="line">        input_shape34 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape34[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape34[<span class="number">1</span>] = <span class="number">256</span></span><br><span class="line">        input_shape34[<span class="number">2</span>] = <span class="number">56</span></span><br><span class="line">        input_shape34[<span class="number">3</span>] = <span class="number">56</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv3_4&quot;</span>, input_shape34, <span class="number">256</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># relu3_4</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu3_4&quot;</span>)</span><br><span class="line">        <span class="comment"># pool3</span></span><br><span class="line">        input_shapepool3 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapepool3[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapepool3[<span class="number">1</span>] = <span class="number">256</span></span><br><span class="line">        input_shapepool3[<span class="number">2</span>] = <span class="number">56</span></span><br><span class="line">        input_shapepool3[<span class="number">3</span>] = <span class="number">56</span></span><br><span class="line">        <span class="comment"># pool3</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createPoolingLayer(<span class="string">&quot;pool3&quot;</span>, input_shapepool3, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># conv4_1</span></span><br><span class="line">        input_shape4 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape4[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape4[<span class="number">1</span>] = <span class="number">256</span></span><br><span class="line">        input_shape4[<span class="number">2</span>] = <span class="number">28</span></span><br><span class="line">        input_shape4[<span class="number">3</span>] = <span class="number">28</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv4_1&quot;</span>, input_shape4, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu4_1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu4_1&quot;</span>)</span><br><span class="line">        <span class="comment"># conv4_2</span></span><br><span class="line">        input_shape42 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape42[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape42[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape42[<span class="number">2</span>] = <span class="number">28</span></span><br><span class="line">        input_shape42[<span class="number">3</span>] = <span class="number">28</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv4_2&quot;</span>, input_shape42, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu4_2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu4_2&quot;</span>)</span><br><span class="line">        <span class="comment"># conv4_3</span></span><br><span class="line">        input_shape43 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape43[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape43[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape43[<span class="number">2</span>] = <span class="number">28</span></span><br><span class="line">        input_shape43[<span class="number">3</span>] = <span class="number">28</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv4_3&quot;</span>, input_shape43, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu4_3</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu4_3&quot;</span>)</span><br><span class="line">        <span class="comment"># conv4_4</span></span><br><span class="line">        input_shape44 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape44[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape44[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape44[<span class="number">2</span>] = <span class="number">28</span></span><br><span class="line">        input_shape44[<span class="number">3</span>] = <span class="number">28</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv4_4&quot;</span>, input_shape44, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># relu4_4</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu4_4&quot;</span>)</span><br><span class="line">        <span class="comment"># pool4</span></span><br><span class="line">        input_shapepool4 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapepool4[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapepool4[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shapepool4[<span class="number">2</span>] = <span class="number">28</span></span><br><span class="line">        input_shapepool4[<span class="number">3</span>] = <span class="number">28</span></span><br><span class="line">        <span class="comment"># pool4</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createPoolingLayer(<span class="string">&quot;pool4&quot;</span>, input_shapepool4, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># conv5_1</span></span><br><span class="line">        input_shape5 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape5[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape5[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape5[<span class="number">2</span>] = <span class="number">14</span></span><br><span class="line">        input_shape5[<span class="number">3</span>] = <span class="number">14</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv5_1&quot;</span>, input_shape5, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu5_1</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu5_1&quot;</span>)</span><br><span class="line">        <span class="comment"># conv5_2</span></span><br><span class="line">        input_shape52 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape52[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape52[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape52[<span class="number">2</span>] = <span class="number">14</span></span><br><span class="line">        input_shape52[<span class="number">3</span>] = <span class="number">14</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv5_2&quot;</span>, input_shape52, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu5_2</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu5_2&quot;</span>)</span><br><span class="line">        <span class="comment"># conv5_3</span></span><br><span class="line">        input_shape53 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape53[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape53[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape53[<span class="number">2</span>] = <span class="number">14</span></span><br><span class="line">        input_shape53[<span class="number">3</span>] = <span class="number">14</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv5_3&quot;</span>, input_shape53, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">        <span class="comment"># relu5_3</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu5_3&quot;</span>)</span><br><span class="line">        <span class="comment"># conv5_4</span></span><br><span class="line">        input_shape54 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shape54[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shape54[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shape54[<span class="number">2</span>] = <span class="number">14</span></span><br><span class="line">        input_shape54[<span class="number">3</span>] = <span class="number">14</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createConvLayer(<span class="string">&quot;conv5_4&quot;</span>, input_shape54, <span class="number">512</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># relu5_4</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu5_4&quot;</span>)</span><br><span class="line">        <span class="comment"># pool5</span></span><br><span class="line">        input_shapepool5 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapepool5[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapepool5[<span class="number">1</span>] = <span class="number">512</span></span><br><span class="line">        input_shapepool5[<span class="number">2</span>] = <span class="number">14</span></span><br><span class="line">        input_shapepool5[<span class="number">3</span>] = <span class="number">14</span></span><br><span class="line">        <span class="comment"># pool5</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createPoolingLayer(<span class="string">&quot;pool5&quot;</span>, input_shapepool5, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># fc6</span></span><br><span class="line">        input_shapem6 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapem6[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem6[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem6[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem6[<span class="number">3</span>] = <span class="number">25088</span></span><br><span class="line">        weight_shapem6 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        weight_shapem6[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        weight_shapem6[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        weight_shapem6[<span class="number">2</span>] = <span class="number">25088</span></span><br><span class="line">        weight_shapem6[<span class="number">3</span>] = <span class="number">4096</span></span><br><span class="line">        output_shapem6 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        output_shapem6[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem6[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem6[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem6[<span class="number">3</span>] = <span class="number">4096</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createMlpLayer(<span class="string">&quot;fc6&quot;</span>, input_shapem6, weight_shapem6, output_shapem6)</span><br><span class="line">        <span class="comment"># relu6</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu6&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># fc7</span></span><br><span class="line">        input_shapem7 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapem7[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem7[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem7[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        input_shapem7[<span class="number">3</span>] = <span class="number">4096</span></span><br><span class="line">        weight_shapem7 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        weight_shapem7[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        weight_shapem7[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        weight_shapem7[<span class="number">2</span>] = <span class="number">4096</span></span><br><span class="line">        weight_shapem7[<span class="number">3</span>] = <span class="number">4096</span></span><br><span class="line">        output_shapem7 = pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        output_shapem7[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem7[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem7[<span class="number">2</span>] = <span class="number">1</span></span><br><span class="line">        output_shapem7[<span class="number">3</span>] = <span class="number">4096</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createMlpLayer(<span class="string">&quot;fc7&quot;</span>, input_shapem7, weight_shapem7, output_shapem7)</span><br><span class="line">        <span class="comment"># relu7</span></span><br><span class="line">        <span class="variable language_">self</span>.net.createReLuLayer(<span class="string">&quot;relu7&quot;</span>)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># fc8</span></span><br><span class="line">        input_shapem3=pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        input_shapem3[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        input_shapem3[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        input_shapem3[<span class="number">2</span>]=<span class="number">1</span></span><br><span class="line">        input_shapem3[<span class="number">3</span>]=<span class="number">4096</span></span><br><span class="line">        weight_shapem3=pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        weight_shapem3[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        weight_shapem3[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        weight_shapem3[<span class="number">2</span>]=<span class="number">4096</span></span><br><span class="line">        weight_shapem3[<span class="number">3</span>]=<span class="number">1000</span></span><br><span class="line">        output_shapem3=pycnnl.IntVector(<span class="number">4</span>)</span><br><span class="line">        output_shapem3[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        output_shapem3[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        output_shapem3[<span class="number">2</span>]=<span class="number">1</span></span><br><span class="line">        output_shapem3[<span class="number">3</span>]=<span class="number">1000</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createMlpLayer(<span class="string">&#x27;fc8&#x27;</span>, input_shapem3,weight_shapem3,output_shapem3)</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># softmax</span></span><br><span class="line">        </span><br><span class="line">        input_shapes=pycnnl.IntVector(<span class="number">3</span>)</span><br><span class="line">        input_shapes[<span class="number">0</span>]=<span class="number">1</span></span><br><span class="line">        input_shapes[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">        input_shapes[<span class="number">2</span>]=<span class="number">1000</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.net.createSoftmaxLayer(<span class="string">&#x27;softmax&#x27;</span>,input_shapes ,<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h2 id="网络推理模块-1"><a href="#网络推理模块-1" class="headerlink" title="网络推理模块"></a>网络推理模块</h2><p>维度交换+数据类型转为 np.float64 类型</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">load_model</span>(<span class="params">self</span>):</span><br><span class="line">    <span class="comment"># loading params ... </span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;Loading parameters from file &#x27;</span> + <span class="variable language_">self</span>.param_path)</span><br><span class="line">    params = scipy.io.loadmat(<span class="variable language_">self</span>.param_path)</span><br><span class="line">    <span class="variable language_">self</span>.image_mean = params[<span class="string">&#x27;normalization&#x27;</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="variable language_">self</span>.image_mean = np.mean(<span class="variable language_">self</span>.image_mean, axis=(<span class="number">0</span>, <span class="number">1</span>))</span><br><span class="line">    </span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> idx <span class="keyword">in</span> <span class="built_in">range</span>(<span class="variable language_">self</span>.net.size()):</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;conv&#x27;</span> <span class="keyword">in</span> <span class="variable language_">self</span>.net.getLayerName(idx):</span><br><span class="line">            weight, bias = params[<span class="string">&#x27;layers&#x27;</span>][<span class="number">0</span>][idx][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            <span class="comment"># TODO：调整权重形状</span></span><br><span class="line">            <span class="comment"># matconvnet: weights dim [height, width, in_channel, out_channel]</span></span><br><span class="line">            <span class="comment"># ours: weights dim [out_channel, height, width,in_channel]</span></span><br><span class="line">            weight = np.transpose(weight, [<span class="number">3</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]).flatten().astype(np.float64)</span><br><span class="line">            bias = bias.reshape(-<span class="number">1</span>).astype(np.float64)</span><br><span class="line">            <span class="variable language_">self</span>.net.loadParams(idx, weight, bias)</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;fc&#x27;</span> <span class="keyword">in</span> <span class="variable language_">self</span>.net.getLayerName(idx):</span><br><span class="line">            <span class="comment"># Loading params may take quite a while. Please be patient.</span></span><br><span class="line">            weight, bias = params[<span class="string">&#x27;layers&#x27;</span>][<span class="number">0</span>][idx][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line">            weight = weight.reshape([weight.shape[<span class="number">0</span>]*weight.shape[<span class="number">1</span>]*weight.shape[<span class="number">2</span>], weight.shape[<span class="number">3</span>]])</span><br><span class="line">            weight = weight.flatten().astype(np.float64)</span><br><span class="line">            bias = bias.reshape(-<span class="number">1</span>).astype(np.float64)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">            <span class="variable language_">self</span>.net.loadParams(idx, weight, bias)</span><br><span class="line">            count += <span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="运行-1"><a href="#运行-1" class="headerlink" title="运行"></a>运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python main_infer_cpu.py</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" title="基于 VGG19 实现图像分类">https://mintind.github.io/2026/04/05/UCAS/智能计算系统/实验/3基于 VGG19 实现图像分类/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/02/AI/Agents/ccswitch/" rel="prev" title="摸一下ccswitch">
+                  <i class="fa fa-angle-left"></i> 摸一下ccswitch
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/06/CTF/PWN/House_of_orange/" rel="next" title="House of Orange">
+                  House of Orange <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/04/05/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/3%E5%9F%BA%E4%BA%8E%20VGG19%20%E5%AE%9E%E7%8E%B0%E5%9B%BE%E5%83%8F%E5%88%86%E7%B1%BB/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

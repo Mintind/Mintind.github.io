@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="整体思路很清晰但是写得我晕头转向的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【RE】2025-12-20升级赛1z_re">
+<meta property="og:url" content="https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="整体思路很清晰但是写得我晕头转向的">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-12-19T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-19T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Reverse">
+<meta property="article:tag" content="TEA&#x2F;XTEA&#x2F;XXTEA">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/","path":"2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/","title":"【RE】2025-12-20升级赛1z_re"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【RE】2025-12-20升级赛1z_re | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%86%E5%90%91"><span class="nav-number">2.</span> <span class="nav-text">逆向</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-number">3.</span> <span class="nav-text">题解</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【RE】2025-12-20升级赛1z_re | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【RE】2025-12-20升级赛1z_re<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL1JldmVyc2UvMjAyNS0xMi0yMF9uZXNlXzF6X3JlLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-20 00:00:00" itemprop="dateCreated datePublished" datetime="2025-12-20T00:00:00+08:00">2025-12-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>整体思路很清晰但是写得我晕头转向的</p>
+<span id="more"></span>
+
+<p>题目：1z_re</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>检查无壳。</p>
+<p>主函数。读入一个buffer，期望buffer长度为19，取前四个四节塞到key里，进行一个encrypt得到Block。期望Block长度为24，对Block按照置换表perm进行置换，然后顺序进行异或加，得到v5。最后如果v5与target完全相等输出You win!</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  FILE *v3; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">int</span> result; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">char</span> v5[<span class="number">24</span>]; <span class="comment">// [rsp+20h] [rbp-60h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 Block_len; <span class="comment">// [rsp+38h] [rbp-48h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int8 Key[<span class="number">8</span>]; <span class="comment">// [rsp+40h] [rbp-40h] BYREF</span></span><br><span class="line">  __int64 v8; <span class="comment">// [rsp+48h] [rbp-38h]</span></span><br><span class="line">  <span class="type">char</span> Buffer[<span class="number">128</span>]; <span class="comment">// [rsp+50h] [rbp-30h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v10; <span class="comment">// [rsp+D0h] [rbp+50h]</span></span><br><span class="line">  _BYTE *Block; <span class="comment">// [rsp+D8h] [rbp+58h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 l; <span class="comment">// [rsp+E0h] [rbp+60h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 k; <span class="comment">// [rsp+E8h] [rbp+68h]</span></span><br><span class="line">  <span class="type">char</span> tmp; <span class="comment">// [rsp+F7h] [rbp+77h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 j; <span class="comment">// [rsp+F8h] [rbp+78h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+100h] [rbp+80h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 Buffer_len; <span class="comment">// [rsp+108h] [rbp+88h]</span></span><br><span class="line"></span><br><span class="line">  _main();</span><br><span class="line">  v3 = __acrt_iob_func(<span class="number">0</span>);</span><br><span class="line">  <span class="keyword">if</span> ( !fgets(Buffer, <span class="number">128</span>, v3) )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  Buffer_len = <span class="built_in">strlen</span>(Buffer);</span><br><span class="line">  <span class="keyword">if</span> ( Buffer_len &amp;&amp; Buffer[Buffer_len - <span class="number">1</span>] == <span class="number">10</span> )</span><br><span class="line">    Buffer[--Buffer_len] = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> ( Buffer_len == <span class="number">19</span> )                       <span class="comment">// 长度19</span></span><br><span class="line">  &#123;</span><br><span class="line">    v8 = <span class="number">0</span>i64;</span><br><span class="line">    *(_QWORD *)Key = (<span class="type">unsigned</span> __int8)Buffer[<span class="number">0</span>];</span><br><span class="line">    Key[<span class="number">1</span>] = Buffer[<span class="number">1</span>];</span><br><span class="line">    Key[<span class="number">2</span>] = Buffer[<span class="number">2</span>];</span><br><span class="line">    Key[<span class="number">3</span>] = Buffer[<span class="number">3</span>];</span><br><span class="line">    Block_len = <span class="number">0</span>i64;</span><br><span class="line">    Block = encrypt((<span class="type">const</span> <span class="type">unsigned</span> __int8 *)Buffer, <span class="number">19u</span>i64, Key, &amp;Block_len);</span><br><span class="line">    <span class="keyword">if</span> ( Block &amp;&amp; Block_len == <span class="number">24</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">for</span> ( i = <span class="number">0</span>i64; i &lt;= <span class="number">23</span>; ++i )</span><br><span class="line">        v5[i] = Block[main::perm[i]];</span><br><span class="line">      <span class="keyword">for</span> ( j = <span class="number">1</span>i64; j &lt;= <span class="number">23</span>; ++j )</span><br><span class="line">      &#123;</span><br><span class="line">        tmp = v5[j];</span><br><span class="line">        v10 = j / <span class="number">3</span>;</span><br><span class="line">        <span class="keyword">for</span> ( k = <span class="number">0</span>i64; k &lt; v10; ++k )</span><br><span class="line">          tmp ^= v5[k];</span><br><span class="line">        v5[j] = tmp;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">free</span>(Block);</span><br><span class="line">      <span class="keyword">for</span> ( l = <span class="number">0</span>i64; l &lt;= <span class="number">23</span>; ++l )</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="keyword">if</span> ( v5[l] != main::target[l] )</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="built_in">puts</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">          <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;You win!&quot;</span>);</span><br><span class="line">      getchar();</span><br><span class="line">      result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      <span class="built_in">free</span>(Block);</span><br><span class="line">      <span class="built_in">puts</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">      result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">&quot;error&quot;</span>);</span><br><span class="line">    result = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>encrypt。输入char转int32得到Block，密钥key扩展成v5，xxtea_encrypt_uint32进行xxtea加密，再int32转回char返回</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">_BYTE *__fastcall <span class="title function_">encrypt</span><span class="params">(<span class="type">const</span> <span class="type">unsigned</span> __int8 *buffer, <span class="type">unsigned</span> __int64 buffer_len, <span class="type">const</span> <span class="type">unsigned</span> __int8 *key, <span class="type">unsigned</span> __int64 *Block_len)</span></span><br><span class="line">&#123;</span><br><span class="line">  _BYTE *result; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v5[<span class="number">4</span>]; <span class="comment">// [rsp+20h] [rbp-30h] BYREF</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 int32_len; <span class="comment">// [rsp+30h] [rbp-20h] BYREF</span></span><br><span class="line">  _BYTE *v7; <span class="comment">// [rsp+38h] [rbp-18h]</span></span><br><span class="line">  <span class="type">void</span> *Block; <span class="comment">// [rsp+40h] [rbp-10h]</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+4Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( buffer_len )</span><br><span class="line">  &#123;</span><br><span class="line">    Block = str2long(buffer, buffer_len, &amp;int32_len, <span class="number">1</span>);<span class="comment">// int32 6个</span></span><br><span class="line">    <span class="keyword">if</span> ( Block )</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; ++i )</span><br><span class="line">        v5[i] = (key[<span class="number">4</span> * i + <span class="number">3</span>] &lt;&lt; <span class="number">24</span>) | (key[<span class="number">4</span> * i + <span class="number">2</span>] &lt;&lt; <span class="number">16</span>) | *(<span class="type">unsigned</span> __int16 *)&amp;key[<span class="number">4</span> * i];</span><br><span class="line">      xxtea_encrypt_uint32((<span class="type">unsigned</span> <span class="type">int</span> *)Block, int32_len, v5);</span><br><span class="line">      v7 = long2str((<span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> *)Block, int32_len, Block_len, <span class="number">0</span>);<span class="comment">// 变回字节长24</span></span><br><span class="line">      <span class="built_in">free</span>(Block);</span><br><span class="line">      result = v7;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">      *Block_len = <span class="number">0</span>i64;</span><br><span class="line">      result = <span class="number">0</span>i64;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    *Block_len = <span class="number">0</span>i64;</span><br><span class="line">    result = <span class="number">0</span>i64;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>str2long。四个char合一块变成int32，因为flag长19字节所以需要<code>(bytes_len &gt;&gt; 2) + ((bytes_len &amp; 3) != 0)</code>&#x3D;5块，最后加了一块用来保留原始字节长度，一共6块</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">_DWORD *__fastcall <span class="title function_">str2long</span><span class="params">(<span class="type">const</span> <span class="type">unsigned</span> __int8 *bytes, <span class="type">unsigned</span> __int64 bytes_len, <span class="type">unsigned</span> __int64 *int32_len, <span class="type">int</span> preserve_bytes_len)</span></span><br><span class="line">&#123;</span><br><span class="line">  _DWORD *res; <span class="comment">// [rsp+20h] [rbp-20h]</span></span><br><span class="line">  <span class="type">size_t</span> Count; <span class="comment">// [rsp+28h] [rbp-18h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v7; <span class="comment">// [rsp+30h] [rbp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = (bytes_len &gt;&gt; <span class="number">2</span>) + ((bytes_len &amp; <span class="number">3</span>) != <span class="number">0</span>);<span class="comment">// 要几个4b的块 5</span></span><br><span class="line">  Count = (preserve_bytes_len != <span class="number">0</span>) + v7;       <span class="comment">// 加一个数保留字节流长度</span></span><br><span class="line">  res = <span class="built_in">calloc</span>(Count, <span class="number">4u</span>i64);</span><br><span class="line">  <span class="keyword">if</span> ( !res )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>i64;</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>i64; i &lt; bytes_len; ++i )</span><br><span class="line">    res[i &gt;&gt; <span class="number">2</span>] |= bytes[i] &lt;&lt; (<span class="number">8</span> * (i &amp; <span class="number">3</span>));</span><br><span class="line">  <span class="keyword">if</span> ( preserve_bytes_len )</span><br><span class="line">    res[v7] = bytes_len;</span><br><span class="line">  *int32_len = Count;</span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>long2str。把int32拆成四个char，所以最后是24个char</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">_BYTE *__fastcall <span class="title function_">long2str</span><span class="params">(<span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> *Block, __int64 int32_len, <span class="type">unsigned</span> __int64 *bytes_len, <span class="type">int</span> flag)</span></span><br><span class="line">&#123;</span><br><span class="line">  _BYTE *result; <span class="comment">// rax</span></span><br><span class="line">  _BYTE *bytes; <span class="comment">// [rsp+28h] [rbp-28h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v6; <span class="comment">// [rsp+34h] [rbp-1Ch]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 Size; <span class="comment">// [rsp+38h] [rbp-18h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+40h] [rbp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v9; <span class="comment">// [rsp+48h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  Size = <span class="number">4</span> * int32_len;</span><br><span class="line">  v9 = <span class="number">4</span> * int32_len;</span><br><span class="line">  <span class="keyword">if</span> ( flag )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">if</span> ( !int32_len )</span><br><span class="line">    &#123;</span><br><span class="line">      *bytes_len = <span class="number">0</span>i64;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>i64;</span><br><span class="line">    &#125;</span><br><span class="line">    v6 = Block[int32_len - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> ( Size &lt; v6 || v6 &lt; Size - <span class="number">3</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      *bytes_len = <span class="number">0</span>i64;</span><br><span class="line">      <span class="keyword">return</span> <span class="number">0</span>i64;</span><br><span class="line">    &#125;</span><br><span class="line">    v9 = v6;</span><br><span class="line">  &#125;</span><br><span class="line">  bytes = <span class="built_in">malloc</span>(Size);</span><br><span class="line">  <span class="keyword">if</span> ( bytes )</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>i64; i &lt; Size; ++i )</span><br><span class="line">      bytes[i] = Block[i &gt;&gt; <span class="number">2</span>] &gt;&gt; (<span class="number">8</span> * (i &amp; <span class="number">3</span>));</span><br><span class="line">    *bytes_len = v9;</span><br><span class="line">    result = bytes;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">  &#123;</span><br><span class="line">    *bytes_len = <span class="number">0</span>i64;</span><br><span class="line">    result = <span class="number">0</span>i64;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>xxtea_encrypt_uint32。标准的xxtea，delta是-&#x3D; 0x61C88647也是标准的，轮数是<code>0x34 / len + 6</code>&#x3D;14</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> __fastcall <span class="title function_">xxtea_encrypt_uint32</span><span class="params">(<span class="type">unsigned</span> <span class="type">int</span> *x, <span class="type">unsigned</span> __int64 len, <span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> *a3)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">int</span> v3; <span class="comment">// eax</span></span><br><span class="line">  <span class="type">bool</span> ret_flag; <span class="comment">// al</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> *v5; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> *v6; <span class="comment">// rax</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v7; <span class="comment">// [rsp+8h] [rbp-18h]</span></span><br><span class="line">  <span class="type">int</span> rounds; <span class="comment">// [rsp+Ch] [rbp-14h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+10h] [rbp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v10; <span class="comment">// [rsp+18h] [rbp-8h]</span></span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v11; <span class="comment">// [rsp+1Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> ( len &gt; <span class="number">1</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v11 = x[len - <span class="number">1</span>];</span><br><span class="line">    v10 = <span class="number">0</span>;</span><br><span class="line">    rounds = <span class="number">0x34</span> / len + <span class="number">6</span>;</span><br><span class="line">    <span class="keyword">while</span> ( <span class="number">1</span> )</span><br><span class="line">    &#123;</span><br><span class="line">      v3 = rounds--;</span><br><span class="line">      ret_flag = v3 != <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">if</span> ( !ret_flag )</span><br><span class="line">        <span class="keyword">break</span>;</span><br><span class="line">      v10 -= <span class="number">0x61C88647</span>;</span><br><span class="line">      v7 = (v10 &gt;&gt; <span class="number">2</span>) &amp; <span class="number">3</span>;</span><br><span class="line">      <span class="keyword">for</span> ( i = <span class="number">0</span>i64; i &lt; len - <span class="number">1</span>; ++i )</span><br><span class="line">      &#123;</span><br><span class="line">        v5 = &amp;x[i];</span><br><span class="line">        *v5 += ((x[i + <span class="number">1</span>] ^ v10) + (v11 ^ a3[i &amp; <span class="number">3</span> ^ v7])) ^ (((<span class="number">4</span> * x[i + <span class="number">1</span>]) ^ (v11 &gt;&gt; <span class="number">5</span>))</span><br><span class="line">                                                            + ((x[i + <span class="number">1</span>] &gt;&gt; <span class="number">3</span>) ^ (<span class="number">16</span> * v11)));</span><br><span class="line">        v11 = *v5;</span><br><span class="line">      &#125;</span><br><span class="line">      v6 = &amp;x[len - <span class="number">1</span>];</span><br><span class="line">      *v6 += ((*x ^ v10) + (v11 ^ a3[i &amp; <span class="number">3</span> ^ v7])) ^ (((<span class="number">4</span> * *x) ^ (v11 &gt;&gt; <span class="number">5</span>)) + ((*x &gt;&gt; <span class="number">3</span>) ^ (<span class="number">16</span> * v11)));</span><br><span class="line">      v11 = *v6;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> ret_flag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h2><p>加密：</p>
+<p>输入19个字节，先str2long变成5个int32，加上一个“19”，共6块，然后xxxtea加密，再long2str，6块变24字节再用perm置换，异或，得到target</p>
+<p>所以解密：</p>
+<p>对24字节的target先异或，逆perm，然后str2long得到6块，然后xxxtea解密，再long2str得到24字节，前19字节就是flag</p>
+<p><strong>异或&amp;逆置换</strong></p>
+<p>为了方便理解用new和old来区分一下，new表示已经经过运算发生了改变</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>i64; i &lt;= <span class="number">23</span>; ++i )</span><br><span class="line">    old[i] = ori[main::perm[i]];</span><br><span class="line"><span class="keyword">for</span> ( j = <span class="number">1</span>i64; j &lt;= <span class="number">23</span>; ++j )</span><br><span class="line">&#123;</span><br><span class="line">    tmp = old[j];</span><br><span class="line">    v10 = j / <span class="number">3</span>;</span><br><span class="line">    <span class="keyword">for</span> ( k = <span class="number">0</span>i64; k &lt; v10; ++k )</span><br><span class="line">        tmp ^= new[k];</span><br><span class="line">    new[j] = tmp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逆向就是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">    <span class="type">uint8_t</span> tmp = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i / <span class="number">3</span>; j++)&#123;</span><br><span class="line">        tmp ^= new[j];</span><br><span class="line">    &#125;</span><br><span class="line">    old[i] = new[i] ^ tmp;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">    ori[i] = old[inv_perm[i]];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>xxtea解密</strong></p>
+<p>抄板子了。不过有个Key的问题，只定义了8个但是用了16</p>
+<p>定义：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">unsigned</span> __int8 Key[<span class="number">8</span>]; <span class="comment">// [rsp+40h] [rbp-40h] BYREF</span></span><br><span class="line">__int64 v8; <span class="comment">// [rsp+48h] [rbp-38h]</span></span><br><span class="line"><span class="type">char</span> Buffer[<span class="number">128</span>]; <span class="comment">// [rsp+50h] [rbp-30h] BYREF</span></span><br></pre></td></tr></table></figure>
+
+<p>初始化：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">v8 = <span class="number">0</span>i64;</span><br><span class="line">*(_QWORD *)Key = (<span class="type">unsigned</span> __int8)Buffer[<span class="number">0</span>];</span><br><span class="line">Key[<span class="number">1</span>] = Buffer[<span class="number">1</span>];</span><br><span class="line">Key[<span class="number">2</span>] = Buffer[<span class="number">2</span>];</span><br><span class="line">Key[<span class="number">3</span>] = Buffer[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>后续用到key[0-15]：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">3</span>; ++i )</span><br><span class="line">  v5[i] = (key[<span class="number">4</span> * i + <span class="number">3</span>] &lt;&lt; <span class="number">24</span>) | (key[<span class="number">4</span> * i + <span class="number">2</span>] &lt;&lt; <span class="number">16</span>) | *(<span class="type">unsigned</span> __int16 *)&amp;key[<span class="number">4</span> * i];</span><br><span class="line">xxtea_encrypt_uint32((<span class="type">unsigned</span> <span class="type">int</span> *)Block, int32_len, v5);</span><br></pre></td></tr></table></figure>
+
+<p>key[0-4]是buffer前4字节，猜是<code>flag</code>，后面就落到v8里了，可能是ida没识别出来吧，v8应该是跟key一块的。v8有初始化为0，所以后边都是0</p>
+<p><strong>str2long&amp;long2str</strong></p>
+<p>直接魔改一下用</p>
+<p>target和perm数组ida里粘</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">.rdata:<span class="number">0000000000405000</span> _ZZ4mainE4perm  dd <span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">5</span>, <span class="number">0</span>Ah, <span class="number">8</span>, <span class="number">0B</span>h, <span class="number">9</span>, <span class="number">0</span>Eh, <span class="number">0</span>Ch, <span class="number">0F</span>h</span><br><span class="line">.rdata:<span class="number">0000000000405000</span>                                         ; DATA XREF: main+<span class="number">168</span>↑o</span><br><span class="line">.rdata:<span class="number">0000000000405000</span>                 dd <span class="number">0</span>Dh, <span class="number">12</span>h, <span class="number">10</span>h, <span class="number">13</span>h, <span class="number">11</span>h, <span class="number">16</span>h, <span class="number">14</span>h, <span class="number">17</span>h, <span class="number">15</span>h</span><br><span class="line">.rdata:<span class="number">0000000000405060</span> ; _BYTE main::target[<span class="number">24</span>]</span><br><span class="line">.rdata:<span class="number">0000000000405060</span> _ZZ4mainE6target db <span class="number">0</span>EEh, <span class="number">56</span>h, <span class="number">9</span>Dh, <span class="number">6B</span>h, <span class="number">2</span>, <span class="number">63</span>h, <span class="number">78</span>h, <span class="number">75</span>h, <span class="number">5</span>, <span class="number">42</span>h, <span class="number">70</span>h</span><br><span class="line">.rdata:<span class="number">0000000000405060</span>                                         ; DATA XREF: main+<span class="number">23F</span>↑o</span><br><span class="line">.rdata:<span class="number">0000000000405060</span>                 db <span class="number">9</span>Ch, <span class="number">63</span>h, <span class="number">0</span>D7h, <span class="number">0</span>DCh, <span class="number">0</span>D7h, <span class="number">1</span>Ah, <span class="number">0B</span>5h, <span class="number">0</span>EAh, <span class="number">0</span>Dh, <span class="number">0</span>C6h</span><br><span class="line">.rdata:<span class="number">0000000000405060</span>                 db <span class="number">8</span>Dh, <span class="number">97</span>h, <span class="number">5</span>Dh</span><br></pre></td></tr></table></figure>
+
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> DELTA 0x9e3779b9</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">static</span> <span class="keyword">inline</span> <span class="type">uint32_t</span> <span class="title">MX_calc</span><span class="params">(<span class="type">uint32_t</span> z, <span class="type">uint32_t</span> y, <span class="type">uint32_t</span> sum, <span class="type">const</span> <span class="type">uint32_t</span> key[<span class="number">4</span>], <span class="type">unsigned</span> p, <span class="type">unsigned</span> e)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (((z &gt;&gt; <span class="number">5</span>) ^ (y &lt;&lt; <span class="number">2</span>)) + ((y &gt;&gt; <span class="number">3</span>) ^ (z &lt;&lt; <span class="number">4</span>)))</span><br><span class="line">           ^ ((sum ^ y) + (key[(p &amp; <span class="number">3</span>) ^ e] ^ z));</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 解密：out[] = decrypt of in[]  需要知道加密时的轮数（或再算一遍） */</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">xxtea_decrypt</span><span class="params">(<span class="type">const</span> <span class="type">uint32_t</span> *in, <span class="type">int</span> n, <span class="type">int</span> rounds, <span class="type">const</span> <span class="type">uint32_t</span> key[<span class="number">4</span>], <span class="type">uint32_t</span> *out)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> y, z, sum;</span><br><span class="line">    <span class="type">unsigned</span> cycle;</span><br><span class="line"></span><br><span class="line">    sum = rounds * DELTA;</span><br><span class="line">    <span class="comment">// sum = 0 - (rounds-1) * DELTA;</span></span><br><span class="line">    <span class="built_in">memcpy</span>(out, in, <span class="built_in">sizeof</span>(<span class="type">uint32_t</span>) * n);</span><br><span class="line">    y = out[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (rounds--) &#123;</span><br><span class="line">        cycle = (sum &gt;&gt; <span class="number">2</span>) &amp; <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> idx = n - <span class="number">1</span>; idx &gt; <span class="number">0</span>; idx--) &#123;</span><br><span class="line">            z = out[idx - <span class="number">1</span>];</span><br><span class="line">            out[idx] -= <span class="built_in">MX_calc</span>(z, y, sum, key, idx, cycle);</span><br><span class="line">            y = out[idx];</span><br><span class="line">        &#125;</span><br><span class="line">        z = out[n - <span class="number">1</span>];</span><br><span class="line">        out[<span class="number">0</span>] -= <span class="built_in">MX_calc</span>(z, y, sum, key, <span class="number">0</span>, cycle);</span><br><span class="line">        y = out[<span class="number">0</span>];</span><br><span class="line">        sum -= DELTA;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">uint32_t</span>* __fastcall <span class="title">str2long</span><span class="params">(<span class="type">const</span> <span class="type">unsigned</span> __int8 *bytes, <span class="type">unsigned</span> __int64 bytes_len, <span class="type">unsigned</span> __int64 *int32_len, <span class="type">int</span> preserve_bytes_len)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="type">size_t</span> Count; <span class="comment">// [rsp+28h] [rbp-18h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 v7; <span class="comment">// [rsp+30h] [rbp-10h]</span></span><br><span class="line">  <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+38h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">  v7 = (bytes_len &gt;&gt; <span class="number">2</span>) + ((bytes_len &amp; <span class="number">3</span>) != <span class="number">0</span>);<span class="comment">// 要几个4b的块</span></span><br><span class="line">  Count = (preserve_bytes_len != <span class="number">0</span>) + v7;       <span class="comment">// 加一个数保留字节流长度</span></span><br><span class="line">  <span class="type">uint32_t</span>* res = <span class="built_in">static_cast</span>&lt;<span class="type">uint32_t</span>*&gt;(<span class="built_in">malloc</span>(Count * <span class="built_in">sizeof</span>(<span class="type">uint32_t</span>)));</span><br><span class="line">  <span class="keyword">if</span> ( !res )</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(res, <span class="number">0</span>, Count * <span class="built_in">sizeof</span>(<span class="type">uint32_t</span>));</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; bytes_len; ++i )</span><br><span class="line">    res[i &gt;&gt; <span class="number">2</span>] |= (<span class="type">uint32_t</span>)bytes[i] &lt;&lt; (<span class="number">8</span> * (i &amp; <span class="number">3</span>));</span><br><span class="line">  <span class="keyword">if</span> ( preserve_bytes_len )</span><br><span class="line">    res[v7] = bytes_len;</span><br><span class="line">  *int32_len = Count;</span><br><span class="line"><span class="comment">//   printf(&quot;int32_len=%llu\n&quot;, *int32_len);</span></span><br><span class="line">  <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">uint8_t</span>* __fastcall <span class="title">long2str</span><span class="params">(<span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> *Block, __int64 int32_len, <span class="type">unsigned</span> __int64* bytes_len, <span class="type">int</span> flag)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">uint8_t</span> *result; <span class="comment">// rax</span></span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> v6; <span class="comment">// [rsp+34h] [rbp-1Ch]</span></span><br><span class="line">    <span class="type">unsigned</span> __int64 Size; <span class="comment">// [rsp+38h] [rbp-18h]</span></span><br><span class="line">    <span class="type">unsigned</span> __int64 i; <span class="comment">// [rsp+40h] [rbp-10h]</span></span><br><span class="line">    <span class="type">unsigned</span> __int64 v9; <span class="comment">// [rsp+48h] [rbp-8h]</span></span><br><span class="line"></span><br><span class="line">    Size = <span class="number">4</span> * int32_len;</span><br><span class="line">    v9 = <span class="number">4</span> * int32_len;</span><br><span class="line">    </span><br><span class="line">    <span class="type">uint8_t</span>* bytes = <span class="built_in">static_cast</span>&lt;<span class="type">uint8_t</span>*&gt;(<span class="built_in">malloc</span>(Size * <span class="built_in">sizeof</span>(<span class="type">uint8_t</span>)));</span><br><span class="line">    <span class="keyword">if</span> ( bytes )</span><br><span class="line">    &#123;</span><br><span class="line">        *bytes_len = <span class="number">24</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;int32_len=%llu, bytes_len=%llu\n&quot;</span>, int32_len, *bytes_len);</span><br><span class="line">        <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; Size; ++i )</span><br><span class="line">            bytes[i] = Block[i &gt;&gt; <span class="number">2</span>] &gt;&gt; (<span class="number">8</span> * (i &amp; <span class="number">3u</span>));</span><br><span class="line">        result = bytes;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        *bytes_len = <span class="number">0</span>;</span><br><span class="line">        result = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">printX</span><span class="params">(<span class="type">uint32_t</span> *data, <span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;0x%08X &quot;</span>,data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">print</span><span class="params">(<span class="type">uint32_t</span> *data, <span class="type">int</span> n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>,data[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">uint32_t</span> plaintext[<span class="number">24</span>];</span><br><span class="line">    <span class="comment">// uint32_t key[4]= &#123;0x67616c66,0x67616c66, 0, 0&#125;; </span></span><br><span class="line">    <span class="type">uint32_t</span> key[<span class="number">4</span>]= &#123;<span class="number">0x67616c66</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>&#125;; </span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 置换表 */</span></span><br><span class="line">    <span class="type">static</span> <span class="type">const</span> <span class="type">unsigned</span> <span class="type">int</span> perm[<span class="number">24</span>] = &#123;</span><br><span class="line">           <span class="number">2</span>, <span class="number">0</span>, <span class="number">3</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">7</span>, <span class="number">5</span>,</span><br><span class="line">    <span class="number">0xA</span>, <span class="number">8</span>, <span class="number">0xB</span>, <span class="number">9</span>, <span class="number">0xE</span>, <span class="number">0xC</span>, <span class="number">0xF</span>, <span class="number">0xD</span>,</span><br><span class="line">    <span class="number">0x12</span>, <span class="number">0x10</span>, <span class="number">0x13</span>, <span class="number">0x11</span>, <span class="number">0x16</span>, <span class="number">0x14</span>, <span class="number">0x17</span>, <span class="number">0x15</span>&#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="type">unsigned</span> <span class="type">int</span> inv_perm[<span class="number">24</span>];</span><br><span class="line">    <span class="keyword">for</span> ( <span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">24</span>; i++ )</span><br><span class="line">    &#123;</span><br><span class="line">        inv_perm[perm[i]] = i;</span><br><span class="line">        <span class="comment">// printf(&quot;%d &quot;, inv_perm[perm[i]]);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* 目标密文（24 字节） */</span></span><br><span class="line">    <span class="type">uint8_t</span> target[<span class="number">24</span>] = &#123;</span><br><span class="line">        <span class="number">0xEE</span>, <span class="number">0x56</span>, <span class="number">0x9D</span>, <span class="number">0x6B</span>, <span class="number">0x02</span>, <span class="number">0x63</span>, <span class="number">0x78</span>, <span class="number">0x75</span>,</span><br><span class="line">        <span class="number">0x05</span>, <span class="number">0x42</span>, <span class="number">0x70</span>, <span class="number">0x9C</span>, <span class="number">0x63</span>, <span class="number">0xD7</span>, <span class="number">0xDC</span>, <span class="number">0xD7</span>,</span><br><span class="line">        <span class="number">0x1A</span>, <span class="number">0xB5</span>, <span class="number">0xEA</span>, <span class="number">0x0D</span>, <span class="number">0xC6</span>, <span class="number">0x8D</span>, <span class="number">0x97</span>, <span class="number">0x5D</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="type">uint8_t</span> v5[<span class="number">24</span>];</span><br><span class="line">    <span class="type">int</span> n = <span class="number">24</span>;</span><br><span class="line">    </span><br><span class="line">    v5[<span class="number">0</span>] = target[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">1</span>; i &lt; n; i++)&#123;</span><br><span class="line">        <span class="type">uint8_t</span> tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> j = <span class="number">0</span>; j &lt; i /<span class="number">3</span>; j++)&#123;</span><br><span class="line">            tmp ^= target[j];</span><br><span class="line">        &#125;</span><br><span class="line">        v5[i] = target[i] ^ tmp;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="type">unsigned</span> <span class="type">char</span> Block[<span class="number">24</span>];</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Block数据：&quot;</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        Block[i] = v5[inv_perm[i]];</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%02X &quot;</span>, Block[i]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// perm</span></span><br><span class="line">    <span class="comment">// for (int i = 0; i &lt; n; ++i )</span></span><br><span class="line">    <span class="comment">//     v5[i] = Block[perm[i]];</span></span><br><span class="line">    <span class="comment">// for (int j = 1; j &lt; n; ++j )</span></span><br><span class="line">    <span class="comment">// &#123;</span></span><br><span class="line">    <span class="comment">//     int tmp = v5[j];</span></span><br><span class="line">    <span class="comment">//     int v10 = j / 3;</span></span><br><span class="line">    <span class="comment">//     for (int k = 0; k &lt; v10; ++k )</span></span><br><span class="line">    <span class="comment">//         tmp ^= v5[k];</span></span><br><span class="line">    <span class="comment">//     v5[j] = tmp;</span></span><br><span class="line">    <span class="comment">//     // printf(&quot;%02X &quot;, v5[j]);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// printf(&quot;\n&quot;);</span></span><br><span class="line">    <span class="comment">// printf(&quot;还原后的数据v5：&quot;);</span></span><br><span class="line">    <span class="comment">// for (int i = 0; i &lt; n; i++) &#123;</span></span><br><span class="line">    <span class="comment">//     printf(&quot;%02X &quot;, v5[i]);</span></span><br><span class="line">    <span class="comment">//     if ((i % 8) == 7) printf(&quot;\n&quot;);</span></span><br><span class="line">    <span class="comment">// &#125;</span></span><br><span class="line">    <span class="comment">// printf(&quot;\n&quot;);</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> <span class="type">unsigned</span> target_len;</span><br><span class="line">    <span class="type">uint32_t</span>* ciphertext = <span class="built_in">str2long</span>((<span class="type">const</span> <span class="type">uint8_t</span>*)Block, <span class="number">24</span>, &amp;target_len, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;密文数据：&quot;</span>);</span><br><span class="line">    <span class="built_in">printX</span>(ciphertext, target_len);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">xxtea_decrypt</span>(ciphertext, target_len, <span class="number">6</span> + <span class="number">52</span>/target_len, key, plaintext);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;解密后的数据：&quot;</span>);</span><br><span class="line">    <span class="built_in">printX</span>(plaintext, target_len);</span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="type">long</span> <span class="type">unsigned</span> bytes_len = <span class="number">0</span>;</span><br><span class="line">    <span class="type">uint8_t</span>* bytes = <span class="built_in">long2str</span>(plaintext, target_len, &amp;bytes_len, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; bytes_len; i++)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, bytes[i]);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/" title="【RE】2025-12-20升级赛1z_re">https://mintind.github.io/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/TEA-XTEA-XXTEA/" rel="tag"># TEA/XTEA/XXTEA</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/19/CTF/Reverse/TEAs/" rel="prev" title="TEA&#x2F;XTEA&#x2F;XXTEA系列算法">
+                  <i class="fa fa-angle-left"></i> TEA/XTEA/XXTEA系列算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/24/CTF/env/Android_RE/" rel="next" title="Android逆向环境">
+                  Android逆向环境 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

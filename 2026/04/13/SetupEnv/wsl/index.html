@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WSL: Linux on Windows Explained">
+<meta property="og:url" content="https://mintind.github.io/2026/04/13/SetupEnv/wsl/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-04-13T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-08-13T18:18:45.912Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="WSL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/04/13/SetupEnv/wsl/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/04/13/SetupEnv/wsl/","path":"2026/04/13/SetupEnv/wsl/","title":"WSL: Linux on Windows Explained"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>WSL: Linux on Windows Explained | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#WSL-Linux-on-Windows-Explained"><span class="nav-number">1.</span> <span class="nav-text">WSL: Linux on Windows Explained</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">基础使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA-%E5%AF%BC%E5%85%A5%EF%BC%88%E8%B7%AF%E5%BE%84%E8%BF%81%E7%A7%BB%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">导出+导入（路径迁移）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C"><span class="nav-number">3.1.</span> <span class="nav-text">网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#dns"><span class="nav-number">3.1.1.</span> <span class="nav-text">dns</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BF%E9%97%AE%E6%9C%AC%E6%9C%BA%E4%BB%A3%E7%90%86"><span class="nav-number">3.1.2.</span> <span class="nav-text">访问本机代理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E8%AE%BF%E9%97%AE"><span class="nav-number">3.2.</span> <span class="nav-text">文件系统访问</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#wsl%E8%AE%BF%E9%97%AE%E6%9C%AC%E5%9C%B0"><span class="nav-number">3.2.1.</span> <span class="nav-text">wsl访问本地</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%AC%E5%9C%B0%E8%AE%BF%E9%97%AEwsl"><span class="nav-number">3.2.2.</span> <span class="nav-text">本地访问wsl</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Terminal"><span class="nav-number">4.</span> <span class="nav-text">Windows Terminal</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VSCode%E6%8F%92%E4%BB%B6"><span class="nav-number">5.</span> <span class="nav-text">VSCode插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">6.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Docker-daemon%E4%BB%A3%E7%90%86"><span class="nav-number">6.1.</span> <span class="nav-text">Docker daemon代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8D%E7%BD%AE%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81"><span class="nav-number">6.2.</span> <span class="nav-text">重置用户密码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/04/13/SetupEnv/wsl/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="WSL: Linux on Windows Explained | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          WSL: Linux on Windows Explained<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvU2V0dXBFbnYvd3NsLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-04-14 00:00:00" itemprop="dateCreated datePublished" datetime="2026-04-14T00:00:00+08:00">2026-04-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2026-08-14 02:18:45" itemprop="dateModified" datetime="2026-08-14T02:18:45+08:00">2026-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SetupEnv/" itemprop="url" rel="index"><span itemprop="name">SetupEnv</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.2k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h2 id="WSL-Linux-on-Windows-Explained"><a href="#WSL-Linux-on-Windows-Explained" class="headerlink" title="WSL: Linux on Windows Explained"></a>WSL: Linux on Windows Explained</h2><p>文档：<span class="exturl" data-url="aHR0cHM6Ly9sZWFybi5taWNyb3NvZnQuY29tL2VuLXVzL3dpbmRvd3Mvd3NsLw==">https://learn.microsoft.com/en-us/windows/wsl/<i class="fa fa-external-link-alt"></i></span></p>
+<p><strong>极速搭建开发环境：</strong> 直接在 Windows 上运行 Python、C++、Rust、Go、Node.js 等 Linux 版本的开发工具链，避免环境配置带来的繁琐。</p>
+<p><strong>使用强大的 Shell 工具：</strong> 可以在 Windows 下原生使用 <code>grep</code>、<code>sed</code>、<code>awk</code> 等文本处理神手，以及高效的 <code>zsh</code> 或 <code>fish</code>。</p>
+<p><strong>容器化开发：</strong> 与 Docker Desktop 深度集成，利用 WSL 2 的 Linux 内核运行 Docker 容器，性能远超传统的 Hyper-V 模式。</p>
+<p><strong>跨系统文件互操作：</strong> 你可以在 Linux 终端里编辑 Windows 磁盘上的代码文件，也可以在 Windows 资源管理器里像访问 U 盘一样访问 Linux 的文件系统。</p>
+<p><strong>运行 Linux 图形应用：</strong> 现在的 WSL 2 支持原生 Linux GUI 程序（如编辑器、浏览器甚至是简单的游戏）。</p>
+<h2 id="基础使用"><a href="#基础使用" class="headerlink" title="基础使用"></a>基础使用</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>安装wsl</p>
+<p>安装分发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 列出可用的分发</span><br><span class="line">wsl.exe --list --online</span><br><span class="line"># 安装</span><br><span class="line">wsl --install Ubuntu-22.04</span><br></pre></td></tr></table></figure>
+
+<p>列出已安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -l</span><br></pre></td></tr></table></figure>
+
+<p>启动。这个系统名称不能缩写（但是大小写不敏感）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl.exe -d Ubuntu-22.04</span><br></pre></td></tr></table></figure>
+
+<p>退出</p>
+<p>exit</p>
+<p>切换默认用户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 格式：&lt;系统分发版命令&gt; config --default-user &lt;你的用户名&gt;</span><br><span class="line">ubuntu config --default-user mintind</span><br></pre></td></tr></table></figure>
+
+<p>删除分发</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl --unregister Ubuntu-22.04</span><br></pre></td></tr></table></figure>
+
+<h3 id="导出-导入（路径迁移）"><a href="#导出-导入（路径迁移）" class="headerlink" title="导出+导入（路径迁移）"></a>导出+导入（路径迁移）</h3><p>建议操作顺序：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">导出： wsl --export Ubuntu D:\backup.tar</span><br><span class="line">注销： wsl --unregister Ubuntu</span><br><span class="line">重新导入： wsl --import MyWorkEnv D:\WSL\MyWorkEnv D:\backup.tar</span><br></pre></td></tr></table></figure>
+
+<p>查看所有已安装系统的路径</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Get-ChildItem</span> <span class="literal">-Path</span> <span class="string">&quot;HKCU:\Software\Microsoft\Windows\CurrentVersion\Lxss&quot;</span> | <span class="built_in">ForEach-Object</span> &#123; <span class="built_in">Get-ItemProperty</span> <span class="literal">-Path</span> <span class="variable">$_</span>.PSPath &#125; | <span class="built_in">Select-Object</span> DistributionName, BasePath</span><br></pre></td></tr></table></figure>
+
+<p>这里系统名称可以指定，用什么名以后就叫什么名了，注意一下。另外这个系统名称不能和已有的重复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 格式：wsl --export &lt;系统名称&gt; &lt;备份文件路径&gt;</span><br><span class="line">wsl --export Ubuntu D:\WSL_Backup\ubuntu_export.tar</span><br><span class="line"></span><br><span class="line"># 格式：wsl --import &lt;新系统名称&gt; &lt;安装的目标路径&gt; &lt;备份文件路径&gt; --version 2</span><br><span class="line">wsl --import Ubuntu-22.04 D:\Default\Documents\wsl\Ubuntu-22.04 D:\Default\Documents\wsl\backup\ubuntu_export.tar</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="网络"><a href="#网络" class="headerlink" title="网络"></a>网络</h3><h4 id="dns"><a href="#dns" class="headerlink" title="dns"></a>dns</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> vim /etc/resolv.conf</span><br></pre></td></tr></table></figure>
+
+<p>改成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nameserver 8.8.8.8</span><br><span class="line">nameserver 1.1.1.1</span><br></pre></td></tr></table></figure>
+
+<p>wsl默认会在每次 WSL 启动（或网络变化）时重新生成 <code>/etc/resolv.conf</code>，所以重启后会丢失。持久化：</p>
+<p>重启后（因为这个文件是符号链接，设置了不自动生成后就会移除）编辑&#x2F;etc&#x2F;wsl.conf，添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[network]</span><br><span class="line">generateResolvConf = false</span><br></pre></td></tr></table></figure>
+
+<p>告诉 WSL：不要再自动生成 <code>/etc/resolv.conf</code></p>
+<h4 id="访问本机代理"><a href="#访问本机代理" class="headerlink" title="访问本机代理"></a>访问本机代理</h4><p>代理软件需要设置允许LAN&#x2F;局域网连接，或者把监听地址从127.0.0.1改为0.0.0.0</p>
+<p>先查询主机ip</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip route | grep default</span><br></pre></td></tr></table></figure>
+
+<p><strong>临时方案：</strong></p>
+<p>代理的ip设成主机ip，端口是你的代理软件的端口</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> http_proxy=http://172.17.192.1:7890</span><br><span class="line"><span class="built_in">export</span> https_proxy=http://172.17.192.1:7890</span><br></pre></td></tr></table></figure>
+
+<p>这个方案是暂时的，<del>后面再做持久化现在不管了。不行VSCode需要网我又回来了</del></p>
+<p><strong>永久方案：</strong></p>
+<p>编辑<code>~/.bashrc</code>，添加：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># ===== proxy for WSL =====</span><br><span class="line">export hostip=$(ip route | awk &#x27;/default/ &#123;print $3&#125;&#x27;)</span><br><span class="line">export http_proxy=http://$hostip:7890</span><br><span class="line">export https_proxy=http://$hostip:7890</span><br><span class="line">export ALL_PROXY=socks5://$hostip:78970</span><br></pre></td></tr></table></figure>
+
+<p>然后</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+
+<p>但是据说因为ip可能会变这个也不稳定但是先这样吧</p>
+<p>测试wsl中是否能访问代理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nc -zv 172.17.192.1 7890</span><br></pre></td></tr></table></figure>
+
+<p>如果wsl还是没法访问代理，可能是防火墙原因。可以给代理软件加个放行规则</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">New-NetFirewallRule</span> <span class="literal">-DisplayName</span> <span class="string">&quot;Allow Clash 7890&quot;</span> `</span><br><span class="line"><span class="literal">-Direction</span> Inbound `</span><br><span class="line"><span class="literal">-Action</span> Allow `</span><br><span class="line"><span class="literal">-Protocol</span> TCP `</span><br><span class="line"><span class="literal">-LocalPort</span> <span class="number">7890</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="文件系统访问"><a href="#文件系统访问" class="headerlink" title="文件系统访问"></a>文件系统访问</h3><h4 id="wsl访问本地"><a href="#wsl访问本地" class="headerlink" title="wsl访问本地"></a>wsl访问本地</h4><p>在wsl中本机的文献系统会被挂载到<code>/mnt</code>目录下，可以直接访问</p>
+<h4 id="本地访问wsl"><a href="#本地访问wsl" class="headerlink" title="本地访问wsl"></a>本地访问wsl</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\\wsl.localhost\&lt;DistroName&gt;\home\&lt;user&gt;\...</span><br></pre></td></tr></table></figure>
+
+<p>路径转换命令（在wsl中执行）：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wslpath -w ~/dir</span><br></pre></td></tr></table></figure>
+
+<p>会输出在本地访问wsl的路径</p>
+<h2 id="Windows-Terminal"><a href="#Windows-Terminal" class="headerlink" title="Windows Terminal"></a>Windows Terminal</h2><p>添加了分发之后terminal中会自动添加对应的系统（但是可能反应略慢）</p>
+<p>也可以自己定义配置。下拉设置选择添加新的配置文件，命令行类似于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\system32\wsl.exe --distribution-id &#123;29eeb622-1951-4f80-951c-3a78abac5649&#125;</span><br></pre></td></tr></table></figure>
+
+<p>应该也可以用 wsl -d ubuntu-22.04这种</p>
+<h2 id="VSCode插件"><a href="#VSCode插件" class="headerlink" title="VSCode插件"></a>VSCode插件</h2><p>安装扩展WSL</p>
+<p>在wsl终端中进入工作目录，运行命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">code .</span><br></pre></td></tr></table></figure>
+
+<p>会自动下载VSCode server，完成后就会将目录通过wsl添加到VSCode中</p>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="Docker-daemon代理"><a href="#Docker-daemon代理" class="headerlink" title="Docker daemon代理"></a>Docker daemon代理</h3><p>在 WSL 中运行 Docker，需要为 Docker daemon 配置代理。</p>
+<p>创建 Docker daemon 的配置目录<code>/etc/systemd/system/docker.service.d</code></p>
+<p>写入配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo tee /etc/systemd/system/docker.service.d/http-proxy.conf &lt;&lt;EOF</span><br><span class="line">[Service]</span><br><span class="line">Environment=&quot;HTTP_PROXY=http://127.1:7890&quot;</span><br><span class="line">Environment=&quot;HTTPS_PROXY=http://127.1:7890&quot;</span><br><span class="line">Environment=&quot;NO_PROXY=localhost,127.0.0.1,.local&quot;</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+
+<p>重载systemd，重启docker</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl daemon-reload</span><br><span class="line">sudo systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<p>验证配置</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl show --property=Environment docker</span><br></pre></td></tr></table></figure>
+
+<h3 id="重置用户密码"><a href="#重置用户密码" class="headerlink" title="重置用户密码"></a>重置用户密码</h3><p>可以从Windows直接进wsl的root：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsl -d Ubuntu(发行版名称) -u root</span><br></pre></td></tr></table></figure>
+
+<p>进去之后就是root权限，可以使用passwd更改用户密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd user</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/04/13/SetupEnv/wsl/" title="WSL: Linux on Windows Explained">https://mintind.github.io/2026/04/13/SetupEnv/wsl/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/WSL/" rel="tag"># WSL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/10/Notes/%E5%AD%A6%E6%9C%AF%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/" rel="prev" title="英文学术论文写作笔记">
+                  <i class="fa fa-angle-left"></i> 英文学术论文写作笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/18/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E9%AA%8C/4%E5%9F%BA%E4%BA%8E%20PyTorch%20%E7%9A%84%E6%A8%A1%E5%9E%8B%E5%AE%9E%E7%8E%B0/" rel="next" title="基于 PyTorch 的模型实现-VGG19图像分类+实时风格迁移">
+                  基于 PyTorch 的模型实现-VGG19图像分类+实时风格迁移 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/04/13/SetupEnv/wsl/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/04/13/SetupEnv/wsl/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

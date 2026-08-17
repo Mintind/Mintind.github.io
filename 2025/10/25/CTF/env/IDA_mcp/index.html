@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="我去，好混乱 总结一下现在就是ida-pro-mcp+VSCode的Roo Code&#x2F;Cherry Studio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ida-pro-mcp配置">
+<meta property="og:url" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="我去，好混乱 总结一下现在就是ida-pro-mcp+VSCode的Roo Code&#x2F;Cherry Studio">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110105501177.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110150907794.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110153210199.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110135529149.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110141247944.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110143154534.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110160543021.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110151310631.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110161351018.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110161315068.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110154016450.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110153956530.png">
+<meta property="article:published_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-25T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Ida Pro">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/image-20260110105501177.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/","path":"2025/10/25/CTF/env/IDA_mcp/","title":"ida-pro-mcp配置"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>ida-pro-mcp配置 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Intro"><span class="nav-number">1.</span> <span class="nav-text">Intro</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.1.</span> <span class="nav-text">参考</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mcp%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.2.</span> <span class="nav-text">mcp介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#VSCode%E6%89%A9%E5%B1%95-Roo-Code"><span class="nav-number">2.1.</span> <span class="nav-text">VSCode扩展-Roo Code</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ida-pro-mcp"><span class="nav-number">2.2.</span> <span class="nav-text">ida-pro-mcp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">3.</span> <span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8IDA-MCP-Server"><span class="nav-number">3.1.</span> <span class="nav-text">启动IDA MCP Server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AERoo-Code"><span class="nav-number">3.2.</span> <span class="nav-text">配置Roo Code</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%88%96%E8%80%85%E4%BD%BF%E7%94%A8Cherry-Studio"><span class="nav-number">4.</span> <span class="nav-text">或者使用Cherry Studio</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="ida-pro-mcp配置 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ida-pro-mcp配置<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL2Vudi9JREFfbWNwLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-26 00:00:00" itemprop="dateCreated datePublished" datetime="2025-10-26T00:00:00+08:00">2025-10-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CTF/" itemprop="url" rel="index"><span itemprop="name">CTF</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>我去，好混乱</p>
+<p>总结一下现在就是ida-pro-mcp+VSCode的Roo Code&#x2F;Cherry Studio</p>
+<span id="more"></span>
+
+<h2 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h2><h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>Cherry Studio方案以及ida-pro-mcp安装流程：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vYWxleGFuZGVyMTcvcC8xOTA4OTcyMA==">https://www.cnblogs.com/alexander17/p/19089720<i class="fa fa-external-link-alt"></i></span></p>
+<p>Roo Code方案以及启动流程：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmRpbmxvbjU1NjYuY29tLzIwMjUvMDkvMTUvSURBLU1DUCVFNSVBRSU4OSVFOCVBMyU5RCVFOCU4OCU4NyVFNCVCRCVCRiVFNyU5NCVBOCVFNiU5NSU5OSVFNSVBRCVCOC8=">https://blog.dinlon5566.com/2025/09/15/IDA-MCP%E5%AE%89%E8%A3%9D%E8%88%87%E4%BD%BF%E7%94%A8%E6%95%99%E5%AD%B8/<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="mcp介绍"><a href="#mcp介绍" class="headerlink" title="mcp介绍"></a>mcp介绍</h3><p>引用：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLnN3aXp6ZXIuY2MvYmxvZy9zaGFycGVuLXlvdXItcmV2ZXJzZS1lbmdpbmVlcmluZy1ibGFkZS13aXRoLWlkYS1tY3AvIyVFNCVCRCU5NSVFNCVCOCVCQW1jcA==">https://blog.swizzer.cc/blog/sharpen-your-reverse-engineering-blade-with-ida-mcp/#%E4%BD%95%E4%B8%BAmcp<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110105501177.png" alt="image-20260110105501177"></p>
+<p><strong>模型上下文协议（Model Context Protocol, MCP） 是由 Anthropic 于 2024 年 11 月推出的开放协议</strong>，用于连接大型语言模型（LLM）与外部系统，包括工具、数据源、资源等。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="VSCode扩展-Roo-Code"><a href="#VSCode扩展-Roo-Code" class="headerlink" title="VSCode扩展-Roo Code"></a>VSCode扩展-Roo Code</h3><p>安装Roo Code之后重启VSCode，左边侧栏打开Roo Vode，注册账号并且添加模型之后点开设置</p>
+<p>以及发现商店里有这个</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110150907794.png" alt="image-20260110150907794"></p>
+<h3 id="ida-pro-mcp"><a href="#ida-pro-mcp" class="headerlink" title="ida-pro-mcp"></a>ida-pro-mcp</h3><p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21yZXhvZGlhL2lkYS1wcm8tbWNw">https://github.com/mrexodia/ida-pro-mcp<i class="fa fa-external-link-alt"></i></span></p>
+<p>注意要使用IDA的python而不是系统的python。指定ida python路径和安装路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;IDA Professional 9.2\python311\python.exe&quot;</span> -m pip install --upgrade --target=<span class="string">&quot;D:\你的目标路径&quot;</span> git+https://github.com/mrexodia/ida-pro-mcp</span><br></pre></td></tr></table></figure>
+
+<p>安装，生成默认配置文件。需要指定ida-pro-mcp.exe的路径</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;D:\CTF\reverse\IDA Professional 9.1\python311\Scripts\ida-pro-mcp.exe&quot;</span> --install</span><br><span class="line"><span class="string">&quot;D:\CTF\reverse\IDA Professional 9.1\python311\Scripts\ida-pro-mcp.exe&quot;</span> --config </span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110153210199.png" alt="image-20260110153210199"></p>
+<p>记一下配置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">[</span>HTTP MCP CONFIGURATION<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;ida-pro-mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;url&quot;</span><span class="punctuation">:</span> <span class="string">&quot;http://127.0.0.1:13345/mcp&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="punctuation">[</span>STDIO MCP CONFIGURATION<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;ida-pro-mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:\\CTFTools\\IDA Professional 9.2\\python311\\python.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">        <span class="string">&quot;D:\\CTFTools\\IDA Professional 9.2\\python311\\Lib\\site-packages\\ida_pro_mcp\\server.py&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;--ida-rpc&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="string">&quot;http://127.0.0.1:13345&quot;</span></span><br><span class="line">      <span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>VSCode的相关配置更新到了<code>User\settings.json</code>用户配置文件里</p>
+<p>打开VSCode时提示不应该在用户配置里，更改到专用配置，我点了是，然后配置就转移过来了。嘻嘻，好用。mcp.json：</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110135529149.png" alt="image-20260110135529149"></p>
+<p>或者也可以手动贴过来</p>
+<h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><h3 id="启动IDA-MCP-Server"><a href="#启动IDA-MCP-Server" class="headerlink" title="启动IDA MCP Server"></a>启动IDA MCP Server</h3><p>很重要，需要先用IDA打开目标，启动Edit &gt; Plugins &gt; MCP</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110141247944.png" alt="image-20260110141247944"></p>
+<p>下面能看到输出</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110143154534.png" alt="image-20260110143154534"></p>
+<h3 id="配置Roo-Code"><a href="#配置Roo-Code" class="headerlink" title="配置Roo Code"></a>配置Roo Code</h3><p>（这一步也可以叫Roo Code自己来配，据说）</p>
+<p>之前安装ida-pro-mcp的时候还没有安装Roo Code，所以没配置。得手动把配置贴进Roo Code的mcp配置文件里，是这个文件</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110160543021.png" alt="image-20260110160543021"></p>
+<p>配置完了尝试连接，但是总报错</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110151310631.png" alt="image-20260110151310631"></p>
+<p>尝试重装ida-pro-mcp</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;D:\CTFTools\IDA Professional 9.2\python311\python.exe&quot;</span> -m pip uninstall ida-pro-mcp</span><br></pre></td></tr></table></figure>
+
+<p>确认一下文件都删干净了，然后再装。也还是不行</p>
+<p>最后把command的路径改成了单正斜杠，好了</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110161351018.png" alt="image-20260110161351018"></p>
+<p>ok了</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110161315068.png" alt="image-20260110161315068"></p>
+<h2 id="或者使用Cherry-Studio"><a href="#或者使用Cherry-Studio" class="headerlink" title="或者使用Cherry Studio"></a>或者使用Cherry Studio</h2><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY2hlcnJ5LWFpLmNvbS8=">Cherry Studio 官方网站 - 全能的 AI 助手<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装之后打开。在设置里选择模型服务。都需要申请API key</p>
+<p>点击mcp服务器，添加配置-从JSON导入。将前面生成的mcp配置文件里的内容粘贴过来，注意的一点是服务得改成”mcpServers”：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;mcpServers&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">		<span class="attr">&quot;ida-pro-mcp&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:\\CTFTools\\IDA Professional 9.2\\python311\\python.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">				</span><br><span class="line">			<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;stdio&quot;</span></span><br><span class="line">		<span class="punctuation">&#125;</span></span><br><span class="line">	<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;inputs&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>然后启动服务</p>
+<p>回到cherry studio首页，点击这个小锤子选择mcp服务器</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110154016450.png" alt="image-20260110154016450"></p>
+<p>可以用了</p>
+<p><img src="/2025/10/25/CTF/env/IDA_mcp/image-20260110153956530.png" alt="image-20260110153956530"></p>
+<p>promt</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21yZXhvZGlhL2lkYS1wcm8tbWNwL2Jsb2IvbWFpbi9SRUFETUUubWQ=">https://github.com/mrexodia/ida-pro-mcp/blob/main/README.md<i class="fa fa-external-link-alt"></i></span></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Your task is to analyze a crackme in IDA Pro. You can use the MCP tools to retrieve information. In general use the following strategy:</span><br><span class="line"></span><br><span class="line">- Inspect the decompilation and add comments with your findings</span><br><span class="line">- Rename variables to more sensible names</span><br><span class="line">- Change the variable and argument types if necessary (especially pointer and array types)</span><br><span class="line">- Change function names to be more descriptive</span><br><span class="line">- If more details are necessary, disassemble the function and add comments with your findings</span><br><span class="line">- NEVER convert number bases yourself. Use the `int_convert` MCP tool if needed!</span><br><span class="line">- Do not attempt brute forcing, derive any solutions purely from the disassembly and simple python scripts</span><br><span class="line">- Create a report.md with your findings and steps taken at the end</span><br><span class="line">- When you find a solution, prompt to user for feedback with the password you found</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">Your task is to create a complete and comprehensive reverse engineering analysis. Reference AGENTS.md to understand the project goals and ensure the analysis serves our purposes.</span><br><span class="line"></span><br><span class="line">Use the following systematic methodology:</span><br><span class="line"></span><br><span class="line">1. **Decompilation Analysis**</span><br><span class="line">   - Thoroughly inspect the decompiler output</span><br><span class="line">   - Add detailed comments documenting your findings</span><br><span class="line">   - Focus on understanding the actual functionality and purpose of each component (do not rely on old, incorrect comments)</span><br><span class="line"></span><br><span class="line">2. **Improve Readability in the Database**</span><br><span class="line">   - Rename variables to sensible, descriptive names</span><br><span class="line">   - Correct variable and argument types where necessary (especially pointers and array types)</span><br><span class="line">   - Update function names to be descriptive of their actual purpose</span><br><span class="line"></span><br><span class="line">3. **Deep Dive When Needed**</span><br><span class="line">   - If more details are necessary, examine the disassembly and add comments with findings</span><br><span class="line">   - Document any low-level behaviors that aren&#x27;t clear from the decompilation alone</span><br><span class="line">   - Use sub-agents to perform detailed analysis</span><br><span class="line"></span><br><span class="line">4. **Important Constraints**</span><br><span class="line">   - NEVER convert number bases yourself - use the int_convert MCP tool if needed</span><br><span class="line">   - Use MCP tools to retrieve information as necessary</span><br><span class="line">   - Derive all conclusions from actual analysis, not assumptions</span><br><span class="line"></span><br><span class="line">5. **Documentation**</span><br><span class="line">   - Produce comprehensive RE/*.md files with your findings</span><br><span class="line">   - Document the steps taken and methodology used</span><br><span class="line">   - When asked by the user, ensure accuracy over previous analysis file</span><br><span class="line">   - Organize findings in a way that serves the project goals outlined in AGENTS.md or CLAUDE.md</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/" title="ida-pro-mcp配置">https://mintind.github.io/2025/10/25/CTF/env/IDA_mcp/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/Ida-Pro/" rel="tag"># Ida Pro</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/25/CTF/env/pwn_envi_Ubuntu_Server/" rel="prev" title="PWN环境搭建记录2 Ubuntu Server22.04和Windows11">
+                  <i class="fa fa-angle-left"></i> PWN环境搭建记录2 Ubuntu Server22.04和Windows11
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/25/UCAS/MAC_Spoofing_prevention/" rel="next" title="【网络协议安全】VLAN防MAC欺骗实验">
+                  【网络协议安全】VLAN防MAC欺骗实验 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/10/25/CTF/env/IDA_mcp/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/10/25/CTF/env/IDA_mcp/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

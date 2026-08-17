@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="摘要">
+<meta property="og:type" content="article">
+<meta property="og:title" content="智能计算系统复习第4-6章">
+<meta property="og:url" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="摘要">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612163436164.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612163554420.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612164042260.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612175041537.png">
+<meta property="og:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612175710353.png">
+<meta property="article:published_time" content="2026-06-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-06-10T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="智能计算系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612163436164.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/","path":"2026/06/10/UCAS/智能计算系统/笔记/笔记4-6章/","title":"智能计算系统复习第4-6章"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>智能计算系统复习第4-6章 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">第四章 编程框架使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%E6%A6%82%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">编程框架概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6"><span class="nav-number">1.1.1.</span> <span class="nav-text">为什么需要编程框架</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89"><span class="nav-number">1.1.2.</span> <span class="nav-text">定义</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyTorch%E6%A6%82%E8%BF%B0"><span class="nav-number">1.2.</span> <span class="nav-text">PyTorch概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PyTorch%E8%B5%B7%E6%BA%90-Torch"><span class="nav-number">1.2.1.</span> <span class="nav-text">PyTorch起源-Torch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PyTorch%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.2.</span> <span class="nav-text">PyTorch简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-PyTorch-2-x"><span class="nav-number">1.2.3.</span> <span class="nav-text">2.3 PyTorch 2.x</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyTorch%E7%BC%96%E7%A8%8B%E6%A8%A1%E5%9E%8B%E5%8F%8A%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95"><span class="nav-number">1.3.</span> <span class="nav-text">PyTorch编程模型及基本用法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%EF%BC%88tensor%EF%BC%89"><span class="nav-number">1.3.1.</span> <span class="nav-text">张量（tensor）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BE%AE%E7%BC%A9%E6%94%BE%EF%BC%88Microscaling%EF%BC%89"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">微缩放（Microscaling）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E7%9A%84%E5%BD%A2%E7%8A%B6%E5%B1%9E%E6%80%A7%EF%BC%88shape%EF%BC%89"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">张量的形状属性（shape）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E7%9A%84device%E5%B1%9E%E6%80%A7"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">张量的device属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%EF%BC%88data-layout%EF%BC%89"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">张量的数据格式（data layout）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E7%9A%84%E8%87%AA%E5%8A%A8%E6%B1%82%E5%AF%BC%E6%94%AF%E6%8C%81"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">张量的自动求导支持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C-operation"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">操作(operation)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE"><span class="nav-number">1.3.2.</span> <span class="nav-text">计算图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EPyTorch%E7%9A%84%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">基于PyTorch的模型推理实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%BB%E5%8F%96%E8%BE%93%E5%85%A5%E5%9B%BE%E5%83%8F"><span class="nav-number">1.4.1.</span> <span class="nav-text">读取输入图像</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C"><span class="nav-number">1.4.2.</span> <span class="nav-text">构建神经网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E4%BE%8B%E5%8C%96%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.3.</span> <span class="nav-text">实例化神经网络模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B0%83%E8%AF%95"><span class="nav-number">1.4.4.</span> <span class="nav-text">调试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8C%96"><span class="nav-number">1.4.5.</span> <span class="nav-text">神经网络模型优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E4%BA%8EPyTorch%E7%9A%84%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.5.</span> <span class="nav-text">基于PyTorch的模型训练实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="nav-number">1.5.1.</span> <span class="nav-text">加载训练数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">1.5.2.</span> <span class="nav-text">模型训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="nav-number">1.5.3.</span> <span class="nav-text">模型的保存与恢复</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%E5%8E%9F%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">第五章 编程框架原理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E7%A8%8B%E6%A1%86%E6%9E%B6%E8%AE%BE%E8%AE%A1"><span class="nav-number">2.1.</span> <span class="nav-text">编程框架设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">2.1.1.</span> <span class="nav-text">设计原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.1.2.</span> <span class="nav-text">整体架构</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E6%9E%84%E5%BB%BA"><span class="nav-number">2.2.</span> <span class="nav-text">计算图构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E5%9B%BE%E4%B8%8E%E5%8F%8D%E5%90%91%E5%9B%BE%E6%9E%84%E5%BB%BA"><span class="nav-number">2.2.1.</span> <span class="nav-text">正向图与反向图构建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.2.2.</span> <span class="nav-text">正向传播</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%90%91%E4%BC%A0%E6%92%AD"><span class="nav-number">2.2.3.</span> <span class="nav-text">反向传播</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%9B%BE%E6%89%A7%E8%A1%8C"><span class="nav-number">2.3.</span> <span class="nav-text">计算图执行</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E5%A4%87%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.1.</span> <span class="nav-text">设备管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%A0%E9%87%8F%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.2.</span> <span class="nav-text">张量实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%97%E5%AD%90%E6%89%A7%E8%A1%8C"><span class="nav-number">2.3.3.</span> <span class="nav-text">算子执行</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%97%E5%AD%90%E5%AE%9E%E7%8E%B0"><span class="nav-number">2.3.3.1.</span> <span class="nav-text">算子实现</span></a></li></ol></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="智能计算系统复习第4-6章 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          智能计算系统复习第4-6章<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy/mmbrog73orqHnrpfns7vnu58v56yU6K6wL+eslOiusDQtNueroC5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-06-11 00:00:00" itemprop="dateCreated datePublished" datetime="2026-06-11T00:00:00+08:00">2026-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>8.8k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>摘要</p>
+<span id="more"></span>
+
+<h1 id="第四章-编程框架使用"><a href="#第四章-编程框架使用" class="headerlink" title="第四章 编程框架使用"></a>第四章 编程框架使用</h1><h2 id="编程框架概述"><a href="#编程框架概述" class="headerlink" title="编程框架概述"></a>编程框架概述</h2><h3 id="为什么需要编程框架"><a href="#为什么需要编程框架" class="headerlink" title="为什么需要编程框架"></a>为什么需要编程框架</h3><ul>
+<li>深度学习算法具有多层结构，每层的运算由一些基本操作构成</li>
+<li>这些基本操作中存在大<strong>量共性运算及操作</strong>，如基础操作、大模型算子、分布式逻辑等。将这些共性操作封装成标准化组件，可以提高编程实现效率</li>
+<li>面向这些封装起来的操作，硬件程序员<strong>可以基于硬件特征，有针对性的进行充分优化</strong>，使其能充分发挥硬件的效率</li>
+</ul>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><ul>
+<li>将深度学习算法中的<strong>基本操作封装成一系列组件</strong>，这一系列深度学习组件，即构成一套深度学习框架</li>
+<li>编程框架能够帮助算法开发人员更简单的实现已有算法，或设计新的算法。也有助于硬件程序员更有针对性的对关键操作进行优化，使其能充分发挥硬件效率</li>
+</ul>
+<p><strong>代表性框架分类</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>代表性框架</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>通用深度学习框架</td>
+<td>PyTorch、TensorFlow</td>
+<td>开发灵活</td>
+</tr>
+<tr>
+<td>大模型专用框架</td>
+<td>Megatron-LM、DeepSpeed</td>
+<td>基于 PyTorch 二次开发，大规模训练</td>
+</tr>
+<tr>
+<td>推理框架</td>
+<td>vLLM</td>
+<td>大模型推理</td>
+</tr>
+</tbody></table>
+<h2 id="PyTorch概述"><a href="#PyTorch概述" class="headerlink" title="PyTorch概述"></a>PyTorch概述</h2><h3 id="PyTorch起源-Torch"><a href="#PyTorch起源-Torch" class="headerlink" title="PyTorch起源-Torch"></a>PyTorch起源-Torch</h3><ul>
+<li>Torch是瑞士亚普研究所（IDIAP）在2002年发布的一款<strong>机器学习框架</strong>，采用LuaJIT脚本编程语言为接口，内核采用C&#x2F;C++来实现</li>
+<li>核心是<strong>易于使用的神经网络和优化库</strong>，同时在实现复杂的神经网络拓扑结构方面具有最大的<strong>灵活性</strong></li>
+<li>在GPU上具有较高的性能</li>
+</ul>
+<h3 id="PyTorch简介"><a href="#PyTorch简介" class="headerlink" title="PyTorch简介"></a>PyTorch简介</h3><ul>
+<li>PyTorch &#x3D; Py + Torch</li>
+<li>PyTorch是一个基于Torch的Python开源机器学习库，用于自然语言处理等应用程序，具有<strong>强大的GPU加速的张量计算（如Numpy）能力</strong></li>
+<li>产生背景：编程语言提供了面向深度学习的高效编程库（NumPy、Eigen、Torch等）；Python开源生态蓬勃发展</li>
+</ul>
+<h3 id="2-3-PyTorch-2-x"><a href="#2-3-PyTorch-2-x" class="headerlink" title="2.3 PyTorch 2.x"></a>2.3 PyTorch 2.x</h3><ul>
+<li>编译优化：torch.compile，兼顾动态图灵活度以及静态图高性能</li>
+<li>大模型生态支持：用于大模型训练的DeepSpeed、Megatron-LM，用于大模型推理的vLLM</li>
+</ul>
+<h2 id="PyTorch编程模型及基本用法"><a href="#PyTorch编程模型及基本用法" class="headerlink" title="PyTorch编程模型及基本用法"></a>PyTorch编程模型及基本用法</h2><h3 id="张量（tensor）"><a href="#张量（tensor）" class="headerlink" title="张量（tensor）"></a>张量（tensor）</h3><ul>
+<li>张量是<strong>计算图上的数据载体</strong>，用张量统一表示所有的数据，张量在计算图的节点之间传递</li>
+<li>张量对应了神经网络中在各个节点之间传递、流动的数据</li>
+<li>张量可以看做是n维的数组，数组的维数即为张量的阶数</li>
+<li>与NumPy中的ndarray不同，PyTorch中的张量<strong>可以运行在GPU或深度学习处理器上</strong>，因此具有较高的性能</li>
+</ul>
+<p><strong>张量的阶数与数据形式</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>阶数</th>
+<th>对应数据形式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>标量</td>
+</tr>
+<tr>
+<td>1</td>
+<td>向量</td>
+</tr>
+<tr>
+<td>2</td>
+<td>矩阵</td>
+</tr>
+<tr>
+<td>n</td>
+<td>n维数组</td>
+</tr>
+</tbody></table>
+<p><strong>张量的常用属性</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>属性名</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>dtype</td>
+<td>tensor存储的数据类型</td>
+</tr>
+<tr>
+<td>shape</td>
+<td>tensor各阶的长度</td>
+</tr>
+<tr>
+<td>device</td>
+<td><strong>存储tensor的设备对象</strong></td>
+</tr>
+<tr>
+<td>grad</td>
+<td>默认为None，当调用backward()进行反向传播后为<strong>该tensor的梯度值</strong></td>
+</tr>
+</tbody></table>
+<p><strong>张量的数据类型（dtype）</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>PyTorch数据类型</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>torch.float16&#x2F;torch.half</td>
+<td>16位浮点</td>
+</tr>
+<tr>
+<td>torch.float32&#x2F;torch.float</td>
+<td>32位浮点</td>
+</tr>
+<tr>
+<td>torch.float64&#x2F;torch.double</td>
+<td>64位浮点</td>
+</tr>
+<tr>
+<td>torch.float8_e4m3fn&#x2F;torch.float8_e5m2</td>
+<td>8位浮点</td>
+</tr>
+<tr>
+<td>torch.uint8</td>
+<td>8位无符号整型</td>
+</tr>
+<tr>
+<td>torch.int8</td>
+<td>8位整型</td>
+</tr>
+<tr>
+<td>torch.int16&#x2F;torch.short</td>
+<td>16位整型</td>
+</tr>
+<tr>
+<td>torch.int32&#x2F;torch.int</td>
+<td>32位整型</td>
+</tr>
+<tr>
+<td>torch.int64&#x2F;torch.long</td>
+<td>64位整型</td>
+</tr>
+<tr>
+<td>torch.bool</td>
+<td>布尔型</td>
+</tr>
+<tr>
+<td>torch.bfloat16</td>
+<td>Brain Float16</td>
+</tr>
+</tbody></table>
+<p><strong>智能计算涉及到的数据类型</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>符号位</th>
+<th>指数位（范围）</th>
+<th>小数位（精度）</th>
+<th>总位数</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>FP64</td>
+<td>1</td>
+<td>11</td>
+<td>52</td>
+<td>64</td>
+</tr>
+<tr>
+<td>FP32</td>
+<td>1</td>
+<td>8</td>
+<td>23</td>
+<td>32</td>
+</tr>
+<tr>
+<td>TF32</td>
+<td>1</td>
+<td>8</td>
+<td>10</td>
+<td>19</td>
+</tr>
+<tr>
+<td>FP16</td>
+<td>1</td>
+<td>5</td>
+<td>10</td>
+<td>16</td>
+</tr>
+<tr>
+<td>BF16</td>
+<td>1</td>
+<td>8</td>
+<td>7</td>
+<td>16</td>
+</tr>
+<tr>
+<td>FP8 E4M3</td>
+<td>1</td>
+<td>4</td>
+<td>3</td>
+<td>8</td>
+</tr>
+<tr>
+<td>FP8 E5M2</td>
+<td>1</td>
+<td>5</td>
+<td>2</td>
+<td>8</td>
+</tr>
+<tr>
+<td>FP4</td>
+<td>1</td>
+<td>2</td>
+<td>1</td>
+<td>4</td>
+</tr>
+</tbody></table>
+<ul>
+<li>FP8 E4M3更适合权重、激活数据，适合前向计算（DeepSeek-R1）。FP8 E5M2更适合梯度数据，适合反向计算</li>
+<li>许多框架会在一个模型中混合使用这两种格式：前向传播用E4M3，反向传播用E5M2，以平衡精度和范围需求</li>
+</ul>
+<p><strong>INT8与FP8</strong>：</p>
+<ul>
+<li>INT8是定点数，表示范围固定[-128, 127]，精度均匀</li>
+<li>FP8是浮点数，具有指数位，可表示更大范围的数值，但精度随数值变化。越靠近0，分布越稠密，越远离0，分布越稀疏</li>
+<li>Transformer模型中，权重分布大部分在0附近，因此在Transformer模型中，使用FP8量化效果好于INT8</li>
+</ul>
+<p>INT8和FP8不存在哪一个有绝对优势，可以根据不同的层的实际loss进行选择。相对来说，<strong>INT8量化更适合于权重，FP8-E4量化更适合于大多数层的激活值</strong></p>
+<p>硬件实现上，FP8和INT8的乘加（MAC）单元的面积几乎相同</p>
+<h4 id="微缩放（Microscaling）"><a href="#微缩放（Microscaling）" class="headerlink" title="微缩放（Microscaling）"></a>微缩放（Microscaling）</h4><p>由AMD、ARM、Intel、Meta、Microsoft、NVIDIA、Qualcomm联合发布的数据格式，是深度学习中一种先进的低精度数据表示方法</p>
+<p>通过精细化调整模型参数、数据格式和计算粒度，深度优化深度学习模型训练和推理效率</p>
+<p>将张量分割为固定大小的子块（blocks），为每个子块分配独立的缩放因子（scaling factor），并使用窄位宽格式（如FP8、INT4等）存储块内元素</p>
+<p>与传统的全张量共享单一缩放因子相比，Microscaling能在保持模型精度的同时，大幅提升硬件效率与存储压缩比</p>
+<p>每k个数据（P1,…,Pk）共享一个缩放因子X，这k个数据称为一个block，每个block占用（w+kd）bits</p>
+<p><strong>具体的MX格式</strong>：</p>
+<ul>
+<li>每32个数据共享相同的scale，scale数据类型为FP8（E8M0），无符号位</li>
+</ul>
+<p><strong>使用MX格式的优势</strong>：</p>
+<ul>
+<li>在多项任务里，MX直接替代FP32推理、用于低比特训练，能够接近&#x2F;对齐FP32&#x2F;BF16的精度</li>
+<li>已有多个硬件（英伟达Blackwell、寒武纪等）架构支持MX格式，在英伟达平台上，MXFP8相比BF16的矩阵核，吞吐达到近2倍</li>
+</ul>
+<h4 id="张量的形状属性（shape）"><a href="#张量的形状属性（shape）" class="headerlink" title="张量的形状属性（shape）"></a>张量的形状属性（shape）</h4><p>表示张量中每一个维度（axis）的尺寸</p>
+<p><img src="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612163436164.png" alt="image-20260612163436164"></p>
+<h4 id="张量的device属性"><a href="#张量的device属性" class="headerlink" title="张量的device属性"></a>张量的device属性</h4><p><code>torch.device</code>指定tensor所在的设备名、设备序号</p>
+<ul>
+<li>用<code>&#39;cuda:n&#39;</code>表示第n个GPU设备，用<code>&#39;dlp:n&#39;</code>表示第n个深度学习处理器</li>
+</ul>
+<p><strong>张量属性的转换</strong>：</p>
+<ul>
+<li><code>tensor.to()</code>：进行张量的数据类型或设备类型转换</li>
+<li>将GPU上的张量转换成NumPy数组，需要先将张量转换到CPU上，再转换成NumPy</li>
+<li><code>tensor.reshape(*shape)</code>：进行张量的形状属性转换。单个维度上的shape值可以为-1，表示该维度上的shape值需要根据其他维度的shape来推算</li>
+<li>张量从CPU转换到DLP上：<code>a.dlp()</code> 或 <code>a.to(torch.device(&#39;dlp&#39;))</code></li>
+</ul>
+<p><strong>张量的复制</strong>：</p>
+<ul>
+<li><code>tensor.clone()</code>：对张量进行复制，返回一个完全相同的tensor，新张量会保存在新的内存中，且仍然留在计算图中</li>
+</ul>
+<h4 id="张量的数据格式（data-layout）"><a href="#张量的数据格式（data-layout）" class="headerlink" title="张量的数据格式（data layout）"></a>张量的数据格式（data layout）</h4><ul>
+<li>张量数据可以有多种数据格式，代表了<strong>多维数组以何种线性存储方式在存储空间中存储</strong></li>
+<li>PyTorch、GPU中采用<strong>NCHW</strong>，TensorFlow、CPU中采用<strong>NHWC</strong></li>
+<li>N：一批次的数据个数（batch size），C：通道数（channel），H：高度（height），W：宽度（width）</li>
+</ul>
+<p>一张RGB彩色图像包含3个原色（红色、绿色、蓝色）通道，对应的张量表示中，N&#x3D;1，C&#x3D;3</p>
+<p><img src="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612163554420.png" alt="image-20260612163554420"></p>
+<p>用于大模型计算优化的张量格式<strong>NHD&#x2F;HND</strong>：N为batch 或 sequence length，H为注意力头数量，D为每个注意力头的隐藏层维度。</p>
+<ul>
+<li><p>NHD<strong>相邻内存属于同一个token的不同head</strong>，适合<strong>按token并行处理</strong>。</p>
+</li>
+<li><p>HND<strong>相邻内存属于同一个head的不同token</strong>，适合<strong>按head并行处理</strong>，对GPU实现更友好</p>
+</li>
+</ul>
+<h4 id="张量的自动求导支持"><a href="#张量的自动求导支持" class="headerlink" title="张量的自动求导支持"></a>张量的自动求导支持</h4><ul>
+<li>PyTorch<strong>支持自动求导</strong>，用户定义好操作的前向计算和反向梯度计算规则，PyTorch能够在训练时自动调用计算图算子，完成整个网络的自动求导</li>
+<li>使用**<code>requires_grad</code>参数来设置张量是否需要自动求导**，默认为false</li>
+<li>对于一个计算操作来说，如果所有输入中有一个输入需要求导，则输出就需要求导；如果所有输入都不需要求导，则输出也不需要求导</li>
+</ul>
+<h4 id="操作-operation"><a href="#操作-operation" class="headerlink" title="操作(operation)"></a>操作(operation)</h4><ul>
+<li>PyTorch基于张量开展各种类型的计算操作。每个操作接收若干个张量作为输入，操作完成后更新原张量或生成新张量作为输出</li>
+<li>计算操作是使用PyTorch实现模型训练和推理的基础</li>
+<li>可以采用<code>torch.operation</code>、<code>tensor.operation</code>等形式来实现张量的计算操作</li>
+</ul>
+<p><strong>操作的广播（broadcasting）机制</strong>：</p>
+<ul>
+<li>对于参与计算操作的多个张量，如果张量维度不匹配，可以使用PyTorch的广播机制对不匹配的张量维度进行扩展，最终将这些张量<strong>均扩展为维度相同</strong></li>
+<li>能够进行广播机制的条件：每个张量都有至少1个维度；从张量末尾的维度开始对齐扩展，在对齐后的同一维度中，仅下列情况之一才允许进行广播操作：1）维度尺寸相同；2）维度尺寸不同但其中一个维度尺寸为1；3）其中一个张量没有该维度</li>
+<li>对于维度数量相同的张量，比较每个维度对应的维度尺寸，若维度尺寸不同但其中一个维度尺寸为1，则将其维度尺寸扩展为另一张量的维度尺寸</li>
+<li>对于维度数量不同的张量，首先从张量末尾的维度开始对齐扩展，对缺少的维度尺寸补1，再沿每个维度方向进行尺寸对比及扩展</li>
+</ul>
+<h3 id="计算图"><a href="#计算图" class="headerlink" title="计算图"></a>计算图</h3><p>编程框架中使用有向图来<strong>描述计算过程</strong>。有向图中包含一组节点和边</p>
+<ul>
+<li>计算图对应了神经网络的结构</li>
+</ul>
+<p><strong>节点和边</strong>：</p>
+<ul>
+<li><strong>节点</strong>一般用来表示<strong>各类操作</strong>，包括数学运算、变量读写、数据填充等，也可以表示输入数据、模型参数、输出数据</li>
+<li><strong>边</strong>表示”节点”之间的<strong>输入输出关系</strong>。分为两类：一类是传递具体数据的边，传递的数据即为张量（tensor）；一类是表示节点之间控制依赖关系的边，这类边不传递数据，只表示节点执行的顺序：必须前序节点计算完成，后序节点才开始计算</li>
+</ul>
+<p><strong>静态图 vs. 动态图</strong>：</p>
+<ul>
+<li>静态图：<strong>先定义整张图，再运行</strong>；可以对图进行<strong>全局优化</strong>，获得更快的运算速度；<strong>调试不方便</strong></li>
+<li>动态图：<strong>即时运行</strong>，网络模型可在<strong>运行时修改</strong>；代码编写灵活，可立即获得执行结果，调试方便；<strong>优化不方便</strong></li>
+<li>TensorFlow 1.x为静态图，PyTorch为动态图</li>
+<li>静态图：构建静态图，每一次iteration中重复执行同样的图</li>
+<li>动态图：每一次iteration中构建并执行新图，在反向传播结束之后，整个计算图就在内存中被释放了</li>
+</ul>
+<p><strong>torch.compile</strong>：</p>
+<ul>
+<li>PyTorch 2.x中的重要升级，实现了动态图语义+静态图性能的统一，一行代码即可获得显著加速</li>
+</ul>
+<h2 id="基于PyTorch的模型推理实现"><a href="#基于PyTorch的模型推理实现" class="headerlink" title="基于PyTorch的模型推理实现"></a>基于PyTorch的模型推理实现</h2><p><img src="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612164042260.png" alt="image-20260612164042260"></p>
+<h3 id="读取输入图像"><a href="#读取输入图像" class="headerlink" title="读取输入图像"></a>读取输入图像</h3><h3 id="构建神经网络"><a href="#构建神经网络" class="headerlink" title="构建神经网络"></a>构建神经网络</h3><ul>
+<li>可以自定义神经网络模型，也可以直接调用PyTorch框架中提供的模型</li>
+<li>自定义模型：PyTorch提供torch.nn、torch.nn.Module、torch.nn.functional等模块</li>
+<li>直接调用预训练模型：PyTorch提供torchvision.models，包含了用于处理不同任务的各种模型，如图像分类、语义分割、目标检测、关键点检测等</li>
+</ul>
+<p><strong>torch.nn.Module</strong>：</p>
+<ul>
+<li>PyTorch使用模块（module）来表示神经网络</li>
+<li>torch.nn.Module是用于封装PyTorch模型及组件的基类</li>
+<li>包含了<code>__init__</code>以及<code>forward</code>方法等</li>
+<li>自定义网络模型的方法：需要<strong>继承torch.nn.Module类</strong>；首先通过<code>__init__</code>方法初始化整个模型，定义模型结构及待学习的参数，再使用<code>forward</code>方法定义模型的前向计算过程；PyTorch支持模型的自动梯度计算，因此在<code>forward()</code>中无需定义反向计算过程</li>
+</ul>
+<p><strong>parameter与buffer</strong>：</p>
+<ul>
+<li>模块类（module）中包含两种不同状态的参数：<ul>
+<li>parameters：可学习的参数，即反向传播时可以被优化器更新的参数</li>
+<li>buffers：不可学习的参数，即反向传播时不可以被优化器更新的参数</li>
+</ul>
+</li>
+<li>Parameter被保存在state_dict之中</li>
+<li>Buffer分成两种：persistent和non-persistent。前者保存在state_dict中，而后者不包含在state_dict中</li>
+<li>保存模型时保存的是包含在state_dict中的参数（parameter、persistent buffer）</li>
+</ul>
+<p><strong>torch.nn中的计算功能</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>计算类型</th>
+<th>计算操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>卷积层</td>
+<td>nn.Conv1d, nn.Conv2d, nn.Conv3d</td>
+</tr>
+<tr>
+<td>池化层</td>
+<td>nn.MaxPool1d, nn.MaxPool2d, nn.MaxPool3d, nn.AvgPool1d, nn.AvgPool2d, nn.AvgPool3d</td>
+</tr>
+<tr>
+<td>非线性激活</td>
+<td>nn.ELU, nn.ReLU, nn.SELU, nn.Sigmoid, nn.Tanh</td>
+</tr>
+<tr>
+<td>归一化层</td>
+<td>nn.BatchNorm1d, nn.BatchNorm2d, nn.BatchNorm3d, nn.InstanceNorm1d, nn.InstanceNorm2d, nn.InstanceNorm3d</td>
+</tr>
+<tr>
+<td>循环神经网络层</td>
+<td>nn.RNN, nn.LSTM, nn.GRU</td>
+</tr>
+<tr>
+<td>线性层</td>
+<td>nn.Linear</td>
+</tr>
+<tr>
+<td>损失函数</td>
+<td>nn.L1Loss, nn.MSELoss, nn.CrossEntropyLoss</td>
+</tr>
+</tbody></table>
+<p><strong>直接调用预训练模型</strong>：</p>
+<ul>
+<li>基于某一种网络结构，首先在一个初始任务场景、初始数据集上训练好一个模型，然后再应用到目标任务上，针对目标任务的特征、数据集，对训练好的模型进行微调（fine-tune），最终满足目标任务的需求</li>
+<li>不需要从零开始训练模型，只需要调用已有的预训练模型参数，进行简单的微调，能够节省大量的计算资源和计算时间</li>
+</ul>
+<p><strong>预训练模型的应用</strong>：</p>
+<ul>
+<li>每种预训练模型对其输入均有各自的规格要求（尺寸、像素值等），在应用该预训练模型之前，需要根据这些要求对输入进行预处理</li>
+<li>Torchvision针对每种权重对输入的要求，提供了预处理方法，可以通过使用<code>.transforms()</code>来实现</li>
+</ul>
+<p><strong>model.train与model.eval</strong>：</p>
+<ul>
+<li>在训练开始之前，代码中添加<code>model.train()</code>，在测试时添加<code>model.eval()</code></li>
+<li>二者差别主要体现在对Batch Normalization和Dropout操作的处理上，<strong><code>model.eval()</code>的作用是不启用BN和Dropout</strong></li>
+<li>Dropout：评估模式下，测试的模型应该是最终得到的模型，而这个模型应该是一个完整的模型</li>
+<li>BN层主要涉及到四个需要更新的参数：均值running_mean、方差running_var、weight(gamma)、bias(beta)</li>
+<li><code>model.train()</code>保证训练时每经过一个mini-batch都会更新这批数据的均值和方差</li>
+<li><code>model.eval()</code>控制BN层中的running_mean、running_std不更新，采用训练结束后的running_mean、running_std来规范化图像</li>
+</ul>
+<p><strong>Hugging Face的transformers库</strong>：</p>
+<ul>
+<li>Hugging Face是目前全球最活跃的AI开源社区，被称为”AI界的GitHub”</li>
+<li>Transformers库是Hugging Face生态的核心Python库，专注自然语言处理类相关的处理</li>
+<li>常用API包括：AutoTokenizer、AutoModelForCausalLM、AutoModelForSequenceClassification、Trainer、model.generate()、pipeline</li>
+</ul>
+<h3 id="实例化神经网络模型"><a href="#实例化神经网络模型" class="headerlink" title="实例化神经网络模型"></a>实例化神经网络模型</h3><ul>
+<li>采用如下步骤进行神经网络模型的实例化：<ul>
+<li>完成神经网络模块（module）的定义，包括<code>__init__()</code>方法和<code>forward()</code>方法的定义</li>
+<li>对模型中的参数（weight、bias等）进行初始化</li>
+<li>实例化模型结构，将结构相关参数传递给module</li>
+<li>定义模型的输入数据</li>
+<li>将模型输入传入实例化后的模型，获取模型输出</li>
+</ul>
+</li>
+</ul>
+<p><strong>使用torch.nn.init模块完成初始化</strong>：</p>
+<ul>
+<li>module中的parameter和buffer参数默认为CPU上执行的32位浮点数，在定义module时可以将其设置为任意的数据类型及设备类型</li>
+<li>在module的构建函数<code>__init__()</code>中，可以使用torch.nn.init模块来对parameter和buffer参数进行初始化</li>
+</ul>
+<p><strong>torchmetrics库</strong>：</p>
+<ul>
+<li>为评估深度学习模型的功能、性能，需要计算各种指标</li>
+<li>torchmetrics库提供了一组评估指标计算工具，包括准确率、精确率、召回率、F1分数、均方误差（MSE）、平均绝对误差（MAE）等</li>
+</ul>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><ul>
+<li>使用python调试工具（使用交互式调试库python的pdb，进行设置断点、单步执行、查看代码、变量、参数等调试功能）</li>
+<li>打印模型结构、参数等信息</li>
+<li>使用TensorBoard实现数据可视化</li>
+</ul>
+<p><strong>使用TensorBoard实现数据可视化</strong>：</p>
+<ul>
+<li>TensorBoard提供了对神经网络模型结构、参数等的可视化功能，可用于查看、分析神经网络模型的结构、权重、损失值、精度等</li>
+<li>PyTorch提供<code>torch.utils.tensorboard</code>，用于引入tensorboard工具，实现神经网络模型及张量的可视化</li>
+</ul>
+<h3 id="神经网络模型优化"><a href="#神经网络模型优化" class="headerlink" title="神经网络模型优化"></a>神经网络模型优化</h3><ul>
+<li>使用torch.nn.utils.prune对神经网络模型进行剪枝操作</li>
+<li>使用torch.ao.quantization进行神经网络模型的量化</li>
+<li>使用torch.compile进行神经网络模型的性能优化</li>
+</ul>
+<p><strong>神经网络模型剪枝</strong>：</p>
+<ul>
+<li>神经网络所包含的大量参数中，<strong>有一部分是冗余且对输出结果无贡献的</strong>，将这些参数裁减掉，可以提升网络的计算速度，且不影响最终的精度</li>
+<li><strong>非结构化剪枝</strong>：按一定规则对单个参数进行裁剪</li>
+<li><strong>结构化剪枝</strong>：按一定结构规则对一组参数进行裁剪，如裁减掉整个卷积核，或裁减掉卷积核的某一行或某一列</li>
+</ul>
+<p><strong>动态量化</strong>：</p>
+<ul>
+<li>神经网络模型的量化，指将模型中的权重和&#x2F;或激活数据从多位宽的浮点格式，<strong>转换为低位宽的整数型格式</strong></li>
+<li>量化过程中使用到的<strong>缩放系数</strong>与<strong>参与量化张量的数值范围有关</strong></li>
+<li>权重参数的数值范围是固定的，其缩放系数也是固定的</li>
+<li>动态量化：每一层<strong>激活数据的数值范围随计算过程变化</strong>，需要动态确定缩放系数，根据缩放系数动态完成数据格式转换</li>
+<li>PyTorch提供<code>torch.ao.quantization.quantize_dynamic()</code>用于模型的动态量化</li>
+</ul>
+<p><strong>性能优化工具 torch.compile</strong>：</p>
+<ul>
+<li>传统PyTorch的动态图模式，存在解释器开销、且算子碎片化</li>
+<li>torch.compile在保留动态图的灵活性的同时，获得静态图的性能优势</li>
+<li>对计算图<strong>自动应用算子融合、内存优化、硬件适配、向量化&#x2F;并行化</strong>等优化技术</li>
+</ul>
+<p><strong>大模型推理引擎</strong>：</p>
+<ul>
+<li>HuggingFace Transformers库存在显存碎片化严重、并发能力差、计算内核利用率低等问题，无法满足生产环境高吞吐、低延迟的需求</li>
+<li>主流大模型推理引擎：vLLM（基于PagedAttention技术，高吞吐，易于使用，社区生态最活跃）、TensorRT-LLM（英伟达官网工具，深度优化GPU性能）、TGI（基于Hugging Face模型，易部署）</li>
+</ul>
+<p><strong>vLLM大模型推理引擎</strong>：</p>
+<ul>
+<li>PagedAttention技术：借鉴操作系统的虚拟内存分页思想。将KV Cache切分为固定大小的Block（页），逻辑上连续，物理上离散存储。为每个请求按需分配块，避免预留式内存浪费</li>
+<li>高吞吐量、低延迟、高内存效率</li>
+<li>PyTorch作为基础：使用PyTorch来定义和加载模型，PyTorch提供了灵活的模型定义和自动微分功能</li>
+<li>推理引擎优化：算子优化、内存管理、调度优化、量化支持等</li>
+</ul>
+<h2 id="基于PyTorch的模型训练实现"><a href="#基于PyTorch的模型训练实现" class="headerlink" title="基于PyTorch的模型训练实现"></a>基于PyTorch的模型训练实现</h2><h3 id="加载训练数据集"><a href="#加载训练数据集" class="headerlink" title="加载训练数据集"></a>加载训练数据集</h3><p><strong>应用于大模型场景的流式数据集</strong>：</p>
+<ul>
+<li>大模型训练的数据集通常达到TB甚至PB级别，无法一次性加载到内存中</li>
+<li>流式数据集加载方式：不将整个数据集一次性加载到内存中，而是在<strong>训练过程中动态地、逐批次地</strong>从磁盘或网络读取数据</li>
+<li>代表性工具：Hugging Face的datasets库</li>
+</ul>
+<h3 id="模型训练"><a href="#模型训练" class="headerlink" title="模型训练"></a>模型训练</h3><ul>
+<li>使用PyTorch进行模型训练时，首先需要<strong>定义损失函数的计算方法</strong>，然后构建优化器实现对模型的<strong>梯度计算及更新</strong></li>
+<li>反向传播过程中，可以利用内建的性能分析工具、梯度检查函数等，验证训练过程的正确性和有效性</li>
+</ul>
+<p><strong>损失函数定义</strong>：</p>
+<ul>
+<li>损失函数可以自己定义，也可以直接使用PyTorch提供的内建损失函数</li>
+<li>自定义损失函数可以通过定义模块实例来实现</li>
+<li>内建损失函数：nn.L1Loss()（计算平均绝对误差MAE）、nn.MSELoss()（计算均方误差MSE）、nn.CrossEntropyLoss()（计算交叉熵损失函数）、nn.NLLLoss（计算负对数似然损失）、nn.BCELoss（计算二分类交叉熵损失函数）</li>
+</ul>
+<p><strong>神经网络模型训练</strong>：</p>
+<ul>
+<li>损失函数定义完成后，需要使用优化器对模型进行训练，包括计算梯度，优化梯度并更新参数等步骤</li>
+<li>计算梯度时需要构建计算图并进行反向传播，根据计算图中的张量属性，控制其节点是否需要计算梯度</li>
+<li>PyTorch提供torch.optim包来实现多种梯度优化算法</li>
+<li>训练流程：构建优化目标 -&gt; 计算预测值 -&gt; 计算损失函数 -&gt; 对参数梯度清零 -&gt; 计算梯度 -&gt; 优化梯度，更新参数</li>
+</ul>
+<p><strong>构建计算图来计算梯度</strong>：</p>
+<ul>
+<li>计算图的主要作用在于能够<strong>在前向计算过程中保存所有中间节点的计算结果</strong>，<strong>便于反向传播时构建反向传播路径</strong>，并利用链式法则完成自动求导</li>
+<li>计算图在一次反向传播后会被立即销毁，释放存储空间，下次调用时需要再次创建</li>
+<li><strong>只有在训练时计算图是必需的</strong>，而如果只是单纯的推理，可以选择不创建计算图，以节省存储占用和资源消耗</li>
+</ul>
+<p><strong>使用torch.no_grad禁用计算图</strong>：</p>
+<ul>
+<li>可以使用torch.no_grad上下文管理器，在其作用域内定义的所有计算，仍然可以前向传播得到计算输出，但不会反向传播计算梯度，也不会创建计算图</li>
+</ul>
+<p><strong>计算图的反向传播</strong>：</p>
+<ul>
+<li>对于requires_grad属性为True的张量，其前向计算过程中的后继张量，除了使用no_grad管理的，其它张量均默认requires_grad&#x3D;True，即需要计算梯度，需要创建计算图</li>
+<li>可以使用<code>tensor.backward()</code>函数计算当前张量相对于计算图中所有requires_grad属性也为True张量的梯度</li>
+<li>每次调用backward()后，计算图会被释放掉</li>
+</ul>
+<p><strong>通过detach()方法修改计算图</strong>：</p>
+<ul>
+<li><code>tensor.detach()</code>：返回一个新张量，该张量从当前计算图中剥离，成为一个新的张量，新张量的requires_grad&#x3D;False，即不需要计算梯度</li>
+<li>返回的张量与原张量共享相同内存，对原张量或新张量的原位修改（如尺寸、stride等的原位修改）均会报错</li>
+</ul>
+<p><strong>使用torch.optim包优化梯度</strong>：</p>
+<ul>
+<li>完成梯度计算后，可以使用torch.optim包来优化梯度、更新模型参数</li>
+<li>torch.opim.Optimizer(params,defaults)：所有优化器的基类。其中，params为需要优化的模型参数列表，defaults为包含了如learning rate等优化选项的字典</li>
+</ul>
+<h3 id="模型的保存与恢复"><a href="#模型的保存与恢复" class="headerlink" title="模型的保存与恢复"></a>模型的保存与恢复</h3><p>使用torch.save()保存模型</p>
+<ul>
+<li>官方推荐：可以<strong>仅保存模型的state_dict</strong>，模型保存格式为.pt或.pth。使用model.load_state_dict()恢复模型</li>
+<li>也可以自定义保存的内容，如将模型的state_dict、优化器的state_dict、epoch、loss值等一起保存为<strong>检查点</strong>，检查点文件的常见保存格式为.tar。使用torch.load()恢复模型</li>
+</ul>
+<p><strong>大模型参数的高效保存</strong>：</p>
+<ul>
+<li>70B模型的state_dict约140GB（BF16）</li>
+<li>存储格式：Safetensors</li>
+<li>核心技术：分片保存、量化保存、激活检查点</li>
+<li><strong>分片保存</strong>技术：将模型参数切分为多个连续的文件块，配合一个索引文件（model.safetensors.index.json），记录每个参数张量所在的文件分片及偏移量</li>
+</ul>
+<p><strong>激活检查点技术</strong>：</p>
+<ul>
+<li>在大模型训练中，正向传播过程中产生的大量激活值需要存储在内存中，以便在反向传播时计算梯度。随着模型参数量的增加（如千亿级参数），<strong>激活值的存储成为训练的主要内存瓶颈</strong></li>
+<li>激活检查点（<strong>计算换内存</strong>）<ul>
+<li>正向传播时，<strong>只保存部分层的激活值</strong>；</li>
+<li>反向传播时，如果发现需要的激活值不在显存中，则利用最近的”检查点”保存的输入，临时重新进行前向传播，计算出所需的激活值</li>
+</ul>
+</li>
+</ul>
+<h1 id="第五章-编程框架原理"><a href="#第五章-编程框架原理" class="headerlink" title="第五章 编程框架原理"></a>第五章 编程框架原理</h1><h2 id="编程框架设计"><a href="#编程框架设计" class="headerlink" title="编程框架设计"></a>编程框架设计</h2><ul>
+<li>智能计算系统中编程框架的<strong>四大模块</strong>：<ul>
+<li>必备：计算图构建模块和计算图执行模块</li>
+<li>追求更高性能：深度学习编译模块和分布式训练模块</li>
+</ul>
+</li>
+</ul>
+<h3 id="设计原则"><a href="#设计原则" class="headerlink" title="设计原则"></a>设计原则</h3><ul>
+<li><strong>简洁性（Simplicity）</strong>：框架提供一套抽象机制，用户仅需关心算法本身和部署策略</li>
+<li><strong>易用性（Usability）</strong>：<ul>
+<li>熟悉的开发范式：如PyTorch始于Python，忠于Python</li>
+<li>直观且用户友好的接口：如PyTorch提供了命令式的动态图编程方法</li>
+</ul>
+</li>
+<li><strong>高效性（Performance）</strong>：<ul>
+<li>如采用静态图编程方式，可以生成完整的计算图并进行全局优化，从而尽量提高用户应用程序的运行效率</li>
+<li>支持深度学习编译技术，多层级表示优化，充分利用用户硬件的计算能力</li>
+<li>支持多机多卡条件的分布式训练，从而高效支持大规模深度学习任务</li>
+</ul>
+</li>
+</ul>
+<h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><ul>
+<li><strong>计算图构建模块</strong>：完成从输入的用户程序到编程框架内部原始计算图的转换过程，编程框架的入口模块</li>
+<li><strong>分布式训练模块</strong>：应对更大规模的神经网络，<strong>将训练、推理任务从一台设备扩展到多台设备</strong></li>
+<li><strong>深度学习编译模块</strong>：对计算图分别进行图层级和算子层级的编译优化，从而提升单设备上的执行效率</li>
+<li><strong>计算图执行模块</strong>：将优化后的计算图中的张量和操作映射到指定设备上进行具体执行，并给出编程框架的输出结果</li>
+</ul>
+<p><img src="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612175041537.png" alt="image-20260612175041537"></p>
+<h2 id="计算图构建"><a href="#计算图构建" class="headerlink" title="计算图构建"></a>计算图构建</h2><h3 id="正向图与反向图构建"><a href="#正向图与反向图构建" class="headerlink" title="正向图与反向图构建"></a>正向图与反向图构建</h3><ul>
+<li>计算图由两个基本元素构成：张量（Tensor）和张量操作（Operation）。计算图是有向图，有向边指明了张量的流动方向</li>
+</ul>
+<h3 id="正向传播"><a href="#正向传播" class="headerlink" title="正向传播"></a>正向传播</h3><p>输入张量经过搭建的神经网络层层计算传递，并最终获得计算结果的过程</p>
+<ul>
+<li><strong>动态图</strong>：在执行函数时，<strong>按照函数顺序逐条语句地生成节点，立即计算并返回结果</strong>；易调试但性能优化空间有限<ul>
+<li>计算图在函数运行过程中逐步构建的（On-the-fly）</li>
+<li>立即（eager）模式：<strong>每次调用语句就立刻执行计算</strong></li>
+<li>PyTorch中的动态图实现：<strong>每次执行，都会重新被构建</strong></li>
+</ul>
+</li>
+<li><strong>静态图</strong>：在执行计算之前构建好所有图上的节点，<strong>在图运行时才计算整个计算图并返回最终结果</strong>；不易调试但性能好<ul>
+<li>整个网络的结构会在开始计算前就建立完成计算图</li>
+<li>框架执行时<strong>接收整个计算图而不是单一语句</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h3><p><strong>计算导数的方法</strong>：</p>
+<p>自动微分</p>
+<ul>
+<li><strong>手动求导</strong>：<strong>用链式法则求解出梯度公式</strong>，然后根据公式编写代码、代入数值计算得到梯度结果。缺点：对于大规模的深度学习算法非常困难</li>
+<li><strong>数值求导</strong>：直接<strong>代入数值近似求解</strong>。优点：易操作，可对用户隐藏求解过程。缺点：计算量大，求解速度慢，可能引起舍入误差和截断误差</li>
+<li><strong>符号求导</strong>：直接<strong>对代数表达式求解，最后才代入问题数字</strong>，出现表达式膨胀问题</li>
+<li><strong>自动求导</strong>：用户只需<strong>描述前向计算的过程，由编程框架自动推导反向计算图</strong>，先建立表达式，再代入数值计算</li>
+</ul>
+<p><strong>自动求导法</strong>：</p>
+<ul>
+<li>介于数值求导和符号求导的方法：对基本算子应用符号求导法，代入数值，保留中间结果，应用于整个函数</li>
+<li>计算分两步执行：<ul>
+<li>1）原始函数建立计算图，数据正向传播，计算出中间节点xi，并记录计算图中的节点依赖关系</li>
+<li>2）反向遍历计算图，计算输出对于每个节点的导数</li>
+</ul>
+</li>
+<li>对于前向计算中一个数据连接多个输出数据的情况，自动求导中，将这些输出数据相对于该数据的导数累加</li>
+</ul>
+<p><strong>求导方式对比</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>对图的遍历次数</th>
+<th>精度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>手动求解法</td>
+<td>NA</td>
+<td>高</td>
+<td>实现复杂</td>
+</tr>
+<tr>
+<td>数值求导法</td>
+<td>nI+1</td>
+<td>低</td>
+<td>计算量大，速度慢</td>
+</tr>
+<tr>
+<td>符号求导法</td>
+<td>NA</td>
+<td>高</td>
+<td>表达式膨胀</td>
+</tr>
+<tr>
+<td>自动求导法</td>
+<td>nO+1</td>
+<td>高</td>
+<td>对输入维度较大的情况优势明显</td>
+</tr>
+</tbody></table>
+<p><strong>PyTorch中的自动混合精度（AMP）</strong>：</p>
+<ul>
+<li>AMP是一种在编程框架中<strong>混合使用高精度（FP32）和低精度（FP16、BF16）浮点数</strong>的技术，能够在<strong>保持模型精度的同时显著提升训练性能并减少内存使用</strong></li>
+<li>动态选择数据类型：对精度不敏感的<strong>线性层、卷积层</strong>等采用<strong>低精度</strong>（FP16、BF16）；精度敏感的<strong>归约操作</strong>等采用FP32<strong>高精度</strong></li>
+</ul>
+<p><img src="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/image-20260612175710353.png" alt="image-20260612175710353"></p>
+<p><strong>典型使用场景</strong>：</p>
+<ul>
+<li>训练场景：目标是在保证模型收敛的数值稳定性的基础上，大幅提升计算速度并节省显存（允许更大Batch Size）。核心策略：遵循”<strong>低精度计算，高精度参数更新</strong>“。</li>
+<li>推理场景：目标是在保证模型推理精度的基础上，提升模型推理性能。核心策略：按需采用低精度运算</li>
+</ul>
+<p><strong>核心机制</strong>：</p>
+<ul>
+<li>操作分类与动态分派（torch.autocast）：PyTorch将算子预设为两类，自动判断精度选择<ul>
+<li>计算密集型算子(FP16&#x2F;BF16)，对精度相对不敏感：matmul、conv、linear、bmm等</li>
+<li>精度敏感型算子(保持FP32)，在FP16下极易发生数值溢出或严重损失精度：softmax、batchnorm、loss计算、log&#x2F;exp、归一化层、激活函数（某些）</li>
+</ul>
+</li>
+<li><strong>梯度缩放(Loss Scaling)</strong>：问题来源：由于FP16指数位较短，许多微小的梯度会被截断为0。原理：缩放——在计算梯度后乘以一个巨大的缩放因子（如65536），将梯度推回FP16有效表示范围；反缩放——在利用梯度进行实际参数更新前，将梯度除以缩放因子，恢复真实量级</li>
+<li>权重副本（Master Weight Copy）：原理：在内存中同时保存FP16精度和FP32精度的副本，分别在前向和反向进行使用</li>
+</ul>
+<h2 id="计算图执行"><a href="#计算图执行" class="headerlink" title="计算图执行"></a>计算图执行</h2><p>将计算图中的张量和操作（又称算子）映射到给定设备上具体执行</p>
+<ul>
+<li>包括：设备管理、张量实现、算子执行（获取算子执行序列、实现算子：前端定义、后端实现、前后端绑定、查找并调用算子）</li>
+</ul>
+<h3 id="设备管理"><a href="#设备管理" class="headerlink" title="设备管理"></a>设备管理</h3><ul>
+<li>设备是编程框架中计算图执行时的硬件实体，每个设备都具体负责计算子图中的张量存放和算子运算</li>
+<li>常见设备包括通用处理器（如CPU）和领域专用处理器（如GPU和DLP等）</li>
+<li>添加对领域专用处理器的设备管理支持需要三个模块：设备操作、执行流管理、事件管理</li>
+</ul>
+<h3 id="张量实现"><a href="#张量实现" class="headerlink" title="张量实现"></a>张量实现</h3><ul>
+<li><strong>逻辑视图</strong>：形状、布局、步长、偏移量、数据类型和设备等，是<strong>框架使用者能直接控制和表达的基本属性</strong></li>
+<li><strong>物理视图</strong>：<strong>设备上的物理地址空间大小、指针、数据类型</strong>等，对框架使用者不可见</li>
+</ul>
+<p><strong>一个物理视图可以对应多个逻辑视图</strong>：切片的结果不是新的物理视图，而是原本物理视图下的一个新的逻辑视图</p>
+<p><strong>PyTorch中的张量抽象</strong>：</p>
+<p>PyTorch中存在与张量对应的类Tensor</p>
+<ul>
+<li>通过张量（Tensor）抽象类和存储（Storage）抽象类来分别表示张量数据结构中的逻辑视图和物理视图</li>
+</ul>
+<p><strong>张量内存分配</strong>：</p>
+<p>从逻辑视图到物理视图的转换需要完成对张量的内存分配。根据设备的类型不同，张量管理的方式不同</p>
+<ul>
+<li><strong>即时分配（CPU）</strong>：每当需要分配张量的内存时，就立即从系统中申请一块合适大小的内存空间。代码核心部分：malloc()和free()函数</li>
+<li><strong>内存池分配（GPU）</strong>：预先分配一块固定大小的内存池，然后在需要时从内存池中分配内存。自我维护：内存块的拆分和合并。优点：节约设备内存使用，减少设备内存碎片化</li>
+</ul>
+<h3 id="算子执行"><a href="#算子执行" class="headerlink" title="算子执行"></a>算子执行</h3><p>计算图的执行过程 &#x3D; 每个算子独立执行的过程</p>
+<ul>
+<li>计算图 -&gt; 执行序列（确保正确的数据流和依赖关系）</li>
+<li>针对每个算子进行<strong>算子实现：前端定义、后端实现和前后端绑定</strong></li>
+<li>分派执行：<strong>查找适合给定输入的算子实现，并调用相应的实现来执行具体的计算任务</strong>（有点类似skills）</li>
+</ul>
+<p><strong>执行序列</strong>：</p>
+<ul>
+<li>分析计算图<strong>节点之间的依赖关系</strong> -&gt; 执行序列</li>
+<li>使用拓扑排序算法（可有多种可行的结果）</li>
+</ul>
+<h4 id="算子实现"><a href="#算子实现" class="headerlink" title="算子实现"></a><strong>算子实现</strong></h4><ul>
+<li>正向传播实现和反向传播<strong>实现分离</strong></li>
+<li>用户接口（前端）和具体实现（后端）分离</li>
+<li>算子实现流程：<ul>
+<li><strong>前端定义</strong>（在编程框架中<strong>配置算子信息</strong>，包含算子的输入、输出以及相关的接口定义，最后<strong>生成前端接口如Python API</strong>）-&gt; </li>
+<li><strong>后端实现</strong>（使用C++或其他高级的编程语言，<strong>编写算子的底层实现代码</strong>）-&gt; </li>
+<li><strong>前后端绑定</strong>（编程框架将前端定义的算子与后端的具体实现进行绑定）</li>
+</ul>
+</li>
+</ul>
+<p>前后端绑定：同一个算子可能会有多个后端实现的代码，多种后端&amp;多种输入，根据不同情况调用相应的后端实现。PyTorch使用分派机制来管理前后端分布式对应关系，由Dispatcher管理分派表。</p>
+<p><strong>分派执行</strong>：</p>
+<p>在运行时根据输入张量的类型和设备类型查找并调用合适的算子实现方法。Dispatcher计算分派键，并由此找到对应的内核函数</p>
+<ul>
+<li>算子：Dispatcher的调度对象，代表了具体的计算任务</li>
+<li>分派键：根据输入张量和其他信息计算，可简单地理解为与硬件平台相关联的标识符</li>
+<li><strong>内核函数</strong>：特定硬件平台上实现算子功能的具体代码</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/" title="智能计算系统复习第4-6章">https://mintind.github.io/2026/06/10/UCAS/智能计算系统/笔记/笔记4-6章/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/" rel="tag"># 智能计算系统</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B0%E4%B8%80%E4%BA%8C%E7%AB%A0/" rel="prev" title="智能计算系统复习第一二章">
+                  <i class="fa fa-angle-left"></i> 智能计算系统复习第一二章
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/06/11/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%AC%E4%B8%89%E7%AB%A0%E7%AC%94%E8%AE%B0/" rel="next" title="智能计算系统复习第三章">
+                  智能计算系统复习第三章 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/06/10/UCAS/%E6%99%BA%E8%83%BD%E8%AE%A1%E7%AE%97%E7%B3%BB%E7%BB%9F/%E7%AC%94%E8%AE%B0/%E7%AC%94%E8%AE%B04-6%E7%AB%A0/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

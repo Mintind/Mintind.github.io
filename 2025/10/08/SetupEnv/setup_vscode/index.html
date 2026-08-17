@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="可是我不敢一个人喝…">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode配置笔记">
+<meta property="og:url" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="可是我不敢一个人喝…">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009195520096.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009201700713.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009203739005.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009202228433.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009203343403.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009204256871.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009205542698.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009204114163.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009215000444.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010133754614.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010134134256.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010134252940.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010134629665.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010140146877.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251010142531511.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209094454852.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209094948550.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209095102569.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209232503084.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209232654880.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209232808982.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251209233106204.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251105113141305.png">
+<meta property="og:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251211090023763.png">
+<meta property="article:published_time" content="2025-10-08T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-08T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="VSCode">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/image-20251009195520096.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/","path":"2025/10/08/SetupEnv/setup_vscode/","title":"VSCode配置笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>VSCode配置笔记 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#VSCode"><span class="nav-number">1.</span> <span class="nav-text">VSCode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MinGW-w64"><span class="nav-number">2.</span> <span class="nav-text">MinGW-w64</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VSCode%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="nav-number">3.</span> <span class="nav-text">VSCode环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E8%99%9A%E6%8B%9F%E6%9C%BA"><span class="nav-number">4.</span> <span class="nav-text">远程连接虚拟机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE"><span class="nav-number">4.1.</span> <span class="nav-text">网络配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%9C%A8%E4%B8%8B%E8%BD%BDVSCode%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">4.2.</span> <span class="nav-text">正在下载VSCode服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%AF%86%E9%92%A5%EF%BC%88%E5%85%8D%E5%AF%86%E8%BF%9E%E6%8E%A5"><span class="nav-number">4.3.</span> <span class="nav-text">配置密钥（免密连接</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A6%81%E6%AD%A2%E8%87%AA%E5%8A%A8%E6%9B%B4%E6%96%B0"><span class="nav-number">5.</span> <span class="nav-text">禁止自动更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%B0%8F%E4%B8%9C%E8%A5%BF"><span class="nav-number">6.</span> <span class="nav-text">其他小东西</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E8%BF%90%E8%A1%8C"><span class="nav-number">6.1.</span> <span class="nav-text">在终端中运行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81"><span class="nav-number">6.2.</span> <span class="nav-text">中文乱码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%9C%A8%E5%BD%93%E5%89%8D%E7%9B%AE%E5%BD%95%E6%89%93%E5%BC%80%E7%BB%88%E7%AB%AF"><span class="nav-number">6.3.</span> <span class="nav-text">默认在当前目录打开终端</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="VSCode配置笔记 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VSCode配置笔记<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvU2V0dXBFbnYvc2V0dXBfdnNjb2RlLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-10-09 00:00:00" itemprop="dateCreated datePublished" datetime="2025-10-09T00:00:00+08:00">2025-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SetupEnv/" itemprop="url" rel="index"><span itemprop="name">SetupEnv</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.6k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>可是我不敢一个人喝…</p>
+<span id="more"></span>
+
+<p>（我去怎么写了三个月）这也是乱得可以。先这样</p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODA3MTQwL2FydGljbGUvZGV0YWlscy8xMTI4NjI1OTI=">https://blog.csdn.net/qq_45807140/article/details/112862592<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1ODA3MTQwL2FydGljbGUvZGV0YWlscy8xMTI4NjI1OTI=">https://blog.csdn.net/qq_45807140/article/details/112862592<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h2><p>安装VSCode以及c&#x2F;c++和简体中文扩展。已有</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009195520096.png" alt="image-20251009195520096"></p>
+<h2 id="MinGW-w64"><a href="#MinGW-w64" class="headerlink" title="MinGW-w64"></a>MinGW-w64</h2><p>（感觉这个没必要啊！</p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly96aHVhbmxhbi56aGlodS5jb20vcC8yNjE0MzM2NzkxNg==">https://zhuanlan.zhihu.com/p/26143367916<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL25pWG1hbi9taW5ndy1idWlsZHMtYmluYXJpZXMvcmVsZWFzZXM=">https://github.com/niXman/mingw-builds-binaries/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>选择：64位的操作系统，选择x86_64，win32是为<code>Windows</code>系统设计的<code>API</code>风格,如果是<code>Windows 10</code>或更高版本，并且你希望利用最新的<code>API</code>和功能，<code>ucrt</code>可能是一个好选择。</p>
+<p>综上我选择最后一个</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009201700713.png" alt="image-20251009201700713"></p>
+<p>下载后解压到想要的位置，需要是全英文路径</p>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><p>新建一个环境变量MinGW_HOME，填上安装目录下的\bin目录，因为要找这个目录下的g++.exe</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009203739005.png" alt="image-20251009203739005"></p>
+<p>验证：打开命令行输入gcc -v</p>
+<p>等会儿这用的是llvm的（）</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009202228433.png" alt="image-20251009202228433"></p>
+<h2 id="VSCode环境配置"><a href="#VSCode环境配置" class="headerlink" title="VSCode环境配置"></a>VSCode环境配置</h2><p>感觉和pycharm有点像，一个项目一个配置这种</p>
+<p>新建一个用来写代码的文件夹，用VSCode打开，按下快捷键shift+ctrl+p，展示全局命令面板，搜索找到C&#x2F;C++ Edit Configurations(UI)</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009203343403.png" alt="image-20251009203343403"></p>
+<p>编译器路径，设为mingw安装目录下的g++.exe</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009204256871.png" alt="image-20251009204256871"></p>
+<p>有个问题但是暂时没找到办法，先搁置</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009205542698.png" alt="image-20251009205542698"></p>
+<p>IntelliSense 模式设为：gcc-x64</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009204114163.png" alt="image-20251009204114163"></p>
+<p>在代码文件夹里新建一个cpp文件并保存，我这已经有了就不搞了。终端-配置默认生成任务，然后左边就会出现一个tasks.json。暂时是这样的</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;2.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;tasks&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">		<span class="punctuation">&#123;</span></span><br><span class="line">			<span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;cppbuild&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;label&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C/C++: g++.exe 生成活动文件&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;D:/Tool/mingw64/bin/g++.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">				<span class="string">&quot;-fdiagnostics-color=always&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="string">&quot;-g&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="string">&quot;$&#123;file&#125;&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="string">&quot;-o&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="string">&quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;</span></span><br><span class="line">			<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;options&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">				<span class="attr">&quot;cwd&quot;</span><span class="punctuation">:</span> <span class="string">&quot;$&#123;fileDirname&#125;&quot;</span></span><br><span class="line">			<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;problemMatcher&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">				<span class="string">&quot;$gcc&quot;</span></span><br><span class="line">			<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;group&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">				<span class="attr">&quot;kind&quot;</span><span class="punctuation">:</span> <span class="string">&quot;build&quot;</span><span class="punctuation">,</span></span><br><span class="line">				<span class="attr">&quot;isDefault&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span></span><br><span class="line">			<span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;detail&quot;</span><span class="punctuation">:</span> <span class="string">&quot;编译器: D:/Tool/mingw64/bin/g++.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">			<span class="attr">&quot;presentation&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span> </span><br><span class="line">                <span class="attr">&quot;panel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;new&quot;</span> <span class="comment">//默认为“shared“表示共享，改成new之后每个进程创建新的端口</span></span><br><span class="line">            <span class="punctuation">&#125;</span><span class="comment">// 添加这一整块代码块</span></span><br><span class="line">		<span class="punctuation">&#125;</span></span><br><span class="line">	<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251009215000444.png" alt="image-20251009215000444"></p>
+<p>点击Run（运行）-&gt;Add Configuration（添加配置），这样会在.vscode文件夹中生成launch.json文件，这个我的初始配置特别特别简单但是也还能用。现在是这样</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // 使用 IntelliSense 了解相关属性。 </span><br><span class="line">    // 悬停以查看现有属性的描述。</span><br><span class="line">    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) Launch&quot;,</span><br><span class="line">            &quot;preLaunchTask&quot;: &quot;g++.exe build active file&quot;,//调试前执行的任务，就是之前配置的tasks.json中的label字段</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,//配置类型，只能为cppdbg</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,//请求配置类型，可以为launch（启动）或attach（附加）</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;fileDirname&#125;\\$&#123;fileBasenameNoExtension&#125;.exe&quot;,//调试程序的路径名称</span><br><span class="line">            &quot;args&quot;: [],//调试传递参数</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;fileDirname&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: true,//true显示外置的控制台窗口，false显示内置终端</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;,</span><br><span class="line">            &quot;miDebuggerPath&quot;: &quot;D:\\Tool\\mingw64\\bin\\gdb.exe&quot;,</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">                &#123;</span><br><span class="line">                    &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                    &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                    &quot;ignoreFailures&quot;: true</span><br><span class="line">                &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程连接虚拟机"><a href="#远程连接虚拟机" class="headerlink" title="远程连接虚拟机"></a>远程连接虚拟机</h2><p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMzOTA5MjY5L2FydGljbGUvZGV0YWlscy8xMzY2NzY5NTQ=">https://blog.csdn.net/qq_33909269/article/details/136676954<i class="fa fa-external-link-alt"></i></span></p>
+<p>安装remote-ssh扩展</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010133754614.png" alt="image-20251010133754614"></p>
+<p>Ubuntu22.04。虚拟机安装openssh-server和net-tools</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt-get install openssh-server</span><br><span class="line"><span class="built_in">sudo</span> apt install net-tools</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010134134256.png" alt="image-20251010134134256"></p>
+<p> 然后获取虚拟机地址： <code>ifconfig</code>。这里ip是192.168.119.133<img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010134252940.png" alt="image-20251010134252940"></p>
+<p>配置VSCode的远程连接。点击VS code左下角的远程资源管理器-ssh，点击加号，然后输入ssh连接命令，格式为</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@ip</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010134629665.png" alt="image-20251010134629665"></p>
+<p>完成之后展开SSH那一栏，看到多了一个连接，点击向右的箭头进行连接。连接失败</p>
+<p>检查了可以ping虚拟机，虚拟机ssh服务在运行，22端口在监听，防火墙没开启，在命令行里尝试ssh连接也不成功</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010140146877.png" alt="image-20251010140146877"></p>
+<p>使用详细模式进行连接，查看错误信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -vvv anthon@192.168.119.133</span><br></pre></td></tr></table></figure>
+
+<p>找不出问题….我搁</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251010142531511.png" alt="image-20251010142531511"></p>
+<h3 id="网络配置"><a href="#网络配置" class="headerlink" title="网络配置"></a>网络配置</h3><p>回来了，不记得之前啥问题了，不过虚拟机主机ip都要静态才行。</p>
+<p>看虚拟网卡的配置</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209094454852.png" alt="image-20251209094454852"></p>
+<p>虚拟机，编辑&#x2F;etc&#x2F;netplan下的文件</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Let NetworkManager manage all devices on this system</span></span><br><span class="line"><span class="attr">network:</span></span><br><span class="line">  <span class="attr">version:</span> <span class="number">2</span></span><br><span class="line">  <span class="attr">renderer:</span> <span class="string">NetworkManager</span></span><br><span class="line">  <span class="attr">ethernets:</span></span><br><span class="line">    <span class="attr">ens33:</span> <span class="comment"># 网卡名称</span></span><br><span class="line">        <span class="attr">dhcp4:</span> <span class="literal">no</span> <span class="comment"># 禁用动态IP分配，以便于下面添加静态IP、网关和DNS服务器的信息</span></span><br><span class="line">        <span class="attr">addresses:</span> [<span class="number">192.168</span><span class="number">.119</span><span class="number">.99</span><span class="string">/24</span>] <span class="comment"># 静态ip地址</span></span><br><span class="line">        <span class="attr">routes:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="attr">to:</span> <span class="string">default</span></span><br><span class="line">            <span class="attr">via:</span> <span class="number">192.168</span><span class="number">.119</span><span class="number">.2</span></span><br><span class="line">        <span class="attr">nameservers:</span></span><br><span class="line">          <span class="attr">addresses:</span> [<span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span>, <span class="number">114.114</span><span class="number">.114</span><span class="number">.114</span>] <span class="comment"># dns服务器地址</span></span><br></pre></td></tr></table></figure>
+
+<p>应用配置和重启服务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> netplan apply</span><br><span class="line"><span class="built_in">sudo</span> systemctl restart systemd-networkd	</span><br></pre></td></tr></table></figure>
+
+<p>主机对应的网络适配器里改静态ip</p>
+<p>这回是密钥不一致（大概因为以前用过其他的机子用这个ip）</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209094948550.png" alt="image-20251209094948550"></p>
+<p>删除旧密钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -R 192.168.119.99</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209095102569.png" alt="image-20251209095102569"></p>
+<p>再尝试ssh可以了，但是VSCode里还是不行。发现每次连接都是显示</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[10:01:48.442] &gt; Anthon@192.168.119.99&#x27;s password: </span><br><span class="line">[10:01:48.442] Showing password prompt</span><br><span class="line">[10:02:10.267] Got password response</span><br><span class="line">[10:02:10.268] &quot;install&quot; wrote data to terminal: &quot;***********&quot;</span><br><span class="line">[10:02:10.296] &gt; </span><br><span class="line">[10:02:13.895] &gt; Permission denied, please try again.</span><br></pre></td></tr></table></figure>
+
+<p>不知道为什么首字母就是要给我大写，导致密码对不上。给ai看了日志他说这几行没出现路径也没出现用户名，说明没加载ssh的配置文件，直接用windows用户名去连接了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[10:01:35.793] SSH Resolver called for host: 192.168.119.99</span><br><span class="line">...</span><br><span class="line">[10:01:37.403] &gt; OpenSSH_9.7p1, ...</span><br></pre></td></tr></table></figure>
+
+<p>按照建议在setting里写死了ssh的配置文件路径</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;remote.SSH.configFile&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C:\\Users\\Anthon\\.ssh\\config&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>连接正常了，不过卡在了下载VSCode服务器</p>
+<h3 id="正在下载VSCode服务器"><a href="#正在下载VSCode服务器" class="headerlink" title="正在下载VSCode服务器"></a>正在下载VSCode服务器</h3><p>一天了捏</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209232503084.png" alt="image-20251209232503084"></p>
+<p>打开remote ssh的设置，取消Exec Server</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209232654880.png" alt="image-20251209232654880"></p>
+<p>这个改成always，意思是总是下载到本地再传输过去</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209232808982.png" alt="image-20251209232808982"></p>
+<p>说这个问题可能是因为vscode自动更新了</p>
+<h3 id="配置密钥（免密连接"><a href="#配置密钥（免密连接" class="headerlink" title="配置密钥（免密连接"></a>配置密钥（免密连接</h3><p>先用ssh生成公钥私钥。然后在远程的<code>~/.ssh/authorized_keys</code>里添加公钥</p>
+<p>最后可能需要配置一下使用的公钥路径，如果没有自动选择的话</p>
+<h2 id="禁止自动更新"><a href="#禁止自动更新" class="headerlink" title="禁止自动更新"></a>禁止自动更新</h2><p>设置里搜更新，这一项改为none</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251209233106204.png" alt="image-20251209233106204"></p>
+<h2 id="其他小东西"><a href="#其他小东西" class="headerlink" title="其他小东西"></a>其他小东西</h2><h3 id="在终端中运行"><a href="#在终端中运行" class="headerlink" title="在终端中运行"></a>在终端中运行</h3><p>文件-首选项-设置，勾选run-in-terminal</p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251105113141305.png" alt="image-20251105113141305"></p>
+<h3 id="中文乱码"><a href="#中文乱码" class="headerlink" title="中文乱码"></a>中文乱码</h3><p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2x6eXdzNzM5MzA3NDUzL2FydGljbGUvZGV0YWlscy84OTgyMzkwMA==">https://blog.csdn.net/lzyws739307453/article/details/89823900<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzY3NzkwMzc0L2FydGljbGUvZGV0YWlscy8xMjY2ODg1OTc=">https://blog.csdn.net/m0_67790374/article/details/126688597<i class="fa fa-external-link-alt"></i></span></p>
+<p>是因为windows终端默认的编码格式和VSCode的不一样，VSCode默认是UTF-8，终端默认是gbk啥的。可以在右下角修编码格式</p>
+<p>或者也有持久化的方法：打开setting.json，在后面加上</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;files.encoding&quot;</span><span class="punctuation">:</span> <span class="string">&quot;utf8&quot;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;terminal.integrated.profiles.windows&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;Command Prompt&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C:\\Windows\\System32\\cmd.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;-NoExit&quot;</span><span class="punctuation">,</span> <span class="string">&quot;/K&quot;</span><span class="punctuation">,</span> <span class="string">&quot;chcp 65001&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;PowerShell&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;path&quot;</span><span class="punctuation">:</span> <span class="string">&quot;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;args&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;-NoExit&quot;</span><span class="punctuation">,</span> <span class="string">&quot;/C&quot;</span><span class="punctuation">,</span> <span class="string">&quot;chcp 65001&quot;</span><span class="punctuation">]</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line"><span class="attr">&quot;terminal.integrated.defaultProfile.windows&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Command Prompt&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>实际上是设定终端参数。改完之后要重启终端</p>
+<h3 id="默认在当前目录打开终端"><a href="#默认在当前目录打开终端" class="headerlink" title="默认在当前目录打开终端"></a>默认在当前目录打开终端</h3><p><span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vanExNzgvcC8xODY4NjUxNw==">https://www.cnblogs.com/jq178/p/18686517<i class="fa fa-external-link-alt"></i></span></p>
+<p>打开设置搜cwd，改成<code>${fileDirname}</code></p>
+<p><img src="/2025/10/08/SetupEnv/setup_vscode/image-20251211090023763.png" alt="image-20251211090023763"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/" title="VSCode配置笔记">https://mintind.github.io/2025/10/08/SetupEnv/setup_vscode/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+              <a href="/tags/VSCode/" rel="tag"># VSCode</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/04/Blog/how-to-build-your-own-blog/" rel="prev" title="使用Hexo&amp;github.io搭建个人博客">
+                  <i class="fa fa-angle-left"></i> 使用Hexo&github.io搭建个人博客
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/10/18/UCAS/MAC-Address-Spoofing-with-Cisco-Packet-Tracer/" rel="next" title="【网络协议安全】MAC欺骗实验">
+                  【网络协议安全】MAC欺骗实验 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/10/08/SetupEnv/setup_vscode/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/10/08/SetupEnv/setup_vscode/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

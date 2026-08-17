@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="很好的软件安全小组作业，使我的电脑自动安装安卓逆向环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android逆向环境">
+<meta property="og:url" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="很好的软件安全小组作业，使我的电脑自动安装安卓逆向环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20251226144005209.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114114122257.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114114601471.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110165321543.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114171722342.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114165420504.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114165710240.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114165815267.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114172742835.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114225251521.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114225923436.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114232434629.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114232652347.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114234132509.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106145030502.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106153433246.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106153458765.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106154703390.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110164307338.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106161842487.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260106164641392.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111222214200.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111122242024.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111122427167.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111153102608.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111153355345.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111153619033.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260111155500688.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110171849868.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110173247074.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260114222107541.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260115000621000.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260115104454288.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260115105416083.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110163323774.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260110164109159.png">
+<meta property="og:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20260116114913279.png">
+<meta property="article:published_time" content="2025-12-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-12-24T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Android">
+<meta property="article:tag" content="CTF">
+<meta property="article:tag" content="Environment">
+<meta property="article:tag" content="Reverse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/image-20251226144005209.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2025/12/24/CTF/env/Android_RE/","path":"2025/12/24/CTF/env/Android_RE/","title":"Android逆向环境"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Android逆向环境 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Android-Studio"><span class="nav-number">1.</span> <span class="nav-text">Android Studio</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.1.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Android-SDK"><span class="nav-number">1.1.1.</span> <span class="nav-text">Android SDK</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E9%A1%B9%E7%9B%AE%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.2.</span> <span class="nav-text">默认项目路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9-android%E5%92%8C-gradle%E8%B7%AF%E5%BE%84"><span class="nav-number">1.1.3.</span> <span class="nav-text">修改.android和.gradle路径</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B0%E5%BB%BA%E8%99%9A%E6%8B%9F%E8%AE%BE%E5%A4%87"><span class="nav-number">1.2.1.</span> <span class="nav-text">新建虚拟设备</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E5%A4%96%E9%83%A8apk"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装外部apk</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adb%E5%91%BD%E4%BB%A4"><span class="nav-number">1.3.</span> <span class="nav-text">adb命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jadx"><span class="nav-number">2.</span> <span class="nav-text">jadx</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK%E4%B8%8EJRE"><span class="nav-number">2.1.</span> <span class="nav-text">JDK与JRE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JDK%EF%BC%88Java-Development-Kit%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">JDK（Java Development Kit）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jadx%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">jadx安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-1"><span class="nav-number">2.4.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%97%E4%BD%93"><span class="nav-number">2.4.1.</span> <span class="nav-text">字体</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%90%AF%E5%8A%A8"><span class="nav-number">2.4.2.</span> <span class="nav-text">快速启动</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%89%B9%E5%A4%84%E7%90%86"><span class="nav-number">2.4.2.1.</span> <span class="nav-text">批处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%88%B0%E5%8F%B3%E9%94%AE"><span class="nav-number">2.4.2.2.</span> <span class="nav-text">添加到右键</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-1"><span class="nav-number">2.5.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A4%8D%E5%88%B6%E5%AE%8C%E6%95%B4%E7%B1%BB%E5%90%8D"><span class="nav-number">2.5.0.1.</span> <span class="nav-text">复制完整类名</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jadx-ai-mcp"><span class="nav-number">3.</span> <span class="nav-text">jadx-ai-mcp</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jadx%E9%87%8C%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-number">3.1.</span> <span class="nav-text">jadx里安装插件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CherryStudio"><span class="nav-number">3.2.</span> <span class="nav-text">CherryStudio</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE-2"><span class="nav-number">3.3.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#APKTool"><span class="nav-number">4.</span> <span class="nav-text">APKTool</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD"><span class="nav-number">4.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8-2"><span class="nav-number">4.2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%8C%85"><span class="nav-number">4.2.1.</span> <span class="nav-text">解包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%87%8D%E6%89%93%E5%8C%85"><span class="nav-number">4.2.2.</span> <span class="nav-text">重打包</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Frida"><span class="nav-number">5.</span> <span class="nav-text">Frida</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">5.1.</span> <span class="nav-text">服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">5.2.</span> <span class="nav-text">客户端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">6.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E6%88%98%E6%B5%81%E7%A8%8B"><span class="nav-number">7.</span> <span class="nav-text">实战流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E6%98%AF%E4%B8%80%E4%BA%9Btips"><span class="nav-number">8.</span> <span class="nav-text">可能是一些tips</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#apk%E5%90%AF%E5%8A%A8%E9%94%99%E8%AF%AF%E6%8E%92%E6%9F%A5"><span class="nav-number">8.1.</span> <span class="nav-text">apk启动错误排查</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Android逆向环境 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Android逆向环境<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvQ1RGL2Vudi9BbmRyb2lkX1JFLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2025-12-25 00:00:00" itemprop="dateCreated datePublished" datetime="2025-12-25T00:00:00+08:00">2025-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Reverse/" itemprop="url" rel="index"><span itemprop="name">Reverse</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.6k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>很好的软件安全小组作业，使我的电脑自动安装安卓逆向环境</p>
+<span id="more"></span>
+
+<p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjg1OTA2Lmh0bQ==">https://bbs.kanxue.com/thread-285906.htm<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWJ1Zi5jb20vYXJ0aWNsZXMvbW9iaWxlLzI4NTg2MS5odG1s">https://www.freebuf.com/articles/mobile/285861.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>这个是好东西：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5kcm9pZGRldnRvb2xzLmNuLyVFRiVCQyU4QyVFNSVCMCVCMSVFNiU5OCVBRiVFNyVCRCU5MSVFOSVBMSVCNSVFNiU5QyU4OSVFNyU4MiVCOSVFNiU4QSVCRCVFOCVCMSVBMQ==">https://www.androiddevtools.cn/，就是网页有点抽象<i class="fa fa-external-link-alt"></i></span></p>
+<h2 id="Android-Studio"><a href="#Android-Studio" class="headerlink" title="Android Studio"></a>Android Studio</h2><p>下载：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5kcm9pZGRldnRvb2xzLmNuLyNhbmRyb2lkLXN0dWRpbw==">https://www.androiddevtools.cn/#android-studio<i class="fa fa-external-link-alt"></i></span></p>
+<p>版本：Android Studio Otter 3 Feature Drop | 2025.2.3 Canary 4                            December 8, 2025</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20251226144005209.png" alt="image-20251226144005209"></p>
+<p>这个组件就算跳过了后面用的时候也得下来着，我选择一直retry。try了一晚上总算好了</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="Android-SDK"><a href="#Android-SDK" class="headerlink" title="Android SDK"></a>Android SDK</h4><p>SDK包含了安卓开发和调试所需的各类工具及系统镜像（包括adb）</p>
+<p>打开设置-language&amp;frameworks，查看SDK的路径</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114114122257.png" alt="image-20260114114122257"></p>
+<p>把SDK路径以及<code>\platform-tools</code>子目录（ADB工具所在目录）加到环境变量里。</p>
+<p>测试：</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114114601471.png" alt="image-20260114114601471"></p>
+<h4 id="默认项目路径"><a href="#默认项目路径" class="headerlink" title="默认项目路径"></a>默认项目路径</h4><p>默认在C盘吓死了</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110165321543.png" alt="image-20260110165321543"></p>
+<h4 id="修改-android和-gradle路径"><a href="#修改-android和-gradle路径" class="headerlink" title="修改.android和.gradle路径"></a>修改.android和.gradle路径</h4><p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmdyZW1saW5zLWJvb2suY29tL2RvY3MvYXBwL2FuZHJvaWRzdHVkaW8xLmh0bWw=">https://blog.gremlins-book.com/docs/app/androidstudio1.html<i class="fa fa-external-link-alt"></i></span></p>
+<p>.android 文件夹：存放 Android 开发环境的配置文件和缓存文件，包括 Android SDK。<br>.gradle 文件夹：类似于 maven 的 .m2 文件夹，用来存放依赖包。</p>
+<p>默认.android 和.gradle 文件夹的存放路径：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\用户名\.android</span><br><span class="line">C:\Users\用户名\.gradle</span><br></pre></td></tr></table></figure>
+
+<p>先关闭所有项目和android studio，把这俩文件夹移动，然后配置环境变量（还没做）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ANDROID_SDK_HOME=D:\software\Android</span><br><span class="line">GRADLE_USER_HOME=D:\software\Android\.gradle</span><br></pre></td></tr></table></figure>
+
+<p>修改android studio设置，Settings-&gt;Build,Execution,Deployment-&gt;Build Tools-&gt;Gradle</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114171722342.png" alt="image-20260114171722342"></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cuZnJlZWJ1Zi5jb20vYXJ0aWNsZXMvbW9iaWxlLzI4NTg2MS5odG1s">https://www.freebuf.com/articles/mobile/285861.html<i class="fa fa-external-link-alt"></i></span></p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLjUxY3RvLmNvbS91XzE2MTc1NTAwLzEyMjA1MDky">android emulator 部署外部apk<i class="fa fa-external-link-alt"></i></span> </p>
+<h4 id="新建虚拟设备"><a href="#新建虚拟设备" class="headerlink" title="新建虚拟设备"></a>新建虚拟设备</h4><p>这一步是选硬件模板，长宽啥的应该是，随便挑</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114165420504.png" alt="image-20260114165420504"></p>
+<p>选系统镜像</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114165710240.png" alt="image-20260114165710240"></p>
+<p>选了android14，没有已下载的镜像，点击下载。然后漫长的等待，好了之后点完成</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114165815267.png" alt="image-20260114165815267"></p>
+<h4 id="安装外部apk"><a href="#安装外部apk" class="headerlink" title="安装外部apk"></a>安装外部apk</h4><ol>
+<li><p>可以直接把apk拖进来。但是发现会自动检查16kb对齐</p>
+</li>
+<li><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install -r 1.apk</span><br></pre></td></tr></table></figure>
+
+<p> <img src="/2025/12/24/CTF/env/Android_RE/image-20260114172742835.png" alt="image-20260114172742835"></p>
+</li>
+</ol>
+<h3 id="adb命令"><a href="#adb命令" class="headerlink" title="adb命令"></a>adb命令</h3><p>列出连接的设备，包括正在运行的模拟器</p>
+<figure class="highlight ps"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+
+<p>安装apk。-r是replace，重装的意思，即使有这个包名也装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install /path/to/your/app.apk</span><br></pre></td></tr></table></figure>
+
+<p>（adb shell这边，感觉就是后面接一个命令带进设备shell里执行）</p>
+<p>按关键字查找包名</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell pm list packages | findstr &lt;关键字&gt;</span><br></pre></td></tr></table></figure>
+
+<p>启动应用。使用 Monkey 工具启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell monkey -p com.example.myapp -c android.intent.category.LAUNCHER 1</span><br></pre></td></tr></table></figure>
+
+<p>卸载应用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb uninstall packages</span><br></pre></td></tr></table></figure>
+
+<p>重启设备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb reboot</span><br></pre></td></tr></table></figure>
+
+<p>进入设备shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br></pre></td></tr></table></figure>
+
+<p>获取设备root权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114225251521.png" alt="image-20260114225251521"></p>
+<p>说明这台设备是 user (production) 版系统，Google 把 adbd 的 root 能力阉掉了，正规途径无法 adb root。</p>
+<p>在device manager中选中设备，点开三个点，show on disk</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114225923436.png" alt="image-20260114225923436"></p>
+<p>打开config.ini找image.sysdir.1&#x3D;system-images&#x2F;android-34&#x2F;google_apis&#x2F;*，如果是google_apis_playstore，说明是user版，得重装一个设备</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114232434629.png" alt="image-20260114232434629"></p>
+<p>好的重装吧。系统镜像这一步选<strong>Google APIs</strong>，不要选<strong>Google Play</strong></p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114232652347.png" alt="image-20260114232652347"></p>
+<p>再试就OK了</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114234132509.png" alt="image-20260114234132509"></p>
+<h2 id="jadx"><a href="#jadx" class="headerlink" title="jadx"></a>jadx</h2><p>参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vZ3F2MjAwOS9wLzE2NzkxODY0Lmh0bWw=">https://www.cnblogs.com/gqv2009/p/16791864.html<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="JDK与JRE"><a href="#JDK与JRE" class="headerlink" title="JDK与JRE"></a>JDK与JRE</h3><table>
+<thead>
+<tr>
+<th>正式名</th>
+<th>包含内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Java</td>
+<td>语言规范 + 语法</td>
+</tr>
+<tr>
+<td>JDK (Java Development Kit)</td>
+<td>JRE + 编译器(javac) + 调试器(jdb) + 打包工具(jar) + 头文件等</td>
+</tr>
+<tr>
+<td>JRE (Java Runtime Environment)</td>
+<td>JVM + 核心类库 + 支持文件</td>
+</tr>
+</tbody></table>
+<p>JDK包含JRE</p>
+<h3 id="JDK（Java-Development-Kit）"><a href="#JDK（Java-Development-Kit）" class="headerlink" title="JDK（Java Development Kit）"></a>JDK（Java Development Kit）</h3><p>参考：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FDRV9VXzAwNUEvYXJ0aWNsZS9kZXRhaWxzLzExNDg0MDQ5Nw==">https://blog.csdn.net/ACE_U_005A/article/details/114840497<i class="fa fa-external-link-alt"></i></span></p>
+<p>下载：<span class="exturl" data-url="aHR0cHM6Ly93d3cub3JhY2xlLmNvbS9qYXZhL3RlY2hub2xvZ2llcy9kb3dubG9hZHMvI2pkazIxLXdpbmRvd3M=">https://www.oracle.com/java/technologies/downloads/#jdk21-windows<i class="fa fa-external-link-alt"></i></span></p>
+<p>下的压缩包版，解压到Java文件夹。然后在加系统变量，在Path里加jdk的bin路径</p>
+<p>验证。这里我用<code>--version</code>报错了，得用<code>-version</code>，改版了？</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106145030502.png" alt="image-20260106145030502"></p>
+<h3 id="jadx安装"><a href="#jadx安装" class="headerlink" title="jadx安装"></a>jadx安装</h3><p>下载：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NreWxvdC9qYWR4L3JlbGVhc2Vz">https://github.com/skylot/jadx/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>下了这个：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3NreWxvdC9qYWR4L3JlbGVhc2VzL2Rvd25sb2FkL3YxLjUuMy9qYWR4LWd1aS0xLjUuMy13aW4uemlw">jadx-gui-1.5.3-win.zip<i class="fa fa-external-link-alt"></i></span> - jadx-gui Windows executable (system JRE must be installed)</p>
+<p>进lib目录运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jadx-gui-1.5.3-all.jar</span><br></pre></td></tr></table></figure>
+
+<p>说我的java版本太老了</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106153433246.png" alt="image-20260106153433246"></p>
+<p>查看java路径，是先识别到了oracle的java8了</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106153458765.png" alt="image-20260106153458765"></p>
+<p>可以在系统变量里把jdk21的路径提前，或者卸载oracle java8。选择卸载，包括：卸载，删除这个文件夹，以及删除相应的环境变量</p>
+<p>再试成功</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106154703390.png" alt="image-20260106154703390"></p>
+<h3 id="配置-1"><a href="#配置-1" class="headerlink" title="配置"></a>配置</h3><h4 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h4><p>首选项-界面</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110164307338.png" alt="image-20260110164307338"></p>
+<h4 id="快速启动"><a href="#快速启动" class="headerlink" title="快速启动"></a>快速启动</h4><h5 id="批处理"><a href="#批处理" class="headerlink" title="批处理"></a>批处理</h5><p>新建一个批处理文件jadx_gui.bat</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@<span class="built_in">echo</span> off</span><br><span class="line">java -jar &quot;%~dp0\lib\jadx-gui-<span class="number">1</span>.<span class="number">5</span>.<span class="number">3</span>-all.jar&quot;</span><br></pre></td></tr></table></figure>
+
+<p>双击这个bat文件就可以打开jadx</p>
+<h5 id="添加到右键"><a href="#添加到右键" class="headerlink" title="添加到右键"></a>添加到右键</h5><p>可以直接使用命令用jadx打开文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar jadx-gui-1.5.3-all.jar <span class="string">&quot;111.jar&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>修改注册表项，在<code>计算机\HKEY_CLASSES_ROOT\*\shell\</code>下添加一项，默认值：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;D:\Tool\Java\jdk-21.0.9\bin\java.exe&quot;</span> -jar <span class="string">&quot;D:\CTFTools\jadx-gui-1.5.3-win\lib\jadx-gui-1.5.3-all.jar&quot;</span> <span class="string">&quot;%1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里注意<strong>路径全部都要写死</strong></p>
+<p>icon设置成jadx的exe路径。嗯…icon好像不太行</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106161842487.png" alt="image-20260106161842487"></p>
+<p>问gemini，它说你可以用java的图标。我去，天才</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260106164641392.png" alt="image-20260106164641392"></p>
+<h3 id="使用-1"><a href="#使用-1" class="headerlink" title="使用"></a>使用</h3><h5 id="复制完整类名"><a href="#复制完整类名" class="headerlink" title="复制完整类名"></a>复制完整类名</h5><p>什么？你说这个不用教？对不起我就需要这种东西</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111222214200.png" alt="image-20260111222214200"></p>
+<h2 id="jadx-ai-mcp"><a href="#jadx-ai-mcp" class="headerlink" title="jadx-ai-mcp"></a>jadx-ai-mcp</h2><p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ppbmphLWNvZGVyL2phZHgtYWktbWNw">https://github.com/zinja-coder/jadx-ai-mcp<i class="fa fa-external-link-alt"></i></span></p>
+<p>release：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL3ppbmphLWNvZGVyL2phZHgtYWktbWNwL3JlbGVhc2Vz">https://github.com/zinja-coder/jadx-ai-mcp/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>把<code>jadx-ai-mcp-&lt;version&gt;.jar</code> and <code>jadx-mcp-server-&lt;version&gt;.zip</code>都下载，然后解压zip。这个布局：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├jadx-mcp-server/</span><br><span class="line">  ├── jadx_mcp.py</span><br><span class="line">  ├── requirements.txt</span><br><span class="line">  ├── README.md</span><br><span class="line">  ├── LICENSE</span><br><span class="line"></span><br><span class="line">├jadx-ai-mcp-&lt;version&gt;.jar</span><br></pre></td></tr></table></figure>
+
+<h3 id="jadx里安装插件"><a href="#jadx里安装插件" class="headerlink" title="jadx里安装插件"></a>jadx里安装插件</h3><p>首选项里找到，点安装然后保存</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111122242024.png" alt="image-20260111122242024"></p>
+<p>菜单栏点插件-安装插件-选择jar</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111122427167.png" alt="image-20260111122427167"></p>
+<h3 id="CherryStudio"><a href="#CherryStudio" class="headerlink" title="CherryStudio"></a>CherryStudio</h3><p>官方给的又是用uvx，不想用，改用python。首先需要在python环境里安装fastmcp和httpx包</p>
+<p>验证：</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111153102608.png" alt="image-20260111153102608"></p>
+<p>OK的，那就在cherry Studio里添加服务器。类型选stdio，命令输python解释器路径，参数输jadx_mcp_server.py的路径，保存，启动</p>
+<p>cherry Studio对话里选择对应的mcp服务器</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111153355345.png" alt="image-20260111153355345"></p>
+<p>成功</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111153619033.png" alt="image-20260111153619033"></p>
+<h3 id="配置-2"><a href="#配置-2" class="headerlink" title="配置"></a>配置</h3><p>jadx的插件选项里可以查看和修改服务器端口</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260111155500688.png" alt="image-20260111155500688"></p>
+<h2 id="APKTool"><a href="#APKTool" class="headerlink" title="APKTool"></a>APKTool</h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><p>下载地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2lCb3RQZWFjaGVzL0Fwa3Rvb2wvcmVsZWFzZXM=">https://github.com/iBotPeaches/Apktool/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>引用：<span class="exturl" data-url="aHR0cHM6Ly9hcGt0b29sLm9yZy9kb2NzL2luc3RhbGw=">https://apktool.org/docs/install<i class="fa fa-external-link-alt"></i></span></p>
+<blockquote>
+<ol>
+<li>Download the Windows <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2lCb3RQZWFjaGVzL0Fwa3Rvb2wvbWFzdGVyL3NjcmlwdHMvd2luZG93cy9hcGt0b29sLmJhdA==">wrapper script<i class="fa fa-external-link-alt"></i></span>. (Right click, Save Link As <code>apktool.bat</code>)</li>
+<li>Download the <span class="exturl" data-url="aHR0cHM6Ly9iaXRidWNrZXQub3JnL2lCb3RQZWFjaGVzL2Fwa3Rvb2wvZG93bmxvYWRz">latest version<i class="fa fa-external-link-alt"></i></span> of Apktool.</li>
+<li>Rename downloaded jar to <code>apktool.jar</code>.</li>
+<li>Move both <code>apktool.jar</code> and <code>apktool.bat</code> to your Windows directory. (Usually <code>C://Windows</code>)</li>
+<li>If you do not have access to <code>C://Windows</code>, you can place the two files anywhere and add that directory to your Environment Variables System PATH variable.</li>
+<li>Try running <code>apktool</code> via the command prompt.</li>
+</ol>
+</blockquote>
+<p> <span class="exturl" data-url="aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL2lCb3RQZWFjaGVzL0Fwa3Rvb2wvbWFzdGVyL3NjcmlwdHMvd2luZG93cy9hcGt0b29sLmJhdA==">wrapper script<i class="fa fa-external-link-alt"></i></span>这里是个bat文件，结合这个bat文件可以在命令行中直接使用<code>apktool</code>而不是都要使用java -jar。这个bat文件和下载的apktool.jar要放在同一个目录</p>
+<h3 id="使用-2"><a href="#使用-2" class="headerlink" title="使用"></a>使用</h3><p>参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vY2xuY2hhbnBpbi9wLzE5Mzk3MDQ4I19hcGt0b29sXzI1">https://www.cnblogs.com/clnchanpin/p/19397048#_apktool_25<i class="fa fa-external-link-alt"></i></span></p>
+<h4 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool d myapp.apk -o myapp_decoded</span><br></pre></td></tr></table></figure>
+
+<p>堆不够用</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110171849868.png" alt="image-20260110171849868"></p>
+<p>先设置堆给到 8 G，再运行。还不行，加上-j，限制使用的线程数。-f是覆盖（因为之前执行过有这个目录了）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -Xmx8g -jar apktool.jar d f -j 1 myapp.apk -o myapp_decoded</span><br></pre></td></tr></table></figure>
+
+<p>终于成了</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110173247074.png" alt="image-20260110173247074"></p>
+<h4 id="重打包"><a href="#重打包" class="headerlink" title="重打包"></a>重打包</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool b myapp_decoded -o my_new.apk</span><br></pre></td></tr></table></figure>
+
+<p>加上-d允许调试</p>
+<h2 id="Frida"><a href="#Frida" class="headerlink" title="Frida"></a>Frida</h2><p>项目地址：<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyaWRhL2ZyaWRhL3JlbGVhc2Vz">https://github.com/frida/frida/releases<i class="fa fa-external-link-alt"></i></span></p>
+<p>参考：</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQwMDM3NTU1L2FydGljbGUvZGV0YWlscy8xNTQ1MjIyMDQ=">https://blog.csdn.net/qq_40037555/article/details/154522204<i class="fa fa-external-link-alt"></i></span> 好详细，但是只有一部分</p>
+<p>Frida是一款动态 instrumentation 工具，可用于在运行时Hook应用程序的函数&#x2F;方法，需分别在设备端（Frida-Server）和本地端（Frida-Client）配置。</p>
+<h3 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h3><p>Frida-Server 是运行在 Android 设备上的服务器端组件，允许 Frida 客户端与设备进行通信。</p>
+<p>选择版本：</p>
+<p><del>注意拉到下面选择frida-server开头的</del></p>
+<ul>
+<li>模拟器的架构通常为x86_64，选择<code>android-x86_64.xz</code>结尾的二进制包；</li>
+<li>真机通常为ARM架构，选择<code>android-arm64.xz</code>结尾的二进制包。</li>
+</ul>
+<p>获取设备的架构。进设备shel然后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getprop ro.product.cpu.abi</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260114222107541.png" alt="image-20260114222107541"></p>
+<p>所以本例就是应该下载<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2ZyaWRhL2ZyaWRhL3JlbGVhc2VzL2Rvd25sb2FkLzE3LjUuMi9mcmlkYS1zZXJ2ZXItMTcuNS4yLWFuZHJvaWQteDg2XzY0Lnh6">     frida-server-17.5.2-android-x86_64.xz      <i class="fa fa-external-link-alt"></i></span></p>
+<p>下载对应版本后解压，推送到设备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 推送到设备</span><br><span class="line">adb push frida-server /data/local/tmp/</span><br><span class="line"></span><br><span class="line"># 换个名字方便 </span><br><span class="line">adb shell mv /data/local/tmp/frida-server-17.5.2-android-x86_64 /data/local/tmp/frida-server</span><br><span class="line"></span><br><span class="line"># 设置执行权限</span><br><span class="line">adb shell &quot;chmod 755 /data/local/tmp/frida-server&quot;</span><br></pre></td></tr></table></figure>
+
+<p>获取设备root权限，然后运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line"></span><br><span class="line"># 以 root 权限运行</span><br><span class="line">adb shell &quot;su 0 sh -c &#x27;/data/local/tmp/frida-server &amp;&#x27;&quot;</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><code>su 0</code></th>
+<th>切换到 <strong>root 用户（uid&#x3D;0）</strong>，否则没权限监听低端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>sh -c &#39;...&#39;</code></td>
+<td>启动一个 shell，把单引号里的内容当成完整脚本执行（Android 的 su 没有 <code>-c</code>，用 sh 包一层实现）</td>
+</tr>
+<tr>
+<td><code>/data/local/tmp/frida-server</code></td>
+<td>真正要运行的可执行文件路径</td>
+</tr>
+<tr>
+<td><code>&amp;</code></td>
+<td>在 <strong>设备端 shell</strong> 里把 frida-server 放后台，这样 adb 会话断开后进程不会被杀</td>
+</tr>
+</tbody></table>
+<p>然后没输出是正常的</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260115000621000.png" alt="image-20260115000621000"></p>
+<h3 id="客户端"><a href="#客户端" class="headerlink" title="客户端"></a>客户端</h3><p>需要python和nodejs环境（编译js的hook脚本）</p>
+<p>Frida-Tool 是命令行工具，通常与 Frida 版本相对应。</p>
+<p>安装。得和frida server版本匹配。因为用的就是最新版的所以没关系</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install frida-tools</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260115104454288.png" alt="image-20260115104454288"></p>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><p>先push Server到设备并且启动</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb shell <span class="string">&quot;su 0 sh -c &#x27;/data/local/tmp/frida-server &amp;&#x27;&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里如果报端口被占用的话，可能是上次没关（）也能用</p>
+<p>验证</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 列出设备上运行的进程</span><br><span class="line">frida-ps -U</span><br><span class="line"></span><br><span class="line"># 列出已安装的应用</span><br><span class="line">frida-ps -Ua</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260115105416083.png" alt="image-20260115105416083"></p>
+<p>安装apk到虚拟设备</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb install path/to/apk</span><br></pre></td></tr></table></figure>
+
+<p>使用monkey启动</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell monkey -p com.ting.android -c android.intent.category.LAUNCHER 1</span><br></pre></td></tr></table></figure>
+
+<p>编写和运行hook脚本</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frida -U -f com.你的应用包名 -l hook.js</span><br></pre></td></tr></table></figure>
+
+<h2 id="实战流程"><a href="#实战流程" class="headerlink" title="实战流程"></a>实战流程</h2><p>后面参考一下这个吧：<span class="exturl" data-url="aHR0cHM6Ly9iYnMua2FueHVlLmNvbS90aHJlYWQtMjg1OTA2Lmh0bQ==">https://bbs.kanxue.com/thread-285906.htm<i class="fa fa-external-link-alt"></i></span></p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110163323774.png" alt="image-20260110163323774"></p>
+<p>用jadx打开APK文件，打开manifest.xml，找入口点。应该是WelcomeScreen.Alias0，需要enabled&#x3D;”true”，同时WelcomeScreen</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260110164109159.png" alt="image-20260110164109159"></p>
+<p>打开Android Studio，点new project</p>
+<p>正常流程是apktool d解包apk，然后b -d给manifest加debug参数，然后keystone生成新签名，jarsigner重签名apk就可以了。</p>
+<h2 id="可能是一些tips"><a href="#可能是一些tips" class="headerlink" title="可能是一些tips"></a>可能是一些tips</h2><h3 id="apk启动错误排查"><a href="#apk启动错误排查" class="headerlink" title="apk启动错误排查"></a>apk启动错误排查</h3><p>比如说这个卡在了启动界面，或者直接黑屏了</p>
+<p>在logcat里查找</p>
+<p><img src="/2025/12/24/CTF/env/Android_RE/image-20260116114913279.png" alt="image-20260116114913279"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">2026-01-16 11:43:05.325 11737-11737 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.NoSuchMethodException: dalvik.system.VMRuntime.setHiddenApiExemptions [class [Ljava.lang.String;]</span><br><span class="line">2026-01-16 11:43:06.184 11737-11850 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.mm.memoryinfo.ApmMemoryInfoModule&quot; on path: DexPathList[[zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.194 11737-11850 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.mm.leak.ApmMemoryLeakModule&quot; on path: DexPathList[[zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.212 11737-11850 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.mm.oom.ApmOOMModule&quot; on path: DexPathList[[zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.374 11737-11887 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.huawei.system.BuildEx&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.379 11737-11850 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.iomonitor.ApmIOModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.391 11737-11856 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.ad.ARouter$$Root$$AdModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.507 11737-11850 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.xmbootmonitor.ApmBootNetMonitorModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.624 11737-11855 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.main.ARouter$$Root$$MainModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.633 11737-11855 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.main.ARouter$$Providers$$MainModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:06.647 11737-11855 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.main.ARouter$$Interceptors$$MainModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 11:43:09.040 11737-12200 System.err              com.ximalaya.ting.android            W  Caused by: android.system.GaiException: android_getaddrinfo failed: EAI_NODATA (No address associated with hostname)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>后来是进去了但是无响应了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"> Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.40 (port 443) from /10.0.2.16 (port 55302) after 29998ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:11:26.411 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:12:51.205 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.40 (port 443) from /10.0.2.16 (port 40800) after 30000ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:12:51.214 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:13:33.863 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.14 (port 443) from /10.0.2.16 (port 56144) after 30000ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:13:33.866 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:14:16.551 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.14 (port 443) from /10.0.2.16 (port 39838) after 30000ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:14:16.556 16105-16148 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:15:24.981 16105-20411 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.mylisten.ARouter$$Root$$MyListenModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/radio/origin/radio.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/chat/origin/chat.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 23:15:26.466 16105-16105 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.NullPointerException: itemView.findViewById(R.id.listen_v_root) must not be null</span><br><span class="line">2026-01-16 23:15:33.105 16105-20415 System.err              com.ximalaya.ting.android            W  Caused by: java.lang.ClassNotFoundException: Didn&#x27;t find class &quot;com.ximalaya.ting.android.record.ARouter$$Root$$RecordModule&quot; on path: DexPathList[[zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/record/origin/record.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/radio/origin/radio.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/chat/origin/chat.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/kid/origin/kid.apk&quot;, zip file &quot;/data/user/0/com.ximalaya.ting.android/app_dex/ad/origin/ad.apk&quot;, zip file &quot;/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk&quot;],nativeLibraryDirectories=[/data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/lib/arm64, /data/app/~~LhWkTAekNeLdyVfbUl_l1Q==/com.ximalaya.ting.android-GN4AVz4NtRzZb2B0a-rhPA==/base.apk!/lib/arm64-v8a, /system/lib64, /system_ext/lib64]]</span><br><span class="line">2026-01-16 23:17:32.676 16699-16883 System.err              com.ximalaya.ting.android            W  Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.40 (port 443) from /10.0.2.16 (port 58734) after 30000ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:17:32.688 16699-16883 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:18:15.388 16699-16883 System.err              com.ximalaya.ting.android            W  Caused by: java.net.ConnectException: failed to connect to mermaid.test.ximalaya.com/10.146.3.40 (port 443) from /10.0.2.16 (port 44662) after 30000ms: isConnected failed: ECONNREFUSED (Connection refused)</span><br><span class="line">2026-01-16 23:18:15.392 16699-16883 System.err              com.ximalaya.ting.android            W  Caused by: android.system.ErrnoException: isConnected failed: ECONNREFUSED (Connection refused)</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2025/12/24/CTF/env/Android_RE/" title="Android逆向环境">https://mintind.github.io/2025/12/24/CTF/env/Android_RE/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/CTF/" rel="tag"># CTF</a>
+              <a href="/tags/Reverse/" rel="tag"># Reverse</a>
+              <a href="/tags/Android/" rel="tag"># Android</a>
+              <a href="/tags/Environment/" rel="tag"># Environment</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/19/CTF/Reverse/2025-12-20_nese_1z_re/" rel="prev" title="【RE】2025-12-20升级赛1z_re">
+                  <i class="fa fa-angle-left"></i> 【RE】2025-12-20升级赛1z_re
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/24/UCAS/network_protocol_security_review/" rel="next" title="【网络协议安全】review">
+                  【网络协议安全】review <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2025/12/24/CTF/env/Android_RE/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2025/12/24/CTF/env/Android_RE/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

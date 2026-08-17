@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="新环境新Python管理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python-conda*Git">
+<meta property="og:url" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="新环境新Python管理">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110112427417.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110112700491.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110112811398.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110113005750.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110113039926.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110113122920.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110114046120.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260106144013396.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260106144718674.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260106150414545.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110111505679.png">
+<meta property="article:published_time" content="2026-01-05T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-05T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="Conda">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/image-20260110112427417.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/01/05/SetupEnv/python_conda/","path":"2026/01/05/SetupEnv/python_conda/","title":"Python-conda*Git"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Python-conda*Git | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Git-for-Windows"><span class="nav-number">1.</span> <span class="nav-text">Git for Windows</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gui%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">gui下载</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-%E2%AC%9C%E2%9C%85-Additional-icons-%E9%99%84%E5%8A%A0%E5%9B%BE%E6%A0%87"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">3.1 ⬜✅ Additional icons (附加图标)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-%E2%9C%85-Windows-Explorer-integration-Windows-%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8%E9%9B%86%E6%88%90-%E2%80%94%E2%80%94-%E2%AD%90-%E6%9C%80%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.0.2.</span> <span class="nav-text">3.2 ✅ Windows Explorer integration (Windows 资源管理器集成) —— ⭐ 最核心功能</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-%E2%9C%85-Git-LFS-Large-File-Support-Git-%E5%A4%A7%E6%96%87%E4%BB%B6%E6%94%AF%E6%8C%81"><span class="nav-number">1.1.0.3.</span> <span class="nav-text">3.3 ✅ Git LFS (Large File Support) (Git 大文件支持)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-4-%E2%9C%85-Associate-git-configuration-files-with-the-default-text-editor"><span class="nav-number">1.1.0.4.</span> <span class="nav-text">3.4 ✅ Associate .git* configuration files with the default text editor</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-5-%E2%9C%85-Associate-sh-files-to-be-run-with-Bash"><span class="nav-number">1.1.0.5.</span> <span class="nav-text">3.5 ✅ Associate .sh files to be run with Bash</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-6-%E2%AC%9C-Check-daily-for-Git-for-Windows-update"><span class="nav-number">1.1.0.6.</span> <span class="nav-text">3.6 ⬜ Check daily for Git for Windows update</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-7-%E2%AC%9C%E2%9C%85-Add-a-Git-Bash-Profile-to-Windows-Terminal"><span class="nav-number">1.1.0.7.</span> <span class="nav-text">3.7 ⬜✅ Add a Git Bash Profile to Windows Terminal</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-8-%E2%9C%85-Scalar-Git-add-on-to-manage-large-scale-repositories"><span class="nav-number">1.1.0.8.</span> <span class="nav-text">3.8 ✅ Scalar (Git add-on to manage large-scale repositories)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%89%E9%A1%B9-1%EF%BC%9ACheckout-Windows-style-commit-Unix-style-line-endings-%E6%A3%80%E5%87%BA%E6%97%B6%E7%94%A8-Windows-%E9%A3%8E%E6%A0%BC%EF%BC%8C%E6%8F%90%E4%BA%A4%E6%97%B6%E7%94%A8-Unix-%E9%A3%8E%E6%A0%BC-%E2%80%94%E2%80%94-%E6%8E%A8%E8%8D%90%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.0.9.</span> <span class="nav-text">选项 1：Checkout Windows-style, commit Unix-style line endings (检出时用 Windows 风格，提交时用 Unix 风格) ——  推荐选择</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8winget%E4%B8%8B%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">使用winget下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Miniconda"><span class="nav-number">2.</span> <span class="nav-text">Miniconda</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Conda"><span class="nav-number">2.1.</span> <span class="nav-text">Conda</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows%E5%AE%89%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">Windows安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#wsl%E5%AE%89%E8%A3%85"><span class="nav-number">2.3.</span> <span class="nav-text">wsl安装</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#conda%E5%91%BD%E4%BB%A4"><span class="nav-number">3.</span> <span class="nav-text">conda命令</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80python"><span class="nav-number">4.</span> <span class="nav-text">基础python</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Python-conda*Git | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python-conda*Git<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvU2V0dXBFbnYvcHl0aG9uX2NvbmRhLm1k" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-06 00:00:00" itemprop="dateCreated datePublished" datetime="2026-01-06T00:00:00+08:00">2026-01-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/SetupEnv/" itemprop="url" rel="index"><span itemprop="name">SetupEnv</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.7k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>新环境新Python管理</p>
+<span id="more"></span>
+
+<h2 id="Git-for-Windows"><a href="#Git-for-Windows" class="headerlink" title="Git for Windows"></a>Git for Windows</h2><h3 id="gui下载"><a href="#gui下载" class="headerlink" title="gui下载"></a>gui下载</h3><p>下载：<span class="exturl" data-url="aHR0cHM6Ly9naXQtc2NtLmNvbS9pbnN0YWxsL3dpbmRvd3M=">https://git-scm.com/install/windows<i class="fa fa-external-link-alt"></i></span></p>
+<p>参考：<span class="exturl" data-url="aHR0cHM6Ly93d3cuY25ibG9ncy5jb20vbGpiZ3VhbmxpL3AvMTk0MzQ0NjI=">https://www.cnblogs.com/ljbguanli/p/19434462<i class="fa fa-external-link-alt"></i></span> 选项解读很完整</p>
+<p>版本：Git 2.52.0</p>
+<p>建议保留默认路径。那好吧</p>
+<p>组件：</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110112427417.png" alt="image-20260110112427417"></p>
+<blockquote>
+<h5 id="3-1-⬜✅-Additional-icons-附加图标"><a href="#3-1-⬜✅-Additional-icons-附加图标" class="headerlink" title="3.1 ⬜✅ Additional icons (附加图标)"></a>3.1 ⬜✅ <strong>Additional icons (附加图标)</strong></h5><ul>
+<li>On the Desktop (在桌面上)<ul>
+<li>含义：在电脑桌面上创建一个 Git Bash 的快捷方式图标</li>
+<li><strong>解读：默认不勾选，看个人喜好</strong></li>
+<li>为什么？：一般很少专门双击图标去打开 Git。通常是在某个具体的项目文件夹里点右键打开（见下一项），或者直接在编辑器（PyCharm&#x2F;VS Code）里用。桌面上图标越少越清爽。</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-2-✅-Windows-Explorer-integration-Windows-资源管理器集成-——-⭐-最核心功能"><a href="#3-2-✅-Windows-Explorer-integration-Windows-资源管理器集成-——-⭐-最核心功能" class="headerlink" title="3.2 ✅ Windows Explorer integration (Windows 资源管理器集成) —— ⭐ 最核心功能"></a>3.2 ✅ <strong>Windows Explorer integration (Windows 资源管理器集成)</strong> —— <strong>⭐ 最核心功能</strong></h5><p>这是一个“大标题”，下面包含两个子选项。它的意思是：<strong>把 Git 的功能添加到鼠标右键菜单里。</strong></p>
+<ul>
+<li><strong>✅ Open Git Bash here (在这里打开 Git Bash)</strong><ul>
+<li><strong>含义</strong>：当进入某个文件夹（比如 Python 项目文件夹），点击鼠标右键，菜单里会出现这个选项。点击它，黑色的命令行窗口就会弹出来，并且自动定位到当前文件夹</li>
+<li><strong>解读</strong>：<strong>必选！</strong> 这是 Git 在 Windows 上最高频的操作入口。没有它，每次打开命令行都得手动输入 <code>cd D:\我的项目\代码</code> 这样长长的路径，非常痛苦</li>
+</ul>
+</li>
+<li><strong>✅ Open Git GUI here (在这里打开 Git GUI)</strong><ul>
+<li><strong>含义</strong>：在右键菜单里添加“打开 Git 图形界面”的选项</li>
+<li><strong>解读</strong>：<strong>保留默认</strong>。虽然程序员多用命令行，但有时候用图形界面看看代码修改历史（Log）也挺直观的</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-3-✅-Git-LFS-Large-File-Support-Git-大文件支持"><a href="#3-3-✅-Git-LFS-Large-File-Support-Git-大文件支持" class="headerlink" title="3.3 ✅ Git LFS (Large File Support) (Git 大文件支持)"></a>3.3 ✅ <strong>Git LFS (Large File Support) (Git 大文件支持)</strong></h5><ul>
+<li><strong>含义</strong>：LFS (Large File Storage) 是 Git 的一个扩展插件</li>
+<li><strong>解读</strong>：<strong>必选</strong><ul>
+<li>Git 原本设计是用来存代码（纯文本）的，存大图片、视频、音频效率极低，甚至会把仓库撑爆</li>
+<li>LFS 就是专门帮 Git “开外挂”来高效管理这些大文件的。很多开源项目都依赖它</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-4-✅-Associate-git-configuration-files-with-the-default-text-editor"><a href="#3-4-✅-Associate-git-configuration-files-with-the-default-text-editor" class="headerlink" title="3.4 ✅ Associate .git* configuration files with the default text editor"></a>3.4 ✅ <strong>Associate .git* configuration files with the default text editor</strong></h5><ul>
+<li><strong>翻译</strong>：将 .git* 配置文件关联到默认文本编辑器</li>
+<li><strong>解读</strong>：<strong>必选</strong><ul>
+<li>Git 的配置文件通常叫 <code>.gitconfig</code>。勾选这个后，在电脑里看到这种文件，双击它，它就会直接用设置好的编辑器（比如记事本）打开，方便修改配置。如果不勾，双击时系统会一脸懵地问：“要用什么软件打开它？”</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-5-✅-Associate-sh-files-to-be-run-with-Bash"><a href="#3-5-✅-Associate-sh-files-to-be-run-with-Bash" class="headerlink" title="3.5 ✅ Associate .sh files to be run with Bash"></a>3.5 ✅ <strong>Associate .sh files to be run with Bash</strong></h5><ul>
+<li><strong>翻译</strong>：关联 .sh 文件，使其通过 Bash 运行</li>
+<li><strong>解读</strong>：<strong>必选</strong><ul>
+<li><code>.sh</code> 文件是 Linux 系统的脚本（类似于 Windows 的 <code>.bat</code>）</li>
+<li>因为装了 Git Bash（它模拟了 Linux 环境），勾选这个后，在 Windows 上双击 <code>.sh</code> 文件，它就能自动跑起来。这对于运行一些跨平台的自动化脚本非常有用</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-6-⬜-Check-daily-for-Git-for-Windows-update"><a href="#3-6-⬜-Check-daily-for-Git-for-Windows-update" class="headerlink" title="3.6 ⬜ Check daily for Git for Windows update"></a>3.6 ⬜ <strong>Check daily for Git for Windows update</strong></h5><ul>
+<li><strong>翻译</strong>：每天检查 Git for Windows 的更新</li>
+<li><strong>解读</strong>：<strong>不要勾选</strong><ul>
+<li>Git 是一个非常成熟稳定的工具，不需要像手机 App 那样天天更新。勾选这个后，它每天都会联网检查，如果有新版本就会弹窗骚扰。想更新的时候，自己半年一年手动去官网下一次就行</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-7-⬜✅-Add-a-Git-Bash-Profile-to-Windows-Terminal"><a href="#3-7-⬜✅-Add-a-Git-Bash-Profile-to-Windows-Terminal" class="headerlink" title="3.7 ⬜✅ Add a Git Bash Profile to Windows Terminal"></a>3.7 ⬜✅ <strong>Add a Git Bash Profile to Windows Terminal</strong></h5><ul>
+<li><strong>翻译</strong>：将 Git Bash 的配置文件添加到 Windows Terminal 中</li>
+<li><strong>解读</strong>：<strong>看个人喜好（默认不勾）</strong><ul>
+<li>如果用的是 Win11，或者自己安装了微软的 <strong>Windows Terminal</strong>（那个可以同时开好几个标签页的帅气终端），勾选这个会让 Git Bash 自动出现在它的下拉菜单里，非常方便</li>
+<li>如果不知道 Windows Terminal 是什么，那就别勾，保持默认</li>
+</ul>
+</li>
+</ul>
+<h5 id="3-8-✅-Scalar-Git-add-on-to-manage-large-scale-repositories"><a href="#3-8-✅-Scalar-Git-add-on-to-manage-large-scale-repositories" class="headerlink" title="3.8 ✅ Scalar (Git add-on to manage large-scale repositories)"></a>3.8 ✅ <strong>Scalar (Git add-on to manage large-scale repositories)</strong></h5><ul>
+<li><strong>翻译</strong>：Scalar（用于管理超大规模仓库的 Git 插件）</li>
+<li><strong>解读</strong>：<strong>保留默认</strong><ul>
+<li>这是微软为了管理像 Windows 源代码那种<strong>巨型</strong>仓库开发的技术。虽然个人的 Python 项目可能只有几兆大小，完全用不上它，但装了它也不会占什么资源，留着作为“未来扩展”即可</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>默认编辑器。选了VSCode</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110112700491.png" alt="image-20260110112700491"></p>
+<p>默认分支命名，选main</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110112811398.png" alt="image-20260110112811398"></p>
+<p>环境变量选项，保持默认</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110113005750.png" alt="image-20260110113005750"></p>
+<p>OpenSSH，如果自己装了可以选第二个，我没装，让git自己装吧</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110113039926.png" alt="image-20260110113039926"></p>
+<p>设置<strong>换行符自动转换</strong></p>
+<blockquote>
+<h5 id="选项-1：Checkout-Windows-style-commit-Unix-style-line-endings-检出时用-Windows-风格，提交时用-Unix-风格-——-推荐选择"><a href="#选项-1：Checkout-Windows-style-commit-Unix-style-line-endings-检出时用-Windows-风格，提交时用-Unix-风格-——-推荐选择" class="headerlink" title="选项 1：Checkout Windows-style, commit Unix-style line endings (检出时用 Windows 风格，提交时用 Unix 风格) ——  推荐选择"></a>选项 1：Checkout Windows-style, commit Unix-style line endings (检出时用 Windows 风格，提交时用 Unix 风格) ——  推荐选择</h5><ul>
+<li><strong>原理</strong>：<ul>
+<li><strong>下载代码时 (Checkout)</strong>：Git 会把仓库里的标准格式 (LF) 自动转换成 Windows 习惯的格式 (CRLF)，这样记事本打开才不会乱码</li>
+<li><strong>上传代码时 (Commit)</strong>：Git 会把电脑上的 Windows 格式 (CRLF) 自动变回标准格式 (LF)，保证仓库里的代码干净、统一</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>这个好，想起来之前提交的时候会报一大段关于换行的warning</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110113122920.png" alt="image-20260110113122920"></p>
+<p>验证：</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110114046120.png" alt="image-20260110114046120"></p>
+<h3 id="使用winget下载"><a href="#使用winget下载" class="headerlink" title="使用winget下载"></a>使用winget下载</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">winget install <span class="literal">--id</span> Git.Git <span class="literal">-e</span> <span class="literal">--source</span> winget</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><p>在命令行里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的英文昵称&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱@example.com&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Miniconda"><a href="#Miniconda" class="headerlink" title="Miniconda"></a>Miniconda</h2><h3 id="Conda"><a href="#Conda" class="headerlink" title="Conda"></a>Conda</h3><p>文档&amp;介绍：<span class="exturl" data-url="aHR0cHM6Ly9kb2NzLmNvbmRhLmlvL3Byb2plY3RzL2NvbmRhL2VuL2xhdGVzdC91c2VyLWd1aWRlL2luc3RhbGwvaW5kZXguaHRtbA==">https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html<i class="fa fa-external-link-alt"></i></span></p>
+<h3 id="Windows安装"><a href="#Windows安装" class="headerlink" title="Windows安装"></a>Windows安装</h3><p>不想用那个巨难用的Anaconda gui了，看了下打算用miniconda</p>
+<p>文档：<span class="exturl" data-url="aHR0cHM6Ly93d3cuYW5hY29uZGEuY29tL2RvY3MvZ2V0dGluZy1zdGFydGVkL21pbmljb25kYS9tYWlu">https://www.anaconda.com/docs/getting-started/miniconda/main<i class="fa fa-external-link-alt"></i></span></p>
+<p>下载：<span class="exturl" data-url="aHR0cHM6Ly9yZXBvLmFuYWNvbmRhLmNvbS9taW5pY29uZGEv">https://repo.anaconda.com/miniconda/<i class="fa fa-external-link-alt"></i></span></p>
+<p>装完之后加一下环境变量，需要在PATH里加miniconda目录以及<code>Script</code>、<code>Library/bin</code></p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260106144013396.png" alt="image-20260106144013396"></p>
+<p>能在命令行里运行conda就成了</p>
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260106144718674.png" alt="image-20260106144718674"></p>
+<h3 id="wsl安装"><a href="#wsl安装" class="headerlink" title="wsl安装"></a>wsl安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">ARCH=<span class="string">&quot;<span class="subst">$(uname -m)</span>&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">case</span> <span class="string">&quot;<span class="variable">$ARCH</span>&quot;</span> <span class="keyword">in</span></span><br><span class="line">  x86_64)</span><br><span class="line">    MINICONDA_ARCH=<span class="string">&quot;x86_64&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">  aarch64|arm64)</span><br><span class="line">    MINICONDA_ARCH=<span class="string">&quot;aarch64&quot;</span></span><br><span class="line">    ;;</span><br><span class="line">  *)</span><br><span class="line">    <span class="built_in">echo</span> <span class="string">&quot;不支持的架构：<span class="variable">$ARCH</span>&quot;</span></span><br><span class="line">    <span class="built_in">exit</span> 1</span><br><span class="line">    ;;</span><br><span class="line"><span class="keyword">esac</span></span><br><span class="line"></span><br><span class="line">curl -fsSLo /tmp/miniconda.sh \</span><br><span class="line">  <span class="string">&quot;https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-<span class="variable">$&#123;MINICONDA_ARCH&#125;</span>.sh&quot;</span></span><br><span class="line"></span><br><span class="line">bash /tmp/miniconda.sh -b -p <span class="string">&quot;<span class="variable">$HOME</span>/miniconda3&quot;</span></span><br><span class="line"><span class="built_in">rm</span> -f /tmp/miniconda.sh</span><br><span class="line"></span><br><span class="line"><span class="built_in">eval</span> <span class="string">&quot;<span class="subst">$(<span class="string">&quot;<span class="variable">$HOME</span>/miniconda3/bin/conda&quot;</span> shell.bash hook)</span>&quot;</span></span><br><span class="line">conda init bash</span><br><span class="line"></span><br><span class="line"><span class="comment"># 启动终端时不自动进入 base 环境</span></span><br><span class="line">conda config --<span class="built_in">set</span> auto_activate_base <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">conda --version</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同意条款</span></span><br><span class="line">conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="conda命令"><a href="#conda命令" class="headerlink" title="conda命令"></a>conda命令</h2><p>列出所有环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda <span class="built_in">env</span> list</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260106150414545.png" alt="image-20260106150414545"></p>
+<p>创建环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create -n env_name python=3.8</span><br></pre></td></tr></table></figure>
+
+<p>初始化。运行activate之前要先init</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda init</span><br></pre></td></tr></table></figure>
+
+<p>激活环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate env_name</span><br></pre></td></tr></table></figure>
+
+<p><img src="/2026/01/05/SetupEnv/python_conda/image-20260110111505679.png" alt="image-20260110111505679"></p>
+<p>删除环境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove --name env_name --all</span><br></pre></td></tr></table></figure>
+
+<p>删除某个环境某些包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda remove --name env_name  package_name</span><br></pre></td></tr></table></figure>
+
+<p>导出</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#获得环境中的所有配置</span></span><br><span class="line">conda <span class="built_in">env</span> <span class="built_in">export</span> --name myenv &gt; myenv.yml</span><br><span class="line"><span class="comment">#重新还原环境</span></span><br><span class="line">conda <span class="built_in">env</span> create -f  myenv.yml</span><br></pre></td></tr></table></figure>
+
+<p>安装包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda install -n <span class="built_in">env</span> pack</span><br></pre></td></tr></table></figure>
+
+<p>或者先激活再安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install pack</span><br><span class="line">//pip isatall pack</span><br></pre></td></tr></table></figure>
+
+<p>查找某个环境有没有某个包</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda list -n <span class="built_in">env</span> | grep pack</span><br></pre></td></tr></table></figure>
+
+<p>或者先激活再查</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda list | grep pack</span><br><span class="line">//pip show pack</span><br></pre></td></tr></table></figure>
+
+<h2 id="基础python"><a href="#基础python" class="headerlink" title="基础python"></a>基础python</h2><p>是这样的，平时可能就跑个脚本啥的实在是懒得每次都进env，所以捏感觉还是有必要下一个公用的python</p>
+<p><span class="exturl" data-url="aHR0cHM6Ly93d3cucHl0aG9uLm9yZy9kb3dubG9hZHMvd2luZG93cw==">https://www.python.org/downloads/windows<i class="fa fa-external-link-alt"></i></span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/01/05/SetupEnv/python_conda/" title="Python-conda*Git">https://mintind.github.io/2026/01/05/SetupEnv/python_conda/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/Conda/" rel="tag"># Conda</a>
+              <a href="/tags/Git/" rel="tag"># Git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/01/UCAS/detect_with_snort3/" rel="prev" title="【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测">
+                  <i class="fa fa-angle-left"></i> 【网络协议安全】分析恶意流量pcap并编写Snort规则进行检测
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/01/09/CTF/Reverse/moumap_reverse/" rel="next" title="moumap逆向尝试">
+                  moumap逆向尝试 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/01/05/SetupEnv/python_conda/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/01/05/SetupEnv/python_conda/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 8.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/meow.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/meow.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta name="google-site-verification" content="ytiTpj8Ol2naa1JDTwZxRYelNQFe4fgRvG5XcJmZ9N0">
+  <meta name="msvalidate.01" content="2B6959B722A9727D346D9795E31C5112">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"mintind.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.27.0","exturl":true,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"tokyo-night-dark","dark":"tokyo-night-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":true,"style":"flat"},"fold":{"enable":true,"height":500},"language":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js" defer></script>
+
+    <meta name="description" content="靠着我的肩膀哭泣">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络攻防基础期末复习">
+<meta property="og:url" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/index.html">
+<meta property="og:site_name" content="Mintind&#39;s Blog">
+<meta property="og:description" content="靠着我的肩膀哭泣">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127094348523.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127094443640.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127095533567.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127095544954.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127094931476.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127112227684.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127154054593.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127154106910.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127154117957.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127113841923.png">
+<meta property="og:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127142448715.png">
+<meta property="article:published_time" content="2026-01-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-01-25T16:00:00.000Z">
+<meta property="article:author" content="Mintind">
+<meta property="article:tag" content="UCAS">
+<meta property="article:tag" content="网络攻防基础">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/image-20260127094348523.png">
+
+
+<link rel="canonical" href="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/","path":"2026/01/25/UCAS/network_a&d_base_review/","title":"网络攻防基础期末复习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>网络攻防基础期末复习 | Mintind's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/js/utils.js" defer></script><script src="/js/motion.js" defer></script><script src="/js/sidebar.js" defer></script><script src="/js/next-boot.js" defer></script><script src="/js/bookmark.js" defer></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.5.0/search.js" integrity="sha256-xFC6PJ82SL9b3WkGjFavNiA9gm5z6UBxWPiu4CYjptg=" crossorigin="anonymous" defer></script>
+<script src="/js/third-party/search/local-search.js" defer></script>
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mintind's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">此心安处是吾乡</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">60</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">16</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">80</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+      <div class="search-header">
+        <span class="search-icon">
+          <i class="fa fa-search"></i>
+        </span>
+        <div class="search-input-container">
+          <input autocomplete="off" autocapitalize="off" maxlength="80"
+                placeholder="搜索..." spellcheck="false"
+                type="search" class="search-input">
+        </div>
+        <span class="popup-btn-close" role="button">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </div>
+      <div class="search-result-container">
+        <div class="search-result-icon">
+          <i class="fa fa-spinner fa-pulse fa-5x"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%AB%A0-%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">第一章    网络安全概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%9C%80%E6%B1%82"><span class="nav-number">1.1.1.</span> <span class="nav-text">网络安全的基本需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%BC%8F%E6%B4%9E%E7%AE%80%E4%BB%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">安全漏洞简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%9A%84%E4%B8%BB%E8%A6%81%E5%A8%81%E8%83%81%E5%9B%A0%E7%B4%A0"><span class="nav-number">1.2.</span> <span class="nav-text">网络安全的主要威胁因素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E7%B3%BB%E7%BB%9F%E8%84%86%E5%BC%B1%E6%80%A7"><span class="nav-number">1.2.1.</span> <span class="nav-text">信息系统脆弱性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%A8%81%E8%83%81"><span class="nav-number">1.2.2.</span> <span class="nav-text">基本威胁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E4%B8%BB%E8%A6%81%E5%A8%81%E8%83%81%E6%9D%A5%E6%BA%90"><span class="nav-number">1.2.3.</span> <span class="nav-text">网络安全主要威胁来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%91%E5%AE%A2%E5%88%86%E7%B1%BB"><span class="nav-number">1.2.4.</span> <span class="nav-text">黑客分类</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E8%BF%87%E7%A8%8B"><span class="nav-number">1.3.</span> <span class="nav-text">网络攻击过程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%AB%A0-%E6%89%AB%E6%8F%8F%E4%B8%8E%E9%98%B2%E5%BE%A1%E6%8A%80%E6%9C%AF"><span class="nav-number">2.</span> <span class="nav-text">第二章    扫描与防御技术</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%89%AB%E6%8F%8F%E5%99%A8"><span class="nav-number">2.1.</span> <span class="nav-text">网络扫描器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%89%AB%E6%8F%8F"><span class="nav-number">2.2.</span> <span class="nav-text">网络安全扫描</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E7%9A%84%E6%89%AB%E6%8F%8F%E6%8A%80%E6%9C%AF"><span class="nav-number">2.3.</span> <span class="nav-text">常见的扫描技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BB%E6%9C%BA%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.1.</span> <span class="nav-text">主机扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.2.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9C%E7%A8%8B%E4%B8%BB%E6%9C%BAOS%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="nav-number">2.3.3.</span> <span class="nav-text">远程主机OS指纹识别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%89%AB%E6%8F%8F"><span class="nav-number">2.3.4.</span> <span class="nav-text">漏洞扫描</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%89%AB%E6%8F%8F%E5%B7%A5%E5%85%B7"><span class="nav-number">2.4.</span> <span class="nav-text">常用扫描工具</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%AB%A0-%E7%BD%91%E7%BB%9C%E7%9B%91%E5%90%AC%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">3.</span> <span class="nav-text">第三章    网络监听及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="nav-number">3.1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%91%E5%90%AC%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.1.</span> <span class="nav-text">网络监听的概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E5%8D%A1%E7%9A%84%E5%9B%9B%E7%A7%8D%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="nav-number">3.1.2.</span> <span class="nav-text">网卡的四种工作模式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E7%9B%91%E5%90%AC%E9%98%B2%E5%BE%A1%E7%9A%84%E9%80%9A%E7%94%A8%E7%AD%96%E7%95%A5"><span class="nav-number">3.2.</span> <span class="nav-text">网络监听防御的通用策略</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E5%8F%A3%E4%BB%A4%E7%A0%B4%E8%A7%A3%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">4.</span> <span class="nav-text">第四章    口令破解及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%94%BB%E5%87%BB"><span class="nav-number">4.1.</span> <span class="nav-text">攻击</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%8D%E5%85%B8%E6%94%BB%E5%87%BB"><span class="nav-number">4.1.1.</span> <span class="nav-text">词典攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E8%A1%8C%E6%94%BB%E5%87%BB%EF%BC%88%E6%9A%B4%E5%8A%9B%E7%A0%B4%E8%A7%A3%EF%BC%89"><span class="nav-number">4.1.2.</span> <span class="nav-text">强行攻击（暴力破解）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E6%94%BB%E5%87%BB"><span class="nav-number">4.1.3.</span> <span class="nav-text">组合攻击</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96"><span class="nav-number">4.1.4.</span> <span class="nav-text">其他</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A3%E4%BB%A4%E7%A0%B4%E8%A7%A3%E5%B7%A5%E5%85%B7"><span class="nav-number">4.2.</span> <span class="nav-text">口令破解工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%A3%E4%BB%A4%E7%A0%B4%E8%A7%A3%E9%98%B2%E5%BE%A1"><span class="nav-number">4.3.</span> <span class="nav-text">口令破解防御</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%BA%94%E7%AB%A0-%E6%AC%BA%E9%AA%97%E6%94%BB%E5%87%BB%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">5.</span> <span class="nav-text">第五章    欺骗攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#IP%E6%AC%BA%E9%AA%97"><span class="nav-number">5.1.</span> <span class="nav-text">IP欺骗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%9C%B0%E5%9D%80%E5%8F%98%E5%8C%96"><span class="nav-number">5.1.1.</span> <span class="nav-text">基本地址变化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%BA%90%E7%AB%99%E9%80%89%E8%B7%AF%E6%88%AA%E5%8F%96%E6%95%B0%E6%8D%AE%E5%8C%85"><span class="nav-number">5.1.2.</span> <span class="nav-text">使用源站选路截取数据包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A9%E7%94%A8Unix%E6%9C%BA%E5%99%A8%E4%B8%8A%E7%9A%84%E4%BF%A1%E4%BB%BB%E5%85%B3%E7%B3%BB"><span class="nav-number">5.1.3.</span> <span class="nav-text">利用Unix机器上的信任关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TCP%E4%BC%9A%E8%AF%9D%E5%8A%AB%E6%8C%81"><span class="nav-number">5.1.4.</span> <span class="nav-text">TCP会话劫持</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E5%8F%B7%E6%9C%BA%E5%88%B6"><span class="nav-number">5.1.4.1.</span> <span class="nav-text">序列号机制</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ARP%E6%AC%BA%E9%AA%97"><span class="nav-number">5.2.</span> <span class="nav-text">ARP欺骗</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1"><span class="nav-number">5.2.1.</span> <span class="nav-text">防御</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E6%AC%BA%E9%AA%97"><span class="nav-number">5.3.</span> <span class="nav-text">电子邮件欺骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DNS%E6%AC%BA%E9%AA%97"><span class="nav-number">5.4.</span> <span class="nav-text">DNS欺骗</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E6%AC%BA%E9%AA%97"><span class="nav-number">5.5.</span> <span class="nav-text">Web欺骗</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">6.</span> <span class="nav-text">第六章    拒绝服务攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E6%94%BB%E5%87%BB%E6%8A%80%E6%9C%AF"><span class="nav-number">6.1.</span> <span class="nav-text">典型拒绝服务攻击技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SYN%E2%80%9C%E6%B4%AA%E6%B0%B4%E2%80%9D"><span class="nav-number">6.1.1.</span> <span class="nav-text">SYN“洪水”</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%98%B2%E5%BE%A1-1"><span class="nav-number">6.1.1.1.</span> <span class="nav-text">防御</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E5%B8%83%E5%BC%8F%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1DDoS-Distributed-Denial-of-Service"><span class="nav-number">6.2.</span> <span class="nav-text">分布式拒绝服务DDoS (Distributed Denial of Service)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E7%AB%A0-%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">7.</span> <span class="nav-text">第七章    缓冲区溢出攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA%E5%8E%9F%E7%90%86"><span class="nav-number">7.1.</span> <span class="nav-text">缓冲区溢出原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA"><span class="nav-number">7.1.1.</span> <span class="nav-text">栈溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E6%BA%A2%E5%87%BA"><span class="nav-number">7.1.2.</span> <span class="nav-text">堆溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BSS%E6%BA%A2%E5%87%BA"><span class="nav-number">7.1.3.</span> <span class="nav-text">BSS溢出</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E4%B8%B2%E6%BA%A2%E5%87%BA"><span class="nav-number">7.1.4.</span> <span class="nav-text">格式化串溢出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%A4%8D%E5%85%A5%E6%8A%80%E6%9C%AF"><span class="nav-number">7.2.</span> <span class="nav-text">代码植入技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSR%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.1.</span> <span class="nav-text">NSR模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RNS%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.2.</span> <span class="nav-text">RNS模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AR%E6%A8%A1%E5%BC%8F"><span class="nav-number">7.2.3.</span> <span class="nav-text">AR模式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E7%AB%A0-WEB%E6%94%BB%E5%87%BB%E5%8F%8A%E9%98%B2%E5%BE%A1"><span class="nav-number">8.</span> <span class="nav-text">第八章    WEB攻击及防御</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E5%AE%89%E5%85%A8"><span class="nav-number">8.1.</span> <span class="nav-text">Web安全</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%AE%89%E5%85%A8"><span class="nav-number">8.1.1.</span> <span class="nav-text">Web服务器的安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E5%AE%89%E5%85%A8"><span class="nav-number">8.1.2.</span> <span class="nav-text">Web客户端的安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Web%E9%80%9A%E4%BF%A1%E4%BF%A1%E9%81%93%E7%9A%84%E5%AE%89%E5%85%A8"><span class="nav-number">8.1.3.</span> <span class="nav-text">Web通信信道的安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="nav-number">8.2.</span> <span class="nav-text">Web服务器指纹识别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Http%E6%8C%87%E7%BA%B9%E8%AF%86%E5%88%AB"><span class="nav-number">8.2.1.</span> <span class="nav-text">Http指纹识别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Web%E7%9B%97%E7%AA%83"><span class="nav-number">8.3.</span> <span class="nav-text">Web盗窃</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SQL%E6%B3%A8%E5%85%A5"><span class="nav-number">8.4.</span> <span class="nav-text">SQL注入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#XSS-%E8%B7%A8%E7%AB%99%E8%84%9A%E6%9C%AC%E6%94%BB%E5%87%BB-Cross-Site-Script"><span class="nav-number">8.5.</span> <span class="nav-text">XSS 跨站脚本攻击(Cross Site Script)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Hacking"><span class="nav-number">8.6.</span> <span class="nav-text">Google Hacking</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E9%A1%B5%E9%AA%8C%E8%AF%81%E7%A0%81"><span class="nav-number">8.7.</span> <span class="nav-text">网页验证码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%97%85%E6%AF%92%E4%B8%8E%E5%90%84%E7%B1%BB%E6%81%B6%E6%84%8F%E8%BD%AF%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text">病毒与各类恶意软件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%85%E6%AF%92"><span class="nav-number">9.1.</span> <span class="nav-text">病毒</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%82%B8%E5%BC%B9"><span class="nav-number">9.2.</span> <span class="nav-text">逻辑炸弹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E9%97%A8"><span class="nav-number">9.3.</span> <span class="nav-text">后门</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%A8%E9%A9%AC"><span class="nav-number">9.4.</span> <span class="nav-text">木马</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A0%95%E8%99%AB"><span class="nav-number">9.5.</span> <span class="nav-text">蠕虫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%83%B5%E5%B0%B8%E7%BD%91%E7%BB%9C"><span class="nav-number">9.6.</span> <span class="nav-text">僵尸网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8B%92%E7%B4%A2%E8%BD%AF%E4%BB%B6"><span class="nav-number">9.7.</span> <span class="nav-text">勒索软件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.8.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B%E4%B8%8E%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90%E5%9F%BA%E7%A1%80"><span class="nav-number">10.</span> <span class="nav-text">逆向工程与代码分析基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-1"><span class="nav-number">10.1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="nav-number">10.1.1.</span> <span class="nav-text">逆向工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E5%8A%A0%E8%BD%BD%E6%96%B9%E5%BC%8F"><span class="nav-number">10.1.2.</span> <span class="nav-text">代码加载方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="nav-number">10.2.</span> <span class="nav-text">常用技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%86%E5%90%91"><span class="nav-number">10.2.1.</span> <span class="nav-text">逆向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E9%80%86%E5%90%91"><span class="nav-number">10.2.2.</span> <span class="nav-text">反逆向</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%B6%E6%84%8F%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">10.3.</span> <span class="nav-text">恶意代码分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BD%AF%E4%BB%B6%E5%AE%89%E5%85%A8%E8%AF%84%E4%BC%B0"><span class="nav-number">10.4.</span> <span class="nav-text">软件安全评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E5%8F%8A%E5%88%A9%E7%94%A8%E5%9F%BA%E7%A1%80"><span class="nav-number">11.</span> <span class="nav-text">漏洞挖掘及利用基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E%E7%B1%BB%E5%9E%8B"><span class="nav-number">11.1.</span> <span class="nav-text">常见漏洞类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98%E6%96%B9%E6%B3%95"><span class="nav-number">11.2.</span> <span class="nav-text">漏洞挖掘方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E4%B8%AD%E9%97%B4%E8%A1%A8%E7%A4%BA"><span class="nav-number">11.2.1.</span> <span class="nav-text">程序中间表示</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%E6%A8%A1%E5%BC%8F"><span class="nav-number">11.3.</span> <span class="nav-text">漏洞利用模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8%EF%BC%88Exp%EF%BC%89"><span class="nav-number">11.3.1.</span> <span class="nav-text">漏洞利用（Exp）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%88%98%E4%B8%8E%E4%BF%A1%E6%81%AF%E6%88%98"><span class="nav-number">12.</span> <span class="nav-text">网络战与信息战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#APT-Advanced-PersistentThreat-%E9%AB%98%E7%BA%A7%E6%8C%81%E7%BB%AD%E6%80%A7%E5%A8%81%E8%83%81"><span class="nav-number">12.1.</span> <span class="nav-text">APT :Advanced PersistentThreat(高级持续性威胁)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5-2"><span class="nav-number">12.1.1.</span> <span class="nav-text">概念</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%9D%B6%E5%9C%BA%E4%B8%8E%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B"><span class="nav-number">13.</span> <span class="nav-text">网络靶场与网络安全竞赛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%9D%B6%E5%9C%BA"><span class="nav-number">13.1.</span> <span class="nav-text">网络靶场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B"><span class="nav-number">13.2.</span> <span class="nav-text">网络安全竞赛</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6%E4%B8%8E%E8%AE%A4%E7%9F%A5%E4%BD%9C%E6%88%98"><span class="nav-number">14.</span> <span class="nav-text">社会工程学与认知作战</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%A4%BE%E4%BC%9A%E5%B7%A5%E7%A8%8B%E5%AD%A6"><span class="nav-number">14.1.</span> <span class="nav-text">社会工程学</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E9%92%93%E9%B1%BC"><span class="nav-number">14.2.</span> <span class="nav-text">网络钓鱼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A4%E7%9F%A5%E4%BD%9C%E6%88%98"><span class="nav-number">14.3.</span> <span class="nav-text">认知作战</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E4%B8%8E%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="nav-number">15.</span> <span class="nav-text">安全风险评估与渗透测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0"><span class="nav-number">15.1.</span> <span class="nav-text">安全风险评估</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9"><span class="nav-number">15.1.1.</span> <span class="nav-text">信息安全风险</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9%E8%AF%84%E4%BC%B0%E7%9A%84%E5%86%85%E5%AE%B9"><span class="nav-number">15.1.2.</span> <span class="nav-text">安全风险评估的内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95"><span class="nav-number">15.2.</span> <span class="nav-text">渗透测试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E6%94%B9%E5%8A%A0%E5%9B%BA"><span class="nav-number">15.3.</span> <span class="nav-text">整改加固</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%B8%AD%E5%88%86%E6%9E%90"><span class="nav-number">15.4.</span> <span class="nav-text">事中分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E5%90%8E%E4%B8%8E%E6%97%A5%E5%B8%B8%E8%AF%84%E4%BC%B0"><span class="nav-number">15.5.</span> <span class="nav-text">事后与日常评估</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8%E6%84%8F%E8%AF%86%E5%9F%B9%E5%85%BB"><span class="nav-number">16.</span> <span class="nav-text">网络安全意识培养</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Mintind</p>
+  <div class="site-description" itemprop="description">Record to Remember</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">80</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">60</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL21pbnRpbmQ=" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;mintind"><i class="fab fa-github fa-fw"></i>GitHub</span>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Mintind">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mintind's Blog">
+      <meta itemprop="description" content="Record to Remember">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="网络攻防基础期末复习 | Mintind's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          网络攻防基础期末复习<span class="exturl post-edit-link" data-url="aHR0cHM6Ly9naXRodWIuY29tL01pbnRpbmQvbWludGluZC1oZXhvLWJsb2cvZWRpdC9tYWluL3NvdXJjZS9fcG9zdHMvVUNBUy9uZXR3b3JrX2EmZF9iYXNlX3Jldmlldy5tZA==" title="编辑"><i class="fa fa-pen-nib"></i></span>
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2026-01-26 00:00:00" itemprop="dateCreated datePublished" datetime="2026-01-26T00:00:00+08:00">2026-01-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/UCAS/" itemprop="url" rel="index"><span itemprop="name">UCAS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>4.9k</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>靠着我的肩膀哭泣</p>
+<span id="more"></span>
+
+<p>引用：中国科学院大学《网络攻防基础》课程课件                    </p>
+<p>主讲教师：张玉清、吴槟</p>
+<p>跳过叠甲</p>
+<p>根据复习课的顺序顺的，一级标题是章节&#x2F;ppt名</p>
+<p>这下真是大纲了</p>
+<h1 id="第一章-网络安全概述"><a href="#第一章-网络安全概述" class="headerlink" title="第一章    网络安全概述"></a>第一章    网络安全概述</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="网络安全的基本需求"><a href="#网络安全的基本需求" class="headerlink" title="网络安全的基本需求"></a><strong>网络安全的基本需求</strong></h3><p>可靠性：网络信息系统能够在规定条件下和规定的时间内完成规定的功能的特性。</p>
+<p><strong>可用性</strong>：可被授权实体访问并按需求使用的特性。即当需要时能否存取所需的信息。例如网络环境下拒     绝服务、破坏网络和有关系统的正常运行等都属于对可用性的攻击；（是核心）</p>
+<p>保密性：防止信息泄露给非授权个体或实体，只允许授权用户访问的特性。</p>
+<p>完整性：数据未经授权不能进行改变的特性。即信息在存储或传输过程中保持不被修改、不被破坏和丢 失的特性。</p>
+<p>不可抵赖性：又称不可否认性，即在网络信息系统的信息交互过程中所有参与者都不可能否认或抵赖曾 经完成的操作的特性。</p>
+<p>可控性：对信息的传播及内容具有控制能力。</p>
+<p>可审查性：出现安全问题时提供依据与手段。</p>
+<p>真实性：确保网络信息系统的访问者与其声称的身份是一致的；确保网络应用程序的身份和功能与其声    称的身份和功能是一致的；确保网络信息操作的数据是真实有效的数据。</p>
+<h3 id="安全漏洞简介"><a href="#安全漏洞简介" class="headerlink" title="安全漏洞简介"></a><strong>安全漏洞简介</strong></h3><p>漏洞也叫脆弱性（Vulnerability），是计算机系统在硬件、软件、协议的具体实现或系统安全策略上存在的缺陷和不足。</p>
+<p>是<strong>攻击的基础</strong></p>
+<h2 id="网络安全的主要威胁因素"><a href="#网络安全的主要威胁因素" class="headerlink" title="网络安全的主要威胁因素"></a>网络安全的主要威胁因素</h2><h3 id="信息系统脆弱性"><a href="#信息系统脆弱性" class="headerlink" title="信息系统脆弱性"></a>信息系统脆弱性</h3><p>操作系统<br>计算机系统<br>网络通信协议</p>
+<h3 id="基本威胁"><a href="#基本威胁" class="headerlink" title="基本威胁"></a>基本威胁</h3><p>安全的基本目标是实现信息的<strong>机密性、完整性、可用性</strong>。对信息系统这3个基本目标的威胁即是基本威胁：</p>
+<p>信息泄漏<br>完整性破坏<br>拒绝服务<br>未授权访问</p>
+<h3 id="网络安全主要威胁来源"><a href="#网络安全主要威胁来源" class="headerlink" title="网络安全主要威胁来源"></a><strong>网络安全主要威胁来源</strong></h3><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127094348523.png" alt="image-20260127094348523"></p>
+<h3 id="黑客分类"><a href="#黑客分类" class="headerlink" title="黑客分类"></a><strong>黑客分类</strong></h3><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127094443640.png" alt="image-20260127094443640"></p>
+<h2 id="网络攻击过程"><a href="#网络攻击过程" class="headerlink" title="网络攻击过程"></a>网络攻击过程</h2><p>按照攻击方式：主动攻击、被动攻击<br>按照攻击位置：远程攻击、本地攻击、伪远程攻击</p>
+<p>远程攻击：</p>
+<p>网络攻击准备阶段<br>网络攻击的实施阶段<br>网络攻击的善后阶段</p>
+<h1 id="第二章-扫描与防御技术"><a href="#第二章-扫描与防御技术" class="headerlink" title="第二章    扫描与防御技术"></a>第二章    扫描与防御技术</h1><p>2.1 扫描技术基础<br>2.2 常见的扫描技术<br>2.3 扫描工具赏析<br>2.4 扫描的防御</p>
+<h2 id="网络扫描器"><a href="#网络扫描器" class="headerlink" title="网络扫描器"></a><strong>网络扫描器</strong></h2><p>网络扫描器可以通过执行一些脚本文件来模拟对网络系统进行攻击的行为并记录系统的反应，从而搜索目标网络内的服务器、路由器、交换机和防火墙等设备的类型与版本，以及在这些远程设备上运行的脆弱服务，并报告可能存在的脆弱性。</p>
+<h2 id="网络安全扫描"><a href="#网络安全扫描" class="headerlink" title="网络安全扫描"></a><strong>网络安全扫描</strong></h2><p>第一阶段：<strong>发现</strong>目标主机或网络（PING扫描）<br>第二阶段：发现目标后进一步<strong>搜集目标信息</strong>，包括操作系统类型、运行的服务以及服务软件的版本等。如果目标是一个网络，还可以进一步发现该网络的拓扑结构、路由设备以及各主机的信息（OS探测、穿透防火墙探测、端口扫描）<br>第三阶段：根据收集到的信息<strong>判断</strong>或者进一步<strong>测试</strong>系统<strong>是否存在安全漏洞</strong>（漏洞扫描）</p>
+<h2 id="常见的扫描技术"><a href="#常见的扫描技术" class="headerlink" title="常见的扫描技术"></a>常见的扫描技术</h2><h3 id="主机扫描"><a href="#主机扫描" class="headerlink" title="主机扫描"></a>主机扫描</h3><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><ul>
+<li><p>全扫描：会产生大量的审计数据，容易被对方发现，但其可靠性高。尝试（使用三次握手）与目标主 机的某个端口建立正规的连接。</p>
+<p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127095533567.png" alt="image-20260127095533567"></p>
+<p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127095544954.png" alt="image-20260127095544954"></p>
+</li>
+<li><p>半扫描：隐蔽性和可靠性介于全扫描和秘密扫描之间。</p>
+<ul>
+<li>SYN扫描：发送SYN数据段。应答是RST，说明端口是关闭的；应答中包含SYN和ACK，说明目标端口处于监听状态。</li>
+</ul>
+</li>
+<li><p>秘密扫描：能有效的避免对方入侵检测系统和防火墙的检测，但使用的数 据包在通过网络时容易被丢弃从而产生错误的探测信息。</p>
+<ul>
+<li>FIN扫描：不包含标准的TCP三次握手协议的任何部分，所以无法被记录下来。返回一个RST数据包，端口关闭；数据包被简单丢弃，不返回任何信息，端口开放</li>
+<li>SYN+ACK扫描：可能误报。端口关闭，则返回RST；端口开放，不回复，因为TCP协议需要SYN标志才能启动连接</li>
+<li>ACK扫描：<ul>
+<li>若返回的RST数据包的TTL值小 于或等于64，则端口开放，反之端口关闭</li>
+<li>若返回的RST数据包的 WINDOW值非零，则端口开放，反之端 口关闭</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>认证扫描：需要先建立一个完整的TCP连接。扫描端先以客户方身份与目标主机建立连接，后又以服务方身份对目标主机进行认证，因此这种扫描方式也被称为反向认证扫描。</p>
+<blockquote>
+<p>认证（ident）协议一般用于网络连接过程中服 务器验证客户端身份。</p>
+</blockquote>
+</li>
+<li><p>FTP代理扫描（FTP反弹扫描（FTP Bounce Attack））：隐蔽性好，难以追踪。但受到服务器设置的限制。许多FTP服务器都禁止了代理这一特性。</p>
+<p>先在本地与一个支持代理的FTP服务器，让FTP服务器尝试向目标主机指定端口发起数据连接请求。 FTP服务器返回成功信息，返回码为150和 226，端口开放；否则返回错误信息“425 Can’t build data connection: Connection refused”</p>
+</li>
+</ul>
+<h3 id="远程主机OS指纹识别"><a href="#远程主机OS指纹识别" class="headerlink" title="远程主机OS指纹识别"></a>远程主机OS指纹识别</h3><h3 id="漏洞扫描"><a href="#漏洞扫描" class="headerlink" title="漏洞扫描"></a>漏洞扫描</h3><ul>
+<li>基于漏洞库</li>
+<li>基于模拟攻击</li>
+</ul>
+<h2 id="常用扫描工具"><a href="#常用扫描工具" class="headerlink" title="常用扫描工具"></a><strong>常用扫描工具</strong></h2><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127094931476.png" alt="image-20260127094931476"></p>
+<h1 id="第三章-网络监听及防御"><a href="#第三章-网络监听及防御" class="headerlink" title="第三章    网络监听及防御"></a>第三章    网络监听及防御</h1><p>3.1 网络监听概述<br>3.2 监听技术<br>3.3 监听的防御</p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="网络监听的概念"><a href="#网络监听的概念" class="headerlink" title="网络监听的概念"></a>网络监听的概念</h3><p>网络监听技术又叫做网络嗅探技术，顾名思义这是一种<strong>在他方未察觉的情况下捕获其通信报文或通信内容</strong>的技术。</p>
+<p>对于网络攻击与防范双方都有着重要的意义，是一把<strong>双刃剑</strong></p>
+<p><strong>只限于局域网</strong></p>
+<h3 id="网卡的四种工作模式"><a href="#网卡的四种工作模式" class="headerlink" title="网卡的四种工作模式"></a>网卡的四种工作模式</h3><p>（1）广播模式：够接收网络中的广播信息。<br>（2）组播模式：能够接受组播数据。<br>（3）直接模式：只收目的MAC是自己的。只有匹配目的MAC地址的网卡才能接收该数据帧。<br>（4）混杂模式：接受一切接收到的数据帧。 </p>
+<h2 id="网络监听防御的通用策略"><a href="#网络监听防御的通用策略" class="headerlink" title="网络监听防御的通用策略"></a><strong>网络监听防御的通用策略</strong></h2><p>采用安全的网络拓扑结构和数据加密技术</p>
+<h1 id="第四章-口令破解及防御"><a href="#第四章-口令破解及防御" class="headerlink" title="第四章    口令破解及防御"></a>第四章    口令破解及防御</h1><h2 id="攻击"><a href="#攻击" class="headerlink" title="攻击"></a>攻击</h2><h3 id="词典攻击"><a href="#词典攻击" class="headerlink" title="词典攻击"></a>词典攻击</h3><h3 id="强行攻击（暴力破解）"><a href="#强行攻击（暴力破解）" class="headerlink" title="强行攻击（暴力破解）"></a>强行攻击（暴力破解）</h3><h3 id="组合攻击"><a href="#组合攻击" class="headerlink" title="组合攻击"></a><strong>组合攻击</strong></h3><h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>社会工程学偷窥搜索垃圾箱口令蠕虫特洛伊木马网络监听重放</p>
+<h2 id="口令破解工具"><a href="#口令破解工具" class="headerlink" title="口令破解工具"></a>口令破解工具</h2><h2 id="口令破解防御"><a href="#口令破解防御" class="headerlink" title="口令破解防御"></a>口令破解防御</h2><h1 id="第五章-欺骗攻击及防御"><a href="#第五章-欺骗攻击及防御" class="headerlink" title="第五章    欺骗攻击及防御"></a>第五章    欺骗攻击及防御</h1><h2 id="IP欺骗"><a href="#IP欺骗" class="headerlink" title="IP欺骗"></a>IP欺骗</h2><p>前三种老的，最后是高级应用，现在还适用</p>
+<h3 id="基本地址变化"><a href="#基本地址变化" class="headerlink" title="基本地址变化"></a>基本地址变化</h3><h3 id="使用源站选路截取数据包"><a href="#使用源站选路截取数据包" class="headerlink" title="使用源站选路截取数据包"></a>使用源站选路截取数据包</h3><h3 id="利用Unix机器上的信任关系"><a href="#利用Unix机器上的信任关系" class="headerlink" title="利用Unix机器上的信任关系"></a>利用Unix机器上的信任关系</h3><p>为了方便大量机器的系统管理。这种信任关系是基于IP地址的</p>
+<h3 id="TCP会话劫持"><a href="#TCP会话劫持" class="headerlink" title="TCP会话劫持"></a>TCP会话劫持</h3><p>会话劫持就是接管一个现存动态会话的过程，结合了嗅探及欺骗技术</p>
+<p>为了接管整个会话过程，攻击者<strong>需要积极攻击使被冒充用户下线</strong>。</p>
+<p>过程：</p>
+<ul>
+<li>发现攻击目标 ：需要目标准予 TCP会话连接以及能检测数据流</li>
+<li>确认动态会话 ：适合在网络流通 量达到高峰时发起攻击，目标多且不容易被怀疑</li>
+<li>猜测序列号 ：通过嗅探或者ARP欺骗，先发现目标机正在使用的序列号，再猜测</li>
+<li>使客户主机下线 </li>
+<li>接管会话</li>
+</ul>
+<p>不依赖于操作系统，并且可以被用来进行积极攻击</p>
+<h4 id="序列号机制"><a href="#序列号机制" class="headerlink" title="序列号机制"></a>序列号机制</h4><p>（简化场景）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2包的SEQ = 1包的ACK</span><br><span class="line">2包的ACK = 1包的SEQ+ 1包的长度</span><br></pre></td></tr></table></figure>
+
+<h2 id="ARP欺骗"><a href="#ARP欺骗" class="headerlink" title="ARP欺骗"></a>ARP欺骗</h2><h3 id="防御"><a href="#防御" class="headerlink" title="防御"></a>防御</h3><ul>
+<li>MAC地址绑定</li>
+<li>静态ARP缓存</li>
+<li>使用ARP服务器</li>
+<li>使用ARP欺骗防护软件，如ARP防火墙。</li>
+<li>发现正在进行ARP欺骗的主机并将其隔离。</li>
+</ul>
+<h2 id="电子邮件欺骗"><a href="#电子邮件欺骗" class="headerlink" title="电子邮件欺骗"></a>电子邮件欺骗</h2><ul>
+<li>利用相似的电子邮件地址 </li>
+<li>修改邮件客户软件设置</li>
+<li>远程登录到25号端口</li>
+</ul>
+<h2 id="DNS欺骗"><a href="#DNS欺骗" class="headerlink" title="DNS欺骗"></a>DNS欺骗</h2><p>在DNS服务器的本地Cache中缓存一条伪造的解析记录</p>
+<p>两种情况：</p>
+<ol>
+<li>攻击者能控制一台本地域名服务器</li>
+<li>攻击者只能控制一台主机：需要<strong>确定目标DNS服务器的ID号</strong>。监听、猜测尝试</li>
+</ol>
+<h2 id="Web欺骗"><a href="#Web欺骗" class="headerlink" title="Web欺骗"></a>Web欺骗</h2><p>网络钓鱼</p>
+<h1 id="第六章-拒绝服务攻击及防御"><a href="#第六章-拒绝服务攻击及防御" class="headerlink" title="第六章    拒绝服务攻击及防御"></a>第六章    拒绝服务攻击及防御</h1><p>Denial of Service（简称DoS）</p>
+<p>致使攻击目标无法对合法的用户提供正常的服务。是让攻击目标瘫痪的一种“损人不利己”的攻击手段</p>
+<h2 id="典型拒绝服务攻击技术"><a href="#典型拒绝服务攻击技术" class="headerlink" title="典型拒绝服务攻击技术"></a>典型拒绝服务攻击技术</h2><p><strong>死亡之Ping（Ping of Death）</strong><br><strong>“泪滴”（teardrop）</strong>：IP数据包分片机制。<br><strong>IP欺骗DoS攻击</strong><br><strong>UDP“洪水”</strong></p>
+<h3 id="SYN“洪水”"><a href="#SYN“洪水”" class="headerlink" title="SYN“洪水”"></a><strong>SYN“洪水”</strong></h3><h4 id="防御-1"><a href="#防御-1" class="headerlink" title="防御"></a>防御</h4><ul>
+<li>缩短SYN Timeout时间  </li>
+<li>设置SYN Cookie ：匹配才分配资源维护连接</li>
+<li>负反馈策略 ：允许系统自己调整timeout等参数</li>
+<li>退让策略 ：遭到攻击后更换IP&#x2F;放一个靶子服务器。原理：SYN flood攻击开始后不会重新进行域名解析，死盯这个IP</li>
+<li>分布式DNS负载均衡 ：分配到不同IP</li>
+<li>防火墙</li>
+</ul>
+<p><strong>Land攻击</strong><br><strong>Smurf攻击</strong><br>Fraggle攻击<br>分布式反射拒绝服务攻击<br>电子邮件炸弹<br>畸形消息攻击<br>Slashdot effect<br>WinNuke攻击</p>
+<h2 id="分布式拒绝服务DDoS-Distributed-Denial-of-Service"><a href="#分布式拒绝服务DDoS-Distributed-Denial-of-Service" class="headerlink" title="分布式拒绝服务DDoS (Distributed Denial of Service)"></a>分布式拒绝服务DDoS (Distributed Denial of Service)</h2><p>借助于客户&#x2F;服务器技术，将多个计算机联合起来作为攻击平台，对一个或多个目标发动DoS攻击。</p>
+<p>来源广泛难以监测</p>
+<h1 id="第七章-缓冲区溢出攻击及防御"><a href="#第七章-缓冲区溢出攻击及防御" class="headerlink" title="第七章    缓冲区溢出攻击及防御"></a>第七章    缓冲区溢出攻击及防御</h1><p>缓冲区溢出，就是由于<strong>填充数据越界</strong>而导致<strong>原有程序流程的改变</strong>。黑客借此精心构造填充数据，让程序转而执行特殊的代码，最终获取控制权。</p>
+<h2 id="缓冲区溢出原理"><a href="#缓冲区溢出原理" class="headerlink" title="缓冲区溢出原理"></a>缓冲区溢出原理</h2><h3 id="栈溢出"><a href="#栈溢出" class="headerlink" title="栈溢出"></a>栈溢出</h3><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127112227684.png" alt="image-20260127112227684"></p>
+<h3 id="堆溢出"><a href="#堆溢出" class="headerlink" title="堆溢出"></a>堆溢出</h3><h3 id="BSS溢出"><a href="#BSS溢出" class="headerlink" title="BSS溢出"></a>BSS溢出</h3><h3 id="格式化串溢出"><a href="#格式化串溢出" class="headerlink" title="格式化串溢出"></a>格式化串溢出</h3><h2 id="代码植入技术"><a href="#代码植入技术" class="headerlink" title="代码植入技术"></a>代码植入技术</h2><p>S代表shellcode，R代表返回地址，N代表填充数据，A表示环境变量</p>
+<p>增加nop或ret以增加命中率</p>
+<h3 id="NSR模式"><a href="#NSR模式" class="headerlink" title="NSR模式"></a>NSR模式</h3><p>缓冲区要大，能放下shellcode</p>
+<p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127154054593.png" alt="image-20260127154054593"></p>
+<h3 id="RNS模式"><a href="#RNS模式" class="headerlink" title="RNS模式"></a>RNS模式</h3><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127154106910.png" alt="image-20260127154106910"></p>
+<h3 id="AR模式"><a href="#AR模式" class="headerlink" title="AR模式"></a>AR模式</h3><p>事先把shellcode放进环境变量里</p>
+<p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127154117957.png" alt="image-20260127154117957"></p>
+<h1 id="第八章-WEB攻击及防御"><a href="#第八章-WEB攻击及防御" class="headerlink" title="第八章    WEB攻击及防御"></a>第八章    WEB攻击及防御</h1><h2 id="Web安全"><a href="#Web安全" class="headerlink" title="Web安全"></a>Web安全</h2><h3 id="Web服务器的安全"><a href="#Web服务器的安全" class="headerlink" title="Web服务器的安全"></a>Web服务器的安全</h3><ul>
+<li>利用Web服务器的漏洞：</li>
+<li>利用网页自身的安全漏洞：SQL注入，跨站脚本攻击</li>
+</ul>
+<h3 id="Web客户端的安全"><a href="#Web客户端的安全" class="headerlink" title="Web客户端的安全"></a>Web客户端的安全</h3><p>浏览器漏洞，XSS</p>
+<h3 id="Web通信信道的安全"><a href="#Web通信信道的安全" class="headerlink" title="Web通信信道的安全"></a>Web通信信道的安全</h3><p>嗅探，DOS</p>
+<h2 id="Web服务器指纹识别"><a href="#Web服务器指纹识别" class="headerlink" title="Web服务器指纹识别"></a>Web服务器指纹识别</h2><ol>
+<li>Banner信息</li>
+<li>服务器协议行为</li>
+</ol>
+<h3 id="Http指纹识别"><a href="#Http指纹识别" class="headerlink" title="Http指纹识别"></a>Http指纹识别</h3><p>记录<strong>不同服务器对Http协议执行中的微小差别</strong>进行识别。</p>
+<blockquote>
+<p>Http指纹识别比TCP&#x2F;IP堆栈指纹识别复杂许多，理由是定制Http服务器的配置文件、增加插件或组件使得更改Http的响应信息变的很容易，这样使得识别变的困难</p>
+</blockquote>
+<h2 id="Web盗窃"><a href="#Web盗窃" class="headerlink" title="Web盗窃"></a>Web盗窃</h2><p>通过对<strong>各个网页页面源码的详细分析</strong>，找出可能存在于代码、注释或者设计中的<strong>关键缺陷和脆弱点</strong>，以此来确定攻击的突破点。 </p>
+<ul>
+<li>逐页手工扫描</li>
+<li>自动扫描</li>
+</ul>
+<h2 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h2><h2 id="XSS-跨站脚本攻击-Cross-Site-Script"><a href="#XSS-跨站脚本攻击-Cross-Site-Script" class="headerlink" title="XSS 跨站脚本攻击(Cross Site Script)"></a>XSS 跨站脚本攻击(Cross Site Script)</h2><p>攻击客户端（浏览器）</p>
+<p>恶意攻击者往Web页面里插入恶意html代码，当用户浏览该网页时，嵌入其中Web里面的html代码会被执行。原因：输入校验不足，又轻易地返回给客户端</p>
+<ul>
+<li><p>需要<strong>存在跨站脚本漏洞的web应用</strong>程序 </p>
+</li>
+<li><p>需要<strong>用户点击链接或者是访问</strong>某一页面</p>
+</li>
+</ul>
+<p>分类：</p>
+<ul>
+<li>反射型</li>
+<li>存储型</li>
+</ul>
+<h2 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h2><p>用搜索引擎通过关键字找到有指定漏洞的网站</p>
+<h2 id="网页验证码"><a href="#网页验证码" class="headerlink" title="网页验证码"></a>网页验证码</h2><p>验证码技术属于<strong>人机区分问题</strong>，这在英文中称为<strong>CAPTCHA</strong>，它是是Completely Automated Public Turing Test to Tell Computers and Humans Apart (全自动区分计算机和人类的图灵测试)的简称。</p>
+<h1 id="病毒与各类恶意软件"><a href="#病毒与各类恶意软件" class="headerlink" title="病毒与各类恶意软件"></a>病毒与各类恶意软件</h1><h2 id="病毒"><a href="#病毒" class="headerlink" title="病毒"></a>病毒</h2><p>具有<strong>自我复制</strong>(Self-replication)能力的自动机结构</p>
+<h2 id="逻辑炸弹"><a href="#逻辑炸弹" class="headerlink" title="逻辑炸弹"></a>逻辑炸弹</h2><p>当系统运行的过程中满足某个逻辑时触发，造成严重后果</p>
+<h2 id="后门"><a href="#后门" class="headerlink" title="后门"></a>后门</h2><p>一种绕过产品，计算机系统，密码系统或算法等中的正常身份验证的方法，通常是秘密的。可以确定是故意留下的 </p>
+<h2 id="木马"><a href="#木马" class="headerlink" title="木马"></a>木马</h2><h2 id="蠕虫"><a href="#蠕虫" class="headerlink" title="蠕虫"></a>蠕虫</h2><h2 id="僵尸网络"><a href="#僵尸网络" class="headerlink" title="僵尸网络"></a>僵尸网络</h2><h2 id="勒索软件"><a href="#勒索软件" class="headerlink" title="勒索软件"></a>勒索软件</h2><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>独立性</strong></th>
+<th><strong>传播性</strong></th>
+<th><strong>可控性</strong></th>
+<th><strong>窃密性</strong></th>
+<th><strong>协同性</strong></th>
+<th><strong>一句话总结</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>僵尸网络</strong></td>
+<td>独立程序</td>
+<td>控制传播</td>
+<td>扩展可控</td>
+<td>窃密</td>
+<td>有</td>
+<td>受中心节点控制</td>
+</tr>
+<tr>
+<td><strong>病毒</strong></td>
+<td>非独立程序</td>
+<td>被动传播</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>毫无克制的传染</td>
+</tr>
+<tr>
+<td><strong>蠕虫</strong></td>
+<td>独立程序</td>
+<td>主动传播</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>明显的网络传播</td>
+</tr>
+<tr>
+<td><strong>木马</strong></td>
+<td>独立程序</td>
+<td>一般不</td>
+<td>完全可控</td>
+<td>窃密</td>
+<td>无</td>
+<td>隐藏、连接CC服务器</td>
+</tr>
+<tr>
+<td><strong>间谍软件</strong></td>
+<td>独立程序</td>
+<td>一般不</td>
+<td>无</td>
+<td>窃密</td>
+<td>无</td>
+<td>深度隐藏</td>
+</tr>
+<tr>
+<td><strong>勒索软件</strong></td>
+<td>独立程序</td>
+<td>一般不</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>数据加密</td>
+</tr>
+</tbody></table>
+<h1 id="逆向工程与代码分析基础"><a href="#逆向工程与代码分析基础" class="headerlink" title="逆向工程与代码分析基础"></a>逆向工程与代码分析基础</h1><h2 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h2><h3 id="逆向工程"><a href="#逆向工程" class="headerlink" title="逆向工程"></a>逆向工程</h3><ol>
+<li>对一项目标产品进行深入分析及研究</li>
+<li>演绎并得出该产品的处理流程、组织结构、功能特性及技术规格等设计要素</li>
+<li>以制作出功能相近，但又不完全一样的产品。</li>
+</ol>
+<p>从产品到设计的过程，即，（不能轻易获得必要的生产信息的情况下）根据已经存在的产品，反向推出产品设计数据（包括各类设计图或数据模型）的过程。</p>
+<h3 id="代码加载方式"><a href="#代码加载方式" class="headerlink" title="代码加载方式"></a>代码加载方式</h3><ul>
+<li>静态链接</li>
+<li>动态链接（分多个文件）<ul>
+<li>load time：与主程序文件同时加载</li>
+<li>run time：运行时加载（如Windows的dll文件）</li>
+</ul>
+</li>
+<li>函数指针定位</li>
+</ul>
+<h2 id="常用技术"><a href="#常用技术" class="headerlink" title="常用技术"></a>常用技术</h2><h3 id="逆向"><a href="#逆向" class="headerlink" title="逆向"></a>逆向</h3><p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127113841923.png" alt="image-20260127113841923"></p>
+<h3 id="反逆向"><a href="#反逆向" class="headerlink" title="反逆向"></a>反逆向</h3><p>代码混淆（Obfuscation）	</p>
+<p>控制流扁平化<br>花指令</p>
+<p>虚拟机保护</p>
+<h2 id="恶意代码分析"><a href="#恶意代码分析" class="headerlink" title="恶意代码分析"></a>恶意代码分析</h2><p>关注点：</p>
+<p>注册表或启动项的创建<br>多个sleep 函数，用于过沙箱<br>字符串循环解密操作<br>创建信号量或互斥体<br>杀软检测<br>收集信息</p>
+<h2 id="软件安全评估"><a href="#软件安全评估" class="headerlink" title="软件安全评估"></a>软件安全评估</h2><p>软件安全评估报告内容：</p>
+<p>是否包含已知漏洞<br>是否包含后门<br>是否有异常数据获取操作<br>是否有隐蔽行为<br>对执行环境的破坏性<br>使用的第三方代码的安全性<br>是否建立隐通道</p>
+<h1 id="漏洞挖掘及利用基础"><a href="#漏洞挖掘及利用基础" class="headerlink" title="漏洞挖掘及利用基础"></a>漏洞挖掘及利用基础</h1><h2 id="常见漏洞类型"><a href="#常见漏洞类型" class="headerlink" title="常见漏洞类型"></a>常见漏洞类型</h2><p>缓冲区溢出漏洞</p>
+<ul>
+<li>栈溢出</li>
+<li>堆溢出</li>
+<li>BSS溢出</li>
+<li>格式化串溢出</li>
+</ul>
+<p>释放后重用漏洞<br>内存未初始化<br>整数溢出漏洞<br>其他溢出类漏洞</p>
+<h2 id="漏洞挖掘方法"><a href="#漏洞挖掘方法" class="headerlink" title="漏洞挖掘方法"></a><strong>漏洞挖掘方法</strong></h2><p>主力：人肉挖掘大法</p>
+<p>辅助分析方法：<br>模糊测试<br>符号执行<br>污点分析<br>程序切片<br>模型检验</p>
+<p>如何使用合适的方法对程序进行<strong>遍历</strong>，发现其中可能存在的<strong>违背正确规则</strong>的代码？</p>
+<p>O什么是正确的规则 ?<br>O什么是违背?</p>
+<h3 id="程序中间表示"><a href="#程序中间表示" class="headerlink" title="程序中间表示"></a>程序中间表示</h3><p>控制流、数据流、依赖</p>
+<h2 id="漏洞利用模式"><a href="#漏洞利用模式" class="headerlink" title="漏洞利用模式"></a>漏洞利用模式</h2><p>栈溢出的利用—返回地址<br>堆溢出漏洞利用—Heap Spraying<br>堆溢出漏洞利用—DW Shoot<br>堆溢出漏洞利用—Heap Fengshui<br>堆溢出漏洞利用—UAF漏洞利用<br>内核漏洞利用— ret2usr<br>Web漏洞利用— URL处理不一致问题</p>
+<h3 id="漏洞利用（Exp）"><a href="#漏洞利用（Exp）" class="headerlink" title="漏洞利用（Exp）"></a>漏洞利用（Exp）</h3><p>优先将漏洞成功利用获得的信息显示出来。稳定、最简利用优先</p>
+<h1 id="网络战与信息战"><a href="#网络战与信息战" class="headerlink" title="网络战与信息战"></a>网络战与信息战</h1><h2 id="APT-Advanced-PersistentThreat-高级持续性威胁"><a href="#APT-Advanced-PersistentThreat-高级持续性威胁" class="headerlink" title="APT :Advanced PersistentThreat(高级持续性威胁)"></a>APT :Advanced PersistentThreat(高级持续性威胁)</h2><h3 id="概念-2"><a href="#概念-2" class="headerlink" title="概念"></a>概念</h3><p>0day：危害极大的<strong>未公开</strong>漏洞</p>
+<p>1day：刚刚被公布的，还<strong>没有来得及被全面修补</strong>的漏洞（可以指两三day）</p>
+<p>Nday：早已披露的，但用户未及时修复陈旧漏洞</p>
+<p>RAT：Remote Access Tool</p>
+<p>C&amp;C，CC，C2：Command and Control，命令与控制，原来主要指应用于僵尸网络的CC服务器，是建立在控制者与被控节点之间的通道</p>
+<p>白加黑：为了避免被发现，可以由白exe+黑dll协作。</p>
+<ul>
+<li>结构：Exe(白) —load—&gt; dll（黑）—load—&gt; 恶意代码（shellcode）</li>
+<li>白exe的选择：带有正规厂商的签名，依赖最小，不同的windows版本下都可以运行，Exe调用了自己的dll，尽可能的小</li>
+</ul>
+<p>鱼叉攻击：<strong>针对特定个人或群体</strong>的高度针对性的网络钓鱼</p>
+<p>水坑攻击：在受害者必经之路设置了一个“水坑(陷阱)”。分析攻击目标的上网活动规律，借助了目标所信任的网站</p>
+<h1 id="网络靶场与网络安全竞赛"><a href="#网络靶场与网络安全竞赛" class="headerlink" title="网络靶场与网络安全竞赛"></a>网络靶场与网络安全竞赛</h1><h2 id="网络靶场"><a href="#网络靶场" class="headerlink" title="网络靶场"></a>网络靶场</h2><p>(APT)行动演练的场所，网络沙盘</p>
+<h2 id="网络安全竞赛"><a href="#网络安全竞赛" class="headerlink" title="网络安全竞赛"></a>网络安全竞赛</h2><h1 id="社会工程学与认知作战"><a href="#社会工程学与认知作战" class="headerlink" title="社会工程学与认知作战"></a>社会工程学与认知作战</h1><h2 id="社会工程学"><a href="#社会工程学" class="headerlink" title="社会工程学"></a>社会工程学</h2><h2 id="网络钓鱼"><a href="#网络钓鱼" class="headerlink" title="网络钓鱼"></a>网络钓鱼</h2><p>基于社会工程学的一种攻击手段，目的是骗取敏感信息，或是获得资源控制权，常用手段包括垃圾邮件、即时聊天、手机短信或恶意网页</p>
+<p>形式：链接钓鱼邮件、附件钓鱼邮件、仿冒邮件、仿冒网站</p>
+<p>三个层次：</p>
+<p>–“撒网式”钓鱼<br>–“鱼叉式”钓鱼<br>–“自动化鱼叉式</p>
+<h2 id="认知作战"><a href="#认知作战" class="headerlink" title="认知作战"></a>认知作战</h2><p>以信息为主要武器，打击敌方的认知系统和信息系统。</p>
+<p>根本目的：①掌握战场主动权②影响舆论，改变决策者的决心</p>
+<h1 id="安全风险评估与渗透测试"><a href="#安全风险评估与渗透测试" class="headerlink" title="安全风险评估与渗透测试"></a>安全风险评估与渗透测试</h1><h2 id="安全风险评估"><a href="#安全风险评估" class="headerlink" title="安全风险评估"></a>安全风险评估</h2><h3 id="信息安全风险"><a href="#信息安全风险" class="headerlink" title="信息安全风险"></a>信息安全风险</h3><p>“风险”强调的是危害发生的机率以及所造成的可能后果。特征：偶然性，可测性</p>
+<p>要素：威胁（Threats）利用脆弱点（Vulnerabilities）给信息资产（Assets）造成负面影响（Impacts）的潜在可能（Likelihood）</p>
+<ul>
+<li>资产必须有价值</li>
+<li>风险取决于可能性和影响</li>
+<li><strong>威胁、脆弱点、影响</strong>三要素缺一不可</li>
+</ul>
+<h3 id="安全风险评估的内容"><a href="#安全风险评估的内容" class="headerlink" title="安全风险评估的内容"></a>安全风险评估的内容</h3><p>标识资产价值与重要性：资产分类、资产价值<br>识别威胁<br>识别脆弱点<br>识别现有控制措施<br>识别可能性<br>识别影响</p>
+<p><img src="/2026/01/25/UCAS/network_a&d_base_review/image-20260127142448715.png" alt="image-20260127142448715"></p>
+<h2 id="渗透测试"><a href="#渗透测试" class="headerlink" title="渗透测试"></a>渗透测试</h2><p>在客户的允许下和可控的范围内，采取<strong>可控</strong>的，<strong>不造成不可弥补损失</strong>的黑客入侵手法，对客户网络和系统发起<strong>真正攻击</strong>。</p>
+<p>具有很强的说服力，必须要获得客户方的授权</p>
+<p>分类：</p>
+<ul>
+<li>外部，内部</li>
+<li>白盒，黑盒，双盲</li>
+</ul>
+<h2 id="整改加固"><a href="#整改加固" class="headerlink" title="整改加固"></a>整改加固</h2><p>加固范围确认</p>
+<p>安全产品部署</p>
+<p>技术策略整改</p>
+<h2 id="事中分析"><a href="#事中分析" class="headerlink" title="事中分析"></a>事中分析</h2><p>五个阶段:检测、抑制、根除、恢复和跟进</p>
+<h2 id="事后与日常评估"><a href="#事后与日常评估" class="headerlink" title="事后与日常评估"></a>事后与日常评估</h2><p>定向日志分析取证</p>
+<h1 id="网络安全意识培养"><a href="#网络安全意识培养" class="headerlink" title="网络安全意识培养"></a>网络安全意识培养</h1><p>一些常见的错误认识</p>
+<p>口令-密码</p>
+<p>存证-取证</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>Mintind
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/" title="网络攻防基础期末复习">https://mintind.github.io/2026/01/25/UCAS/network_a&d_base_review/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/UCAS/" rel="tag"># UCAS</a>
+              <a href="/tags/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2%E5%9F%BA%E7%A1%80/" rel="tag"># 网络攻防基础</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/24/UCAS/network_a&d_vunl_judge_labor/" rel="prev" title="网络攻防基础实验三漏洞分析">
+                  <i class="fa fa-angle-left"></i> 网络攻防基础实验三漏洞分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/02/05/Notes/vmware_dh/" rel="next" title="VMWare虚拟机磁盘扩容踩坑记录">
+                  VMWare虚拟机磁盘扩容踩坑记录 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+  <div class="languages">
+    <label class="lang-select-label">
+      <i class="fa fa-language"></i>
+      <span>简体中文</span>
+      <i class="fa fa-angle-up" aria-hidden="true"></i>
+    </label>
+    <select class="lang-select" data-canonical="" aria-label="选择语言">
+      
+        <option value="zh-CN" data-href="/2026/01/25/UCAS/network_a&d_base_review/" selected="">
+          简体中文
+        </option>
+      
+        <option value="en" data-href="/en/2026/01/25/UCAS/network_a&d_base_review/" selected="">
+          English
+        </option>
+      
+    </select>
+  </div>
+
+  <div class="copyright">
+    &copy; 2025 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">Mintind</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">203k</span>
+  </span>
+</div>
+  <div class="powered-by">由 <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & <span class="exturl" data-url="aHR0cHM6Ly90aGVtZS1uZXh0LmpzLm9yZw==">NexT.Gemini</span> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>
